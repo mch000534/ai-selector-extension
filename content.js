@@ -6,6 +6,8 @@
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
   let topZ = Z_BASE;
+  let _hoveredImage = null;
+  let _iconHoverTimer = null;
 
   function injectStyles() {
     const style = document.createElement('style');
@@ -45,7 +47,10 @@
         min-width: 280px !important;
         min-height: 250px !important;
         max-width: 90vw !important;
-        background: #fff !important;
+        background: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
         display: flex !important;
@@ -391,12 +396,21 @@
   }
 
   // ─── Floating Icon ───
-  function showFloatingIcon(x, y) {
+  function showFloatingIcon(x, y, imgEl) {
     hideFloatingIcon();
     floatingIcon = document.createElement('div');
     floatingIcon.className = `${PREFIX}icon`;
     floatingIcon.setAttribute('data-aiext', '1');
     floatingIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>`;
+
+    if (imgEl) {
+      floatingIcon.addEventListener('mouseenter', () => {
+        if (_iconHoverTimer) { clearTimeout(_iconHoverTimer); _iconHoverTimer = null; }
+      });
+      floatingIcon.addEventListener('mouseleave', () => {
+        _iconHoverTimer = setTimeout(() => { hideFloatingIcon(); _hoveredImage = null; }, 200);
+      });
+    }
 
     const viewW = window.innerWidth;
     const viewH = window.innerHeight;
@@ -414,7 +428,15 @@
     floatingIcon.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      openDialog();
+      if (imgEl) {
+        (async () => {
+          const src = await imageToDataURL(imgEl);
+          currentContext = { text: '', images: src ? [src] : [] };
+          openDialog();
+        })();
+      } else {
+        openDialog();
+      }
     });
 
     document.body.appendChild(floatingIcon);
@@ -897,18 +919,47 @@
     if (floatingIcon) hideFloatingIcon();
   });
 
+  // ─── Image Hover ───
+  document.addEventListener('mouseover', (e) => {
+    const img = e.target.closest('img');
+    if (!img || isOurElement(img)) return;
+    if (img.naturalWidth < 20 || img.naturalHeight < 20) return;
+    if (img === _hoveredImage) return;
+    if (_iconHoverTimer) { clearTimeout(_iconHoverTimer); _iconHoverTimer = null; }
+    _hoveredImage = img;
+    const rect = img.getBoundingClientRect();
+    showFloatingIcon(rect.right, rect.top, img);
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const img = e.target.closest('img');
+    if (!img || img !== _hoveredImage) return;
+    if (_iconHoverTimer) clearTimeout(_iconHoverTimer);
+    _iconHoverTimer = setTimeout(() => {
+      if (!_hoveredImage) return;
+      hideFloatingIcon();
+      _hoveredImage = null;
+    }, 300);
+  });
+
   // ─── Context Menu ───
   chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.action !== 'openDialog') return;
-    (async () => {
-      const sel = window.getSelection();
-      if (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0)) {
-        currentContext = await extractContextFromSelection(sel);
-      } else {
-        currentContext = { text: '', images: [] };
-      }
-      openDialog();
-    })();
+    if (msg.action === 'openDialog') {
+      (async () => {
+        const sel = window.getSelection();
+        if (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0)) {
+          currentContext = await extractContextFromSelection(sel);
+        } else {
+          currentContext = { text: '', images: [] };
+        }
+        openDialog();
+      })();
+    } else if (msg.action === 'openDialogWithImage' && msg.srcUrl) {
+      (async () => {
+        currentContext = { text: '', images: [msg.srcUrl] };
+        openDialog();
+      })();
+    }
   });
 
   injectStyles();

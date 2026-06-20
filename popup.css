@@ -104,6 +104,12 @@ small {
   color: #999;
 }
 
+.footer .version {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #bbb;
+}
+
 .prompts-list {
   margin-bottom: 8px;
   max-height: 120px;

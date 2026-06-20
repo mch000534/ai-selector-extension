@@ -125,4 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     statusEl.className = 'status ' + type;
     setTimeout(() => { statusEl.textContent = ''; statusEl.className = 'status'; }, 3000);
   }
+
+  const versionEl = document.querySelector('.version');
+  if (versionEl) {
+    const manifest = chrome.runtime.getManifest();
+    versionEl.textContent = `v${manifest.version}`;
+  }
 });
