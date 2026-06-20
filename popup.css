@@ -10,6 +10,12 @@ body {
   color: #333;
   background: #fff;
   width: 320px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .container {

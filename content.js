@@ -128,6 +128,34 @@
         border-radius: 4px !important;
       }
       .${PREFIX}close:hover { background: #f5f5f5 !important; color: #666 !important; }
+      .${PREFIX}minimize {
+        all: unset;
+        width: 24px !important;
+        height: 24px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+        color: #999 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 4px !important;
+        transition: color 0.2s, background 0.2s !important;
+      }
+      .${PREFIX}minimize:hover { background: #f5f5f5 !important; color: #666 !important; }
+      .${PREFIX}dialog-minimized {
+        max-height: none !important;
+        min-height: auto !important;
+        height: auto !important;
+        resize: none !important;
+        overflow: hidden !important;
+      }
+      .${PREFIX}dialog-minimized .${PREFIX}selected,
+      .${PREFIX}dialog-minimized .${PREFIX}messages,
+      .${PREFIX}dialog-minimized .${PREFIX}prompts,
+      .${PREFIX}dialog-minimized .${PREFIX}input-row,
+      .${PREFIX}dialog-minimized .${PREFIX}screenshot-preview {
+        display: none !important;
+      }
       .${PREFIX}selected {
         all: unset;
         display: block !important;
@@ -168,6 +196,7 @@
         border-radius: 4px !important;
         object-fit: cover !important;
         border: 1px solid #ddd !important;
+        overflow: hidden !important;
       }
       .${PREFIX}messages {
         all: unset;
@@ -295,6 +324,7 @@
         border-radius: 4px !important;
         object-fit: cover !important;
         border: 1px solid #ddd !important;
+        overflow: hidden !important;
       }
       .${PREFIX}screenshot-remove {
         all: unset;
@@ -589,15 +619,25 @@
 
   function getConfig() {
     return new Promise((resolve) => {
-      chrome.storage.sync.get(['apiKey', 'model', 'baseUrl'], resolve);
+      try {
+        if (!chrome.storage || !chrome.storage.sync) return resolve({});
+        chrome.storage.sync.get(['apiKey', 'model', 'baseUrl'], resolve);
+      } catch (e) {
+        resolve({});
+      }
     });
   }
 
   function getQuickPrompts() {
     return new Promise((resolve) => {
-      chrome.storage.sync.get(['quickPrompts'], (result) => {
-        resolve(result.quickPrompts || []);
-      });
+      try {
+        if (!chrome.storage || !chrome.storage.sync) return resolve([]);
+        chrome.storage.sync.get(['quickPrompts'], (result) => {
+          resolve(result.quickPrompts || []);
+        });
+      } catch (e) {
+        resolve([]);
+      }
     });
   }
 
@@ -704,12 +744,15 @@
         <span class="${PREFIX}pin" data-aiext="1" title="固定視窗">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>
         </span>
+        <span class="${PREFIX}minimize" data-aiext="1" title="縮小">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </span>
         <span class="${PREFIX}close" data-aiext="1">&times;</span>
       </div>
       ${hasContent ? `
       <div class="${PREFIX}selected">
         ${ctx.text ? `<div class="${PREFIX}selected-label">選取文字</div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label">${ctx.text ? '' : '選取'}圖片</div><div class="${PREFIX}selected-images">${ctx.images.map(src => `<img class="${PREFIX}selected-img" src="${src}" data-aiext="1">`).join('')}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label">${ctx.text ? '' : '選取'}圖片</div><div class="${PREFIX}selected-images">${ctx.images.map(src => `<img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden">`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
@@ -746,6 +789,21 @@
     state.dialog.querySelector(`.${PREFIX}close`).addEventListener('click', () => closeDialog(id));
     state.dialog.querySelector(`.${PREFIX}pin`).addEventListener('click', () => togglePin(id));
 
+    const minimizeBtn = state.dialog.querySelector(`.${PREFIX}minimize`);
+    minimizeBtn.addEventListener('click', () => {
+      const isMinimized = state.dialog.classList.toggle(`${PREFIX}dialog-minimized`);
+      if (isMinimized) {
+        state._savedHeight = state.dialog.style.height;
+        state.dialog.style.height = 'auto';
+        minimizeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+        minimizeBtn.title = '展開';
+      } else {
+        if (state._savedHeight) state.dialog.style.height = state._savedHeight;
+        minimizeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+        minimizeBtn.title = '縮小';
+      }
+    });
+
     setupDrag(id);
     bringToFront(id);
 
@@ -770,6 +828,24 @@
         sendMessage(id);
       }
       if (e.key === 'Escape' && !state.isPinned) closeDialog(id);
+    });
+
+    input.addEventListener('paste', (e) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (!file) continue;
+          const reader = new FileReader();
+          reader.onload = () => {
+            state.pendingScreenshots.push(reader.result);
+            renderScreenshotPreview();
+          };
+          reader.readAsDataURL(file);
+        }
+      }
     });
 
     const promptChips = state.dialog.querySelectorAll(`.${PREFIX}prompt-chip`);
@@ -829,7 +905,7 @@
       state.pendingScreenshots.forEach((src, i) => {
         const thumb = document.createElement('div');
         thumb.className = `${PREFIX}screenshot-thumb`;
-        thumb.innerHTML = `<img src="${src}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        thumb.innerHTML = `<img src="${src}" data-aiext="1" style="overflow:hidden"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
         thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
           state.pendingScreenshots.splice(i, 1);
           renderScreenshotPreview();
@@ -1138,7 +1214,14 @@
 
     const id = createDialog(config, rect, quickPrompts, currentContext);
 
-    const settings = await new Promise(r => chrome.storage.sync.get(['defaultPin'], r));
+    const settings = await new Promise(r => {
+      try {
+        if (!chrome.storage || !chrome.storage.sync) return r({});
+        chrome.storage.sync.get(['defaultPin'], r);
+      } catch (e) {
+        r({});
+      }
+    });
     if (settings.defaultPin !== false) togglePin(id);
   }
 
@@ -1226,7 +1309,9 @@
   });
 
   // ─── Context Menu ───
-  chrome.runtime.onMessage.addListener((msg) => {
+  try {
+    if (chrome.runtime && chrome.runtime.onMessage) {
+      chrome.runtime.onMessage.addListener((msg) => {
     if (msg.action === 'openDialog') {
       (async () => {
         const sel = window.getSelection();
@@ -1243,7 +1328,11 @@
         openDialog();
       })();
     }
-  });
+      });
+    }
+  } catch (e) {
+    // Extension context invalidated
+  }
 
   injectStyles();
 })();

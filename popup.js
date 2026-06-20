@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const baseUrlInput = document.getElementById('baseUrl');
   const modelHint = document.getElementById('modelHint');
   const fetchModelsBtn = document.getElementById('fetchModelsBtn');
-  const saveBtn = document.getElementById('saveBtn');
   const statusEl = document.getElementById('status');
   const promptsList = document.getElementById('promptsList');
   const newPromptInput = document.getElementById('newPrompt');
@@ -38,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = parseInt(e.target.dataset.index);
         quickPrompts.splice(index, 1);
         renderPrompts();
+        save();
       });
     });
 
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const [moved] = quickPrompts.splice(dragSrcIndex, 1);
           quickPrompts.splice(dropIndex, 0, moved);
           renderPrompts();
+          save();
         }
       });
     });
@@ -84,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       quickPrompts.push(text);
       newPromptInput.value = '';
       renderPrompts();
+      save();
     }
   }
 
@@ -142,20 +144,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  saveBtn.addEventListener('click', () => {
+  function save() {
     const apiKey = apiKeyInput.value.trim();
     const model = modelInput.value.trim();
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
-
-    if (!apiKey) { showStatus('請輸入 API Key', 'error'); return; }
-    if (!baseUrl) { showStatus('請輸入 API Base URL', 'error'); return; }
-    if (!model) { showStatus('請輸入模型名稱', 'error'); return; }
-
     chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin }, () => {
-      showStatus('設定已儲存！', 'success');
+      showStatus('已自動儲存', 'success');
     });
-  });
+  }
+
+  let saveTimer = null;
+  function debouncedSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 500);
+  }
+
+  baseUrlInput.addEventListener('input', debouncedSave);
+  apiKeyInput.addEventListener('input', debouncedSave);
+  modelInput.addEventListener('input', debouncedSave);
+  defaultPinCheckbox.addEventListener('change', save);
 
   function showStatus(message, type) {
     statusEl.textContent = message;
