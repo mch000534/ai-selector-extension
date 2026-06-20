@@ -1,4 +1,6 @@
 (() => {
+  if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.sync) return;
+
   const PREFIX = '__aiext_';
   let floatingIcon = null;
   let currentContext = { text: '', images: [] };
@@ -254,6 +256,108 @@
       }
       .${PREFIX}send:hover { background: #5a6fd6 !important; }
       .${PREFIX}send:disabled { background: #ccc !important; cursor: not-allowed !important; }
+      .${PREFIX}camera {
+        all: unset;
+        padding: 8px 10px !important;
+        background: #f5f5f5 !important;
+        color: #666 !important;
+        border-radius: 6px !important;
+        font-size: 16px !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: background 0.2s !important;
+      }
+      .${PREFIX}camera:hover { background: #e8e8e8 !important; color: #333 !important; }
+      .${PREFIX}camera:disabled { opacity: 0.5 !important; cursor: not-allowed !important; }
+      .${PREFIX}screenshot-preview {
+        all: unset;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        padding: 8px 16px !important;
+        border-top: 1px solid #eee !important;
+        box-sizing: border-box !important;
+      }
+      .${PREFIX}screenshot-preview:empty { display: none !important; padding: 0 !important; border: none !important; }
+      .${PREFIX}screenshot-thumb {
+        all: unset;
+        position: relative !important;
+        display: inline-block !important;
+      }
+      .${PREFIX}screenshot-thumb img {
+        all: unset;
+        display: block !important;
+        max-height: 60px !important;
+        max-width: 80px !important;
+        border-radius: 4px !important;
+        object-fit: cover !important;
+        border: 1px solid #ddd !important;
+      }
+      .${PREFIX}screenshot-remove {
+        all: unset;
+        position: absolute !important;
+        top: -6px !important;
+        right: -6px !important;
+        width: 18px !important;
+        height: 18px !important;
+        background: #e74c3c !important;
+        color: white !important;
+        border-radius: 50% !important;
+        font-size: 12px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
+      }
+      .${PREFIX}screenshot-remove:hover { background: #c0392b !important; }
+      .${PREFIX}crop-overlay {
+        all: initial;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-size: 100% 100% !important;
+        background-position: center !important;
+        cursor: crosshair !important;
+        z-index: 2147483647 !important;
+      }
+      .${PREFIX}crop-overlay::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+      }
+      .${PREFIX}crop-selection {
+        all: unset;
+        position: absolute !important;
+        border: 2px solid #667eea !important;
+        background: transparent !important;
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
+        pointer-events: none !important;
+      }
+      .${PREFIX}crop-hint {
+        all: unset;
+        position: fixed !important;
+        top: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        color: white !important;
+        padding: 8px 16px !important;
+        border-radius: 6px !important;
+        font-size: 14px !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        z-index: 2147483647 !important;
+        pointer-events: none !important;
+      }
       .${PREFIX}prompts {
         all: unset;
         display: flex !important;
@@ -316,6 +420,116 @@
       }
     `;
     document.head.appendChild(style);
+  }
+
+  function showCropOverlay(dataUrl) {
+    return new Promise((resolve) => {
+      const overlay = document.createElement('div');
+      overlay.className = `${PREFIX}crop-overlay`;
+      overlay.setAttribute('data-aiext', '1');
+      overlay.style.backgroundImage = `url(${dataUrl})`;
+
+      const selection = document.createElement('div');
+      selection.className = `${PREFIX}crop-selection`;
+      selection.setAttribute('data-aiext', '1');
+      selection.style.display = 'none';
+
+      const hint = document.createElement('div');
+      hint.className = `${PREFIX}crop-hint`;
+      hint.textContent = '拖曳選取範圍，按 Esc 取消';
+
+      overlay.appendChild(selection);
+      overlay.appendChild(hint);
+      document.body.appendChild(overlay);
+
+      let isDragging = false;
+      let startX = 0, startY = 0;
+
+      function cleanup() {
+        overlay.remove();
+        document.removeEventListener('keydown', onKeyDown);
+      }
+
+      function onKeyDown(e) {
+        if (e.key === 'Escape') {
+          cleanup();
+          resolve(null);
+        }
+      }
+      document.addEventListener('keydown', onKeyDown);
+
+      overlay.addEventListener('mousedown', (e) => {
+        if (e.target !== overlay && e.target !== selection) return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        selection.style.left = startX + 'px';
+        selection.style.top = startY + 'px';
+        selection.style.width = '0px';
+        selection.style.height = '0px';
+        selection.style.display = 'block';
+        e.preventDefault();
+      });
+
+      overlay.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+        const left = Math.min(startX, currentX);
+        const top = Math.min(startY, currentY);
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+        selection.style.left = left + 'px';
+        selection.style.top = top + 'px';
+        selection.style.width = width + 'px';
+        selection.style.height = height + 'px';
+        e.preventDefault();
+      });
+
+      overlay.addEventListener('mouseup', async (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        const rect = {
+          x: parseInt(selection.style.left),
+          y: parseInt(selection.style.top),
+          width: parseInt(selection.style.width),
+          height: parseInt(selection.style.height),
+        };
+
+        if (rect.width < 5 || rect.height < 5) {
+          cleanup();
+          resolve(null);
+          return;
+        }
+
+        const img = new Image();
+        img.onload = () => {
+          const scaleX = img.naturalWidth / window.innerWidth;
+          const scaleY = img.naturalHeight / window.innerHeight;
+
+          const cropX = Math.round(rect.x * scaleX);
+          const cropY = Math.round(rect.y * scaleY);
+          const cropWidth = Math.round(rect.width * scaleX);
+          const cropHeight = Math.round(rect.height * scaleY);
+
+          const canvas = document.createElement('canvas');
+          canvas.width = cropWidth;
+          canvas.height = cropHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+          const croppedDataUrl = canvas.toDataURL('image/png');
+          cleanup();
+          resolve(croppedDataUrl);
+        };
+        img.onerror = () => {
+          cleanup();
+          resolve(null);
+        };
+        img.src = dataUrl;
+        e.preventDefault();
+      });
+    });
   }
 
   function escapeHtml(str) {
@@ -430,8 +644,10 @@
       e.stopPropagation();
       if (imgEl) {
         (async () => {
-          const src = await imageToDataURL(imgEl);
-          currentContext = { text: '', images: src ? [src] : [] };
+          const dataUrl = await imageToDataURL(imgEl);
+          const src = imgEl.src || imgEl.getAttribute('src');
+          const imageUrl = dataUrl || (src && !src.startsWith('blob:') ? src : null);
+          currentContext = { text: '', images: imageUrl ? [imageUrl] : [] };
           openDialog();
         })();
       } else {
@@ -464,6 +680,7 @@
       dragOffsetY: 0,
       overlay: null,
       dialog: null,
+      pendingScreenshots: [],
     };
 
     // Overlay
@@ -501,6 +718,9 @@
       </div>` : ''}
       <div class="${PREFIX}input-row">
         <input class="${PREFIX}input" type="text" placeholder="輸入你的問題..." data-aiext="1" />
+        <button class="${PREFIX}camera" data-aiext="1" title="擷取螢幕">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </button>
         <button class="${PREFIX}send" data-aiext="1">發送</button>
       </div>
     `;
@@ -561,6 +781,62 @@
         }
       });
     });
+
+    const screenshotPreview = document.createElement('div');
+    screenshotPreview.className = `${PREFIX}screenshot-preview`;
+    screenshotPreview.setAttribute('data-aiext', '1');
+    state.dialog.insertBefore(screenshotPreview, state.dialog.querySelector(`.${PREFIX}input-row`));
+
+    const cameraBtn = state.dialog.querySelector(`.${PREFIX}camera`);
+    cameraBtn.addEventListener('click', async () => {
+      cameraBtn.disabled = true;
+      const origDialogDisplay = state.dialog.style.display;
+      const origOverlayDisplay = state.overlay ? state.overlay.style.display : '';
+      state.dialog.style.display = 'none';
+      if (state.overlay) state.overlay.style.display = 'none';
+
+      await new Promise(r => setTimeout(r, 50));
+
+      try {
+        if (!chrome.runtime || !chrome.runtime.sendMessage) {
+          throw new Error('Extension context invalidated');
+        }
+        const response = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
+
+        if (response && response.dataUrl) {
+          const croppedDataUrl = await showCropOverlay(response.dataUrl);
+          state.dialog.style.display = origDialogDisplay;
+          if (state.overlay) state.overlay.style.display = origOverlayDisplay;
+
+          if (croppedDataUrl) {
+            state.pendingScreenshots.push(croppedDataUrl);
+            renderScreenshotPreview();
+          }
+        } else {
+          state.dialog.style.display = origDialogDisplay;
+          if (state.overlay) state.overlay.style.display = origOverlayDisplay;
+        }
+      } catch (e) {
+        state.dialog.style.display = origDialogDisplay;
+        if (state.overlay) state.overlay.style.display = origOverlayDisplay;
+      }
+      cameraBtn.disabled = false;
+      input.focus();
+    });
+
+    function renderScreenshotPreview() {
+      screenshotPreview.innerHTML = '';
+      state.pendingScreenshots.forEach((src, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = `${PREFIX}screenshot-thumb`;
+        thumb.innerHTML = `<img src="${src}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
+          state.pendingScreenshots.splice(i, 1);
+          renderScreenshotPreview();
+        });
+        screenshotPreview.appendChild(thumb);
+      });
+    }
 
     setTimeout(() => input.focus(), 50);
     return id;
@@ -718,11 +994,12 @@
     const input = state.dialog.querySelector(`.${PREFIX}input`);
     const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
     const text = input.value.trim();
-    if (!text) return;
+    const hasScreenshots = state.pendingScreenshots && state.pendingScreenshots.length > 0;
+    if (!text && !hasScreenshots) return;
 
     input.value = '';
-    addMessage(id, 'user', text);
-    state.conversationHistory.push({ role: 'user', content: text });
+    addMessage(id, 'user', text || '[截屏]');
+    state.conversationHistory.push({ role: 'user', content: text || '[截屏]' });
 
     state.isStreaming = true;
     sendBtn.disabled = true;
@@ -731,15 +1008,16 @@
 
     try {
       const ctx = state.context;
-      const textPart = `你是一個 AI 助手。${ctx.text ? `用戶選取了以下文字作為上下文：\n"${ctx.text}"\n` : ''}${ctx.images && ctx.images.length > 0 ? `用戶還選取了 ${ctx.images.length} 張圖片作為上下文。` : ''}請基於此上下文回答用戶的問題。如果問題與選取內容無關，也可以直接回答。`;
+      const allImages = [...(ctx.images || []), ...(state.pendingScreenshots || [])];
+      const textPart = `你是一個 AI 助手。${ctx.text ? `用戶選取了以下文字作為上下文：\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `用戶提供了 ${allImages.length} 張圖片作為上下文。` : ''}請基於此上下文回答用戶的問題。如果問題與選取內容無關，也可以直接回答。`;
 
       const messages = [
         { role: 'system', content: textPart },
       ];
 
-      if (ctx.images && ctx.images.length > 0) {
-        const imgContent = [{ type: 'text', text: '以下是用戶選取的圖片上下文：' }];
-        for (const img of ctx.images) {
+      if (allImages.length > 0) {
+        const imgContent = [{ type: 'text', text: '以下是用戶提供的圖片上下文：' }];
+        for (const img of allImages) {
           imgContent.push({ type: 'image_url', image_url: { url: img } });
         }
         messages.push({ role: 'user', content: imgContent });
@@ -774,6 +1052,11 @@
         addMessage(id, 'assistant', response.content);
         state.conversationHistory.push({ role: 'assistant', content: response.content });
       }
+
+      // Clear pending screenshots
+      state.pendingScreenshots.length = 0;
+      const previewEl = state.dialog.querySelector(`.${PREFIX}screenshot-preview`);
+      if (previewEl) previewEl.innerHTML = '';
     } catch (err) {
       if (typing) typing.remove();
       const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);

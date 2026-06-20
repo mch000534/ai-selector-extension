@@ -112,8 +112,6 @@ small {
 
 .prompts-list {
   margin-bottom: 8px;
-  max-height: 120px;
-  overflow-y: auto;
 }
 
 .prompt-item {
@@ -125,6 +123,26 @@ small {
   border-radius: 4px;
   margin-bottom: 4px;
   font-size: 12px;
+  cursor: grab;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.prompt-item.dragging {
+  opacity: 0.4;
+}
+
+.prompt-item.drag-over {
+  background: #e8eaff;
+  box-shadow: inset 0 0 0 1px #667eea;
+}
+
+.prompt-drag {
+  color: #bbb;
+  font-size: 14px;
+  cursor: grab;
+  margin-right: 8px;
+  user-select: none;
+  flex-shrink: 0;
 }
 
 .prompt-text {

@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderPrompts() {
     promptsList.innerHTML = quickPrompts.map((p, i) => `
-      <div class="prompt-item">
+      <div class="prompt-item" draggable="true" data-index="${i}">
+        <span class="prompt-drag">⠿</span>
         <span class="prompt-text">${escapeHtml(p)}</span>
         <button class="prompt-remove" data-index="${i}">&times;</button>
       </div>
@@ -37,6 +38,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = parseInt(e.target.dataset.index);
         quickPrompts.splice(index, 1);
         renderPrompts();
+      });
+    });
+
+    let dragSrcIndex = null;
+
+    promptsList.querySelectorAll('.prompt-item').forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        dragSrcIndex = parseInt(item.dataset.index);
+        item.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      item.addEventListener('dragend', () => {
+        item.classList.remove('dragging');
+        promptsList.querySelectorAll('.prompt-item').forEach(el => el.classList.remove('drag-over'));
+      });
+
+      item.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        item.classList.add('drag-over');
+      });
+
+      item.addEventListener('dragleave', () => {
+        item.classList.remove('drag-over');
+      });
+
+      item.addEventListener('drop', (e) => {
+        e.preventDefault();
+        item.classList.remove('drag-over');
+        const dropIndex = parseInt(item.dataset.index);
+        if (dragSrcIndex !== null && dragSrcIndex !== dropIndex) {
+          const [moved] = quickPrompts.splice(dragSrcIndex, 1);
+          quickPrompts.splice(dropIndex, 0, moved);
+          renderPrompts();
+        }
       });
     });
   }
