@@ -1,0 +1,27 @@
+# 作業系統
+.DS_Store
+Thumbs.db
+
+# 編輯器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 環境變數與金鑰
+.env
+.env.local
+.env.*.local
+*.key
+
+# 日誌與暫存
+*.log
+tmp/
+
+# Node.js（預留，目前專案無建置流程）
+node_modules/
+package-lock.json
+
+# 工具設定
+.qoder/
