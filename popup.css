@@ -116,6 +116,20 @@ small {
   color: #bbb;
 }
 
+.footer .github-link {
+  margin-top: 6px;
+}
+
+.footer .github-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.footer .github-link a:hover {
+  text-decoration: underline;
+}
+
 .prompts-list {
   margin-bottom: 8px;
 }
