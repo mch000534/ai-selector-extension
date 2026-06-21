@@ -1,12 +1,12 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'ai-selector-open',
-    title: 'AI 劃詞助手',
+    title: chrome.i18n.getMessage('contextMenuTitle'),
     contexts: ['all'],
   });
   chrome.contextMenus.create({
     id: 'ai-selector-image',
-    title: 'AI 圖片助手',
+    title: chrome.i18n.getMessage('contextMenuImageTitle'),
     contexts: ['image'],
   });
 });

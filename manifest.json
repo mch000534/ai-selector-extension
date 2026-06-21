@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "AI 劃詞助手",
-  "version": "1.0.3",
-  "description": "劃選文字後彈出 AI 對話框，支援多供應商 BYOK",
+  "name": "__MSG_extName__",
+  "version": "1.0.4",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "permissions": ["storage", "activeTab", "contextMenus"],
   "background": {
     "service_worker": "background.js"

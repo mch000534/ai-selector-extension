@@ -16,18 +16,67 @@
     }
     return normalized;
   }
+
+  function t(key, ...args) {
+    return chrome.i18n.getMessage(key, args) || key;
+  }
+
+  const _isRtl = ['ar', 'iw', 'fa', 'ur'].some(l => chrome.i18n.getUILanguage().startsWith(l));
+
+  function getThemeColors() {
+    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (dark) {
+      return {
+        bg: '#1a1a2e', bgGlass: 'rgba(26,26,46,0.9)', bgSecondary: '#16213e', bgTertiary: '#0f3460',
+        bgInput: '#1e1e3a', bgHover: '#2a2a4a', bgSelected: 'rgba(102,126,234,0.15)',
+        text: '#e0e0e0', textSecondary: '#b0b0b0', textMuted: '#808080',
+        border: '#2a2a4a', borderLight: '#1e1e3a',
+        accent: '#7c8ff0', accentHover: '#8fa0f5', accentActive: '#667eea',
+        userBubble: '#5a6fd6', userBubbleText: '#fff',
+        assistantBubble: '#1e1e3a', assistantBubbleText: '#e0e0e0',
+        codeBg: '#0d0d1a', codeText: '#d4d4d4', inlineCodeBg: '#2a2a4a',
+        errorText: '#ff6b6b', errorBg: '#3d1a1a',
+        warningText: '#b0b0b0',
+        dotColor: '#808080',
+        pinActive: '#7c8ff0', pinActiveBg: 'rgba(124,143,240,0.15)',
+        chipBg: '#1e1e3a', chipText: '#b0b0b0', chipHoverBg: '#2a2a4a',
+        cameraBg: '#1e1e3a', cameraText: '#b0b0b0',
+      };
+    }
+    return {
+      bg: '#fff', bgGlass: 'rgba(255,255,255,0.75)', bgSecondary: '#f5f5f5', bgTertiary: '#f9f9f9',
+      bgInput: '#fff', bgHover: '#f5f5f5', bgSelected: '#f8f9fa',
+      text: '#333', textSecondary: '#666', textMuted: '#999',
+      border: '#ddd', borderLight: '#eee',
+      accent: '#667eea', accentHover: '#5a6fd6', accentActive: '#667eea',
+      userBubble: '#667eea', userBubbleText: 'white',
+      assistantBubble: '#f0f2f5', assistantBubbleText: '#333',
+      codeBg: '#1e1e1e', codeText: '#d4d4d4', inlineCodeBg: '#e0e0e0',
+      errorText: '#e74c3c', errorBg: '#fdeaea',
+      warningText: '#666',
+      dotColor: '#999',
+      pinActive: '#667eea', pinActiveBg: '#eef0ff',
+      chipBg: '#f0f2f5', chipText: '#555', chipHoverBg: '#e0e3e8',
+      cameraBg: '#f5f5f5', cameraText: '#666',
+    };
+  }
+
   let _hoveredImage = null;
   let _iconHoverTimer = null;
 
   function injectStyles() {
+    const old = document.querySelector('style[data-aiext-styles]');
+    if (old) old.remove();
+    const c = getThemeColors();
     const style = document.createElement('style');
+    style.setAttribute('data-aiext-styles', '1');
     style.textContent = `
       .${PREFIX}icon {
         all: initial;
         position: fixed !important;
         width: 32px !important;
         height: 32px !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, ${c.accent} 0%, #764ba2 100%) !important;
         border-radius: 50% !important;
         cursor: pointer !important;
         display: flex !important;
@@ -57,10 +106,10 @@
         min-width: 280px !important;
         min-height: 250px !important;
         max-width: 90vw !important;
-        background: rgba(255, 255, 255, 0.75) !important;
+        background: ${c.bgGlass} !important;
         backdrop-filter: blur(16px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border: 1px solid ${c.borderLight} !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
         display: flex !important;
@@ -68,7 +117,7 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         overflow: auto !important;
         pointer-events: auto !important;
-        color: #333 !important;
+        color: ${c.text} !important;
         font-size: 15px !important;
         line-height: 1.5 !important;
         resize: both !important;
@@ -77,7 +126,7 @@
         all: unset;
         display: flex !important;
         padding: 10px 12px !important;
-        border-bottom: 1px solid #eee !important;
+        border-bottom: 1px solid ${c.borderLight} !important;
         align-items: center !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
@@ -89,7 +138,7 @@
         all: unset;
         font-size: 16px !important;
         font-weight: 600 !important;
-        color: #333 !important;
+        color: ${c.text} !important;
         flex: 1 !important;
       }
       .${PREFIX}pin {
@@ -98,58 +147,58 @@
         height: 24px !important;
         cursor: pointer !important;
         font-size: 14px !important;
-        color: #bbb !important;
+        color: ${c.textMuted} !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
         transition: color 0.2s, background 0.2s !important;
       }
-      .${PREFIX}pin:hover { background: #f5f5f5 !important; color: #666 !important; }
+      .${PREFIX}pin:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
       .${PREFIX}pin-active {
-        color: #667eea !important;
-        background: #eef0ff !important;
+        color: ${c.pinActive} !important;
+        background: ${c.pinActiveBg} !important;
       }
-      .${PREFIX}pin-active:hover { background: #dde1ff !important; color: #5a6fd6 !important; }
+      .${PREFIX}pin-active:hover { background: ${c.pinActiveBg} !important; color: ${c.accentHover} !important; }
       .${PREFIX}model-input {
         all: unset;
         font-size: 12px !important;
         padding: 2px 6px !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid ${c.border} !important;
         border-radius: 4px !important;
-        color: #555 !important;
-        background: #fff !important;
+        color: ${c.textSecondary} !important;
+        background: ${c.bgInput} !important;
         max-width: 140px !important;
         outline: none !important;
       }
-      .${PREFIX}model-input:focus { border-color: #667eea !important; }
+      .${PREFIX}model-input:focus { border-color: ${c.accent} !important; }
       .${PREFIX}close {
         all: unset;
         width: 24px !important;
         height: 24px !important;
         cursor: pointer !important;
         font-size: 18px !important;
-        color: #999 !important;
+        color: ${c.textMuted} !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
       }
-      .${PREFIX}close:hover { background: #f5f5f5 !important; color: #666 !important; }
+      .${PREFIX}close:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
       .${PREFIX}minimize {
         all: unset;
         width: 24px !important;
         height: 24px !important;
         cursor: pointer !important;
         font-size: 14px !important;
-        color: #999 !important;
+        color: ${c.textMuted} !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
         transition: color 0.2s, background 0.2s !important;
       }
-      .${PREFIX}minimize:hover { background: #f5f5f5 !important; color: #666 !important; }
+      .${PREFIX}minimize:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
       .${PREFIX}dialog-minimized {
         max-height: none !important;
         min-height: auto !important;
@@ -168,8 +217,8 @@
         all: unset;
         display: block !important;
         padding: 10px 16px !important;
-        background: #f8f9fa !important;
-        border-bottom: 1px solid #eee !important;
+        background: ${c.bgSelected} !important;
+        border-bottom: 1px solid ${c.borderLight} !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
       }
@@ -177,14 +226,14 @@
         all: unset;
         display: block !important;
         font-size: 12px !important;
-        color: #888 !important;
+        color: ${c.textMuted} !important;
         margin-bottom: 4px !important;
       }
       .${PREFIX}selected-text {
         all: unset;
         display: block !important;
         font-size: 14px !important;
-        color: #555 !important;
+        color: ${c.textSecondary} !important;
         max-height: 60px !important;
         overflow-y: auto !important;
         line-height: 1.4 !important;
@@ -203,7 +252,7 @@
         max-width: 80px !important;
         border-radius: 4px !important;
         object-fit: cover !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid ${c.border} !important;
         overflow: hidden !important;
       }
       .${PREFIX}messages {
@@ -220,7 +269,7 @@
         display: block !important;
         margin-bottom: 12px !important;
       }
-      .${PREFIX}msg-user { text-align: right !important; }
+      .${PREFIX}msg-user { text-align: ${_isRtl ? 'left' : 'right'} !important; }
       .${PREFIX}bubble {
         all: unset;
         display: inline-block !important;
@@ -229,21 +278,21 @@
         font-size: 15px !important;
         line-height: 1.5 !important;
         max-width: 85% !important;
-        text-align: left !important;
+        text-align: ${_isRtl ? 'right' : 'left'} !important;
         word-wrap: break-word !important;
         box-sizing: border-box !important;
       }
       .${PREFIX}msg-user .${PREFIX}bubble {
-        background: #667eea !important;
-        color: white !important;
+        background: ${c.userBubble} !important;
+        color: ${c.userBubbleText} !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble {
-        background: #f0f2f5 !important;
-        color: #333 !important;
+        background: ${c.assistantBubble} !important;
+        color: ${c.assistantBubbleText} !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
-        background: #1e1e1e !important;
-        color: #d4d4d4 !important;
+        background: ${c.codeBg} !important;
+        color: ${c.codeText} !important;
         padding: 8px !important;
         border-radius: 4px !important;
         overflow-x: auto !important;
@@ -251,7 +300,7 @@
         margin: 4px 0 !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble code {
-        background: #e0e0e0 !important;
+        background: ${c.inlineCodeBg} !important;
         padding: 1px 4px !important;
         border-radius: 3px !important;
         font-size: 13px !important;
@@ -264,7 +313,7 @@
         all: unset;
         display: flex !important;
         padding: 12px 16px !important;
-        border-top: 1px solid #eee !important;
+        border-top: 1px solid ${c.borderLight} !important;
         gap: 8px !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
@@ -273,31 +322,31 @@
         all: unset;
         flex: 1 !important;
         padding: 8px 12px !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid ${c.border} !important;
         border-radius: 6px !important;
         font-size: 15px !important;
         box-sizing: border-box !important;
-        color: #333 !important;
-        background: #fff !important;
+        color: ${c.text} !important;
+        background: ${c.bgInput} !important;
       }
-      .${PREFIX}input:focus { border-color: #667eea !important; }
+      .${PREFIX}input:focus { border-color: ${c.accent} !important; }
       .${PREFIX}send {
         all: unset;
         padding: 8px 16px !important;
-        background: #667eea !important;
+        background: ${c.accent} !important;
         color: white !important;
         border-radius: 6px !important;
         font-size: 15px !important;
         cursor: pointer !important;
         box-sizing: border-box !important;
       }
-      .${PREFIX}send:hover { background: #5a6fd6 !important; }
-      .${PREFIX}send:disabled { background: #ccc !important; cursor: not-allowed !important; }
+      .${PREFIX}send:hover { background: ${c.accentHover} !important; }
+      .${PREFIX}send:disabled { background: ${c.textMuted} !important; cursor: not-allowed !important; }
       .${PREFIX}camera {
         all: unset;
         padding: 8px 10px !important;
-        background: #f5f5f5 !important;
-        color: #666 !important;
+        background: ${c.cameraBg} !important;
+        color: ${c.cameraText} !important;
         border-radius: 6px !important;
         font-size: 16px !important;
         cursor: pointer !important;
@@ -307,7 +356,7 @@
         justify-content: center !important;
         transition: background 0.2s !important;
       }
-      .${PREFIX}camera:hover { background: #e8e8e8 !important; color: #333 !important; }
+      .${PREFIX}camera:hover { background: ${c.bgHover} !important; color: ${c.text} !important; }
       .${PREFIX}camera:disabled { opacity: 0.5 !important; cursor: not-allowed !important; }
       .${PREFIX}screenshot-preview {
         all: unset;
@@ -315,7 +364,7 @@
         flex-wrap: wrap !important;
         gap: 6px !important;
         padding: 8px 16px !important;
-        border-top: 1px solid #eee !important;
+        border-top: 1px solid ${c.borderLight} !important;
         box-sizing: border-box !important;
       }
       .${PREFIX}screenshot-preview:empty { display: none !important; padding: 0 !important; border: none !important; }
@@ -331,7 +380,7 @@
         max-width: 80px !important;
         border-radius: 4px !important;
         object-fit: cover !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid ${c.border} !important;
         overflow: hidden !important;
       }
       .${PREFIX}screenshot-remove {
@@ -376,7 +425,7 @@
       .${PREFIX}crop-selection {
         all: unset;
         position: absolute !important;
-        border: 2px solid #667eea !important;
+        border: 2px solid ${c.accent} !important;
         background: transparent !important;
         box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
         pointer-events: none !important;
@@ -402,29 +451,29 @@
         flex-wrap: wrap !important;
         gap: 6px !important;
         padding: 8px 16px !important;
-        border-top: 1px solid #eee !important;
+        border-top: 1px solid ${c.borderLight} !important;
         box-sizing: border-box !important;
       }
       .${PREFIX}prompt-chip {
         all: unset;
         display: inline-block !important;
         padding: 4px 10px !important;
-        background: #f0f2f5 !important;
-        color: #555 !important;
+        background: ${c.chipBg} !important;
+        color: ${c.chipText} !important;
         border-radius: 12px !important;
         font-size: 13px !important;
         cursor: pointer !important;
         white-space: nowrap !important;
         transition: background 0.2s !important;
       }
-      .${PREFIX}prompt-chip:hover { background: #e0e3e8 !important; color: #333 !important; }
+      .${PREFIX}prompt-chip:hover { background: ${c.chipHoverBg} !important; color: ${c.text} !important; }
       .${PREFIX}error {
         all: unset;
         display: block !important;
-        color: #e74c3c !important;
+        color: ${c.errorText} !important;
         font-size: 12px !important;
         padding: 8px 12px !important;
-        background: #fdeaea !important;
+        background: ${c.errorBg} !important;
         border-radius: 6px !important;
         margin-bottom: 8px !important;
       }
@@ -433,7 +482,7 @@
         display: block !important;
         padding: 20px !important;
         text-align: center !important;
-        color: #666 !important;
+        color: ${c.warningText} !important;
         font-size: 13px !important;
       }
       .${PREFIX}typing {
@@ -446,7 +495,7 @@
         display: block !important;
         width: 6px !important;
         height: 6px !important;
-        background: #999 !important;
+        background: ${c.dotColor} !important;
         border-radius: 50% !important;
         animation: ${PREFIX}bounce 1.4s infinite !important;
       }
@@ -474,7 +523,7 @@
 
       const hint = document.createElement('div');
       hint.className = `${PREFIX}crop-hint`;
-      hint.textContent = '拖曳選取範圍，按 Esc 取消';
+      hint.textContent = t('cropHint');
 
       overlay.appendChild(selection);
       overlay.appendChild(hint);
@@ -743,24 +792,25 @@
     state.dialog = document.createElement('div');
     state.dialog.className = `${PREFIX}dialog`;
     state.dialog.setAttribute('data-aiext', '1');
+    if (_isRtl) state.dialog.setAttribute('dir', 'rtl');
     state.dialog.dataset.dialogId = id;
     state.dialog.innerHTML = `
       <div class="${PREFIX}header" data-aiext="1">
-        <span class="${PREFIX}title">AI 劃詞助手</span>
-        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${config.model || ''}" placeholder="模型" title="輸入或選擇模型" autocomplete="off">
+        <span class="${PREFIX}title">${t('dialogTitle')}</span>
+        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${config.model || ''}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
         <datalist id="${PREFIX}model-list-${id}"></datalist>
-        <span class="${PREFIX}pin" data-aiext="1" title="固定視窗">
+        <span class="${PREFIX}pin" data-aiext="1" title="${t('dialogPinTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>
         </span>
-        <span class="${PREFIX}minimize" data-aiext="1" title="縮小">
+        <span class="${PREFIX}minimize" data-aiext="1" title="${t('dialogMinimizeTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
         </span>
         <span class="${PREFIX}close" data-aiext="1">&times;</span>
       </div>
       ${hasContent ? `
       <div class="${PREFIX}selected">
-        ${ctx.text ? `<div class="${PREFIX}selected-label">選取文字</div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label">${ctx.text ? '' : '選取'}圖片</div><div class="${PREFIX}selected-images">${ctx.images.map(src => `<img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden">`).join('')}</div>` : ''}
+        ${ctx.text ? `<div class="${PREFIX}selected-label">${t('dialogSelectedText')}</div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label">${t('dialogSelectedImages')}</div><div class="${PREFIX}selected-images">${ctx.images.map(src => `<img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden">`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
@@ -768,11 +818,11 @@
         ${quickPrompts.map((p, i) => `<span class="${PREFIX}prompt-chip" data-aiext="1" data-prompt-index="${i}">${escapeHtml(p)}</span>`).join('')}
       </div>` : ''}
       <div class="${PREFIX}input-row">
-        <input class="${PREFIX}input" type="text" placeholder="輸入你的問題..." data-aiext="1" />
-        <button class="${PREFIX}camera" data-aiext="1" title="擷取螢幕">
+        <input class="${PREFIX}input" type="text" placeholder="${t('dialogInputPlaceholder')}" data-aiext="1" />
+        <button class="${PREFIX}camera" data-aiext="1" title="${t('dialogCameraTooltip')}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </button>
-        <button class="${PREFIX}send" data-aiext="1">發送</button>
+        <button class="${PREFIX}send" data-aiext="1">${t('dialogSendBtn')}</button>
       </div>
     `;
 
@@ -804,11 +854,11 @@
         state._savedHeight = state.dialog.style.height;
         state.dialog.style.height = 'auto';
         minimizeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
-        minimizeBtn.title = '展開';
+        minimizeBtn.title = t('dialogExpandTooltip');
       } else {
         if (state._savedHeight) state.dialog.style.height = state._savedHeight;
         minimizeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
-        minimizeBtn.title = '縮小';
+        minimizeBtn.title = t('dialogMinimizeTooltip');
       }
     });
 
@@ -1082,8 +1132,8 @@
     if (!text && !hasScreenshots) return;
 
     input.value = '';
-    addMessage(id, 'user', text || '[截屏]');
-    state.conversationHistory.push({ role: 'user', content: text || '[截屏]' });
+    addMessage(id, 'user', text || t('screenshotLabel'));
+    state.conversationHistory.push({ role: 'user', content: text || t('screenshotLabel') });
 
     state.isStreaming = true;
     sendBtn.disabled = true;
@@ -1093,19 +1143,19 @@
     try {
       const ctx = state.context;
       const allImages = [...(ctx.images || []), ...(state.pendingScreenshots || [])];
-      const textPart = `你是一個 AI 助手。${ctx.text ? `用戶選取了以下文字作為上下文：\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `用戶提供了 ${allImages.length} 張圖片作為上下文。` : ''}請基於此上下文回答用戶的問題。如果問題與選取內容無關，也可以直接回答。`;
+      const textPart = `You are an AI assistant. ${ctx.text ? `The user selected the following text as context:\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `The user also provided ${allImages.length} image(s) as context.` : ''} Please answer the user's question based on this context. If the question is unrelated to the selection, you may answer directly.`;
 
       const messages = [
         { role: 'system', content: textPart },
       ];
 
       if (allImages.length > 0) {
-        const imgContent = [{ type: 'text', text: '以下是用戶提供的圖片上下文：' }];
+        const imgContent = [{ type: 'text', text: 'Here are the images provided by the user as context:' }];
         for (const img of allImages) {
           imgContent.push({ type: 'image_url', image_url: { url: img } });
         }
         messages.push({ role: 'user', content: imgContent });
-        messages.push({ role: 'assistant', content: '好的，我已了解這些圖片上下文。請提問。' });
+        messages.push({ role: 'assistant', content: 'Got it, I have reviewed the image context. Please go ahead and ask your question.' });
       }
 
       messages.push(...state.conversationHistory);
@@ -1147,7 +1197,7 @@
       if (messagesEl) {
         const errDiv = document.createElement('div');
         errDiv.className = `${PREFIX}error`;
-        errDiv.textContent = '請求失敗：' + err.message;
+        errDiv.textContent = t('errorRequestFailed', err.message);
         messagesEl.appendChild(errDiv);
       }
     }
@@ -1171,7 +1221,7 @@
     });
     if (!res.ok) {
       const errText = await res.text();
-      return { error: `API 錯誤 ${res.status}: ${errText.slice(0, 200)}` };
+      return { error: t('errorApiError', res.status, errText.slice(0, 200)) };
     }
     return await readStream(id, res);
   }
@@ -1246,12 +1296,12 @@
     dlg.style.cssText = 'top:50% !important; left:50% !important; transform:translate(-50%,-50%) !important;';
     dlg.innerHTML = `
       <div class="${PREFIX}header" data-aiext="1">
-        <span class="${PREFIX}title">AI 劃詞助手</span>
+        <span class="${PREFIX}title">${t('settingsWarningTitle')}</span>
         <span class="${PREFIX}close" data-aiext="1">&times;</span>
       </div>
       <div class="${PREFIX}warning">
-        <p>請先設定 API Key</p>
-        <p style="margin-top:8px;font-size:12px;">點擊瀏覽器工具列的插件圖示打開設定頁面</p>
+        <p>${t('settingsWarningMessage')}</p>
+        <p style="margin-top:8px;font-size:12px;">${t('settingsWarningSubMessage')}</p>
       </div>
     `;
 
@@ -1343,4 +1393,8 @@
   }
 
   injectStyles();
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    injectStyles();
+  });
 })();

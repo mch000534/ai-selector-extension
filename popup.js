@@ -16,6 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let quickPrompts = [];
 
+  function applyI18n() {
+    const lang = chrome.i18n.getUILanguage();
+    const rtlLangs = ['ar', 'iw', 'fa', 'ur'];
+    const isRtl = rtlLangs.some(l => lang.startsWith(l));
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) el.textContent = msg;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) el.placeholder = msg;
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.dataset.i18nTitle;
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) el.title = msg;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.dataset.i18nAria;
+      const msg = chrome.i18n.getMessage(key);
+      if (msg) el.setAttribute('aria-label', msg);
+    });
+  }
+
   function normalizeBaseUrl(url) {
     let normalized = url.trim().replace(/\/+$/, '');
     if (!/\/v\d+$/i.test(normalized)) {
@@ -32,9 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const normalized = normalizeBaseUrl(raw);
     baseUrlHint.textContent = normalized !== raw
-      ? `有效位址：${normalized}`
+      ? chrome.i18n.getMessage('baseUrlValidHint', [normalized])
       : '';
   }
+
+  applyI18n();
 
   chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin'], (result) => {
     if (result.apiKey) apiKeyInput.value = result.apiKey;
@@ -47,10 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function renderPrompts() {
+    const editTooltip = chrome.i18n.getMessage('quickPromptsEditTooltip');
     promptsList.innerHTML = quickPrompts.map((p, i) => `
       <div class="prompt-item" data-index="${i}">
         <span class="prompt-drag" draggable="true">⠿</span>
-        <span class="prompt-text" title="點擊編輯">${escapeHtml(p)}</span>
+        <span class="prompt-text" title="${escapeHtml(editTooltip)}">${escapeHtml(p)}</span>
         <button class="prompt-remove" data-index="${i}">&times;</button>
       </div>
     `).join('');
@@ -169,13 +201,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = baseUrlInput.value.trim();
     const apiKey = apiKeyInput.value.trim();
     if (!baseUrl || !apiKey) {
-      showStatus('請先輸入 Base URL 和 API Key', 'error');
+      showStatus(chrome.i18n.getMessage('statusNeedUrlAndKey'), 'error');
       return;
     }
 
     fetchModelsBtn.disabled = true;
-    fetchModelsBtn.textContent = '...';
-    modelHint.textContent = '正在獲取模型列表...';
+    fetchModelsBtn.textContent = chrome.i18n.getMessage('modelFetching');
+    modelHint.textContent = chrome.i18n.getMessage('modelFetchingHint');
 
     try {
       const url = normalizeBaseUrl(baseUrl) + '/models';
@@ -187,25 +219,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
 
       if (models.length === 0) {
-        showStatus('未找到模型', 'error');
+        showStatus(chrome.i18n.getMessage('modelNoModels'), 'error');
         return;
       }
 
-      const current = modelInput.value;
       modelList.innerHTML = '';
       models.forEach(id => {
         const opt = document.createElement('option');
         opt.value = id;
         modelList.appendChild(opt);
       });
-      modelHint.textContent = `找到 ${models.length} 個模型，可輸入篩選`;
-      showStatus('模型列表已更新', 'success');
+      modelHint.textContent = chrome.i18n.getMessage('modelFound', [String(models.length)]);
+      showStatus(chrome.i18n.getMessage('modelUpdated'), 'success');
     } catch (err) {
-      showStatus('獲取失敗：' + err.message, 'error');
-      modelHint.textContent = '獲取失敗，請檢查 URL 和 Key';
+      showStatus(chrome.i18n.getMessage('modelFetchFailed', [err.message]), 'error');
+      modelHint.textContent = chrome.i18n.getMessage('modelFetchFailedHint');
     } finally {
       fetchModelsBtn.disabled = false;
-      fetchModelsBtn.textContent = '獲取';
+      fetchModelsBtn.textContent = chrome.i18n.getMessage('modelFetchBtn');
     }
   });
 
@@ -215,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
     chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin }, () => {
-      showStatus('已自動儲存', 'success');
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
   }
 

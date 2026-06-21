@@ -4,11 +4,55 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #f9f9f9;
+  --bg-hover: #e8e8e8;
+  --bg-toggle-hover: #f0f0f0;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --text-faint: #bbb;
+  --text-dark: #444;
+  --border-color: #ddd;
+  --border-light: #eee;
+  --accent: #667eea;
+  --accent-soft: #e8eaff;
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --error-bg: #f8d7da;
+  --error-text: #721c24;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
+    --bg-hover: #2a2a4a;
+    --bg-toggle-hover: #2a2a4a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --text-faint: #606080;
+    --text-dark: #c0c0c0;
+    --border-color: #2a2a4a;
+    --border-light: #1e1e3a;
+    --accent: #7c8ff0;
+    --accent-soft: rgba(124, 143, 240, 0.15);
+    --success-bg: #1a3d1a;
+    --success-text: #6bcf7f;
+    --error-bg: #3d1a1a;
+    --error-text: #ff6b6b;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
-  color: #333;
-  background: #fff;
+  color: var(--text-primary);
+  background: var(--bg-primary);
   width: 320px;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -26,7 +70,7 @@ h1 {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .form-group {
@@ -37,35 +81,37 @@ label {
   display: block;
   font-size: 12px;
   font-weight: 500;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
 input, select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 13px;
   outline: none;
   transition: border-color 0.2s;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 input:focus, select:focus {
-  border-color: #667eea;
+  border-color: var(--accent);
 }
 
 small {
   display: block;
   font-size: 11px;
-  color: #999;
+  color: var(--text-muted);
   margin-top: 4px;
 }
 
 .btn-primary {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -89,31 +135,31 @@ small {
 }
 
 .status.success {
-  background: #d4edda;
-  color: #155724;
+  background: var(--success-bg);
+  color: var(--success-text);
 }
 
 .status.error {
-  background: #f8d7da;
-  color: #721c24;
+  background: var(--error-bg);
+  color: var(--error-text);
 }
 
 .footer {
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-light);
   text-align: center;
 }
 
 .footer p {
   font-size: 11px;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .footer .version {
   margin-top: 4px;
   font-size: 10px;
-  color: #bbb;
+  color: var(--text-faint);
 }
 
 .footer .github-link {
@@ -121,7 +167,7 @@ small {
 }
 
 .footer .github-link a {
-  color: #667eea;
+  color: var(--accent);
   text-decoration: none;
   font-size: 11px;
 }
@@ -139,7 +185,7 @@ small {
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  background: #f5f5f5;
+  background: var(--bg-secondary);
   border-radius: 4px;
   margin-bottom: 4px;
   font-size: 12px;
@@ -152,12 +198,12 @@ small {
 }
 
 .prompt-item.drag-over {
-  background: #e8eaff;
-  box-shadow: inset 0 0 0 1px #667eea;
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 .prompt-drag {
-  color: #bbb;
+  color: var(--text-faint);
   font-size: 14px;
   cursor: grab;
   margin-right: 8px;
@@ -170,19 +216,19 @@ small {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #444;
+  color: var(--text-dark);
   cursor: text;
 }
 
 .prompt-edit-input {
   flex: 1;
-  border: 1px solid #667eea;
+  border: 1px solid var(--accent);
   border-radius: 3px;
   padding: 2px 6px;
   font-size: 12px;
   font-family: inherit;
-  color: #444;
-  background: #fff;
+  color: var(--text-dark);
+  background: var(--bg-primary);
   outline: none;
 }
 
@@ -191,7 +237,7 @@ small {
   height: 20px;
   border: none;
   background: none;
-  color: #999;
+  color: var(--text-muted);
   font-size: 16px;
   cursor: pointer;
   display: flex;
@@ -203,8 +249,8 @@ small {
 }
 
 .prompt-remove:hover {
-  background: #e8e8e8;
-  color: #666;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
 }
 
 .prompt-input-row {
@@ -219,9 +265,9 @@ small {
 .btn-add {
   width: 36px;
   height: 36px;
-  border: 1px solid #ddd;
-  background: #f9f9f9;
-  color: #666;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
   font-size: 18px;
   cursor: pointer;
   border-radius: 6px;
@@ -232,8 +278,8 @@ small {
 }
 
 .btn-add:hover {
-  background: #eee;
-  color: #333;
+  background: var(--border-light);
+  color: var(--text-primary);
 }
 
 .model-row {
@@ -248,9 +294,9 @@ small {
 .btn-fetch {
   width: 50px;
   height: 36px;
-  border: 1px solid #ddd;
-  background: #f9f9f9;
-  color: #666;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
   font-size: 13px;
   cursor: pointer;
   border-radius: 6px;
@@ -262,8 +308,8 @@ small {
 }
 
 .btn-fetch:hover {
-  background: #eee;
-  color: #333;
+  background: var(--border-light);
+  color: var(--text-primary);
 }
 
 .btn-fetch:disabled {
@@ -282,13 +328,13 @@ small {
   gap: 8px;
   cursor: pointer;
   font-size: 13px !important;
-  color: #444 !important;
+  color: var(--text-dark) !important;
 }
 
 .toggle-label input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #667eea;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
@@ -307,7 +353,7 @@ small {
   transform: translateY(-50%);
   border: none;
   background: none;
-  color: #999;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -318,8 +364,8 @@ small {
 }
 
 .toggle-visibility:hover {
-  color: #666;
-  background: #f0f0f0;
+  color: var(--text-secondary);
+  background: var(--bg-toggle-hover);
 }
 
 .toggle-visibility .eye-closed {
