@@ -505,6 +505,35 @@
         0%, 60%, 100% { transform: translateY(0); }
         30% { transform: translateY(-4px); }
       }
+      .${PREFIX}dialog::-webkit-scrollbar,
+      .${PREFIX}messages::-webkit-scrollbar,
+      .${PREFIX}selected-text::-webkit-scrollbar {
+        width: 8px;
+      }
+      .${PREFIX}dialog::-webkit-scrollbar-track,
+      .${PREFIX}messages::-webkit-scrollbar-track,
+      .${PREFIX}selected-text::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .${PREFIX}dialog::-webkit-scrollbar-thumb,
+      .${PREFIX}messages::-webkit-scrollbar-thumb,
+      .${PREFIX}selected-text::-webkit-scrollbar-thumb {
+        background: ${c.textMuted} !important;
+        border-radius: 4px;
+      }
+      .${PREFIX}dialog::-webkit-scrollbar-thumb:hover,
+      .${PREFIX}messages::-webkit-scrollbar-thumb:hover,
+      .${PREFIX}selected-text::-webkit-scrollbar-thumb:hover {
+        background: ${c.textSecondary} !important;
+      }
+      .${PREFIX}dialog {
+        scrollbar-width: thin;
+        scrollbar-color: ${c.textMuted} transparent;
+      }
+      .${PREFIX}messages {
+        scrollbar-width: thin;
+        scrollbar-color: ${c.textMuted} transparent;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -1143,7 +1172,11 @@
     try {
       const ctx = state.context;
       const allImages = [...(ctx.images || []), ...(state.pendingScreenshots || [])];
-      const textPart = `You are an AI assistant. ${ctx.text ? `The user selected the following text as context:\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `The user also provided ${allImages.length} image(s) as context.` : ''} Please answer the user's question based on this context. If the question is unrelated to the selection, you may answer directly.`;
+      const uiLang = chrome.i18n.getUILanguage();
+      const langInstruction = uiLang.startsWith('zh')
+        ? `Please respond in the same Chinese variant (Traditional or Simplified) as the user's input.`
+        : `Please respond in ${uiLang} unless the user writes in another language.`;
+      const textPart = `You are an AI assistant. ${ctx.text ? `The user selected the following text as context:\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `The user also provided ${allImages.length} image(s) as context.` : ''} ${langInstruction} Please answer the user's question based on this context. If the question is unrelated to the selection, you may answer directly.`;
 
       const messages = [
         { role: 'system', content: textPart },
