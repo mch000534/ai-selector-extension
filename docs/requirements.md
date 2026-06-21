@@ -1,6 +1,6 @@
 # AI 劃詞助手 — 需求文件
 
-> 版本：1.0.0 | 最後更新：2026-06-20
+> 版本：1.0.4 | 最後更新：2026-06-21
 
 ## 1. 專案概述
 
@@ -31,13 +31,17 @@
 - 右鍵選單整合
 - 設定頁面（API URL、Key、模型、快速問題、預設釘選）
 - 鍵盤快捷鍵（Enter 發送、ESC 關閉）
+- 多語言 UI（55 種語言，Chrome i18n 機制）
+- 暗色/亮色模式自動切換（依系統 `prefers-color-scheme`）
+- RTL 佈局支援（阿拉伯語、希伯來語、波斯語）
+- Base URL 自動補上 `/v1`
+- API Key 眼圖示切換顯示
+- 快速預設問題行內編輯（單擊編輯、拖曳把手排序）
 
 **Out of Scope（不納入範圍）**
 - 非 OpenAI 相容的 API 格式支援
 - 本地模型推論
 - 對話歷史持久化（頁面重新整理後對話清空）
-- 暗色模式
-- 多國語言 UI（僅支援繁體中文）
 - 跨裝置對話同步
 
 ## 2. 用戶故事
@@ -122,10 +126,43 @@
 - `ESC`：關閉最上層未釘選的對話框
 
 #### FR-011：錯誤處理
-- 未設定 API Key 時顯示引導提示「請先設定 API Key」
+- 未設定 API Key 時顯示引導提示
 - API 回傳錯誤時在對話框內顯示錯誤訊息（HTTP 狀態碼 + 回應前 200 字）
 - 多模態請求回傳 400 時自動重試為純文字模式
-- 網路請求例外時顯示「請求失敗：[錯誤訊息]」
+- 網路請求例外時顯示錯誤訊息
+
+#### FR-012：多語言支援（i18n）
+- 使用 Chrome 內建 `_locales` + `chrome.i18n.getMessage()` 機制
+- 支援 55 種語言，`default_locale` 為 `en`
+- `manifest.json` 的 `name`/`description` 使用 `__MSG_` 格式
+- `popup.html` 透過 `data-i18n*` 屬性標記可翻譯元素，`popup.js` 的 `applyI18n()` 套用翻譯
+- `content.js` 透過 `t()` 輔助函式取得翻譯字串
+- 系統提示詞為英文，但根據使用者 UI 語言指示 AI 以該語言回應
+- RTL 語言（ar、iw、fa）自動設定 `dir="rtl"`，訊息氣泡對齊方向翻轉
+
+#### FR-013：暗色/亮色模式
+- 依系統 `prefers-color-scheme` 自動切換，無需手動設定
+- `popup.css` 使用 CSS 自訂屬性 + `@media (prefers-color-scheme: dark)` 覆寫
+- `content.js` 的 `getThemeColors()` 根據 `matchMedia` 回傳對應色彩組
+- 系統切換主題時自動重新注入 content script 樣式
+- 滾動條顏色跟隨主題切換
+
+#### FR-014：Base URL 自動正規化
+- `normalizeBaseUrl()` 去除結尾斜線
+- 若 URL 不以 `/v1`、`/v2` 等版本路徑結尾，自動補上 `/v1`
+- 設定頁輸入框失焦時自動修正並儲存
+- 所有 API 呼叫（popup 獲取模型、content.js 對話補全）均使用正規化 URL
+
+#### FR-015：API Key 顯示切換
+- API Key 輸入框右側有眼圖示按鈕
+- 點擊切換 `password` / `text` 類型
+- 圖示在張眼/閉眼之間切換
+
+#### FR-016：快速預設問題行內編輯
+- 單擊已存在的問題文字即可進入編輯模式
+- Enter 或失焦儲存，Escape 取消
+- 空字串不儲存（視為取消）
+- 僅左側 ⠿ 把手可發起拖曳排序，整列不可拖曳
 
 ### 3.2 非功能需求
 
@@ -140,7 +177,9 @@
 - 對話框內容渲染前必須先跳脫 HTML 再套用 Markdown 轉換
 
 #### NFR-003：可用性
-- 所有 UI 文字使用繁體中文（zh-TW）
+- UI 文字使用 Chrome i18n 機制，支援 55 種語言，禁止硬編碼 UI 字串
+- 暗色/亮色模式自動切換，禁止硬編碼顏色值（使用 CSS variables 或 `getThemeColors()`）
+- RTL 語言自動翻轉佈局方向
 - 對話框最小尺寸 280×250px，最大不超過 90vw / 90vh
 - 圖示與對話框需使用 `all: initial` + `!important` 確保樣式不受宿主頁面影響
 
@@ -244,7 +283,7 @@ Content-Type: application/json
 {
   "model": "gpt-4o",
   "messages": [
-    { "role": "system", "content": "你是一個 AI 助手。用戶選取了以下文字..." },
+    { "role": "system", "content": "You are an AI assistant. The user selected the following text..." },
     { "role": "user", "content": "解釋這段文字" }
   ],
   "stream": true
@@ -262,7 +301,7 @@ data: [DONE]
 {
   "role": "user",
   "content": [
-    { "type": "text", "text": "以下是用戶選取的圖片上下文：" },
+    { "type": "text", "text": "Here are the images provided by the user as context:" },
     { "type": "image_url", "image_url": { "url": "data:image/png;base64,..." } }
   ]
 }
@@ -272,14 +311,23 @@ data: [DONE]
 
 ```
 ai-selector-extension/
-├── manifest.json          # Manifest V3 設定檔（權限、背景腳本、彈出頁面、Content Script）
-├── background.js          # Service worker：右鍵選單建立與點擊轉發
-├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、API 呼叫、串流解析、Markdown 渲染）
+├── manifest.json          # Manifest V3 設定檔（權限、背景腳本、彈出頁面、Content Script、default_locale）
+├── background.js          # Service worker：右鍵選單建立與點擊轉發（i18n）
+├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、API 呼叫、串流解析、Markdown 渲染、i18n、暗色模式、RTL）
 ├── content.css            # 故意為空白（所有樣式由 content.js 動態注入）
-├── popup.html             # 設定頁面 HTML
-├── popup.js               # 設定頁面邏輯（儲存讀取、模型獲取、快速問題管理）
-├── popup.css              # 設定頁面樣式
+├── popup.html             # 設定頁面 HTML（data-i18n 屬性標記）
+├── popup.js               # 設定頁面邏輯（applyI18n、儲存讀取、模型獲取、快速問題管理、眼圖示、行內編輯）
+├── popup.css              # 設定頁面樣式（CSS variables + @media dark 暗色模式）
+├── _locales/              # 多語言檔案目錄（55 種語言）
+│   ├── en/                # 英文（預設語言）
+│   │   └── messages.json
+│   ├── zh_TW/             # 繁體中文
+│   │   └── messages.json
+│   ├── zh_CN/             # 簡體中文
+│   │   └── messages.json
+│   └── ...                # 其餘 52 種語言
 ├── AGENTS.md              # AI agent 工作指引
+├── README.md              # 專案說明文件
 ├── requirements.md        # 本需求文件
 └── icons/
     ├── icon16.png         # 工具列圖示（16×16）

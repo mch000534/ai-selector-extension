@@ -79,7 +79,7 @@
         position: fixed !important;
         width: 32px !important;
         height: 32px !important;
-        background: linear-gradient(135deg, ${c.accent} 0%, #764ba2 100%) !important;
+        background: transparent !important;
         border-radius: 50% !important;
         cursor: pointer !important;
         display: flex !important;
@@ -90,9 +90,10 @@
         transition: transform 0.15s !important;
         user-select: none !important;
         pointer-events: auto !important;
+        overflow: hidden !important;
       }
       .${PREFIX}icon:hover { transform: scale(1.1) !important; }
-      .${PREFIX}icon svg { width: 18px; height: 18px; fill: white; pointer-events: none; }
+      .${PREFIX}icon img { width: 32px; height: 32px; border-radius: 50%; pointer-events: none; display: block; }
       .${PREFIX}overlay {
         all: initial;
         position: fixed !important;
@@ -744,7 +745,7 @@
     floatingIcon = document.createElement('div');
     floatingIcon.className = `${PREFIX}icon`;
     floatingIcon.setAttribute('data-aiext', '1');
-    floatingIcon.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>`;
+    floatingIcon.innerHTML = `<img src="${chrome.runtime.getURL('icons/icon48.png')}" alt="">`;
 
     if (imgEl) {
       floatingIcon.addEventListener('mouseenter', () => {
