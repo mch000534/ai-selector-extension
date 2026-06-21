@@ -18,10 +18,13 @@
   }
 
   function t(key, ...args) {
+    if (!chrome.i18n || !chrome.i18n.getMessage) return key;
     return chrome.i18n.getMessage(key, args) || key;
   }
 
-  const _isRtl = ['ar', 'iw', 'fa', 'ur'].some(l => chrome.i18n.getUILanguage().startsWith(l));
+  const _isRtl = chrome.i18n && chrome.i18n.getUILanguage
+    ? ['ar', 'iw', 'fa', 'ur'].some(l => chrome.i18n.getUILanguage().startsWith(l))
+    : false;
 
   function getThemeColors() {
     const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;

@@ -1,12 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
+  const i18n = chrome.i18n;
   chrome.contextMenus.create({
     id: 'ai-selector-open',
-    title: chrome.i18n.getMessage('contextMenuTitle'),
+    title: (i18n && i18n.getMessage) ? i18n.getMessage('contextMenuTitle') : 'AI Selection Assistant',
     contexts: ['all'],
   });
   chrome.contextMenus.create({
     id: 'ai-selector-image',
-    title: chrome.i18n.getMessage('contextMenuImageTitle'),
+    title: (i18n && i18n.getMessage) ? i18n.getMessage('contextMenuImageTitle') : 'AI Image Assistant',
     contexts: ['image'],
   });
 });
