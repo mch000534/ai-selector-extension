@@ -129,7 +129,7 @@ small {
   border-radius: 4px;
   margin-bottom: 4px;
   font-size: 12px;
-  cursor: grab;
+  cursor: default;
   transition: background 0.15s, box-shadow 0.15s;
 }
 
@@ -157,6 +157,19 @@ small {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #444;
+  cursor: text;
+}
+
+.prompt-edit-input {
+  flex: 1;
+  border: 1px solid #667eea;
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  color: #444;
+  background: #fff;
+  outline: none;
 }
 
 .prompt-remove {
@@ -263,4 +276,46 @@ small {
   height: 16px;
   accent-color: #667eea;
   cursor: pointer;
+}
+
+.input-with-toggle {
+  position: relative;
+}
+
+.input-with-toggle input {
+  padding-right: 38px;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.toggle-visibility:hover {
+  color: #666;
+  background: #f0f0f0;
+}
+
+.toggle-visibility .eye-closed {
+  display: none;
+}
+
+.toggle-visibility.visible .eye-open {
+  display: none;
+}
+
+.toggle-visibility.visible .eye-closed {
+  display: block;
 }

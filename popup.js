@@ -11,8 +11,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const addPromptBtn = document.getElementById('addPromptBtn');
 
   const defaultPinCheckbox = document.getElementById('defaultPin');
+  const baseUrlHint = document.getElementById('baseUrlHint');
+  const toggleApiKeyBtn = document.getElementById('toggleApiKey');
 
   let quickPrompts = [];
+
+  function normalizeBaseUrl(url) {
+    let normalized = url.trim().replace(/\/+$/, '');
+    if (!/\/v\d+$/i.test(normalized)) {
+      normalized += '/v1';
+    }
+    return normalized;
+  }
+
+  function updateBaseUrlHint() {
+    const raw = baseUrlInput.value.trim();
+    if (!raw) {
+      baseUrlHint.textContent = '';
+      return;
+    }
+    const normalized = normalizeBaseUrl(raw);
+    baseUrlHint.textContent = normalized !== raw
+      ? `有效位址：${normalized}`
+      : '';
+  }
 
   chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin'], (result) => {
     if (result.apiKey) apiKeyInput.value = result.apiKey;
@@ -21,13 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
     defaultPinCheckbox.checked = result.defaultPin !== false;
     quickPrompts = result.quickPrompts || [];
     renderPrompts();
+    updateBaseUrlHint();
   });
 
   function renderPrompts() {
     promptsList.innerHTML = quickPrompts.map((p, i) => `
-      <div class="prompt-item" draggable="true" data-index="${i}">
-        <span class="prompt-drag">⠿</span>
-        <span class="prompt-text">${escapeHtml(p)}</span>
+      <div class="prompt-item" data-index="${i}">
+        <span class="prompt-drag" draggable="true">⠿</span>
+        <span class="prompt-text" title="點擊編輯">${escapeHtml(p)}</span>
         <button class="prompt-remove" data-index="${i}">&times;</button>
       </div>
     `).join('');
@@ -41,15 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    promptsList.querySelectorAll('.prompt-text').forEach(span => {
+      span.addEventListener('click', () => {
+        const index = parseInt(span.closest('.prompt-item').dataset.index);
+        editPrompt(index, span);
+      });
+    });
+
     let dragSrcIndex = null;
 
-    promptsList.querySelectorAll('.prompt-item').forEach(item => {
-      item.addEventListener('dragstart', (e) => {
+    promptsList.querySelectorAll('.prompt-drag').forEach(handle => {
+      handle.addEventListener('dragstart', (e) => {
+        const item = handle.closest('.prompt-item');
         dragSrcIndex = parseInt(item.dataset.index);
         item.classList.add('dragging');
         e.dataTransfer.effectAllowed = 'move';
       });
+    });
 
+    promptsList.querySelectorAll('.prompt-item').forEach(item => {
       item.addEventListener('dragend', () => {
         item.classList.remove('dragging');
         promptsList.querySelectorAll('.prompt-item').forEach(el => el.classList.remove('drag-over'));
@@ -77,6 +110,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+  }
+
+  function editPrompt(index, spanEl) {
+    const input = document.createElement('input');
+    input.className = 'prompt-edit-input';
+    input.value = quickPrompts[index];
+    spanEl.replaceWith(input);
+    input.focus();
+    input.select();
+
+    let done = false;
+    function commit() {
+      if (done) return;
+      done = true;
+      const val = input.value.trim();
+      if (val) {
+        quickPrompts[index] = val;
+        save();
+      }
+      renderPrompts();
+    }
+    function cancel() {
+      if (done) return;
+      done = true;
+      renderPrompts();
+    }
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+    input.addEventListener('blur', commit);
   }
 
   function addPrompt() {
@@ -113,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modelHint.textContent = '正在獲取模型列表...';
 
     try {
-      const url = baseUrl.replace(/\/+$/, '') + '/models';
+      const url = normalizeBaseUrl(baseUrl) + '/models';
       const res = await fetch(url, {
         headers: { 'Authorization': `Bearer ${apiKey}` }
       });
@@ -160,10 +225,30 @@ document.addEventListener('DOMContentLoaded', () => {
     saveTimer = setTimeout(save, 500);
   }
 
-  baseUrlInput.addEventListener('input', debouncedSave);
+  baseUrlInput.addEventListener('input', () => {
+    updateBaseUrlHint();
+    debouncedSave();
+  });
+  baseUrlInput.addEventListener('blur', () => {
+    const raw = baseUrlInput.value.trim();
+    if (raw) {
+      const normalized = normalizeBaseUrl(raw);
+      if (normalized !== raw) {
+        baseUrlInput.value = normalized;
+        updateBaseUrlHint();
+        save();
+      }
+    }
+  });
   apiKeyInput.addEventListener('input', debouncedSave);
   modelInput.addEventListener('input', debouncedSave);
   defaultPinCheckbox.addEventListener('change', save);
+
+  toggleApiKeyBtn.addEventListener('click', () => {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleApiKeyBtn.classList.toggle('visible', isPassword);
+  });
 
   function showStatus(message, type) {
     statusEl.textContent = message;

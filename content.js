@@ -8,6 +8,14 @@
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
   let topZ = Z_BASE;
+
+  function normalizeBaseUrl(url) {
+    let normalized = url.trim().replace(/\/+$/, '');
+    if (!/\/v\d+$/i.test(normalized)) {
+      normalized += '/v1';
+    }
+    return normalized;
+  }
   let _hoveredImage = null;
   let _iconHoverTimer = null;
 
@@ -984,7 +992,7 @@
     if (!datalist) return;
 
     try {
-      const url = baseUrl.replace(/\/+$/, '') + '/models';
+      const url = normalizeBaseUrl(baseUrl) + '/models';
       const res = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
       if (!res.ok) return;
       const data = await res.json();
@@ -1152,7 +1160,7 @@
   // ─── AI Calls ───
   async function callAI(id, config, messages) {
     const { apiKey, model, baseUrl } = config;
-    const url = (baseUrl || 'https://api.openai.com/v1').replace(/\/+$/, '') + '/chat/completions';
+    const url = normalizeBaseUrl(baseUrl || 'https://api.openai.com/v1') + '/chat/completions';
     const res = await fetch(url, {
       method: 'POST',
       headers: {
