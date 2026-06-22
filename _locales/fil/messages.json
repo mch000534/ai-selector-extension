@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Piliin ang teksto sa anumang pahina para makipag-chat sa AI. Sinusuportahan ang maraming provider (BYOK)." },
-  "popupTitle": { "message": "Mga Setting ng AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Epektibong URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Key" },
-  "apiKeyPlaceholder": { "message": "Ilagay ang iyong API Key" },
-  "apiKeyToggleAria": { "message": "Ipakita o itago ang API Key" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Ilagay o piliin ang pangalan ng model" },
-  "modelFetchBtn": { "message": "Kunin" },
-  "modelHint": { "message": "Ilagay ang Base URL at API Key, pagkatapos ay i-click Kunin" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Kumukuha ng listahan ng model..." },
-  "modelNoModels": { "message": "Walang nahanap na model" },
-  "modelFound": { "message": "Nakahanap ng $1 na model, i-type para i-filter", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Na-update ang listahan ng model" },
-  "modelFetchFailed": { "message": "Nabigo ang pagkuha: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Nabigo ang pagkuha, pakitingnan ang URL at Key" },
-  "quickPromptsLabel": { "message": "Mabilisang Prompt" },
-  "quickPromptsPlaceholder": { "message": "Maglagay ng mabilisang prompt..." },
-  "quickPromptsHint": { "message": "I-click ang mabilisang prompt sa dialog para mapunan" },
-  "quickPromptsEditTooltip": { "message": "I-click para i-edit" },
-  "defaultPinLabel": { "message": "I-pin ang dialog bilang default" },
-  "defaultPinHint": { "message": "Kapag naka-enable, ang mga bagong dialog ay awtomatikong naa-pin at hindi magsasara kapag nag-click sa labas" },
-  "statusNeedUrlAndKey": { "message": "Mangyaring ilagay muna ang Base URL at API Key" },
-  "statusAutoSaved": { "message": "Awtomatikong na-save" },
-  "footerHint": { "message": "Piliin ang teksto sa anumang pahina para gamitin" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Ilagay o piliin ang model" },
-  "dialogPinTooltip": { "message": "I-pin ang window" },
-  "dialogMinimizeTooltip": { "message": "I-minimize" },
-  "dialogExpandTooltip": { "message": "Palawakin" },
-  "dialogSelectedText": { "message": "Napiling teksto" },
-  "dialogSelectedImages": { "message": "Napiling mga imahe" },
-  "dialogInputPlaceholder": { "message": "I-type ang iyong tanong..." },
-  "dialogSendBtn": { "message": "Ipadala" },
-  "dialogCameraTooltip": { "message": "Kuhanin ang screenshot" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Mangyaring i-set up muna ang iyong API Key" },
-  "settingsWarningSubMessage": { "message": "I-click ang icon ng extension sa toolbar para buksan ang mga setting" },
-  "cropHint": { "message": "I-drag para piliin ang lugar, pindutin ang Esc para kanselahin" },
-  "errorRequestFailed": { "message": "Nabigo ang kahilingan: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API Error $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Screenshot]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI Image Assistant" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Piliin ang teksto sa anumang pahina para makipag-chat sa AI. Sinusuportahan ang maraming provider (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Mga Setting ng AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Epektibong URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Key"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Ilagay ang iyong API Key"
+  },
+  "apiKeyToggleAria": {
+    "message": "Ipakita o itago ang API Key"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Ilagay o piliin ang pangalan ng model"
+  },
+  "modelFetchBtn": {
+    "message": "Kunin"
+  },
+  "modelHint": {
+    "message": "Ilagay ang Base URL at API Key, pagkatapos ay i-click Kunin"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Kumukuha ng listahan ng model..."
+  },
+  "modelNoModels": {
+    "message": "Walang nahanap na model"
+  },
+  "modelFound": {
+    "message": "Nakahanap ng $1 na model, i-type para i-filter",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Na-update ang listahan ng model"
+  },
+  "modelFetchFailed": {
+    "message": "Nabigo ang pagkuha: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Nabigo ang pagkuha, pakitingnan ang URL at Key"
+  },
+  "quickPromptsLabel": {
+    "message": "Mabilisang Prompt"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Maglagay ng mabilisang prompt..."
+  },
+  "quickPromptsHint": {
+    "message": "I-click ang mabilisang prompt sa dialog para mapunan"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "I-click para i-edit"
+  },
+  "defaultPinLabel": {
+    "message": "I-pin ang dialog bilang default"
+  },
+  "defaultPinHint": {
+    "message": "Kapag naka-enable, ang mga bagong dialog ay awtomatikong naa-pin at hindi magsasara kapag nag-click sa labas"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Mangyaring ilagay muna ang Base URL at API Key"
+  },
+  "statusAutoSaved": {
+    "message": "Awtomatikong na-save"
+  },
+  "footerHint": {
+    "message": "Piliin ang teksto sa anumang pahina para gamitin"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Ilagay o piliin ang model"
+  },
+  "dialogPinTooltip": {
+    "message": "I-pin ang window"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "I-minimize"
+  },
+  "dialogExpandTooltip": {
+    "message": "Palawakin"
+  },
+  "dialogSelectedText": {
+    "message": "Napiling teksto"
+  },
+  "dialogSelectedImages": {
+    "message": "Napiling mga imahe"
+  },
+  "dialogInputPlaceholder": {
+    "message": "I-type ang iyong tanong..."
+  },
+  "dialogSendBtn": {
+    "message": "Ipadala"
+  },
+  "dialogCameraTooltip": {
+    "message": "Kuhanin ang screenshot"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Mangyaring i-set up muna ang iyong API Key"
+  },
+  "settingsWarningSubMessage": {
+    "message": "I-click ang icon ng extension sa toolbar para buksan ang mga setting"
+  },
+  "cropHint": {
+    "message": "I-drag para piliin ang lugar, pindutin ang Esc para kanselahin"
+  },
+  "errorRequestFailed": {
+    "message": "Nabigo ang kahilingan: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API Error $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Screenshot]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI Image Assistant"
+  },
+  "dialogClearTooltip": {
+    "message": "I-clear ang pinili"
+  }
 }

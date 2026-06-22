@@ -1,6 +1,21 @@
 (() => {
   if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.sync) return;
 
+  let _contextInvalid = false;
+  function contextValid() {
+    if (_contextInvalid) return false;
+    try {
+      if (chrome.runtime && chrome.runtime.id == null) {
+        _contextInvalid = true;
+        return false;
+      }
+    } catch (e) {
+      _contextInvalid = true;
+      return false;
+    }
+    return true;
+  }
+
   const PREFIX = '__aiext_';
   let floatingIcon = null;
   let currentContext = { text: '', images: [] };
@@ -18,8 +33,9 @@
   }
 
   function t(key, ...args) {
-    if (!chrome.i18n || !chrome.i18n.getMessage) return key;
-    return chrome.i18n.getMessage(key, args) || key;
+    if (!contextValid() || !chrome.i18n || !chrome.i18n.getMessage) return key;
+    try { return chrome.i18n.getMessage(key, args) || key; }
+    catch (e) { _contextInvalid = true; return key; }
   }
 
   const _isRtl = chrome.i18n && chrome.i18n.getUILanguage
@@ -228,10 +244,33 @@
       }
       .${PREFIX}selected-label {
         all: unset;
-        display: block !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         font-size: 12px !important;
         color: ${c.textMuted} !important;
         margin-bottom: 4px !important;
+        gap: 6px !important;
+      }
+      .${PREFIX}selected-clear {
+        all: unset;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 16px !important;
+        height: 16px !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        color: ${c.textMuted} !important;
+        background: transparent !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        transition: background 0.15s, color 0.15s !important;
+        flex-shrink: 0 !important;
+      }
+      .${PREFIX}selected-clear:hover {
+        background: ${c.errorBg} !important;
+        color: ${c.errorText} !important;
       }
       .${PREFIX}selected-text {
         all: unset;
@@ -249,6 +288,13 @@
         margin-top: 6px !important;
         flex-wrap: wrap !important;
       }
+      .${PREFIX}selected-img-wrap {
+        all: unset;
+        display: inline-block !important;
+        position: relative !important;
+        max-width: 80px !important;
+        max-height: 60px !important;
+      }
       .${PREFIX}selected-img {
         all: unset;
         display: block !important;
@@ -259,6 +305,26 @@
         border: 1px solid ${c.border} !important;
         overflow: hidden !important;
       }
+      .${PREFIX}selected-img-remove {
+        all: unset;
+        position: absolute !important;
+        top: -6px !important;
+        ${_isRtl ? 'left' : 'right'}: -6px !important;
+        width: 16px !important;
+        height: 16px !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        color: #fff !important;
+        background: ${c.accent} !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+        transition: background 0.15s !important;
+      }
+      .${PREFIX}selected-img-remove:hover { background: ${c.errorText} !important; }
       .${PREFIX}messages {
         all: unset;
         display: block !important;
@@ -745,7 +811,13 @@
     floatingIcon = document.createElement('div');
     floatingIcon.className = `${PREFIX}icon`;
     floatingIcon.setAttribute('data-aiext', '1');
-    floatingIcon.innerHTML = `<img src="${chrome.runtime.getURL('icons/icon48.png')}" alt="">`;
+    let _iconUrl = '';
+    try {
+      if (contextValid() && chrome.runtime && chrome.runtime.getURL) {
+        _iconUrl = chrome.runtime.getURL('icons/icon48.png');
+      }
+    } catch (e) { _contextInvalid = true; }
+    floatingIcon.innerHTML = _iconUrl ? `<img src="${_iconUrl}" alt="">` : '';
 
     if (imgEl) {
       floatingIcon.addEventListener('mouseenter', () => {
@@ -842,8 +914,8 @@
       </div>
       ${hasContent ? `
       <div class="${PREFIX}selected">
-        ${ctx.text ? `<div class="${PREFIX}selected-label">${t('dialogSelectedText')}</div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label">${t('dialogSelectedImages')}</div><div class="${PREFIX}selected-images">${ctx.images.map(src => `<img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden">`).join('')}</div>` : ''}
+        ${ctx.text ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedText')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="text" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
@@ -879,6 +951,43 @@
     // Events
     state.dialog.querySelector(`.${PREFIX}close`).addEventListener('click', () => closeDialog(id));
     state.dialog.querySelector(`.${PREFIX}pin`).addEventListener('click', () => togglePin(id));
+
+    state.dialog.querySelectorAll(`.${PREFIX}selected-clear`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.clearType;
+        const labelRow = btn.closest(`.${PREFIX}selected-label`);
+        const target = labelRow ? labelRow.nextElementSibling : null;
+        if (labelRow) labelRow.remove();
+        if (target) target.remove();
+        if (type === 'text') state.context.text = '';
+        else if (type === 'images') state.context.images = [];
+        const selDiv = state.dialog.querySelector(`.${PREFIX}selected`);
+        if (selDiv && !selDiv.querySelector(`.${PREFIX}selected-label`)) selDiv.remove();
+      });
+    });
+
+    state.dialog.querySelectorAll(`.${PREFIX}selected-img-remove`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wrap = btn.closest(`.${PREFIX}selected-img-wrap`);
+        if (!wrap) return;
+        const imagesDiv = wrap.parentElement;
+        const labelRow = imagesDiv ? imagesDiv.previousElementSibling : null;
+        wrap.remove();
+        if (imagesDiv) {
+          const remaining = Array.from(imagesDiv.querySelectorAll(`.${PREFIX}selected-img-wrap`));
+          state.context.images = remaining.map(w => {
+            const img = w.querySelector(`.${PREFIX}selected-img`);
+            return img ? img.src : '';
+          }).filter(Boolean);
+          if (remaining.length === 0) {
+            imagesDiv.remove();
+            if (labelRow) labelRow.remove();
+            const selDiv = state.dialog.querySelector(`.${PREFIX}selected`);
+            if (selDiv && !selDiv.querySelector(`.${PREFIX}selected-label`)) selDiv.remove();
+          }
+        }
+      });
+    });
 
     const minimizeBtn = state.dialog.querySelector(`.${PREFIX}minimize`);
     minimizeBtn.addEventListener('click', () => {
@@ -965,7 +1074,7 @@
       await new Promise(r => setTimeout(r, 50));
 
       try {
-        if (!chrome.runtime || !chrome.runtime.sendMessage) {
+        if (!contextValid() || !chrome.runtime || !chrome.runtime.sendMessage) {
           throw new Error('Extension context invalidated');
         }
         const response = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
@@ -1176,7 +1285,12 @@
     try {
       const ctx = state.context;
       const allImages = [...(ctx.images || []), ...(state.pendingScreenshots || [])];
-      const uiLang = chrome.i18n.getUILanguage();
+      let uiLang = 'en';
+      try {
+        if (contextValid() && chrome.i18n && chrome.i18n.getUILanguage) {
+          uiLang = chrome.i18n.getUILanguage() || 'en';
+        }
+      } catch (e) { _contextInvalid = true; }
       const langInstruction = uiLang.startsWith('zh')
         ? `Please respond in the same Chinese variant (Traditional or Simplified) as the user's input.`
         : `Please respond in ${uiLang} unless the user writes in another language.`;
@@ -1432,6 +1546,7 @@
   injectStyles();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    injectStyles();
+    if (!contextValid()) return;
+    try { injectStyles(); } catch (e) { /* context invalidated */ }
   });
 })();

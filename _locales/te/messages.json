@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "AI తో మాట్లాడటానికి ఏ పేజీలోనైనా వచనాన్ని ఎంచుకోండి. బహుళ ప్రొవైడర్‌లను సపోర్ట్ చేస్తుంది (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant సెట్టింగ్‌లు" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "ప్రభావవంతమైన URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Key" },
-  "apiKeyPlaceholder": { "message": "మీ API Key నమోదు చేయండి" },
-  "apiKeyToggleAria": { "message": "API Key చూపించు లేదా దాచు" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "మోడల్ పేరు నమోదు చేయండి లేదా ఎంచుకోండి" },
-  "modelFetchBtn": { "message": "తీసుకురా" },
-  "modelHint": { "message": "Base URL మరియు API Key నమోదు చేయండి, ఆపై తీసుకురా క్లిక్ చేయండి" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "మోడల్ జాబితా తీసుకువస్తోంది..." },
-  "modelNoModels": { "message": "ఏ మోడళ్లు కనుగొనబడలేదు" },
-  "modelFound": { "message": "$1 మోడళ్లు కనుగొనబడ్డాయి, ఫిల్టర్ చేయడానికి టైప్ చేయండి", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "మోడల్ జాబితా నవీకరించబడింది" },
-  "modelFetchFailed": { "message": "తీసుకురావడం విఫలమైంది: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "తీసుకురావడం విఫలమైంది, దయచేసి URL మరియు Key తనిఖీ చేయండి" },
-  "quickPromptsLabel": { "message": "త్వరిత ప్రాంప్ట్‌లు" },
-  "quickPromptsPlaceholder": { "message": "త్వరిత ప్రాంప్ట్ నమోదు చేయండి..." },
-  "quickPromptsHint": { "message": "నింపడానికి డైలాగ్‌లో త్వరిత ప్రాంప్ట్‌ను క్లిక్ చేయండి" },
-  "quickPromptsEditTooltip": { "message": "సవరించడానికి క్లిక్ చేయండి" },
-  "defaultPinLabel": { "message": "డిఫాల్ట్‌గా డైలాగ్‌ను పిన్ చేయండి" },
-  "defaultPinHint": { "message": "ప్రారంభించినప్పుడు, కొత్త డైలాగ్‌లు స్వయంచాలకంగా పిన్ చేయబడతాయి మరియు బయట క్లిక్ చేసినప్పుడు మూసివేయవు" },
-  "statusNeedUrlAndKey": { "message": "దయచేసి ముందుగా Base URL మరియు API Key నమోదు చేయండి" },
-  "statusAutoSaved": { "message": "స్వయంచాలకంగా సేవ్ చేయబడింది" },
-  "footerHint": { "message": "ఉపయోగించడానికి ఏ పేజీలోనైనా వచనాన్ని ఎంచుకోండి" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "మోడల్" },
-  "dialogModelTooltip": { "message": "మోడల్ నమోదు చేయండి లేదా ఎంచుకోండి" },
-  "dialogPinTooltip": { "message": "విండో పిన్ చేయండి" },
-  "dialogMinimizeTooltip": { "message": "కనిష్టం చేయండి" },
-  "dialogExpandTooltip": { "message": "విస్తరించండి" },
-  "dialogSelectedText": { "message": "ఎంచుకున్న వచనం" },
-  "dialogSelectedImages": { "message": "ఎంచుకున్న చిత్రాలు" },
-  "dialogInputPlaceholder": { "message": "మీ ప్రశ్నను టైప్ చేయండి..." },
-  "dialogSendBtn": { "message": "పంపండి" },
-  "dialogCameraTooltip": { "message": "స్క్రీన్‌షాట్ తీయండి" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "దయచేసి ముందుగా మీ API Key సెట్ చేయండి" },
-  "settingsWarningSubMessage": { "message": "సెట్టింగ్‌లను తెరవడానికి టూల్‌బార్‌లోని ఎక్స్‌టెన్షన్ ఐకాన్‌ను క్లిక్ చేయండి" },
-  "cropHint": { "message": "ప్రాంతాన్ని ఎంచుకోవడానికి డ్రాగ్ చేయండి, రద్దు చేయడానికి Esc నొక్కండి" },
-  "errorRequestFailed": { "message": "అభ్యర్థన విఫలమైంది: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API లోపం $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[స్క్రీన్‌షాట్]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI చిత్ర సహాయకుడు" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "AI తో మాట్లాడటానికి ఏ పేజీలోనైనా వచనాన్ని ఎంచుకోండి. బహుళ ప్రొవైడర్‌లను సపోర్ట్ చేస్తుంది (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant సెట్టింగ్‌లు"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "ప్రభావవంతమైన URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Key"
+  },
+  "apiKeyPlaceholder": {
+    "message": "మీ API Key నమోదు చేయండి"
+  },
+  "apiKeyToggleAria": {
+    "message": "API Key చూపించు లేదా దాచు"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "మోడల్ పేరు నమోదు చేయండి లేదా ఎంచుకోండి"
+  },
+  "modelFetchBtn": {
+    "message": "తీసుకురా"
+  },
+  "modelHint": {
+    "message": "Base URL మరియు API Key నమోదు చేయండి, ఆపై తీసుకురా క్లిక్ చేయండి"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "మోడల్ జాబితా తీసుకువస్తోంది..."
+  },
+  "modelNoModels": {
+    "message": "ఏ మోడళ్లు కనుగొనబడలేదు"
+  },
+  "modelFound": {
+    "message": "$1 మోడళ్లు కనుగొనబడ్డాయి, ఫిల్టర్ చేయడానికి టైప్ చేయండి",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "మోడల్ జాబితా నవీకరించబడింది"
+  },
+  "modelFetchFailed": {
+    "message": "తీసుకురావడం విఫలమైంది: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "తీసుకురావడం విఫలమైంది, దయచేసి URL మరియు Key తనిఖీ చేయండి"
+  },
+  "quickPromptsLabel": {
+    "message": "త్వరిత ప్రాంప్ట్‌లు"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "త్వరిత ప్రాంప్ట్ నమోదు చేయండి..."
+  },
+  "quickPromptsHint": {
+    "message": "నింపడానికి డైలాగ్‌లో త్వరిత ప్రాంప్ట్‌ను క్లిక్ చేయండి"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "సవరించడానికి క్లిక్ చేయండి"
+  },
+  "defaultPinLabel": {
+    "message": "డిఫాల్ట్‌గా డైలాగ్‌ను పిన్ చేయండి"
+  },
+  "defaultPinHint": {
+    "message": "ప్రారంభించినప్పుడు, కొత్త డైలాగ్‌లు స్వయంచాలకంగా పిన్ చేయబడతాయి మరియు బయట క్లిక్ చేసినప్పుడు మూసివేయవు"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "దయచేసి ముందుగా Base URL మరియు API Key నమోదు చేయండి"
+  },
+  "statusAutoSaved": {
+    "message": "స్వయంచాలకంగా సేవ్ చేయబడింది"
+  },
+  "footerHint": {
+    "message": "ఉపయోగించడానికి ఏ పేజీలోనైనా వచనాన్ని ఎంచుకోండి"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "మోడల్"
+  },
+  "dialogModelTooltip": {
+    "message": "మోడల్ నమోదు చేయండి లేదా ఎంచుకోండి"
+  },
+  "dialogPinTooltip": {
+    "message": "విండో పిన్ చేయండి"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "కనిష్టం చేయండి"
+  },
+  "dialogExpandTooltip": {
+    "message": "విస్తరించండి"
+  },
+  "dialogSelectedText": {
+    "message": "ఎంచుకున్న వచనం"
+  },
+  "dialogSelectedImages": {
+    "message": "ఎంచుకున్న చిత్రాలు"
+  },
+  "dialogInputPlaceholder": {
+    "message": "మీ ప్రశ్నను టైప్ చేయండి..."
+  },
+  "dialogSendBtn": {
+    "message": "పంపండి"
+  },
+  "dialogCameraTooltip": {
+    "message": "స్క్రీన్‌షాట్ తీయండి"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "దయచేసి ముందుగా మీ API Key సెట్ చేయండి"
+  },
+  "settingsWarningSubMessage": {
+    "message": "సెట్టింగ్‌లను తెరవడానికి టూల్‌బార్‌లోని ఎక్స్‌టెన్షన్ ఐకాన్‌ను క్లిక్ చేయండి"
+  },
+  "cropHint": {
+    "message": "ప్రాంతాన్ని ఎంచుకోవడానికి డ్రాగ్ చేయండి, రద్దు చేయడానికి Esc నొక్కండి"
+  },
+  "errorRequestFailed": {
+    "message": "అభ్యర్థన విఫలమైంది: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API లోపం $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[స్క్రీన్‌షాట్]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI చిత్ర సహాయకుడు"
+  },
+  "dialogClearTooltip": {
+    "message": "ఎంపికను తొలగించు"
+  }
 }

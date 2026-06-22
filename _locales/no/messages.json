@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Merk tekst på en hvilken som helst side for å chatte med AI. Støtter flere leverandører (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant Innstillinger" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API-basis-URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Effektiv URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API-nøkkel" },
-  "apiKeyPlaceholder": { "message": "Skriv inn API-nøkkelen din" },
-  "apiKeyToggleAria": { "message": "Vis eller skjul API-nøkkel" },
-  "modelLabel": { "message": "Modell" },
-  "modelPlaceholder": { "message": "Skriv inn eller velg modellnavn" },
-  "modelFetchBtn": { "message": "Hent" },
-  "modelHint": { "message": "Skriv inn basis-URL og API-nøkkel, klikk deretter på Hent" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Henter modelliste..." },
-  "modelNoModels": { "message": "Ingen modeller funnet" },
-  "modelFound": { "message": "Fant $1 modeller, skriv for å filtrere", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Modelliste oppdatert" },
-  "modelFetchFailed": { "message": "Henting mislyktes: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Henting mislyktes, sjekk URL og nøkkel" },
-  "quickPromptsLabel": { "message": "Hurtigkommandoer" },
-  "quickPromptsPlaceholder": { "message": "Skriv inn en hurtigkommando..." },
-  "quickPromptsHint": { "message": "Klikk på en hurtigkommando i dialogen for å fylle inn" },
-  "quickPromptsEditTooltip": { "message": "Klikk for å redigere" },
-  "defaultPinLabel": { "message": "Fest dialog som standard" },
-  "defaultPinHint": { "message": "Når aktivert, festes nye dialoger automatisk og lukkes ikke ved klikk utenfor" },
-  "statusNeedUrlAndKey": { "message": "Skriv inn basis-URL og API-nøkkel først" },
-  "statusAutoSaved": { "message": "Lagret automatisk" },
-  "footerHint": { "message": "Merk tekst på en hvilken som helst side for å bruke" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Modell" },
-  "dialogModelTooltip": { "message": "Skriv inn eller velg modell" },
-  "dialogPinTooltip": { "message": "Fest vindu" },
-  "dialogMinimizeTooltip": { "message": "Minimer" },
-  "dialogExpandTooltip": { "message": "Utvid" },
-  "dialogSelectedText": { "message": "Valgt tekst" },
-  "dialogSelectedImages": { "message": "Valgte bilder" },
-  "dialogInputPlaceholder": { "message": "Skriv inn spørsmålet ditt..." },
-  "dialogSendBtn": { "message": "Send" },
-  "dialogCameraTooltip": { "message": "Ta skjermbilde" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Sett opp API-nøkkelen din først" },
-  "settingsWarningSubMessage": { "message": "Klikk på utvidelsesikonet i verktøylinjen for å åpne innstillinger" },
-  "cropHint": { "message": "Dra for å merke område, trykk Esc for å avbryte" },
-  "errorRequestFailed": { "message": "Forespørsel mislyktes: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API-feil $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Skjermbilde]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI-bildeassistent" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Merk tekst på en hvilken som helst side for å chatte med AI. Støtter flere leverandører (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant Innstillinger"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API-basis-URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Effektiv URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API-nøkkel"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Skriv inn API-nøkkelen din"
+  },
+  "apiKeyToggleAria": {
+    "message": "Vis eller skjul API-nøkkel"
+  },
+  "modelLabel": {
+    "message": "Modell"
+  },
+  "modelPlaceholder": {
+    "message": "Skriv inn eller velg modellnavn"
+  },
+  "modelFetchBtn": {
+    "message": "Hent"
+  },
+  "modelHint": {
+    "message": "Skriv inn basis-URL og API-nøkkel, klikk deretter på Hent"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Henter modelliste..."
+  },
+  "modelNoModels": {
+    "message": "Ingen modeller funnet"
+  },
+  "modelFound": {
+    "message": "Fant $1 modeller, skriv for å filtrere",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Modelliste oppdatert"
+  },
+  "modelFetchFailed": {
+    "message": "Henting mislyktes: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Henting mislyktes, sjekk URL og nøkkel"
+  },
+  "quickPromptsLabel": {
+    "message": "Hurtigkommandoer"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Skriv inn en hurtigkommando..."
+  },
+  "quickPromptsHint": {
+    "message": "Klikk på en hurtigkommando i dialogen for å fylle inn"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Klikk for å redigere"
+  },
+  "defaultPinLabel": {
+    "message": "Fest dialog som standard"
+  },
+  "defaultPinHint": {
+    "message": "Når aktivert, festes nye dialoger automatisk og lukkes ikke ved klikk utenfor"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Skriv inn basis-URL og API-nøkkel først"
+  },
+  "statusAutoSaved": {
+    "message": "Lagret automatisk"
+  },
+  "footerHint": {
+    "message": "Merk tekst på en hvilken som helst side for å bruke"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Modell"
+  },
+  "dialogModelTooltip": {
+    "message": "Skriv inn eller velg modell"
+  },
+  "dialogPinTooltip": {
+    "message": "Fest vindu"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimer"
+  },
+  "dialogExpandTooltip": {
+    "message": "Utvid"
+  },
+  "dialogSelectedText": {
+    "message": "Valgt tekst"
+  },
+  "dialogSelectedImages": {
+    "message": "Valgte bilder"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Skriv inn spørsmålet ditt..."
+  },
+  "dialogSendBtn": {
+    "message": "Send"
+  },
+  "dialogCameraTooltip": {
+    "message": "Ta skjermbilde"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Sett opp API-nøkkelen din først"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Klikk på utvidelsesikonet i verktøylinjen for å åpne innstillinger"
+  },
+  "cropHint": {
+    "message": "Dra for å merke område, trykk Esc for å avbryte"
+  },
+  "errorRequestFailed": {
+    "message": "Forespørsel mislyktes: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API-feil $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Skjermbilde]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI-bildeassistent"
+  },
+  "dialogClearTooltip": {
+    "message": "Fjern valg"
+  }
 }

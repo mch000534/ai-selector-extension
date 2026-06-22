@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Pasirinkite tekstą bet kuriame puslapyje, norėdami kalbėtis su AI. Palaiko kelis teikėjus (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant nustatymai" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API bazinis URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Veiksmingas URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API raktas" },
-  "apiKeyPlaceholder": { "message": "Įveskite savo API raktą" },
-  "apiKeyToggleAria": { "message": "Rodyti arba slėpti API raktą" },
-  "modelLabel": { "message": "Modelis" },
-  "modelPlaceholder": { "message": "Įveskite arba pasirinkite modelio pavadinimą" },
-  "modelFetchBtn": { "message": "Gauti" },
-  "modelHint": { "message": "Įveskite bazinį URL ir API raktą, tada spustelėkite Gauti" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Gaunamas modelių sąrašas..." },
-  "modelNoModels": { "message": "Modelių nerasta" },
-  "modelFound": { "message": "Rasta $1 modelių, rašykite filtravimui", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Modelių sąrašas atnaujintas" },
-  "modelFetchFailed": { "message": "Gauti nepavyko: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Gauti nepavyko, patikrinkite URL ir raktą" },
-  "quickPromptsLabel": { "message": "Spartieji užklausimai" },
-  "quickPromptsPlaceholder": { "message": "Įveskite spartųjį užklausimą..." },
-  "quickPromptsHint": { "message": "Spustelėkite spartųjį užklausimą dialogo lange, kad jį užpildytumėte" },
-  "quickPromptsEditTooltip": { "message": "Spustelėkite redagavimui" },
-  "defaultPinLabel": { "message": "Prisegti dialogą pagal numatytąjį nustatymą" },
-  "defaultPinHint": { "message": "Kai įjungta, nauji dialogai automatiškai prisegami ir neužsidarys spustelėjus už jų ribų" },
-  "statusNeedUrlAndKey": { "message": "Pirmiausia įveskite bazinį URL ir API raktą" },
-  "statusAutoSaved": { "message": "Išsaugota automatiškai" },
-  "footerHint": { "message": "Pasirinkite tekstą bet kuriame puslapyje, norėdami naudoti" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Modelis" },
-  "dialogModelTooltip": { "message": "Įveskite arba pasirinkite modelį" },
-  "dialogPinTooltip": { "message": "Prisegti langą" },
-  "dialogMinimizeTooltip": { "message": "Suskleisti" },
-  "dialogExpandTooltip": { "message": "Išskleisti" },
-  "dialogSelectedText": { "message": "Pasirinktas tekstas" },
-  "dialogSelectedImages": { "message": "Pasirinkti vaizdai" },
-  "dialogInputPlaceholder": { "message": "Įveskite savo klausimą..." },
-  "dialogSendBtn": { "message": "Siųsti" },
-  "dialogCameraTooltip": { "message": "Padaryti ekrano nuotrauką" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Pirmiausia nustatykite savo API raktą" },
-  "settingsWarningSubMessage": { "message": "Spustelėkite plėtinio piktogramą įrankių juostoje, norėdami atidaryti nustatymus" },
-  "cropHint": { "message": "Tempkite norėdami pasirinkti sritį, paspauskite Esc norėdami atšaukti" },
-  "errorRequestFailed": { "message": "Užklausa nepavyko: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API klaida $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Ekrano nuotrauka]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI vaizdų asistentas" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Pasirinkite tekstą bet kuriame puslapyje, norėdami kalbėtis su AI. Palaiko kelis teikėjus (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant nustatymai"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API bazinis URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Veiksmingas URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API raktas"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Įveskite savo API raktą"
+  },
+  "apiKeyToggleAria": {
+    "message": "Rodyti arba slėpti API raktą"
+  },
+  "modelLabel": {
+    "message": "Modelis"
+  },
+  "modelPlaceholder": {
+    "message": "Įveskite arba pasirinkite modelio pavadinimą"
+  },
+  "modelFetchBtn": {
+    "message": "Gauti"
+  },
+  "modelHint": {
+    "message": "Įveskite bazinį URL ir API raktą, tada spustelėkite Gauti"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Gaunamas modelių sąrašas..."
+  },
+  "modelNoModels": {
+    "message": "Modelių nerasta"
+  },
+  "modelFound": {
+    "message": "Rasta $1 modelių, rašykite filtravimui",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Modelių sąrašas atnaujintas"
+  },
+  "modelFetchFailed": {
+    "message": "Gauti nepavyko: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Gauti nepavyko, patikrinkite URL ir raktą"
+  },
+  "quickPromptsLabel": {
+    "message": "Spartieji užklausimai"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Įveskite spartųjį užklausimą..."
+  },
+  "quickPromptsHint": {
+    "message": "Spustelėkite spartųjį užklausimą dialogo lange, kad jį užpildytumėte"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Spustelėkite redagavimui"
+  },
+  "defaultPinLabel": {
+    "message": "Prisegti dialogą pagal numatytąjį nustatymą"
+  },
+  "defaultPinHint": {
+    "message": "Kai įjungta, nauji dialogai automatiškai prisegami ir neužsidarys spustelėjus už jų ribų"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Pirmiausia įveskite bazinį URL ir API raktą"
+  },
+  "statusAutoSaved": {
+    "message": "Išsaugota automatiškai"
+  },
+  "footerHint": {
+    "message": "Pasirinkite tekstą bet kuriame puslapyje, norėdami naudoti"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Modelis"
+  },
+  "dialogModelTooltip": {
+    "message": "Įveskite arba pasirinkite modelį"
+  },
+  "dialogPinTooltip": {
+    "message": "Prisegti langą"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Suskleisti"
+  },
+  "dialogExpandTooltip": {
+    "message": "Išskleisti"
+  },
+  "dialogSelectedText": {
+    "message": "Pasirinktas tekstas"
+  },
+  "dialogSelectedImages": {
+    "message": "Pasirinkti vaizdai"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Įveskite savo klausimą..."
+  },
+  "dialogSendBtn": {
+    "message": "Siųsti"
+  },
+  "dialogCameraTooltip": {
+    "message": "Padaryti ekrano nuotrauką"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Pirmiausia nustatykite savo API raktą"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Spustelėkite plėtinio piktogramą įrankių juostoje, norėdami atidaryti nustatymus"
+  },
+  "cropHint": {
+    "message": "Tempkite norėdami pasirinkti sritį, paspauskite Esc norėdami atšaukti"
+  },
+  "errorRequestFailed": {
+    "message": "Užklausa nepavyko: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API klaida $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Ekrano nuotrauka]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI vaizdų asistentas"
+  },
+  "dialogClearTooltip": {
+    "message": "Išvalyti pasirinkimą"
+  }
 }

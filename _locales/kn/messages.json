@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "AI ಯೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಲು ಯಾವುದೇ ಪುಟದಲ್ಲಿ ಪಠ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಅನೇಕ ಪೂರೈಕೆದಾರರನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant ಸೆಟ್ಟಿಂಗ್‌ಗಳು" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "ಪರಿಣಾಮಕಾರಿ URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Key" },
-  "apiKeyPlaceholder": { "message": "ನಿಮ್ಮ API Key ಅನ್ನು ನಮೂದಿಸಿ" },
-  "apiKeyToggleAria": { "message": "API Key ತೋರಿಸಿ ಅಥವಾ ಮರೆಮಾಡಿ" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "ಮಾದರಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ" },
-  "modelFetchBtn": { "message": "ಪಡೆಯಿರಿ" },
-  "modelHint": { "message": "Base URL ಮತ್ತು API Key ಅನ್ನು ನಮೂದಿಸಿ, ನಂತರ ಪಡೆಯಿರಿ ಕ್ಲಿಕ್ ಮಾಡಿ" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "ಮಾದರಿಗಳ ಪಟ್ಟಿಯನ್ನು ಪಡೆಯಲಾಗುತ್ತಿದೆ..." },
-  "modelNoModels": { "message": "ಯಾವುದೇ ಮಾದರಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ" },
-  "modelFound": { "message": "$1 ಮಾದರಿಗಳು ಕಂಡುಬಂದಿವೆ, ಫಿಲ್ಟರ್ ಮಾಡಲು ಟೈಪ್ ಮಾಡಿ", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "ಮಾದರಿಗಳ ಪಟ್ಟಿ ಅಪ್‌ಡೇಟ್ ಆಗಿದೆ" },
-  "modelFetchFailed": { "message": "ಪಡೆಯುವಿಕೆ ವಿಫಲವಾಗಿದೆ: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "ಪಡೆಯುವಿಕೆ ವಿಫಲವಾಗಿದೆ, ದಯವಿಟ್ಟು URL ಮತ್ತು Key ಪರಿಶೀಲಿಸಿ" },
-  "quickPromptsLabel": { "message": "ತ್ವರಿತ ಪ್ರಾಂಪ್ಟ್‌ಗಳು" },
-  "quickPromptsPlaceholder": { "message": "ತ್ವರಿತ ಪ್ರಾಂಪ್ ಅನ್ನು ನಮೂದಿಸಿ..." },
-  "quickPromptsHint": { "message": "ಭರ್ತಿ ಮಾಡಲು ಸಂವಾದದಲ್ಲಿ ತ್ವರಿತ ಪ್ರಾಂಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ" },
-  "quickPromptsEditTooltip": { "message": "ಸಂಪಾದಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ" },
-  "defaultPinLabel": { "message": "ಡೀಫಾಲ್ಟ್‌ನಿಂದ ಸಂವಾದವನ್ನು ಪಿನ್ ಮಾಡಿ" },
-  "defaultPinHint": { "message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ಹೊಸ ಸಂವಾದಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪಿನ್ ಆಗುತ್ತವೆ ಮತ್ತು ಹೊರಗೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಮುಚ್ಚುವುದಿಲ್ಲ" },
-  "statusNeedUrlAndKey": { "message": "ದಯವಿಟ್ಟು ಮೊದಲು Base URL ಮತ್ತು API Key ಅನ್ನು ನಮೂದಿಸಿ" },
-  "statusAutoSaved": { "message": "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿಸಲಾಗಿದೆ" },
-  "footerHint": { "message": "ಬಳಸಲು ಯಾವುದೇ ಪುಟದಲ್ಲಿ ಪಠ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "ಮಾದರಿ" },
-  "dialogModelTooltip": { "message": "ಮಾದರಿ ನಮೂದಿಸಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ" },
-  "dialogPinTooltip": { "message": "ವಿಂಡೋ ಪಿನ್ ಮಾಡಿ" },
-  "dialogMinimizeTooltip": { "message": "ಕನಿಷ್ಠೀಕರಿಸಿ" },
-  "dialogExpandTooltip": { "message": "ವಿಸ್ತರಿಸಿ" },
-  "dialogSelectedText": { "message": "ಆಯ್ದ ಪಠ್ಯ" },
-  "dialogSelectedImages": { "message": "ಆಯ್ದ ಚಿತ್ರಗಳು" },
-  "dialogInputPlaceholder": { "message": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ..." },
-  "dialogSendBtn": { "message": "ಕಳುಹಿಸಿ" },
-  "dialogCameraTooltip": { "message": "ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಸೆರೆಹಿಡಿಯಿರಿ" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "ದಯವಿಟ್ಟು ಮೊದಲು ನಿಮ್ಮ API Key ಅನ್ನು ಹೊಂದಿಸಿ" },
-  "settingsWarningSubMessage": { "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಲು ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ ಎಕ್ಸ್‌ಟೆನ್ಶನ್ ಐಕಾನ್ ಕ್ಲಿಕ್ ಮಾಡಿ" },
-  "cropHint": { "message": "ಪ್ರದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಲು ಎಳೆಯಿರಿ, ರದ್ದುಮಾಡಲು Esc ಒತ್ತಿ" },
-  "errorRequestFailed": { "message": "ವಿನಂತಿ ವಿಫಲವಾಗಿದೆ: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API ದೋಷ $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[ಸ್ಕ್ರೀನ್‌ಶಾಟ್]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI ಚಿತ್ರ ಸಹಾಯಕ" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "AI ಯೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಲು ಯಾವುದೇ ಪುಟದಲ್ಲಿ ಪಠ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಅನೇಕ ಪೂರೈಕೆದಾರರನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "ಪರಿಣಾಮಕಾರಿ URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Key"
+  },
+  "apiKeyPlaceholder": {
+    "message": "ನಿಮ್ಮ API Key ಅನ್ನು ನಮೂದಿಸಿ"
+  },
+  "apiKeyToggleAria": {
+    "message": "API Key ತೋರಿಸಿ ಅಥವಾ ಮರೆಮಾಡಿ"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "ಮಾದರಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "modelFetchBtn": {
+    "message": "ಪಡೆಯಿರಿ"
+  },
+  "modelHint": {
+    "message": "Base URL ಮತ್ತು API Key ಅನ್ನು ನಮೂದಿಸಿ, ನಂತರ ಪಡೆಯಿರಿ ಕ್ಲಿಕ್ ಮಾಡಿ"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "ಮಾದರಿಗಳ ಪಟ್ಟಿಯನ್ನು ಪಡೆಯಲಾಗುತ್ತಿದೆ..."
+  },
+  "modelNoModels": {
+    "message": "ಯಾವುದೇ ಮಾದರಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+  },
+  "modelFound": {
+    "message": "$1 ಮಾದರಿಗಳು ಕಂಡುಬಂದಿವೆ, ಫಿಲ್ಟರ್ ಮಾಡಲು ಟೈಪ್ ಮಾಡಿ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "ಮಾದರಿಗಳ ಪಟ್ಟಿ ಅಪ್‌ಡೇಟ್ ಆಗಿದೆ"
+  },
+  "modelFetchFailed": {
+    "message": "ಪಡೆಯುವಿಕೆ ವಿಫಲವಾಗಿದೆ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "ಪಡೆಯುವಿಕೆ ವಿಫಲವಾಗಿದೆ, ದಯವಿಟ್ಟು URL ಮತ್ತು Key ಪರಿಶೀಲಿಸಿ"
+  },
+  "quickPromptsLabel": {
+    "message": "ತ್ವರಿತ ಪ್ರಾಂಪ್ಟ್‌ಗಳು"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "ತ್ವರಿತ ಪ್ರಾಂಪ್ ಅನ್ನು ನಮೂದಿಸಿ..."
+  },
+  "quickPromptsHint": {
+    "message": "ಭರ್ತಿ ಮಾಡಲು ಸಂವಾದದಲ್ಲಿ ತ್ವರಿತ ಪ್ರಾಂಪ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "ಸಂಪಾದಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ"
+  },
+  "defaultPinLabel": {
+    "message": "ಡೀಫಾಲ್ಟ್‌ನಿಂದ ಸಂವಾದವನ್ನು ಪಿನ್ ಮಾಡಿ"
+  },
+  "defaultPinHint": {
+    "message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ಹೊಸ ಸಂವಾದಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪಿನ್ ಆಗುತ್ತವೆ ಮತ್ತು ಹೊರಗೆ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಮುಚ್ಚುವುದಿಲ್ಲ"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "ದಯವಿಟ್ಟು ಮೊದಲು Base URL ಮತ್ತು API Key ಅನ್ನು ನಮೂದಿಸಿ"
+  },
+  "statusAutoSaved": {
+    "message": "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿಸಲಾಗಿದೆ"
+  },
+  "footerHint": {
+    "message": "ಬಳಸಲು ಯಾವುದೇ ಪುಟದಲ್ಲಿ ಪಠ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "ಮಾದರಿ"
+  },
+  "dialogModelTooltip": {
+    "message": "ಮಾದರಿ ನಮೂದಿಸಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "dialogPinTooltip": {
+    "message": "ವಿಂಡೋ ಪಿನ್ ಮಾಡಿ"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "ಕನಿಷ್ಠೀಕರಿಸಿ"
+  },
+  "dialogExpandTooltip": {
+    "message": "ವಿಸ್ತರಿಸಿ"
+  },
+  "dialogSelectedText": {
+    "message": "ಆಯ್ದ ಪಠ್ಯ"
+  },
+  "dialogSelectedImages": {
+    "message": "ಆಯ್ದ ಚಿತ್ರಗಳು"
+  },
+  "dialogInputPlaceholder": {
+    "message": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ..."
+  },
+  "dialogSendBtn": {
+    "message": "ಕಳುಹಿಸಿ"
+  },
+  "dialogCameraTooltip": {
+    "message": "ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಸೆರೆಹಿಡಿಯಿರಿ"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "ದಯವಿಟ್ಟು ಮೊದಲು ನಿಮ್ಮ API Key ಅನ್ನು ಹೊಂದಿಸಿ"
+  },
+  "settingsWarningSubMessage": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಲು ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ ಎಕ್ಸ್‌ಟೆನ್ಶನ್ ಐಕಾನ್ ಕ್ಲಿಕ್ ಮಾಡಿ"
+  },
+  "cropHint": {
+    "message": "ಪ್ರದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಲು ಎಳೆಯಿರಿ, ರದ್ದುಮಾಡಲು Esc ಒತ್ತಿ"
+  },
+  "errorRequestFailed": {
+    "message": "ವಿನಂತಿ ವಿಫಲವಾಗಿದೆ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API ದೋಷ $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[ಸ್ಕ್ರೀನ್‌ಶಾಟ್]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI ಚಿತ್ರ ಸಹಾಯಕ"
+  },
+  "dialogClearTooltip": {
+    "message": "ಆಯ್ಕೆಯನ್ನು ತೆರವುಗೊಳಿಸು"
+  }
 }

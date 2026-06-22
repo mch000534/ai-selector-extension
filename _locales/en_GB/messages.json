@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Select text on any page to chat with AI. Supports multiple providers (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant Settings" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Effective URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Key" },
-  "apiKeyPlaceholder": { "message": "Enter your API Key" },
-  "apiKeyToggleAria": { "message": "Show or hide API Key" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Enter or select model name" },
-  "modelFetchBtn": { "message": "Fetch" },
-  "modelHint": { "message": "Enter Base URL and API Key, then click Fetch" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Fetching model list..." },
-  "modelNoModels": { "message": "No models found" },
-  "modelFound": { "message": "Found $1 models, type to filter", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Model list updated" },
-  "modelFetchFailed": { "message": "Fetch failed: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Fetch failed, please check URL and Key" },
-  "quickPromptsLabel": { "message": "Quick Prompts" },
-  "quickPromptsPlaceholder": { "message": "Enter a quick prompt..." },
-  "quickPromptsHint": { "message": "Click a quick prompt in the dialog to fill it in" },
-  "quickPromptsEditTooltip": { "message": "Click to edit" },
-  "defaultPinLabel": { "message": "Pin dialog by default" },
-  "defaultPinHint": { "message": "When enabled, new dialogs are automatically pinned and won't close when clicking outside" },
-  "statusNeedUrlAndKey": { "message": "Please enter Base URL and API Key first" },
-  "statusAutoSaved": { "message": "Saved automatically" },
-  "footerHint": { "message": "Select text on any page to use" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Enter or select model" },
-  "dialogPinTooltip": { "message": "Pin window" },
-  "dialogMinimizeTooltip": { "message": "Minimise" },
-  "dialogExpandTooltip": { "message": "Expand" },
-  "dialogSelectedText": { "message": "Selected text" },
-  "dialogSelectedImages": { "message": "Selected images" },
-  "dialogInputPlaceholder": { "message": "Type your question..." },
-  "dialogSendBtn": { "message": "Send" },
-  "dialogCameraTooltip": { "message": "Capture screenshot" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Please set up your API Key first" },
-  "settingsWarningSubMessage": { "message": "Click the extension icon in the toolbar to open settings" },
-  "cropHint": { "message": "Drag to select area, press Esc to cancel" },
-  "errorRequestFailed": { "message": "Request failed: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API Error $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Screenshot]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI Image Assistant" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Select text on any page to chat with AI. Supports multiple providers (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant Settings"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Effective URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Key"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Enter your API Key"
+  },
+  "apiKeyToggleAria": {
+    "message": "Show or hide API Key"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Enter or select model name"
+  },
+  "modelFetchBtn": {
+    "message": "Fetch"
+  },
+  "modelHint": {
+    "message": "Enter Base URL and API Key, then click Fetch"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Fetching model list..."
+  },
+  "modelNoModels": {
+    "message": "No models found"
+  },
+  "modelFound": {
+    "message": "Found $1 models, type to filter",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Model list updated"
+  },
+  "modelFetchFailed": {
+    "message": "Fetch failed: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Fetch failed, please check URL and Key"
+  },
+  "quickPromptsLabel": {
+    "message": "Quick Prompts"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Enter a quick prompt..."
+  },
+  "quickPromptsHint": {
+    "message": "Click a quick prompt in the dialog to fill it in"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Click to edit"
+  },
+  "defaultPinLabel": {
+    "message": "Pin dialog by default"
+  },
+  "defaultPinHint": {
+    "message": "When enabled, new dialogs are automatically pinned and won't close when clicking outside"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Please enter Base URL and API Key first"
+  },
+  "statusAutoSaved": {
+    "message": "Saved automatically"
+  },
+  "footerHint": {
+    "message": "Select text on any page to use"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Enter or select model"
+  },
+  "dialogPinTooltip": {
+    "message": "Pin window"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimise"
+  },
+  "dialogExpandTooltip": {
+    "message": "Expand"
+  },
+  "dialogSelectedText": {
+    "message": "Selected text"
+  },
+  "dialogSelectedImages": {
+    "message": "Selected images"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Type your question..."
+  },
+  "dialogSendBtn": {
+    "message": "Send"
+  },
+  "dialogCameraTooltip": {
+    "message": "Capture screenshot"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Please set up your API Key first"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Click the extension icon in the toolbar to open settings"
+  },
+  "cropHint": {
+    "message": "Drag to select area, press Esc to cancel"
+  },
+  "errorRequestFailed": {
+    "message": "Request failed: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API Error $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Screenshot]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI Image Assistant"
+  },
+  "dialogClearTooltip": {
+    "message": "Clear selection"
+  }
 }

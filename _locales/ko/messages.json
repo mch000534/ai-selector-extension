@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "모든 페이지에서 텍스트를 선택하여 AI와 대화하세요. 여러 공급자를 지원합니다(BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant 설정" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "유효한 URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API 키" },
-  "apiKeyPlaceholder": { "message": "API 키를 입력하세요" },
-  "apiKeyToggleAria": { "message": "API 키 표시/숨기기" },
-  "modelLabel": { "message": "모델" },
-  "modelPlaceholder": { "message": "모델 이름을 입력하거나 선택하세요" },
-  "modelFetchBtn": { "message": "가져오기" },
-  "modelHint": { "message": "Base URL과 API 키를 입력한 후 가져오기를 클릭하세요" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "모델 목록을 가져오는 중..." },
-  "modelNoModels": { "message": "모델을 찾을 수 없습니다" },
-  "modelFound": { "message": "$1개의 모델을 찾았습니다. 입력하여 필터링", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "모델 목록이 업데이트되었습니다" },
-  "modelFetchFailed": { "message": "가져오기 실패: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "가져오기에 실패했습니다. URL과 키를 확인하세요" },
-  "quickPromptsLabel": { "message": "빠른 프롬프트" },
-  "quickPromptsPlaceholder": { "message": "빠른 프롬프트를 입력..." },
-  "quickPromptsHint": { "message": "대화상자에서 빠른 프롬프트를 클릭하여 입력" },
-  "quickPromptsEditTooltip": { "message": "클릭하여 편집" },
-  "defaultPinLabel": { "message": "대화상자 기본 고정" },
-  "defaultPinHint": { "message": "활성화하면 새 대화상자가 자동으로 고정되며, 외부를 클릭해도 닫히지 않습니다" },
-  "statusNeedUrlAndKey": { "message": "먼저 Base URL과 API 키를 입력하세요" },
-  "statusAutoSaved": { "message": "자동으로 저장되었습니다" },
-  "footerHint": { "message": "모든 페이지에서 텍스트를 선택하여 사용" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "모델" },
-  "dialogModelTooltip": { "message": "모델을 입력하거나 선택" },
-  "dialogPinTooltip": { "message": "창 고정" },
-  "dialogMinimizeTooltip": { "message": "최소화" },
-  "dialogExpandTooltip": { "message": "확장" },
-  "dialogSelectedText": { "message": "선택한 텍스트" },
-  "dialogSelectedImages": { "message": "선택한 이미지" },
-  "dialogInputPlaceholder": { "message": "질문을 입력..." },
-  "dialogSendBtn": { "message": "전송" },
-  "dialogCameraTooltip": { "message": "스크린샷 캡처" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "먼저 API 키를 설정하세요" },
-  "settingsWarningSubMessage": { "message": "도구 모음에서 확장 프로그램 아이콘을 클릭하여 설정을 여세요" },
-  "cropHint": { "message": "드래그하여 영역을 선택하고, Esc를 눌러 취소" },
-  "errorRequestFailed": { "message": "요청 실패: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API 오류 $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[스크린샷]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI 이미지 어시스턴트" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "모든 페이지에서 텍스트를 선택하여 AI와 대화하세요. 여러 공급자를 지원합니다(BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant 설정"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "유효한 URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API 키"
+  },
+  "apiKeyPlaceholder": {
+    "message": "API 키를 입력하세요"
+  },
+  "apiKeyToggleAria": {
+    "message": "API 키 표시/숨기기"
+  },
+  "modelLabel": {
+    "message": "모델"
+  },
+  "modelPlaceholder": {
+    "message": "모델 이름을 입력하거나 선택하세요"
+  },
+  "modelFetchBtn": {
+    "message": "가져오기"
+  },
+  "modelHint": {
+    "message": "Base URL과 API 키를 입력한 후 가져오기를 클릭하세요"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "모델 목록을 가져오는 중..."
+  },
+  "modelNoModels": {
+    "message": "모델을 찾을 수 없습니다"
+  },
+  "modelFound": {
+    "message": "$1개의 모델을 찾았습니다. 입력하여 필터링",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "모델 목록이 업데이트되었습니다"
+  },
+  "modelFetchFailed": {
+    "message": "가져오기 실패: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "가져오기에 실패했습니다. URL과 키를 확인하세요"
+  },
+  "quickPromptsLabel": {
+    "message": "빠른 프롬프트"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "빠른 프롬프트를 입력..."
+  },
+  "quickPromptsHint": {
+    "message": "대화상자에서 빠른 프롬프트를 클릭하여 입력"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "클릭하여 편집"
+  },
+  "defaultPinLabel": {
+    "message": "대화상자 기본 고정"
+  },
+  "defaultPinHint": {
+    "message": "활성화하면 새 대화상자가 자동으로 고정되며, 외부를 클릭해도 닫히지 않습니다"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "먼저 Base URL과 API 키를 입력하세요"
+  },
+  "statusAutoSaved": {
+    "message": "자동으로 저장되었습니다"
+  },
+  "footerHint": {
+    "message": "모든 페이지에서 텍스트를 선택하여 사용"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "모델"
+  },
+  "dialogModelTooltip": {
+    "message": "모델을 입력하거나 선택"
+  },
+  "dialogPinTooltip": {
+    "message": "창 고정"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "최소화"
+  },
+  "dialogExpandTooltip": {
+    "message": "확장"
+  },
+  "dialogSelectedText": {
+    "message": "선택한 텍스트"
+  },
+  "dialogSelectedImages": {
+    "message": "선택한 이미지"
+  },
+  "dialogInputPlaceholder": {
+    "message": "질문을 입력..."
+  },
+  "dialogSendBtn": {
+    "message": "전송"
+  },
+  "dialogCameraTooltip": {
+    "message": "스크린샷 캡처"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "먼저 API 키를 설정하세요"
+  },
+  "settingsWarningSubMessage": {
+    "message": "도구 모음에서 확장 프로그램 아이콘을 클릭하여 설정을 여세요"
+  },
+  "cropHint": {
+    "message": "드래그하여 영역을 선택하고, Esc를 눌러 취소"
+  },
+  "errorRequestFailed": {
+    "message": "요청 실패: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API 오류 $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[스크린샷]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI 이미지 어시스턴트"
+  },
+  "dialogClearTooltip": {
+    "message": "선택 지우기"
+  }
 }

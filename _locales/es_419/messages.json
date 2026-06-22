@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Selecciona texto en cualquier página para chatear con IA. Compatible con varios proveedores (BYOK)." },
-  "popupTitle": { "message": "Configuración de AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "URL base de la API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "URL efectiva: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Clave de API" },
-  "apiKeyPlaceholder": { "message": "Ingresa tu clave de API" },
-  "apiKeyToggleAria": { "message": "Mostrar u ocultar clave de API" },
-  "modelLabel": { "message": "Modelo" },
-  "modelPlaceholder": { "message": "Ingresa o selecciona el nombre del modelo" },
-  "modelFetchBtn": { "message": "Obtener" },
-  "modelHint": { "message": "Ingresa la URL base y la clave de API, luego haz clic en Obtener" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Obteniendo lista de modelos..." },
-  "modelNoModels": { "message": "No se encontraron modelos" },
-  "modelFound": { "message": "$1 modelos encontrados, escribe para filtrar", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Lista de modelos actualizada" },
-  "modelFetchFailed": { "message": "Error al obtener: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Error al obtener, revisa la URL y la clave" },
-  "quickPromptsLabel": { "message": "Prompts rápidos" },
-  "quickPromptsPlaceholder": { "message": "Ingresa un prompt rápido..." },
-  "quickPromptsHint": { "message": "Haz clic en un prompt rápido en el diálogo para llenarlo" },
-  "quickPromptsEditTooltip": { "message": "Haz clic para editar" },
-  "defaultPinLabel": { "message": "Fijar diálogo por defecto" },
-  "defaultPinHint": { "message": "Si está activado, los nuevos diálogos se fijan automáticamente y no se cierran al hacer clic fuera" },
-  "statusNeedUrlAndKey": { "message": "Ingresa primero la URL base y la clave de API" },
-  "statusAutoSaved": { "message": "Guardado automáticamente" },
-  "footerHint": { "message": "Selecciona texto en cualquier página para usar" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Modelo" },
-  "dialogModelTooltip": { "message": "Ingresa o selecciona modelo" },
-  "dialogPinTooltip": { "message": "Fijar ventana" },
-  "dialogMinimizeTooltip": { "message": "Minimizar" },
-  "dialogExpandTooltip": { "message": "Expandir" },
-  "dialogSelectedText": { "message": "Texto seleccionado" },
-  "dialogSelectedImages": { "message": "Imágenes seleccionadas" },
-  "dialogInputPlaceholder": { "message": "Escribe tu pregunta..." },
-  "dialogSendBtn": { "message": "Enviar" },
-  "dialogCameraTooltip": { "message": "Capturar pantalla" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Configura primero tu clave de API" },
-  "settingsWarningSubMessage": { "message": "Haz clic en el ícono de la extensión en la barra de herramientas para abrir la configuración" },
-  "cropHint": { "message": "Arrastra para seleccionar el área, presiona Esc para cancelar" },
-  "errorRequestFailed": { "message": "Error en la solicitud: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Error de API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Captura de pantalla]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Asistente de imágenes IA" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Selecciona texto en cualquier página para chatear con IA. Compatible con varios proveedores (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Configuración de AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "URL base de la API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "URL efectiva: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Clave de API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Ingresa tu clave de API"
+  },
+  "apiKeyToggleAria": {
+    "message": "Mostrar u ocultar clave de API"
+  },
+  "modelLabel": {
+    "message": "Modelo"
+  },
+  "modelPlaceholder": {
+    "message": "Ingresa o selecciona el nombre del modelo"
+  },
+  "modelFetchBtn": {
+    "message": "Obtener"
+  },
+  "modelHint": {
+    "message": "Ingresa la URL base y la clave de API, luego haz clic en Obtener"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Obteniendo lista de modelos..."
+  },
+  "modelNoModels": {
+    "message": "No se encontraron modelos"
+  },
+  "modelFound": {
+    "message": "$1 modelos encontrados, escribe para filtrar",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Lista de modelos actualizada"
+  },
+  "modelFetchFailed": {
+    "message": "Error al obtener: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Error al obtener, revisa la URL y la clave"
+  },
+  "quickPromptsLabel": {
+    "message": "Prompts rápidos"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Ingresa un prompt rápido..."
+  },
+  "quickPromptsHint": {
+    "message": "Haz clic en un prompt rápido en el diálogo para llenarlo"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Haz clic para editar"
+  },
+  "defaultPinLabel": {
+    "message": "Fijar diálogo por defecto"
+  },
+  "defaultPinHint": {
+    "message": "Si está activado, los nuevos diálogos se fijan automáticamente y no se cierran al hacer clic fuera"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Ingresa primero la URL base y la clave de API"
+  },
+  "statusAutoSaved": {
+    "message": "Guardado automáticamente"
+  },
+  "footerHint": {
+    "message": "Selecciona texto en cualquier página para usar"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Modelo"
+  },
+  "dialogModelTooltip": {
+    "message": "Ingresa o selecciona modelo"
+  },
+  "dialogPinTooltip": {
+    "message": "Fijar ventana"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimizar"
+  },
+  "dialogExpandTooltip": {
+    "message": "Expandir"
+  },
+  "dialogSelectedText": {
+    "message": "Texto seleccionado"
+  },
+  "dialogSelectedImages": {
+    "message": "Imágenes seleccionadas"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Escribe tu pregunta..."
+  },
+  "dialogSendBtn": {
+    "message": "Enviar"
+  },
+  "dialogCameraTooltip": {
+    "message": "Capturar pantalla"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Configura primero tu clave de API"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Haz clic en el ícono de la extensión en la barra de herramientas para abrir la configuración"
+  },
+  "cropHint": {
+    "message": "Arrastra para seleccionar el área, presiona Esc para cancelar"
+  },
+  "errorRequestFailed": {
+    "message": "Error en la solicitud: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Error de API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Captura de pantalla]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Asistente de imágenes IA"
+  },
+  "dialogClearTooltip": {
+    "message": "Borrar selección"
+  }
 }

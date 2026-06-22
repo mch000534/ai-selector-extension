@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Válasszon ki szöveget bármelyik oldalon az AI-vel való csevegéshez. Több szolgáltatót támogat (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant beállítások" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API alap URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Érvényes URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API kulcs" },
-  "apiKeyPlaceholder": { "message": "Adja meg API kulcsát" },
-  "apiKeyToggleAria": { "message": "API kulcs megjelenítése vagy elrejtése" },
-  "modelLabel": { "message": "Modell" },
-  "modelPlaceholder": { "message": "Adja meg vagy válassza ki a modell nevét" },
-  "modelFetchBtn": { "message": "Lekérés" },
-  "modelHint": { "message": "Adja meg az alap URL-t és az API kulcsot, majd kattintson a Lekérés gombra" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Modelllista lekérése..." },
-  "modelNoModels": { "message": "Nem találhatók modellek" },
-  "modelFound": { "message": "$1 modell található, gépeljen a szűréshez", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Modelllista frissítve" },
-  "modelFetchFailed": { "message": "A lekérés sikertelen: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "A lekérés sikertelen, ellenőrizze az URL-t és a kulcsot" },
-  "quickPromptsLabel": { "message": "Gyors parancsok" },
-  "quickPromptsPlaceholder": { "message": "Adjon meg egy gyors parancsot..." },
-  "quickPromptsHint": { "message": "Kattintson egy gyors parancsra a párbeszédablakban a kitöltéshez" },
-  "quickPromptsEditTooltip": { "message": "Kattintson a szerkesztéshez" },
-  "defaultPinLabel": { "message": "Párbeszédablak rögzítése alapértelmezés szerint" },
-  "defaultPinHint": { "message": "Bekapcsoláskor az új párbeszédablakok automatikusan rögzítve lesznek, és nem záródnak be kattintásra kívül" },
-  "statusNeedUrlAndKey": { "message": "Először adja meg az alap URL-t és az API kulcsot" },
-  "statusAutoSaved": { "message": "Automatikusan mentve" },
-  "footerHint": { "message": "Válasszon ki szöveget bármelyik oldalon a használathoz" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Modell" },
-  "dialogModelTooltip": { "message": "Adja meg vagy válassza ki a modellt" },
-  "dialogPinTooltip": { "message": "Ablak rögzítése" },
-  "dialogMinimizeTooltip": { "message": "Kis méret" },
-  "dialogExpandTooltip": { "message": "Kibontás" },
-  "dialogSelectedText": { "message": "Kiválasztott szöveg" },
-  "dialogSelectedImages": { "message": "Kiválasztott képek" },
-  "dialogInputPlaceholder": { "message": "Írja be kérdését..." },
-  "dialogSendBtn": { "message": "Küldés" },
-  "dialogCameraTooltip": { "message": "Képernyőkép készítése" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Először állítsa be az API kulcsot" },
-  "settingsWarningSubMessage": { "message": "Kattintson az eszköztár kiterjesztés ikonjára a beállítások megnyitásához" },
-  "cropHint": { "message": "Húzza a kijelöléshez, nyomja meg az Esc billentyűt a megszakításhoz" },
-  "errorRequestFailed": { "message": "Kérés sikertelen: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API hiba $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Képernyőkép]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI Képasszisztens" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Válasszon ki szöveget bármelyik oldalon az AI-vel való csevegéshez. Több szolgáltatót támogat (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant beállítások"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API alap URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Érvényes URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API kulcs"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Adja meg API kulcsát"
+  },
+  "apiKeyToggleAria": {
+    "message": "API kulcs megjelenítése vagy elrejtése"
+  },
+  "modelLabel": {
+    "message": "Modell"
+  },
+  "modelPlaceholder": {
+    "message": "Adja meg vagy válassza ki a modell nevét"
+  },
+  "modelFetchBtn": {
+    "message": "Lekérés"
+  },
+  "modelHint": {
+    "message": "Adja meg az alap URL-t és az API kulcsot, majd kattintson a Lekérés gombra"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Modelllista lekérése..."
+  },
+  "modelNoModels": {
+    "message": "Nem találhatók modellek"
+  },
+  "modelFound": {
+    "message": "$1 modell található, gépeljen a szűréshez",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Modelllista frissítve"
+  },
+  "modelFetchFailed": {
+    "message": "A lekérés sikertelen: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "A lekérés sikertelen, ellenőrizze az URL-t és a kulcsot"
+  },
+  "quickPromptsLabel": {
+    "message": "Gyors parancsok"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Adjon meg egy gyors parancsot..."
+  },
+  "quickPromptsHint": {
+    "message": "Kattintson egy gyors parancsra a párbeszédablakban a kitöltéshez"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Kattintson a szerkesztéshez"
+  },
+  "defaultPinLabel": {
+    "message": "Párbeszédablak rögzítése alapértelmezés szerint"
+  },
+  "defaultPinHint": {
+    "message": "Bekapcsoláskor az új párbeszédablakok automatikusan rögzítve lesznek, és nem záródnak be kattintásra kívül"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Először adja meg az alap URL-t és az API kulcsot"
+  },
+  "statusAutoSaved": {
+    "message": "Automatikusan mentve"
+  },
+  "footerHint": {
+    "message": "Válasszon ki szöveget bármelyik oldalon a használathoz"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Modell"
+  },
+  "dialogModelTooltip": {
+    "message": "Adja meg vagy válassza ki a modellt"
+  },
+  "dialogPinTooltip": {
+    "message": "Ablak rögzítése"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Kis méret"
+  },
+  "dialogExpandTooltip": {
+    "message": "Kibontás"
+  },
+  "dialogSelectedText": {
+    "message": "Kiválasztott szöveg"
+  },
+  "dialogSelectedImages": {
+    "message": "Kiválasztott képek"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Írja be kérdését..."
+  },
+  "dialogSendBtn": {
+    "message": "Küldés"
+  },
+  "dialogCameraTooltip": {
+    "message": "Képernyőkép készítése"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Először állítsa be az API kulcsot"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Kattintson az eszköztár kiterjesztés ikonjára a beállítások megnyitásához"
+  },
+  "cropHint": {
+    "message": "Húzza a kijelöléshez, nyomja meg az Esc billentyűt a megszakításhoz"
+  },
+  "errorRequestFailed": {
+    "message": "Kérés sikertelen: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API hiba $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Képernyőkép]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI Képasszisztens"
+  },
+  "dialogClearTooltip": {
+    "message": "Kijelölés törlése"
+  }
 }

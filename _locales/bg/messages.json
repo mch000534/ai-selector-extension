@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Изберете текст на всяка страница, за да си общувате с AI. Поддържа множество доставчици (BYOK)." },
-  "popupTitle": { "message": "Настройки на AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "Базов URL на API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Действащ URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API ключ" },
-  "apiKeyPlaceholder": { "message": "Въведете своя API ключ" },
-  "apiKeyToggleAria": { "message": "Показване или скриване на API ключа" },
-  "modelLabel": { "message": "Модел" },
-  "modelPlaceholder": { "message": "Въведете или изберете име на модела" },
-  "modelFetchBtn": { "message": "Извличане" },
-  "modelHint": { "message": "Въведете базов URL и API ключ, след което кликнете върху Извличане" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Извличане на списък с модели..." },
-  "modelNoModels": { "message": "Няма намерени модели" },
-  "modelFound": { "message": "Намерени са $1 модела, напишете за филтриране", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Списъкът с модели е обновен" },
-  "modelFetchFailed": { "message": "Извличането е неуспешно: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Извличането е неуспешно, проверете URL и ключа" },
-  "quickPromptsLabel": { "message": "Бързи подсказки" },
-  "quickPromptsPlaceholder": { "message": "Въведете бърза подсказка..." },
-  "quickPromptsHint": { "message": "Кликнете върху бърза подсказка в диалога, за да я попълните" },
-  "quickPromptsEditTooltip": { "message": "Кликнете за редактиране" },
-  "defaultPinLabel": { "message": "Закачи диалоговия прозорец по подразбиране" },
-  "defaultPinHint": { "message": "Когато е активирано, новите диалози се закачат автоматично и няма да се затварят при кликване извън тях" },
-  "statusNeedUrlAndKey": { "message": "Първо въведете базов URL и API ключ" },
-  "statusAutoSaved": { "message": "Запазено автоматично" },
-  "footerHint": { "message": "Изберете текст на всяка страница, за да използвате" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Модел" },
-  "dialogModelTooltip": { "message": "Въведете или изберете модел" },
-  "dialogPinTooltip": { "message": "Закачи прозорец" },
-  "dialogMinimizeTooltip": { "message": "Минимизиране" },
-  "dialogExpandTooltip": { "message": "Разширяване" },
-  "dialogSelectedText": { "message": "Избран текст" },
-  "dialogSelectedImages": { "message": "Избрани изображения" },
-  "dialogInputPlaceholder": { "message": "Напишете въпроса си..." },
-  "dialogSendBtn": { "message": "Изпрати" },
-  "dialogCameraTooltip": { "message": "Заснемане на екрана" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Първо настройте своя API ключ" },
-  "settingsWarningSubMessage": { "message": "Кликнете върху иконата на разширението в лентата с инструменти, за да отворите настройките" },
-  "cropHint": { "message": "Влачете за избор на област, натиснете Esc за отмяна" },
-  "errorRequestFailed": { "message": "Заявката е неуспешна: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API грешка $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Снимка на екрана]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI асистент за изображения" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Изберете текст на всяка страница, за да си общувате с AI. Поддържа множество доставчици (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Настройки на AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "Базов URL на API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Действащ URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API ключ"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Въведете своя API ключ"
+  },
+  "apiKeyToggleAria": {
+    "message": "Показване или скриване на API ключа"
+  },
+  "modelLabel": {
+    "message": "Модел"
+  },
+  "modelPlaceholder": {
+    "message": "Въведете или изберете име на модела"
+  },
+  "modelFetchBtn": {
+    "message": "Извличане"
+  },
+  "modelHint": {
+    "message": "Въведете базов URL и API ключ, след което кликнете върху Извличане"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Извличане на списък с модели..."
+  },
+  "modelNoModels": {
+    "message": "Няма намерени модели"
+  },
+  "modelFound": {
+    "message": "Намерени са $1 модела, напишете за филтриране",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Списъкът с модели е обновен"
+  },
+  "modelFetchFailed": {
+    "message": "Извличането е неуспешно: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Извличането е неуспешно, проверете URL и ключа"
+  },
+  "quickPromptsLabel": {
+    "message": "Бързи подсказки"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Въведете бърза подсказка..."
+  },
+  "quickPromptsHint": {
+    "message": "Кликнете върху бърза подсказка в диалога, за да я попълните"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Кликнете за редактиране"
+  },
+  "defaultPinLabel": {
+    "message": "Закачи диалоговия прозорец по подразбиране"
+  },
+  "defaultPinHint": {
+    "message": "Когато е активирано, новите диалози се закачат автоматично и няма да се затварят при кликване извън тях"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Първо въведете базов URL и API ключ"
+  },
+  "statusAutoSaved": {
+    "message": "Запазено автоматично"
+  },
+  "footerHint": {
+    "message": "Изберете текст на всяка страница, за да използвате"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Модел"
+  },
+  "dialogModelTooltip": {
+    "message": "Въведете или изберете модел"
+  },
+  "dialogPinTooltip": {
+    "message": "Закачи прозорец"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Минимизиране"
+  },
+  "dialogExpandTooltip": {
+    "message": "Разширяване"
+  },
+  "dialogSelectedText": {
+    "message": "Избран текст"
+  },
+  "dialogSelectedImages": {
+    "message": "Избрани изображения"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Напишете въпроса си..."
+  },
+  "dialogSendBtn": {
+    "message": "Изпрати"
+  },
+  "dialogCameraTooltip": {
+    "message": "Заснемане на екрана"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Първо настройте своя API ключ"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Кликнете върху иконата на разширението в лентата с инструменти, за да отворите настройките"
+  },
+  "cropHint": {
+    "message": "Влачете за избор на област, натиснете Esc за отмяна"
+  },
+  "errorRequestFailed": {
+    "message": "Заявката е неуспешна: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API грешка $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Снимка на екрана]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI асистент за изображения"
+  },
+  "dialogClearTooltip": {
+    "message": "Изчистване на избора"
+  }
 }

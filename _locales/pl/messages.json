@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Zaznacz tekst na dowolnej stronie, aby porozmawiać z AI. Obsługuje wielu dostawców (BYOK)." },
-  "popupTitle": { "message": "Ustawienia AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "Bazowy adres URL API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Obowiązuje URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Klucz API" },
-  "apiKeyPlaceholder": { "message": "Wpisz swój klucz API" },
-  "apiKeyToggleAria": { "message": "Pokaż lub ukryj klucz API" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Wpisz lub wybierz nazwę modelu" },
-  "modelFetchBtn": { "message": "Pobierz" },
-  "modelHint": { "message": "Wpisz bazowy adres URL i klucz API, a następnie kliknij Pobierz" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Pobieranie listy modeli..." },
-  "modelNoModels": { "message": "Nie znaleziono modeli" },
-  "modelFound": { "message": "Znaleziono $1 modeli, wpisz aby filtrować", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Lista modeli zaktualizowana" },
-  "modelFetchFailed": { "message": "Pobieranie nie powiodło się: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Pobieranie nie powiodło się, sprawdź adres URL i klucz" },
-  "quickPromptsLabel": { "message": "Szybkie podpowiedzi" },
-  "quickPromptsPlaceholder": { "message": "Wpisz szybką podpowiedź..." },
-  "quickPromptsHint": { "message": "Kliknij szybką podpowiedź w oknie dialogowym, aby ją wypełnić" },
-  "quickPromptsEditTooltip": { "message": "Kliknij, aby edytować" },
-  "defaultPinLabel": { "message": "Domyślnie przypnij okno dialogowe" },
-  "defaultPinHint": { "message": "Po włączeniu nowe okna dialogowe są automatycznie przypinane i nie zostaną zamknięte po kliknięciu poza nimi" },
-  "statusNeedUrlAndKey": { "message": "Najpierw wpisz bazowy adres URL i klucz API" },
-  "statusAutoSaved": { "message": "Zapisano automatycznie" },
-  "footerHint": { "message": "Zaznacz tekst na dowolnej stronie, aby użyć" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Wpisz lub wybierz model" },
-  "dialogPinTooltip": { "message": "Przypnij okno" },
-  "dialogMinimizeTooltip": { "message": "Minimalizuj" },
-  "dialogExpandTooltip": { "message": "Rozwiń" },
-  "dialogSelectedText": { "message": "Zaznaczony tekst" },
-  "dialogSelectedImages": { "message": "Zaznaczone obrazy" },
-  "dialogInputPlaceholder": { "message": "Wpisz swoje pytanie..." },
-  "dialogSendBtn": { "message": "Wyślij" },
-  "dialogCameraTooltip": { "message": "Utwórz zrzut ekranu" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Najpierw skonfiguruj swój klucz API" },
-  "settingsWarningSubMessage": { "message": "Kliknij ikonę rozszerzenia na pasku narzędzi, aby otworzyć ustawienia" },
-  "cropHint": { "message": "Przeciągnij, aby zaznaczyć obszar, naciśnij Esc, aby anulować" },
-  "errorRequestFailed": { "message": "Żądanie nie powiodło się: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Błąd API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Zrzut ekranu]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Asystent obrazów AI" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Zaznacz tekst na dowolnej stronie, aby porozmawiać z AI. Obsługuje wielu dostawców (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Ustawienia AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "Bazowy adres URL API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Obowiązuje URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Klucz API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Wpisz swój klucz API"
+  },
+  "apiKeyToggleAria": {
+    "message": "Pokaż lub ukryj klucz API"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Wpisz lub wybierz nazwę modelu"
+  },
+  "modelFetchBtn": {
+    "message": "Pobierz"
+  },
+  "modelHint": {
+    "message": "Wpisz bazowy adres URL i klucz API, a następnie kliknij Pobierz"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Pobieranie listy modeli..."
+  },
+  "modelNoModels": {
+    "message": "Nie znaleziono modeli"
+  },
+  "modelFound": {
+    "message": "Znaleziono $1 modeli, wpisz aby filtrować",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Lista modeli zaktualizowana"
+  },
+  "modelFetchFailed": {
+    "message": "Pobieranie nie powiodło się: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Pobieranie nie powiodło się, sprawdź adres URL i klucz"
+  },
+  "quickPromptsLabel": {
+    "message": "Szybkie podpowiedzi"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Wpisz szybką podpowiedź..."
+  },
+  "quickPromptsHint": {
+    "message": "Kliknij szybką podpowiedź w oknie dialogowym, aby ją wypełnić"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Kliknij, aby edytować"
+  },
+  "defaultPinLabel": {
+    "message": "Domyślnie przypnij okno dialogowe"
+  },
+  "defaultPinHint": {
+    "message": "Po włączeniu nowe okna dialogowe są automatycznie przypinane i nie zostaną zamknięte po kliknięciu poza nimi"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Najpierw wpisz bazowy adres URL i klucz API"
+  },
+  "statusAutoSaved": {
+    "message": "Zapisano automatycznie"
+  },
+  "footerHint": {
+    "message": "Zaznacz tekst na dowolnej stronie, aby użyć"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Wpisz lub wybierz model"
+  },
+  "dialogPinTooltip": {
+    "message": "Przypnij okno"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimalizuj"
+  },
+  "dialogExpandTooltip": {
+    "message": "Rozwiń"
+  },
+  "dialogSelectedText": {
+    "message": "Zaznaczony tekst"
+  },
+  "dialogSelectedImages": {
+    "message": "Zaznaczone obrazy"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Wpisz swoje pytanie..."
+  },
+  "dialogSendBtn": {
+    "message": "Wyślij"
+  },
+  "dialogCameraTooltip": {
+    "message": "Utwórz zrzut ekranu"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Najpierw skonfiguruj swój klucz API"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Kliknij ikonę rozszerzenia na pasku narzędzi, aby otworzyć ustawienia"
+  },
+  "cropHint": {
+    "message": "Przeciągnij, aby zaznaczyć obszar, naciśnij Esc, aby anulować"
+  },
+  "errorRequestFailed": {
+    "message": "Żądanie nie powiodło się: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Błąd API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Zrzut ekranu]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Asystent obrazów AI"
+  },
+  "dialogClearTooltip": {
+    "message": "Wyczyść zaznaczenie"
+  }
 }

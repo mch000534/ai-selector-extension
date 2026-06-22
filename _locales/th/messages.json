@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "เลือกข้อความบนหน้าเว็บใดก็ได้เพื่อแชทกับ AI รองรับหลายผู้ให้บริการ (BYOK)" },
-  "popupTitle": { "message": "การตั้งค่า AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "URL ฐาน API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "URL ที่ใช้งาน: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "คีย์ API" },
-  "apiKeyPlaceholder": { "message": "กรอกคีย์ API ของคุณ" },
-  "apiKeyToggleAria": { "message": "แสดงหรือซ่อนคีย์ API" },
-  "modelLabel": { "message": "โมเดล" },
-  "modelPlaceholder": { "message": "กรอกหรือเลือกชื่อโมเดล" },
-  "modelFetchBtn": { "message": "ดึงข้อมูล" },
-  "modelHint": { "message": "กรอก URL ฐานและคีย์ API แล้วคลิกดึงข้อมูล" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "กำลังดึงรายการโมเดล..." },
-  "modelNoModels": { "message": "ไม่พบโมเดล" },
-  "modelFound": { "message": "พบโมเดล $1 รายการ พิมพ์เพื่อกรอง", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "อัปเดตรายการโมเดลแล้ว" },
-  "modelFetchFailed": { "message": "ดึงข้อมูลล้มเหลว: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "ดึงข้อมูลล้มเหลว โปรดตรวจสอบ URL และคีย์" },
-  "quickPromptsLabel": { "message": "พร้อมต์ด่วน" },
-  "quickPromptsPlaceholder": { "message": "กรอกพร้อมต์ด่วน..." },
-  "quickPromptsHint": { "message": "คลิกพร้อมต์ด่วนในกล่องโต้ตอบเพื่อกรอก" },
-  "quickPromptsEditTooltip": { "message": "คลิกเพื่อแก้ไข" },
-  "defaultPinLabel": { "message": "ปักหมุดกล่องโต้ตอบโดยค่าเริ่มต้น" },
-  "defaultPinHint": { "message": "เมื่อเปิดใช้งาน กล่องโต้ตอบใหม่จะถูกปักหมุดอัตโนมัติและจะไม่ปิดเมื่อคลิกด้านนอก" },
-  "statusNeedUrlAndKey": { "message": "กรุณากรอก URL ฐานและคีย์ API ก่อน" },
-  "statusAutoSaved": { "message": "บันทึกอัตโนมัติแล้ว" },
-  "footerHint": { "message": "เลือกข้อความบนหน้าเว็บใดก็ได้เพื่อใช้งาน" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "โมเดล" },
-  "dialogModelTooltip": { "message": "กรอกหรือเลือกโมเดล" },
-  "dialogPinTooltip": { "message": "ปักหมุดหน้าต่าง" },
-  "dialogMinimizeTooltip": { "message": "ย่อเก็บ" },
-  "dialogExpandTooltip": { "message": "ขยาย" },
-  "dialogSelectedText": { "message": "ข้อความที่เลือก" },
-  "dialogSelectedImages": { "message": "รูปภาพที่เลือก" },
-  "dialogInputPlaceholder": { "message": "พิมพ์คำถามของคุณ..." },
-  "dialogSendBtn": { "message": "ส่ง" },
-  "dialogCameraTooltip": { "message": "จับภาพหน้าจอ" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "กรุณาตั้งค่าคีย์ API ก่อน" },
-  "settingsWarningSubMessage": { "message": "คลิกไอคอนส่วนขยายในแถบเครื่องมือเพื่อเปิดการตั้งค่า" },
-  "cropHint": { "message": "ลากเพื่อเลือกพื้นที่ กด Esc เพื่อยกเลิก" },
-  "errorRequestFailed": { "message": "คำขอล้มเหลว: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "ข้อผิดพลาด API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[ภาพหน้าจอ]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "ผู้ช่วยภาพ AI" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "เลือกข้อความบนหน้าเว็บใดก็ได้เพื่อแชทกับ AI รองรับหลายผู้ให้บริการ (BYOK)"
+  },
+  "popupTitle": {
+    "message": "การตั้งค่า AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "URL ฐาน API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "URL ที่ใช้งาน: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "คีย์ API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "กรอกคีย์ API ของคุณ"
+  },
+  "apiKeyToggleAria": {
+    "message": "แสดงหรือซ่อนคีย์ API"
+  },
+  "modelLabel": {
+    "message": "โมเดล"
+  },
+  "modelPlaceholder": {
+    "message": "กรอกหรือเลือกชื่อโมเดล"
+  },
+  "modelFetchBtn": {
+    "message": "ดึงข้อมูล"
+  },
+  "modelHint": {
+    "message": "กรอก URL ฐานและคีย์ API แล้วคลิกดึงข้อมูล"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "กำลังดึงรายการโมเดล..."
+  },
+  "modelNoModels": {
+    "message": "ไม่พบโมเดล"
+  },
+  "modelFound": {
+    "message": "พบโมเดล $1 รายการ พิมพ์เพื่อกรอง",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "อัปเดตรายการโมเดลแล้ว"
+  },
+  "modelFetchFailed": {
+    "message": "ดึงข้อมูลล้มเหลว: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "ดึงข้อมูลล้มเหลว โปรดตรวจสอบ URL และคีย์"
+  },
+  "quickPromptsLabel": {
+    "message": "พร้อมต์ด่วน"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "กรอกพร้อมต์ด่วน..."
+  },
+  "quickPromptsHint": {
+    "message": "คลิกพร้อมต์ด่วนในกล่องโต้ตอบเพื่อกรอก"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "คลิกเพื่อแก้ไข"
+  },
+  "defaultPinLabel": {
+    "message": "ปักหมุดกล่องโต้ตอบโดยค่าเริ่มต้น"
+  },
+  "defaultPinHint": {
+    "message": "เมื่อเปิดใช้งาน กล่องโต้ตอบใหม่จะถูกปักหมุดอัตโนมัติและจะไม่ปิดเมื่อคลิกด้านนอก"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "กรุณากรอก URL ฐานและคีย์ API ก่อน"
+  },
+  "statusAutoSaved": {
+    "message": "บันทึกอัตโนมัติแล้ว"
+  },
+  "footerHint": {
+    "message": "เลือกข้อความบนหน้าเว็บใดก็ได้เพื่อใช้งาน"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "โมเดล"
+  },
+  "dialogModelTooltip": {
+    "message": "กรอกหรือเลือกโมเดล"
+  },
+  "dialogPinTooltip": {
+    "message": "ปักหมุดหน้าต่าง"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "ย่อเก็บ"
+  },
+  "dialogExpandTooltip": {
+    "message": "ขยาย"
+  },
+  "dialogSelectedText": {
+    "message": "ข้อความที่เลือก"
+  },
+  "dialogSelectedImages": {
+    "message": "รูปภาพที่เลือก"
+  },
+  "dialogInputPlaceholder": {
+    "message": "พิมพ์คำถามของคุณ..."
+  },
+  "dialogSendBtn": {
+    "message": "ส่ง"
+  },
+  "dialogCameraTooltip": {
+    "message": "จับภาพหน้าจอ"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "กรุณาตั้งค่าคีย์ API ก่อน"
+  },
+  "settingsWarningSubMessage": {
+    "message": "คลิกไอคอนส่วนขยายในแถบเครื่องมือเพื่อเปิดการตั้งค่า"
+  },
+  "cropHint": {
+    "message": "ลากเพื่อเลือกพื้นที่ กด Esc เพื่อยกเลิก"
+  },
+  "errorRequestFailed": {
+    "message": "คำขอล้มเหลว: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "ข้อผิดพลาด API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[ภาพหน้าจอ]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "ผู้ช่วยภาพ AI"
+  },
+  "dialogClearTooltip": {
+    "message": "ล้างสิ่งที่เลือก"
+  }
 }

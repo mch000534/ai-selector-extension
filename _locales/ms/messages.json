@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Pilih teks pada mana-mana halaman untuk berbual dengan AI. Menyokong pelbagai penyedia (BYOK)." },
-  "popupTitle": { "message": "Tetapan AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "URL Asas API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "URL berkesan: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Kunci API" },
-  "apiKeyPlaceholder": { "message": "Masukkan Kunci API anda" },
-  "apiKeyToggleAria": { "message": "Tunjukkan atau sembunyikan Kunci API" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Masukkan atau pilih nama model" },
-  "modelFetchBtn": { "message": "Dapatkan" },
-  "modelHint": { "message": "Masukkan URL Asas dan Kunci API, kemudian klik Dapatkan" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Mendapatkan senarai model..." },
-  "modelNoModels": { "message": "Tiada model ditemui" },
-  "modelFound": { "message": "$1 model ditemui, taip untuk menapis", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Senarai model dikemas kini" },
-  "modelFetchFailed": { "message": "Pengambilan gagal: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Pengambilan gagal, sila semak URL dan Kunci" },
-  "quickPromptsLabel": { "message": "Arahan Pantas" },
-  "quickPromptsPlaceholder": { "message": "Masukkan arahan pantas..." },
-  "quickPromptsHint": { "message": "Klik arahan pantas dalam dialog untuk mengisinya" },
-  "quickPromptsEditTooltip": { "message": "Klik untuk edit" },
-  "defaultPinLabel": { "message": "Semat dialog secara lalai" },
-  "defaultPinHint": { "message": "Apabila diaktifkan, dialog baharu akan disemat secara automatik dan tidak akan ditutup apabila mengklik di luar" },
-  "statusNeedUrlAndKey": { "message": "Sila masukkan URL Asas dan Kunci API terlebih dahulu" },
-  "statusAutoSaved": { "message": "Disimpan secara automatik" },
-  "footerHint": { "message": "Pilih teks pada mana-mana halaman untuk digunakan" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Masukkan atau pilih model" },
-  "dialogPinTooltip": { "message": "Semat tetingkap" },
-  "dialogMinimizeTooltip": { "message": "Minimumkan" },
-  "dialogExpandTooltip": { "message": "Kembangkan" },
-  "dialogSelectedText": { "message": "Teks yang dipilih" },
-  "dialogSelectedImages": { "message": "Imej yang dipilih" },
-  "dialogInputPlaceholder": { "message": "Taip soalan anda..." },
-  "dialogSendBtn": { "message": "Hantar" },
-  "dialogCameraTooltip": { "message": "Tangkap tangkapan skrin" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Sila tetapkan Kunci API anda terlebih dahulu" },
-  "settingsWarningSubMessage": { "message": "Klik ikon sambungan dalam bar alat untuk membuka tetapan" },
-  "cropHint": { "message": "Seret untuk memilih kawasan, tekan Esc untuk membatalkan" },
-  "errorRequestFailed": { "message": "Permintaan gagal: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Ralat API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Tangkapan Skrin]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Pembantu Imej AI" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Pilih teks pada mana-mana halaman untuk berbual dengan AI. Menyokong pelbagai penyedia (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Tetapan AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "URL Asas API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "URL berkesan: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Kunci API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Masukkan Kunci API anda"
+  },
+  "apiKeyToggleAria": {
+    "message": "Tunjukkan atau sembunyikan Kunci API"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Masukkan atau pilih nama model"
+  },
+  "modelFetchBtn": {
+    "message": "Dapatkan"
+  },
+  "modelHint": {
+    "message": "Masukkan URL Asas dan Kunci API, kemudian klik Dapatkan"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Mendapatkan senarai model..."
+  },
+  "modelNoModels": {
+    "message": "Tiada model ditemui"
+  },
+  "modelFound": {
+    "message": "$1 model ditemui, taip untuk menapis",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Senarai model dikemas kini"
+  },
+  "modelFetchFailed": {
+    "message": "Pengambilan gagal: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Pengambilan gagal, sila semak URL dan Kunci"
+  },
+  "quickPromptsLabel": {
+    "message": "Arahan Pantas"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Masukkan arahan pantas..."
+  },
+  "quickPromptsHint": {
+    "message": "Klik arahan pantas dalam dialog untuk mengisinya"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Klik untuk edit"
+  },
+  "defaultPinLabel": {
+    "message": "Semat dialog secara lalai"
+  },
+  "defaultPinHint": {
+    "message": "Apabila diaktifkan, dialog baharu akan disemat secara automatik dan tidak akan ditutup apabila mengklik di luar"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Sila masukkan URL Asas dan Kunci API terlebih dahulu"
+  },
+  "statusAutoSaved": {
+    "message": "Disimpan secara automatik"
+  },
+  "footerHint": {
+    "message": "Pilih teks pada mana-mana halaman untuk digunakan"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Masukkan atau pilih model"
+  },
+  "dialogPinTooltip": {
+    "message": "Semat tetingkap"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimumkan"
+  },
+  "dialogExpandTooltip": {
+    "message": "Kembangkan"
+  },
+  "dialogSelectedText": {
+    "message": "Teks yang dipilih"
+  },
+  "dialogSelectedImages": {
+    "message": "Imej yang dipilih"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Taip soalan anda..."
+  },
+  "dialogSendBtn": {
+    "message": "Hantar"
+  },
+  "dialogCameraTooltip": {
+    "message": "Tangkap tangkapan skrin"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Sila tetapkan Kunci API anda terlebih dahulu"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Klik ikon sambungan dalam bar alat untuk membuka tetapan"
+  },
+  "cropHint": {
+    "message": "Seret untuk memilih kawasan, tekan Esc untuk membatalkan"
+  },
+  "errorRequestFailed": {
+    "message": "Permintaan gagal: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Ralat API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Tangkapan Skrin]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Pembantu Imej AI"
+  },
+  "dialogClearTooltip": {
+    "message": "Kosongkan pilihan"
+  }
 }

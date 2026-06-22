@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Vyberte text na akejkoľvek stránke pre konverzáciu s AI. Podporuje viacerých poskytovateľov (BYOK)." },
-  "popupTitle": { "message": "Nastavenia AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "Základná URL API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Platná URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Kľúč API" },
-  "apiKeyPlaceholder": { "message": "Zadajte svoj kľúč API" },
-  "apiKeyToggleAria": { "message": "Zobraziť alebo skryť kľúč API" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Zadajte alebo vyberte názov modelu" },
-  "modelFetchBtn": { "message": "Načítať" },
-  "modelHint": { "message": "Zadajte základnú URL a kľúč API, potom kliknite na Načítať" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Načítava sa zoznam modelov..." },
-  "modelNoModels": { "message": "Nenašli sa žiadne modely" },
-  "modelFound": { "message": "Nájdených $1 modelov, začnite písať pre filtrovanie", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Zoznam modelov aktualizovaný" },
-  "modelFetchFailed": { "message": "Načítanie zlyhalo: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Načítanie zlyhalo, skontrolujte URL a kľúč" },
-  "quickPromptsLabel": { "message": "Rýchle výzvy" },
-  "quickPromptsPlaceholder": { "message": "Zadajte rýchlu výzvu..." },
-  "quickPromptsHint": { "message": "Kliknite na rýchlu výzvu v dialógovom okne pre vyplnenie" },
-  "quickPromptsEditTooltip": { "message": "Kliknite pre úpravu" },
-  "defaultPinLabel": { "message": "Predvolene pripnúť dialóg" },
-  "defaultPinHint": { "message": "Pri zapnutí sú nové dialógy automaticky pripnuté a nezatvoria sa pri kliknutí mimo nich" },
-  "statusNeedUrlAndKey": { "message": "Najprv zadajte základnú URL a kľúč API" },
-  "statusAutoSaved": { "message": "Uložené automaticky" },
-  "footerHint": { "message": "Vyberte text na akejkoľvek stránke pre použitie" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Zadajte alebo vyberte model" },
-  "dialogPinTooltip": { "message": "Pripnúť okno" },
-  "dialogMinimizeTooltip": { "message": "Minimalizovať" },
-  "dialogExpandTooltip": { "message": "Rozbaliť" },
-  "dialogSelectedText": { "message": "Vybraný text" },
-  "dialogSelectedImages": { "message": "Vybrané obrázky" },
-  "dialogInputPlaceholder": { "message": "Napíšte svoju otázku..." },
-  "dialogSendBtn": { "message": "Odoslať" },
-  "dialogCameraTooltip": { "message": "Zachytiť snímku obrazovky" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Najprv si nastavte kľúč API" },
-  "settingsWarningSubMessage": { "message": "Kliknite na ikonu rozšírenia v paneli nástrojov pre otvorenie nastavení" },
-  "cropHint": { "message": "Potiahnite pre výber oblasti, stlačte Esc pre zrušenie" },
-  "errorRequestFailed": { "message": "Požiadavka zlyhala: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Chyba API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Snímka obrazovky]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Asistent obrázkov AI" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Vyberte text na akejkoľvek stránke pre konverzáciu s AI. Podporuje viacerých poskytovateľov (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Nastavenia AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "Základná URL API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Platná URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Kľúč API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Zadajte svoj kľúč API"
+  },
+  "apiKeyToggleAria": {
+    "message": "Zobraziť alebo skryť kľúč API"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Zadajte alebo vyberte názov modelu"
+  },
+  "modelFetchBtn": {
+    "message": "Načítať"
+  },
+  "modelHint": {
+    "message": "Zadajte základnú URL a kľúč API, potom kliknite na Načítať"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Načítava sa zoznam modelov..."
+  },
+  "modelNoModels": {
+    "message": "Nenašli sa žiadne modely"
+  },
+  "modelFound": {
+    "message": "Nájdených $1 modelov, začnite písať pre filtrovanie",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Zoznam modelov aktualizovaný"
+  },
+  "modelFetchFailed": {
+    "message": "Načítanie zlyhalo: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Načítanie zlyhalo, skontrolujte URL a kľúč"
+  },
+  "quickPromptsLabel": {
+    "message": "Rýchle výzvy"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Zadajte rýchlu výzvu..."
+  },
+  "quickPromptsHint": {
+    "message": "Kliknite na rýchlu výzvu v dialógovom okne pre vyplnenie"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Kliknite pre úpravu"
+  },
+  "defaultPinLabel": {
+    "message": "Predvolene pripnúť dialóg"
+  },
+  "defaultPinHint": {
+    "message": "Pri zapnutí sú nové dialógy automaticky pripnuté a nezatvoria sa pri kliknutí mimo nich"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Najprv zadajte základnú URL a kľúč API"
+  },
+  "statusAutoSaved": {
+    "message": "Uložené automaticky"
+  },
+  "footerHint": {
+    "message": "Vyberte text na akejkoľvek stránke pre použitie"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Zadajte alebo vyberte model"
+  },
+  "dialogPinTooltip": {
+    "message": "Pripnúť okno"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimalizovať"
+  },
+  "dialogExpandTooltip": {
+    "message": "Rozbaliť"
+  },
+  "dialogSelectedText": {
+    "message": "Vybraný text"
+  },
+  "dialogSelectedImages": {
+    "message": "Vybrané obrázky"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Napíšte svoju otázku..."
+  },
+  "dialogSendBtn": {
+    "message": "Odoslať"
+  },
+  "dialogCameraTooltip": {
+    "message": "Zachytiť snímku obrazovky"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Najprv si nastavte kľúč API"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Kliknite na ikonu rozšírenia v paneli nástrojov pre otvorenie nastavení"
+  },
+  "cropHint": {
+    "message": "Potiahnite pre výber oblasti, stlačte Esc pre zrušenie"
+  },
+  "errorRequestFailed": {
+    "message": "Požiadavka zlyhala: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Chyba API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Snímka obrazovky]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Asistent obrázkov AI"
+  },
+  "dialogClearTooltip": {
+    "message": "Vymazať výber"
+  }
 }

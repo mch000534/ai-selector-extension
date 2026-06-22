@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Seleccioneu text a qualsevol pàgina per xatejar amb la IA. Admet diversos proveïdors (BYOK)." },
-  "popupTitle": { "message": "Configuració d'AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "URL base de l'API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "URL efectiva: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Clau d'API" },
-  "apiKeyPlaceholder": { "message": "Introduïu la vostra clau d'API" },
-  "apiKeyToggleAria": { "message": "Mostra o amaga la clau d'API" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Introduïu o seleccioneu el nom del model" },
-  "modelFetchBtn": { "message": "Obtén" },
-  "modelHint": { "message": "Introduïu l'URL base i la clau d'API, després feu clic a Obtén" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "S'està obtenint la llista de models..." },
-  "modelNoModels": { "message": "No s'han trobat models" },
-  "modelFound": { "message": "$1 models trobats, escriviu per filtrar", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Llista de models actualitzada" },
-  "modelFetchFailed": { "message": "Error en obtenir: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Error en obtenir, comproveu l'URL i la clau" },
-  "quickPromptsLabel": { "message": "Prompts ràpids" },
-  "quickPromptsPlaceholder": { "message": "Introduïu un prompt ràpid..." },
-  "quickPromptsHint": { "message": "Feu clic en un prompt ràpid al diàleg per omplir-lo" },
-  "quickPromptsEditTooltip": { "message": "Feu clic per editar" },
-  "defaultPinLabel": { "message": "Fixa el diàleg per defecte" },
-  "defaultPinHint": { "message": "Si està activat, els nous diàlegs es fixen automàticament i no es tanquen en fer clic a fora" },
-  "statusNeedUrlAndKey": { "message": "Introduïu primer l'URL base i la clau d'API" },
-  "statusAutoSaved": { "message": "Desat automàticament" },
-  "footerHint": { "message": "Seleccioneu text a qualsevol pàgina per utilitzar" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Introduïu o seleccioneu el model" },
-  "dialogPinTooltip": { "message": "Fixa la finestra" },
-  "dialogMinimizeTooltip": { "message": "Minimitza" },
-  "dialogExpandTooltip": { "message": "Expandeix" },
-  "dialogSelectedText": { "message": "Text seleccionat" },
-  "dialogSelectedImages": { "message": "Imatges seleccionades" },
-  "dialogInputPlaceholder": { "message": "Escriviu la vostra pregunta..." },
-  "dialogSendBtn": { "message": "Envia" },
-  "dialogCameraTooltip": { "message": "Captura de pantalla" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Configureu primer la vostra clau d'API" },
-  "settingsWarningSubMessage": { "message": "Feu clic a la icona de l'extensió a la barra d'eines per obrir la configuració" },
-  "cropHint": { "message": "Arrossegueu per seleccionar l'àrea, premeu Esc per cancel·lar" },
-  "errorRequestFailed": { "message": "Error de sol·licitud: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Error d'API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Captura de pantalla]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Assistent d'imatges IA" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Seleccioneu text a qualsevol pàgina per xatejar amb la IA. Admet diversos proveïdors (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Configuració d'AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "URL base de l'API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "URL efectiva: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Clau d'API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Introduïu la vostra clau d'API"
+  },
+  "apiKeyToggleAria": {
+    "message": "Mostra o amaga la clau d'API"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Introduïu o seleccioneu el nom del model"
+  },
+  "modelFetchBtn": {
+    "message": "Obtén"
+  },
+  "modelHint": {
+    "message": "Introduïu l'URL base i la clau d'API, després feu clic a Obtén"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "S'està obtenint la llista de models..."
+  },
+  "modelNoModels": {
+    "message": "No s'han trobat models"
+  },
+  "modelFound": {
+    "message": "$1 models trobats, escriviu per filtrar",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Llista de models actualitzada"
+  },
+  "modelFetchFailed": {
+    "message": "Error en obtenir: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Error en obtenir, comproveu l'URL i la clau"
+  },
+  "quickPromptsLabel": {
+    "message": "Prompts ràpids"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Introduïu un prompt ràpid..."
+  },
+  "quickPromptsHint": {
+    "message": "Feu clic en un prompt ràpid al diàleg per omplir-lo"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Feu clic per editar"
+  },
+  "defaultPinLabel": {
+    "message": "Fixa el diàleg per defecte"
+  },
+  "defaultPinHint": {
+    "message": "Si està activat, els nous diàlegs es fixen automàticament i no es tanquen en fer clic a fora"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Introduïu primer l'URL base i la clau d'API"
+  },
+  "statusAutoSaved": {
+    "message": "Desat automàticament"
+  },
+  "footerHint": {
+    "message": "Seleccioneu text a qualsevol pàgina per utilitzar"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Introduïu o seleccioneu el model"
+  },
+  "dialogPinTooltip": {
+    "message": "Fixa la finestra"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimitza"
+  },
+  "dialogExpandTooltip": {
+    "message": "Expandeix"
+  },
+  "dialogSelectedText": {
+    "message": "Text seleccionat"
+  },
+  "dialogSelectedImages": {
+    "message": "Imatges seleccionades"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Escriviu la vostra pregunta..."
+  },
+  "dialogSendBtn": {
+    "message": "Envia"
+  },
+  "dialogCameraTooltip": {
+    "message": "Captura de pantalla"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Configureu primer la vostra clau d'API"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Feu clic a la icona de l'extensió a la barra d'eines per obrir la configuració"
+  },
+  "cropHint": {
+    "message": "Arrossegueu per seleccionar l'àrea, premeu Esc per cancel·lar"
+  },
+  "errorRequestFailed": {
+    "message": "Error de sol·licitud: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Error d'API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Captura de pantalla]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Assistent d'imatges IA"
+  },
+  "dialogClearTooltip": {
+    "message": "Esborra la selecció"
+  }
 }

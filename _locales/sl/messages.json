@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Izberite besedilo na kateri koli strani za klepet z AI. Podpira več ponudnikov (BYOK)." },
-  "popupTitle": { "message": "Nastavitve AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "Osnovni URL API-ja" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Veljaven URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "Ključ API" },
-  "apiKeyPlaceholder": { "message": "Vnesite svoj ključ API" },
-  "apiKeyToggleAria": { "message": "Prikaži ali skrij ključ API" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Vnesite ali izberite ime modela" },
-  "modelFetchBtn": { "message": "Pridobi" },
-  "modelHint": { "message": "Vnesite osnovni URL in ključ API, nato kliknite Pridobi" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Pridobivanje seznama modelov..." },
-  "modelNoModels": { "message": "Modelov ni mogoče najti" },
-  "modelFound": { "message": "Najdenih $1 modelov, vnesite za filtriranje", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Seznam modelov posodobljen" },
-  "modelFetchFailed": { "message": "Pridobivanje ni uspelo: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Pridobivanje ni uspelo, preverite URL in ključ" },
-  "quickPromptsLabel": { "message": "Hitra navodila" },
-  "quickPromptsPlaceholder": { "message": "Vnesite hitro navodilo..." },
-  "quickPromptsHint": { "message": "Kliknite hitro navodilo v pogovornem oknu za izpolnitev" },
-  "quickPromptsEditTooltip": { "message": "Kliknite za urejanje" },
-  "defaultPinLabel": { "message": "Privzeto pripni pogovorno okno" },
-  "defaultPinHint": { "message": "Ko je omogočeno, so nova pogovorna okna samodejno pripeta in se ne zaprejo ob kliku izven njih" },
-  "statusNeedUrlAndKey": { "message": "Najprej vnesite osnovni URL in ključ API" },
-  "statusAutoSaved": { "message": "Samodejno shranjeno" },
-  "footerHint": { "message": "Izberite besedilo na kateri koli strani za uporabo" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Vnesite ali izberite model" },
-  "dialogPinTooltip": { "message": "Pripni okno" },
-  "dialogMinimizeTooltip": { "message": "Skrči" },
-  "dialogExpandTooltip": { "message": "Razširi" },
-  "dialogSelectedText": { "message": "Izbrano besedilo" },
-  "dialogSelectedImages": { "message": "Izbrane slike" },
-  "dialogInputPlaceholder": { "message": "Vnesite svoje vprašanje..." },
-  "dialogSendBtn": { "message": "Pošlji" },
-  "dialogCameraTooltip": { "message": "Zajemi posnetek zaslona" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Najprej nastavite svoj ključ API" },
-  "settingsWarningSubMessage": { "message": "Kliknite ikono razširitve v orodni vrstici za odpiranje nastavitev" },
-  "cropHint": { "message": "Povlecite za izbiro območja, pritisnite Esc za preklic" },
-  "errorRequestFailed": { "message": "Zahteva ni uspela: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Napaka API-ja $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Posnetek zaslona]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI pomočnik za slike" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Izberite besedilo na kateri koli strani za klepet z AI. Podpira več ponudnikov (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Nastavitve AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "Osnovni URL API-ja"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Veljaven URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "Ključ API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Vnesite svoj ključ API"
+  },
+  "apiKeyToggleAria": {
+    "message": "Prikaži ali skrij ključ API"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Vnesite ali izberite ime modela"
+  },
+  "modelFetchBtn": {
+    "message": "Pridobi"
+  },
+  "modelHint": {
+    "message": "Vnesite osnovni URL in ključ API, nato kliknite Pridobi"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Pridobivanje seznama modelov..."
+  },
+  "modelNoModels": {
+    "message": "Modelov ni mogoče najti"
+  },
+  "modelFound": {
+    "message": "Najdenih $1 modelov, vnesite za filtriranje",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Seznam modelov posodobljen"
+  },
+  "modelFetchFailed": {
+    "message": "Pridobivanje ni uspelo: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Pridobivanje ni uspelo, preverite URL in ključ"
+  },
+  "quickPromptsLabel": {
+    "message": "Hitra navodila"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Vnesite hitro navodilo..."
+  },
+  "quickPromptsHint": {
+    "message": "Kliknite hitro navodilo v pogovornem oknu za izpolnitev"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Kliknite za urejanje"
+  },
+  "defaultPinLabel": {
+    "message": "Privzeto pripni pogovorno okno"
+  },
+  "defaultPinHint": {
+    "message": "Ko je omogočeno, so nova pogovorna okna samodejno pripeta in se ne zaprejo ob kliku izven njih"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Najprej vnesite osnovni URL in ključ API"
+  },
+  "statusAutoSaved": {
+    "message": "Samodejno shranjeno"
+  },
+  "footerHint": {
+    "message": "Izberite besedilo na kateri koli strani za uporabo"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Vnesite ali izberite model"
+  },
+  "dialogPinTooltip": {
+    "message": "Pripni okno"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Skrči"
+  },
+  "dialogExpandTooltip": {
+    "message": "Razširi"
+  },
+  "dialogSelectedText": {
+    "message": "Izbrano besedilo"
+  },
+  "dialogSelectedImages": {
+    "message": "Izbrane slike"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Vnesite svoje vprašanje..."
+  },
+  "dialogSendBtn": {
+    "message": "Pošlji"
+  },
+  "dialogCameraTooltip": {
+    "message": "Zajemi posnetek zaslona"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Najprej nastavite svoj ključ API"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Kliknite ikono razširitve v orodni vrstici za odpiranje nastavitev"
+  },
+  "cropHint": {
+    "message": "Povlecite za izbiro območja, pritisnite Esc za preklic"
+  },
+  "errorRequestFailed": {
+    "message": "Zahteva ni uspela: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Napaka API-ja $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Posnetek zaslona]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI pomočnik za slike"
+  },
+  "dialogClearTooltip": {
+    "message": "Počisti izbor"
+  }
 }

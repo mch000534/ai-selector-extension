@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Chagua maandishi kwenye ukurasa wowote ili kuzungumza na AI. Inaauni watoaji wengi (BYOK)." },
-  "popupTitle": { "message": "Mipangilio ya AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "URL inayotumika: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Key" },
-  "apiKeyPlaceholder": { "message": "Ingiza API Key yako" },
-  "apiKeyToggleAria": { "message": "Onesha au ficha API Key" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Ingiza au chagua jina la model" },
-  "modelFetchBtn": { "message": "Letesha" },
-  "modelHint": { "message": "Ingiza Base URL na API Key, kisha bofya Letesha" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Inaleta orodha ya model..." },
-  "modelNoModels": { "message": "Hakuna model iliyopatikana" },
-  "modelFound": { "message": "Imepata model $1, andika kuchuja", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Orodha ya model imesasishwa" },
-  "modelFetchFailed": { "message": "Kuletesha kumeshindikana: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Kuletesha kumeshindikana, tafadhali angalia URL na Key" },
-  "quickPromptsLabel": { "message": "Maelekezo ya Haraka" },
-  "quickPromptsPlaceholder": { "message": "Ingiza maelekezo ya haraka..." },
-  "quickPromptsHint": { "message": "Bofya maelekezo ya haraka kwenye dirisha kujaza" },
-  "quickPromptsEditTooltip": { "message": "Bofya kuhariri" },
-  "defaultPinLabel": { "message": "Funga dirisha kwa chaguomsingi" },
-  "defaultPinHint": { "message": "Ikiwa imewashwa, dirisha jipya litafungwa moja kwa moja na halitafungwa unapobofya nje" },
-  "statusNeedUrlAndKey": { "message": "Tafadhali ingiza Base URL na API Key kwanza" },
-  "statusAutoSaved": { "message": "Imehifadhiwa moja kwa moja" },
-  "footerHint": { "message": "Chagua maandishi kwenye ukurasa wowote kutumia" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Ingiza au chagua model" },
-  "dialogPinTooltip": { "message": "Funga dirisha" },
-  "dialogMinimizeTooltip": { "message": "Punguza ukubwa" },
-  "dialogExpandTooltip": { "message": "Kunjua" },
-  "dialogSelectedText": { "message": "Maandishi yaliyochaguliwa" },
-  "dialogSelectedImages": { "message": "Picha zilizochaguliwa" },
-  "dialogInputPlaceholder": { "message": "Andika swali lako..." },
-  "dialogSendBtn": { "message": "Tuma" },
-  "dialogCameraTooltip": { "message": "Piga picha ya skrini" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Tafadhali sanidi API Key yako kwanza" },
-  "settingsWarningSubMessage": { "message": "Bofya ikoni ya kienyeji kwenye ubao wa zana kufungua mipangilio" },
-  "cropHint": { "message": "Buruta kuchagua eneo, bofya Esc kughairi" },
-  "errorRequestFailed": { "message": "Ombi limeshindikana: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "Kosa la API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Picha ya Skrini]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "Msaidizi wa Picha wa AI" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Chagua maandishi kwenye ukurasa wowote ili kuzungumza na AI. Inaauni watoaji wengi (BYOK)."
+  },
+  "popupTitle": {
+    "message": "Mipangilio ya AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "URL inayotumika: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Key"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Ingiza API Key yako"
+  },
+  "apiKeyToggleAria": {
+    "message": "Onesha au ficha API Key"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Ingiza au chagua jina la model"
+  },
+  "modelFetchBtn": {
+    "message": "Letesha"
+  },
+  "modelHint": {
+    "message": "Ingiza Base URL na API Key, kisha bofya Letesha"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Inaleta orodha ya model..."
+  },
+  "modelNoModels": {
+    "message": "Hakuna model iliyopatikana"
+  },
+  "modelFound": {
+    "message": "Imepata model $1, andika kuchuja",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Orodha ya model imesasishwa"
+  },
+  "modelFetchFailed": {
+    "message": "Kuletesha kumeshindikana: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Kuletesha kumeshindikana, tafadhali angalia URL na Key"
+  },
+  "quickPromptsLabel": {
+    "message": "Maelekezo ya Haraka"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Ingiza maelekezo ya haraka..."
+  },
+  "quickPromptsHint": {
+    "message": "Bofya maelekezo ya haraka kwenye dirisha kujaza"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Bofya kuhariri"
+  },
+  "defaultPinLabel": {
+    "message": "Funga dirisha kwa chaguomsingi"
+  },
+  "defaultPinHint": {
+    "message": "Ikiwa imewashwa, dirisha jipya litafungwa moja kwa moja na halitafungwa unapobofya nje"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Tafadhali ingiza Base URL na API Key kwanza"
+  },
+  "statusAutoSaved": {
+    "message": "Imehifadhiwa moja kwa moja"
+  },
+  "footerHint": {
+    "message": "Chagua maandishi kwenye ukurasa wowote kutumia"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Ingiza au chagua model"
+  },
+  "dialogPinTooltip": {
+    "message": "Funga dirisha"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Punguza ukubwa"
+  },
+  "dialogExpandTooltip": {
+    "message": "Kunjua"
+  },
+  "dialogSelectedText": {
+    "message": "Maandishi yaliyochaguliwa"
+  },
+  "dialogSelectedImages": {
+    "message": "Picha zilizochaguliwa"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Andika swali lako..."
+  },
+  "dialogSendBtn": {
+    "message": "Tuma"
+  },
+  "dialogCameraTooltip": {
+    "message": "Piga picha ya skrini"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Tafadhali sanidi API Key yako kwanza"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Bofya ikoni ya kienyeji kwenye ubao wa zana kufungua mipangilio"
+  },
+  "cropHint": {
+    "message": "Buruta kuchagua eneo, bofya Esc kughairi"
+  },
+  "errorRequestFailed": {
+    "message": "Ombi limeshindikana: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "Kosa la API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Picha ya Skrini]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "Msaidizi wa Picha wa AI"
+  },
+  "dialogClearTooltip": {
+    "message": "Futa uteuzi"
+  }
 }

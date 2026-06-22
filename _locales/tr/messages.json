@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Herhangi bir sayfada metin seçerek AI ile sohbet edin. Birden fazla sağlayıcıyı destekler (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant Ayarları" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Temel URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Geçerli URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API Anahtarı" },
-  "apiKeyPlaceholder": { "message": "API Anahtarınızı girin" },
-  "apiKeyToggleAria": { "message": "API Anahtarını göster veya gizle" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Model adını girin veya seçin" },
-  "modelFetchBtn": { "message": "Getir" },
-  "modelHint": { "message": "Temel URL ve API Anahtarını girin, ardından Getir'e tıklayın" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Model listesi getiriliyor..." },
-  "modelNoModels": { "message": "Model bulunamadı" },
-  "modelFound": { "message": "$1 model bulundu, filtrelemek için yazın", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Model listesi güncellendi" },
-  "modelFetchFailed": { "message": "Getirme başarısız: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Getirme başarısız, lütfen URL ve Anahtarı kontrol edin" },
-  "quickPromptsLabel": { "message": "Hızlı Komutlar" },
-  "quickPromptsPlaceholder": { "message": "Hızlı komut girin..." },
-  "quickPromptsHint": { "message": "Doldurmak için iletişim kutusunda hızlı komuta tıklayın" },
-  "quickPromptsEditTooltip": { "message": "Düzenlemek için tıklayın" },
-  "defaultPinLabel": { "message": "İletişim kutusunu varsayılan olarak sabitle" },
-  "defaultPinHint": { "message": "Etkinleştirildiğinde, yeni iletişim kutuları otomatik olarak sabitlenir ve dışarıya tıklandığında kapanmaz" },
-  "statusNeedUrlAndKey": { "message": "Lütfen önce Temel URL ve API Anahtarını girin" },
-  "statusAutoSaved": { "message": "Otomatik kaydedildi" },
-  "footerHint": { "message": "Kullanmak için herhangi bir sayfada metin seçin" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Model girin veya seçin" },
-  "dialogPinTooltip": { "message": "Pencereyi sabitle" },
-  "dialogMinimizeTooltip": { "message": "Küçült" },
-  "dialogExpandTooltip": { "message": "Genişlet" },
-  "dialogSelectedText": { "message": "Seçili metin" },
-  "dialogSelectedImages": { "message": "Seçili görseller" },
-  "dialogInputPlaceholder": { "message": "Sorunuzu yazın..." },
-  "dialogSendBtn": { "message": "Gönder" },
-  "dialogCameraTooltip": { "message": "Ekran görüntüsü al" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Lütfen önce API Anahtarınızı ayarlayın" },
-  "settingsWarningSubMessage": { "message": "Ayarları açmak için araç çubuğundaki uzantı simgesine tıklayın" },
-  "cropHint": { "message": "Alan seçmek için sürükleyin, iptal etmek için Esc'ye basın" },
-  "errorRequestFailed": { "message": "İstek başarısız: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API Hatası $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Ekran Görüntüsü]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI Görsel Asistanı" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Herhangi bir sayfada metin seçerek AI ile sohbet edin. Birden fazla sağlayıcıyı destekler (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant Ayarları"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Temel URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Geçerli URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API Anahtarı"
+  },
+  "apiKeyPlaceholder": {
+    "message": "API Anahtarınızı girin"
+  },
+  "apiKeyToggleAria": {
+    "message": "API Anahtarını göster veya gizle"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Model adını girin veya seçin"
+  },
+  "modelFetchBtn": {
+    "message": "Getir"
+  },
+  "modelHint": {
+    "message": "Temel URL ve API Anahtarını girin, ardından Getir'e tıklayın"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Model listesi getiriliyor..."
+  },
+  "modelNoModels": {
+    "message": "Model bulunamadı"
+  },
+  "modelFound": {
+    "message": "$1 model bulundu, filtrelemek için yazın",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Model listesi güncellendi"
+  },
+  "modelFetchFailed": {
+    "message": "Getirme başarısız: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Getirme başarısız, lütfen URL ve Anahtarı kontrol edin"
+  },
+  "quickPromptsLabel": {
+    "message": "Hızlı Komutlar"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Hızlı komut girin..."
+  },
+  "quickPromptsHint": {
+    "message": "Doldurmak için iletişim kutusunda hızlı komuta tıklayın"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Düzenlemek için tıklayın"
+  },
+  "defaultPinLabel": {
+    "message": "İletişim kutusunu varsayılan olarak sabitle"
+  },
+  "defaultPinHint": {
+    "message": "Etkinleştirildiğinde, yeni iletişim kutuları otomatik olarak sabitlenir ve dışarıya tıklandığında kapanmaz"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Lütfen önce Temel URL ve API Anahtarını girin"
+  },
+  "statusAutoSaved": {
+    "message": "Otomatik kaydedildi"
+  },
+  "footerHint": {
+    "message": "Kullanmak için herhangi bir sayfada metin seçin"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Model girin veya seçin"
+  },
+  "dialogPinTooltip": {
+    "message": "Pencereyi sabitle"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Küçült"
+  },
+  "dialogExpandTooltip": {
+    "message": "Genişlet"
+  },
+  "dialogSelectedText": {
+    "message": "Seçili metin"
+  },
+  "dialogSelectedImages": {
+    "message": "Seçili görseller"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Sorunuzu yazın..."
+  },
+  "dialogSendBtn": {
+    "message": "Gönder"
+  },
+  "dialogCameraTooltip": {
+    "message": "Ekran görüntüsü al"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Lütfen önce API Anahtarınızı ayarlayın"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Ayarları açmak için araç çubuğundaki uzantı simgesine tıklayın"
+  },
+  "cropHint": {
+    "message": "Alan seçmek için sürükleyin, iptal etmek için Esc'ye basın"
+  },
+  "errorRequestFailed": {
+    "message": "İstek başarısız: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API Hatası $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Ekran Görüntüsü]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI Görsel Asistanı"
+  },
+  "dialogClearTooltip": {
+    "message": "Seçimi temizle"
+  }
 }

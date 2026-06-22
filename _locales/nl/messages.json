@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "Selecteer tekst op elke pagina om te chatten met AI. Ondersteunt meerdere providers (BYOK)." },
-  "popupTitle": { "message": "AI Selection Assistant Instellingen" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API-basis-URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "Effectieve URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API-sleutel" },
-  "apiKeyPlaceholder": { "message": "Voer uw API-sleutel in" },
-  "apiKeyToggleAria": { "message": "API-sleutel tonen of verbergen" },
-  "modelLabel": { "message": "Model" },
-  "modelPlaceholder": { "message": "Modelnaam invoeren of selecteren" },
-  "modelFetchBtn": { "message": "Ophalen" },
-  "modelHint": { "message": "Basis-URL en API-sleutel invoeren, klik vervolgens op Ophalen" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "Modellenlijst ophalen..." },
-  "modelNoModels": { "message": "Geen modellen gevonden" },
-  "modelFound": { "message": "$1 modellen gevonden, typ om te filteren", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "Modellenlijst bijgewerkt" },
-  "modelFetchFailed": { "message": "Ophalen mislukt: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "Ophalen mislukt, controleer URL en sleutel" },
-  "quickPromptsLabel": { "message": "Snelle prompts" },
-  "quickPromptsPlaceholder": { "message": "Voer een snelle prompt in..." },
-  "quickPromptsHint": { "message": "Klik op een snelle prompt in het dialoogvenster om in te vullen" },
-  "quickPromptsEditTooltip": { "message": "Klik om te bewerken" },
-  "defaultPinLabel": { "message": "Dialoogvenster standaard vastmaken" },
-  "defaultPinHint": { "message": "Indien ingeschakeld, worden nieuwe dialoogvensters automatisch vastgemaakt en sluiten niet bij klikken buiten" },
-  "statusNeedUrlAndKey": { "message": "Voer eerst basis-URL en API-sleutel in" },
-  "statusAutoSaved": { "message": "Automatisch opgeslagen" },
-  "footerHint": { "message": "Selecteer tekst op een pagina om te gebruiken" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "Model" },
-  "dialogModelTooltip": { "message": "Model invoeren of selecteren" },
-  "dialogPinTooltip": { "message": "Venster vastmaken" },
-  "dialogMinimizeTooltip": { "message": "Minimaliseren" },
-  "dialogExpandTooltip": { "message": "Uitvouwen" },
-  "dialogSelectedText": { "message": "Geselecteerde tekst" },
-  "dialogSelectedImages": { "message": "Geselecteerde afbeeldingen" },
-  "dialogInputPlaceholder": { "message": "Typ uw vraag..." },
-  "dialogSendBtn": { "message": "Verzenden" },
-  "dialogCameraTooltip": { "message": "Schermafbeelding maken" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "Stel eerst uw API-sleutel in" },
-  "settingsWarningSubMessage": { "message": "Klik op het extensiepictogram in de werkbalk om instellingen te openen" },
-  "cropHint": { "message": "Sleep om gebied te selecteren, druk op Esc om te annuleren" },
-  "errorRequestFailed": { "message": "Aanvraag mislukt: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API-fout $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[Schermafbeelding]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI-afbeeldingsassistent" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "Selecteer tekst op elke pagina om te chatten met AI. Ondersteunt meerdere providers (BYOK)."
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant Instellingen"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API-basis-URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "Effectieve URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API-sleutel"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Voer uw API-sleutel in"
+  },
+  "apiKeyToggleAria": {
+    "message": "API-sleutel tonen of verbergen"
+  },
+  "modelLabel": {
+    "message": "Model"
+  },
+  "modelPlaceholder": {
+    "message": "Modelnaam invoeren of selecteren"
+  },
+  "modelFetchBtn": {
+    "message": "Ophalen"
+  },
+  "modelHint": {
+    "message": "Basis-URL en API-sleutel invoeren, klik vervolgens op Ophalen"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "Modellenlijst ophalen..."
+  },
+  "modelNoModels": {
+    "message": "Geen modellen gevonden"
+  },
+  "modelFound": {
+    "message": "$1 modellen gevonden, typ om te filteren",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "Modellenlijst bijgewerkt"
+  },
+  "modelFetchFailed": {
+    "message": "Ophalen mislukt: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "Ophalen mislukt, controleer URL en sleutel"
+  },
+  "quickPromptsLabel": {
+    "message": "Snelle prompts"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "Voer een snelle prompt in..."
+  },
+  "quickPromptsHint": {
+    "message": "Klik op een snelle prompt in het dialoogvenster om in te vullen"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "Klik om te bewerken"
+  },
+  "defaultPinLabel": {
+    "message": "Dialoogvenster standaard vastmaken"
+  },
+  "defaultPinHint": {
+    "message": "Indien ingeschakeld, worden nieuwe dialoogvensters automatisch vastgemaakt en sluiten niet bij klikken buiten"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "Voer eerst basis-URL en API-sleutel in"
+  },
+  "statusAutoSaved": {
+    "message": "Automatisch opgeslagen"
+  },
+  "footerHint": {
+    "message": "Selecteer tekst op een pagina om te gebruiken"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "Model"
+  },
+  "dialogModelTooltip": {
+    "message": "Model invoeren of selecteren"
+  },
+  "dialogPinTooltip": {
+    "message": "Venster vastmaken"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "Minimaliseren"
+  },
+  "dialogExpandTooltip": {
+    "message": "Uitvouwen"
+  },
+  "dialogSelectedText": {
+    "message": "Geselecteerde tekst"
+  },
+  "dialogSelectedImages": {
+    "message": "Geselecteerde afbeeldingen"
+  },
+  "dialogInputPlaceholder": {
+    "message": "Typ uw vraag..."
+  },
+  "dialogSendBtn": {
+    "message": "Verzenden"
+  },
+  "dialogCameraTooltip": {
+    "message": "Schermafbeelding maken"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "Stel eerst uw API-sleutel in"
+  },
+  "settingsWarningSubMessage": {
+    "message": "Klik op het extensiepictogram in de werkbalk om instellingen te openen"
+  },
+  "cropHint": {
+    "message": "Sleep om gebied te selecteren, druk op Esc om te annuleren"
+  },
+  "errorRequestFailed": {
+    "message": "Aanvraag mislukt: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API-fout $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[Schermafbeelding]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI-afbeeldingsassistent"
+  },
+  "dialogClearTooltip": {
+    "message": "Selectie wissen"
+  }
 }

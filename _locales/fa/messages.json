@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "متن را در هر صفحه انتخاب کنید تا با هوش مصنوعی گفتگو کنید. از چندین ارائه‌دهنده پشتیبانی می‌کند (BYOK)." },
-  "popupTitle": { "message": "تنظیمات AI Selection Assistant" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "آدرس پایه API" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "آدرس مؤثر: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "کلید API" },
-  "apiKeyPlaceholder": { "message": "کلید API خود را وارد کنید" },
-  "apiKeyToggleAria": { "message": "نمایش یا پنهان کردن کلید API" },
-  "modelLabel": { "message": "مدل" },
-  "modelPlaceholder": { "message": "نام مدل را وارد یا انتخاب کنید" },
-  "modelFetchBtn": { "message": "دریافت" },
-  "modelHint": { "message": "آدرس پایه و کلید API را وارد کنید، سپس روی دریافت کلیک کنید" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "در حال دریافت لیست مدل‌ها..." },
-  "modelNoModels": { "message": "مدلی یافت نشد" },
-  "modelFound": { "message": "$1 مدل یافت شد، تایپ کنید برای فیلتر کردن", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "لیست مدل‌ها به‌روزرسانی شد" },
-  "modelFetchFailed": { "message": "دریافت ناموفق: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "دریافت ناموفق بود، لطفاً آدرس و کلید را بررسی کنید" },
-  "quickPromptsLabel": { "message": "پرامپت‌های سریع" },
-  "quickPromptsPlaceholder": { "message": "یک پرامپت سریع وارد کنید..." },
-  "quickPromptsHint": { "message": "برای پر کردن، روی یک پرامپت سریع در گفتگو کلیک کنید" },
-  "quickPromptsEditTooltip": { "message": "برای ویرایش کلیک کنید" },
-  "defaultPinLabel": { "message": "سنجاق گفتگو به‌طور پیش‌فرض" },
-  "defaultPinHint": { "message": "هنگامی که فعال است، گفتگوهای جدید به‌طور خودکار سنجاق می‌شوند و با کلیک خارج بسته نمی‌شوند" },
-  "statusNeedUrlAndKey": { "message": "لطفاً ابتدا آدرس پایه و کلید API را وارد کنید" },
-  "statusAutoSaved": { "message": "به‌طور خودکار ذخیره شد" },
-  "footerHint": { "message": "برای استفاده، متنی را در هر صفحه انتخاب کنید" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "مدل" },
-  "dialogModelTooltip": { "message": "مدل را وارد یا انتخاب کنید" },
-  "dialogPinTooltip": { "message": "سنجاق پنجره" },
-  "dialogMinimizeTooltip": { "message": "کوچک‌سازی" },
-  "dialogExpandTooltip": { "message": "بزرگ‌نمایی" },
-  "dialogSelectedText": { "message": "متن انتخاب‌شده" },
-  "dialogSelectedImages": { "message": "تصاویر انتخاب‌شده" },
-  "dialogInputPlaceholder": { "message": "سوال خود را تایپ کنید..." },
-  "dialogSendBtn": { "message": "ارسال" },
-  "dialogCameraTooltip": { "message": "گرفتن اسکرین‌شات" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "لطفاً ابتدا کلید API خود را تنظیم کنید" },
-  "settingsWarningSubMessage": { "message": "برای باز کردن تنظیمات، روی نماد افزونه در نوار ابزار کلیک کنید" },
-  "cropHint": { "message": "برای انتخاب ناحیه بکشید، برای لغو Esc را فشار دهید" },
-  "errorRequestFailed": { "message": "درخواست ناموفق: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "خطای API $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[اسکرین‌شات]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "دستیار تصاویر هوش مصنوعی" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "متن را در هر صفحه انتخاب کنید تا با هوش مصنوعی گفتگو کنید. از چندین ارائه‌دهنده پشتیبانی می‌کند (BYOK)."
+  },
+  "popupTitle": {
+    "message": "تنظیمات AI Selection Assistant"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "آدرس پایه API"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "آدرس مؤثر: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "کلید API"
+  },
+  "apiKeyPlaceholder": {
+    "message": "کلید API خود را وارد کنید"
+  },
+  "apiKeyToggleAria": {
+    "message": "نمایش یا پنهان کردن کلید API"
+  },
+  "modelLabel": {
+    "message": "مدل"
+  },
+  "modelPlaceholder": {
+    "message": "نام مدل را وارد یا انتخاب کنید"
+  },
+  "modelFetchBtn": {
+    "message": "دریافت"
+  },
+  "modelHint": {
+    "message": "آدرس پایه و کلید API را وارد کنید، سپس روی دریافت کلیک کنید"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "در حال دریافت لیست مدل‌ها..."
+  },
+  "modelNoModels": {
+    "message": "مدلی یافت نشد"
+  },
+  "modelFound": {
+    "message": "$1 مدل یافت شد، تایپ کنید برای فیلتر کردن",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "لیست مدل‌ها به‌روزرسانی شد"
+  },
+  "modelFetchFailed": {
+    "message": "دریافت ناموفق: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "دریافت ناموفق بود، لطفاً آدرس و کلید را بررسی کنید"
+  },
+  "quickPromptsLabel": {
+    "message": "پرامپت‌های سریع"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "یک پرامپت سریع وارد کنید..."
+  },
+  "quickPromptsHint": {
+    "message": "برای پر کردن، روی یک پرامپت سریع در گفتگو کلیک کنید"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "برای ویرایش کلیک کنید"
+  },
+  "defaultPinLabel": {
+    "message": "سنجاق گفتگو به‌طور پیش‌فرض"
+  },
+  "defaultPinHint": {
+    "message": "هنگامی که فعال است، گفتگوهای جدید به‌طور خودکار سنجاق می‌شوند و با کلیک خارج بسته نمی‌شوند"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "لطفاً ابتدا آدرس پایه و کلید API را وارد کنید"
+  },
+  "statusAutoSaved": {
+    "message": "به‌طور خودکار ذخیره شد"
+  },
+  "footerHint": {
+    "message": "برای استفاده، متنی را در هر صفحه انتخاب کنید"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "مدل"
+  },
+  "dialogModelTooltip": {
+    "message": "مدل را وارد یا انتخاب کنید"
+  },
+  "dialogPinTooltip": {
+    "message": "سنجاق پنجره"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "کوچک‌سازی"
+  },
+  "dialogExpandTooltip": {
+    "message": "بزرگ‌نمایی"
+  },
+  "dialogSelectedText": {
+    "message": "متن انتخاب‌شده"
+  },
+  "dialogSelectedImages": {
+    "message": "تصاویر انتخاب‌شده"
+  },
+  "dialogInputPlaceholder": {
+    "message": "سوال خود را تایپ کنید..."
+  },
+  "dialogSendBtn": {
+    "message": "ارسال"
+  },
+  "dialogCameraTooltip": {
+    "message": "گرفتن اسکرین‌شات"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "لطفاً ابتدا کلید API خود را تنظیم کنید"
+  },
+  "settingsWarningSubMessage": {
+    "message": "برای باز کردن تنظیمات، روی نماد افزونه در نوار ابزار کلیک کنید"
+  },
+  "cropHint": {
+    "message": "برای انتخاب ناحیه بکشید، برای لغو Esc را فشار دهید"
+  },
+  "errorRequestFailed": {
+    "message": "درخواست ناموفق: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "خطای API $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[اسکرین‌شات]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "دستیار تصاویر هوش مصنوعی"
+  },
+  "dialogClearTooltip": {
+    "message": "پاک کردن انتخاب"
+  }
 }

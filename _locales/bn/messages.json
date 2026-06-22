@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "যেকোনো পৃষ্ঠায় টেক্সট নির্বাচন করে AI-এর সাথে চ্যাট করুন। একাধিক প্রোভাইডার সমর্থন করে (BYOK)।" },
-  "popupTitle": { "message": "AI Selection Assistant সেটিংস" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API বেস URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "কার্যকর URL: $1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API কী" },
-  "apiKeyPlaceholder": { "message": "আপনার API কী লিখুন" },
-  "apiKeyToggleAria": { "message": "API কী দেখান বা লুকান" },
-  "modelLabel": { "message": "মডেল" },
-  "modelPlaceholder": { "message": "মডেলের নাম লিখুন বা নির্বাচন করুন" },
-  "modelFetchBtn": { "message": "আনুন" },
-  "modelHint": { "message": "বেস URL এবং API কী লিখুন, তারপর আনুন-এ ক্লিক করুন" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "মডেল তালিকা আনা হচ্ছে..." },
-  "modelNoModels": { "message": "কোনো মডেল পাওয়া যায়নি" },
-  "modelFound": { "message": "$1টি মডেল পাওয়া গেছে, ফিল্টার করতে টাইপ করুন", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "মডেল তালিকা আপডেট হয়েছে" },
-  "modelFetchFailed": { "message": "আনা ব্যর্থ: $1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "আনা ব্যর্থ, অনুগ্রহ করে URL এবং কী পরীক্ষা করুন" },
-  "quickPromptsLabel": { "message": "কুইক প্রম্পট" },
-  "quickPromptsPlaceholder": { "message": "একটি কুইক প্রম্পট লিখুন..." },
-  "quickPromptsHint": { "message": "পূরণ করতে ডায়লগে কুইক প্রম্পটে ক্লিক করুন" },
-  "quickPromptsEditTooltip": { "message": "সম্পাদনা করতে ক্লিক করুন" },
-  "defaultPinLabel": { "message": "ডিফল্টভাবে ডায়লগ পিন করুন" },
-  "defaultPinHint": { "message": "সক্ষম থাকলে, নতুন ডায়লগ স্বয়ংক্রিয়ভাবে পিন হবে এবং বাইরে ক্লিক করলে বন্ধ হবে না" },
-  "statusNeedUrlAndKey": { "message": "অনুগ্রহ করে প্রথমে বেস URL এবং API কী লিখুন" },
-  "statusAutoSaved": { "message": "স্বয়ংক্রিয়ভাবে সংরক্ষিত" },
-  "footerHint": { "message": "ব্যবহার করতে যেকোনো পৃষ্ঠায় টেক্সট নির্বাচন করুন" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "মডেল" },
-  "dialogModelTooltip": { "message": "মডেল লিখুন বা নির্বাচন করুন" },
-  "dialogPinTooltip": { "message": "উইন্ডো পিন করুন" },
-  "dialogMinimizeTooltip": { "message": "ছোট করুন" },
-  "dialogExpandTooltip": { "message": "বড় করুন" },
-  "dialogSelectedText": { "message": "নির্বাচিত টেক্সট" },
-  "dialogSelectedImages": { "message": "নির্বাচিত ছবি" },
-  "dialogInputPlaceholder": { "message": "আপনার প্রশ্ন লিখুন..." },
-  "dialogSendBtn": { "message": "পাঠান" },
-  "dialogCameraTooltip": { "message": "স্ক্রিনশট ক্যাপচার করুন" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "অনুগ্রহ করে প্রথমে আপনার API কী সেট করুন" },
-  "settingsWarningSubMessage": { "message": "সেটিংস খুলতে টুলবারে এক্সটেনশন আইকনে ক্লিক করুন" },
-  "cropHint": { "message": "এলাকা নির্বাচন করতে টানুন, বাতিল করতে Esc চাপুন" },
-  "errorRequestFailed": { "message": "অনুরোধ ব্যর্থ: $1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API ত্রুটি $1: $2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[স্ক্রিনশট]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI ছবি সহকারী" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "যেকোনো পৃষ্ঠায় টেক্সট নির্বাচন করে AI-এর সাথে চ্যাট করুন। একাধিক প্রোভাইডার সমর্থন করে (BYOK)।"
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant সেটিংস"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API বেস URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "কার্যকর URL: $1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API কী"
+  },
+  "apiKeyPlaceholder": {
+    "message": "আপনার API কী লিখুন"
+  },
+  "apiKeyToggleAria": {
+    "message": "API কী দেখান বা লুকান"
+  },
+  "modelLabel": {
+    "message": "মডেল"
+  },
+  "modelPlaceholder": {
+    "message": "মডেলের নাম লিখুন বা নির্বাচন করুন"
+  },
+  "modelFetchBtn": {
+    "message": "আনুন"
+  },
+  "modelHint": {
+    "message": "বেস URL এবং API কী লিখুন, তারপর আনুন-এ ক্লিক করুন"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "মডেল তালিকা আনা হচ্ছে..."
+  },
+  "modelNoModels": {
+    "message": "কোনো মডেল পাওয়া যায়নি"
+  },
+  "modelFound": {
+    "message": "$1টি মডেল পাওয়া গেছে, ফিল্টার করতে টাইপ করুন",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "মডেল তালিকা আপডেট হয়েছে"
+  },
+  "modelFetchFailed": {
+    "message": "আনা ব্যর্থ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "আনা ব্যর্থ, অনুগ্রহ করে URL এবং কী পরীক্ষা করুন"
+  },
+  "quickPromptsLabel": {
+    "message": "কুইক প্রম্পট"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "একটি কুইক প্রম্পট লিখুন..."
+  },
+  "quickPromptsHint": {
+    "message": "পূরণ করতে ডায়লগে কুইক প্রম্পটে ক্লিক করুন"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "সম্পাদনা করতে ক্লিক করুন"
+  },
+  "defaultPinLabel": {
+    "message": "ডিফল্টভাবে ডায়লগ পিন করুন"
+  },
+  "defaultPinHint": {
+    "message": "সক্ষম থাকলে, নতুন ডায়লগ স্বয়ংক্রিয়ভাবে পিন হবে এবং বাইরে ক্লিক করলে বন্ধ হবে না"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "অনুগ্রহ করে প্রথমে বেস URL এবং API কী লিখুন"
+  },
+  "statusAutoSaved": {
+    "message": "স্বয়ংক্রিয়ভাবে সংরক্ষিত"
+  },
+  "footerHint": {
+    "message": "ব্যবহার করতে যেকোনো পৃষ্ঠায় টেক্সট নির্বাচন করুন"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "মডেল"
+  },
+  "dialogModelTooltip": {
+    "message": "মডেল লিখুন বা নির্বাচন করুন"
+  },
+  "dialogPinTooltip": {
+    "message": "উইন্ডো পিন করুন"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "ছোট করুন"
+  },
+  "dialogExpandTooltip": {
+    "message": "বড় করুন"
+  },
+  "dialogSelectedText": {
+    "message": "নির্বাচিত টেক্সট"
+  },
+  "dialogSelectedImages": {
+    "message": "নির্বাচিত ছবি"
+  },
+  "dialogInputPlaceholder": {
+    "message": "আপনার প্রশ্ন লিখুন..."
+  },
+  "dialogSendBtn": {
+    "message": "পাঠান"
+  },
+  "dialogCameraTooltip": {
+    "message": "স্ক্রিনশট ক্যাপচার করুন"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "অনুগ্রহ করে প্রথমে আপনার API কী সেট করুন"
+  },
+  "settingsWarningSubMessage": {
+    "message": "সেটিংস খুলতে টুলবারে এক্সটেনশন আইকনে ক্লিক করুন"
+  },
+  "cropHint": {
+    "message": "এলাকা নির্বাচন করতে টানুন, বাতিল করতে Esc চাপুন"
+  },
+  "errorRequestFailed": {
+    "message": "অনুরোধ ব্যর্থ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API ত্রুটি $1: $2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[স্ক্রিনশট]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI ছবি সহকারী"
+  },
+  "dialogClearTooltip": {
+    "message": "নির্বাচন মুছুন"
+  }
 }

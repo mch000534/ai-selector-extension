@@ -1,53 +1,186 @@
 {
-  "extName": { "message": "AI Selection Assistant" },
-  "extDescription": { "message": "在任意頁面選取文字即可與 AI 對話。支援多個供應商（自備金鑰）。" },
-  "popupTitle": { "message": "AI Selection Assistant 設定" },
-  "popupHeading": { "message": "AI Selection Assistant" },
-  "baseUrlLabel": { "message": "API Base URL" },
-  "baseUrlPlaceholder": { "message": "https://api.example.com/v1" },
-  "baseUrlValidHint": { "message": "有效網址：$1", "placeholders": { "url": { "content": "$1" } } },
-  "apiKeyLabel": { "message": "API 金鑰" },
-  "apiKeyPlaceholder": { "message": "輸入您的 API 金鑰" },
-  "apiKeyToggleAria": { "message": "顯示或隱藏 API 金鑰" },
-  "modelLabel": { "message": "模型" },
-  "modelPlaceholder": { "message": "輸入或選擇模型名稱" },
-  "modelFetchBtn": { "message": "取得" },
-  "modelHint": { "message": "輸入 Base URL 與 API 金鑰，然後點擊取得" },
-  "modelFetching": { "message": "..." },
-  "modelFetchingHint": { "message": "正在取得模型清單..." },
-  "modelNoModels": { "message": "找不到模型" },
-  "modelFound": { "message": "找到 $1 個模型，輸入以篩選", "placeholders": { "count": { "content": "$1" } } },
-  "modelUpdated": { "message": "模型清單已更新" },
-  "modelFetchFailed": { "message": "取得失敗：$1", "placeholders": { "error": { "content": "$1" } } },
-  "modelFetchFailedHint": { "message": "取得失敗，請檢查網址與金鑰" },
-  "quickPromptsLabel": { "message": "快捷提示" },
-  "quickPromptsPlaceholder": { "message": "輸入快捷提示..." },
-  "quickPromptsHint": { "message": "在對話框中點擊快捷提示即可填入" },
-  "quickPromptsEditTooltip": { "message": "點擊以編輯" },
-  "defaultPinLabel": { "message": "預設釘選對話框" },
-  "defaultPinHint": { "message": "啟用後，新對話框會自動釘選，點擊外部時不會關閉" },
-  "statusNeedUrlAndKey": { "message": "請先輸入 Base URL 與 API 金鑰" },
-  "statusAutoSaved": { "message": "已自動儲存" },
-  "footerHint": { "message": "在任意頁面選取文字即可使用" },
-  "githubLink": { "message": "GitHub" },
-  "dialogTitle": { "message": "AI Selection Assistant" },
-  "dialogModelPlaceholder": { "message": "模型" },
-  "dialogModelTooltip": { "message": "輸入或選擇模型" },
-  "dialogPinTooltip": { "message": "釘選視窗" },
-  "dialogMinimizeTooltip": { "message": "最小化" },
-  "dialogExpandTooltip": { "message": "展開" },
-  "dialogSelectedText": { "message": "已選取文字" },
-  "dialogSelectedImages": { "message": "已選取圖片" },
-  "dialogInputPlaceholder": { "message": "輸入您的問題..." },
-  "dialogSendBtn": { "message": "傳送" },
-  "dialogCameraTooltip": { "message": "擷取螢幕截圖" },
-  "settingsWarningTitle": { "message": "AI Selection Assistant" },
-  "settingsWarningMessage": { "message": "請先設定您的 API 金鑰" },
-  "settingsWarningSubMessage": { "message": "點擊工具列中的擴充功能圖示以開啟設定" },
-  "cropHint": { "message": "拖曳以選取區域，按 Esc 取消" },
-  "errorRequestFailed": { "message": "請求失敗：$1", "placeholders": { "error": { "content": "$1" } } },
-  "errorApiError": { "message": "API 錯誤 $1：$2", "placeholders": { "status": { "content": "$1" }, "detail": { "content": "$2" } } },
-  "screenshotLabel": { "message": "[螢幕截圖]" },
-  "contextMenuTitle": { "message": "AI Selection Assistant" },
-  "contextMenuImageTitle": { "message": "AI 圖片助手" }
+  "extName": {
+    "message": "AI Selection Assistant"
+  },
+  "extDescription": {
+    "message": "在任意頁面選取文字即可與 AI 對話。支援多個供應商（自備金鑰）。"
+  },
+  "popupTitle": {
+    "message": "AI Selection Assistant 設定"
+  },
+  "popupHeading": {
+    "message": "AI Selection Assistant"
+  },
+  "baseUrlLabel": {
+    "message": "API Base URL"
+  },
+  "baseUrlPlaceholder": {
+    "message": "https://api.example.com/v1"
+  },
+  "baseUrlValidHint": {
+    "message": "有效網址：$1",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "apiKeyLabel": {
+    "message": "API 金鑰"
+  },
+  "apiKeyPlaceholder": {
+    "message": "輸入您的 API 金鑰"
+  },
+  "apiKeyToggleAria": {
+    "message": "顯示或隱藏 API 金鑰"
+  },
+  "modelLabel": {
+    "message": "模型"
+  },
+  "modelPlaceholder": {
+    "message": "輸入或選擇模型名稱"
+  },
+  "modelFetchBtn": {
+    "message": "取得"
+  },
+  "modelHint": {
+    "message": "輸入 Base URL 與 API 金鑰，然後點擊取得"
+  },
+  "modelFetching": {
+    "message": "..."
+  },
+  "modelFetchingHint": {
+    "message": "正在取得模型清單..."
+  },
+  "modelNoModels": {
+    "message": "找不到模型"
+  },
+  "modelFound": {
+    "message": "找到 $1 個模型，輸入以篩選",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelUpdated": {
+    "message": "模型清單已更新"
+  },
+  "modelFetchFailed": {
+    "message": "取得失敗：$1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "modelFetchFailedHint": {
+    "message": "取得失敗，請檢查網址與金鑰"
+  },
+  "quickPromptsLabel": {
+    "message": "快捷提示"
+  },
+  "quickPromptsPlaceholder": {
+    "message": "輸入快捷提示..."
+  },
+  "quickPromptsHint": {
+    "message": "在對話框中點擊快捷提示即可填入"
+  },
+  "quickPromptsEditTooltip": {
+    "message": "點擊以編輯"
+  },
+  "defaultPinLabel": {
+    "message": "預設釘選對話框"
+  },
+  "defaultPinHint": {
+    "message": "啟用後，新對話框會自動釘選，點擊外部時不會關閉"
+  },
+  "statusNeedUrlAndKey": {
+    "message": "請先輸入 Base URL 與 API 金鑰"
+  },
+  "statusAutoSaved": {
+    "message": "已自動儲存"
+  },
+  "footerHint": {
+    "message": "在任意頁面選取文字即可使用"
+  },
+  "githubLink": {
+    "message": "GitHub"
+  },
+  "dialogTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "dialogModelPlaceholder": {
+    "message": "模型"
+  },
+  "dialogModelTooltip": {
+    "message": "輸入或選擇模型"
+  },
+  "dialogPinTooltip": {
+    "message": "釘選視窗"
+  },
+  "dialogMinimizeTooltip": {
+    "message": "最小化"
+  },
+  "dialogExpandTooltip": {
+    "message": "展開"
+  },
+  "dialogSelectedText": {
+    "message": "已選取文字"
+  },
+  "dialogSelectedImages": {
+    "message": "已選取圖片"
+  },
+  "dialogInputPlaceholder": {
+    "message": "輸入您的問題..."
+  },
+  "dialogSendBtn": {
+    "message": "傳送"
+  },
+  "dialogCameraTooltip": {
+    "message": "擷取螢幕截圖"
+  },
+  "settingsWarningTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "settingsWarningMessage": {
+    "message": "請先設定您的 API 金鑰"
+  },
+  "settingsWarningSubMessage": {
+    "message": "點擊工具列中的擴充功能圖示以開啟設定"
+  },
+  "cropHint": {
+    "message": "拖曳以選取區域，按 Esc 取消"
+  },
+  "errorRequestFailed": {
+    "message": "請求失敗：$1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorApiError": {
+    "message": "API 錯誤 $1：$2",
+    "placeholders": {
+      "status": {
+        "content": "$1"
+      },
+      "detail": {
+        "content": "$2"
+      }
+    }
+  },
+  "screenshotLabel": {
+    "message": "[螢幕截圖]"
+  },
+  "contextMenuTitle": {
+    "message": "AI Selection Assistant"
+  },
+  "contextMenuImageTitle": {
+    "message": "AI 圖片助手"
+  },
+  "dialogClearTooltip": {
+    "message": "清除選取"
+  }
 }
