@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "키 받기"
+  },
+  "pasteTooManyImages": {
+    "message": "이미지가 너무 많습니다 (최대 4개)"
+  },
+  "retrying": {
+    "message": "연결 실패, 재시도 중 ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "재시도 취소됨"
+  },
+  "fallbackTextOnly": {
+    "message": "모델이 이미지를 지원하지 않아 텍스트 전용 모드로 전환합니다"
+  },
+  "dialogRestoredHint": {
+    "message": "이전 세션에서 복원됨"
+  },
+  "recentClosedBtn": {
+    "message": "최근 닫은 항목"
+  },
+  "recentClosedEmpty": {
+    "message": "닫힌 대화 없음"
+  },
+  "recentClosedTitle": {
+    "message": "최근 닫은 대화"
+  },
+  "recentClosedRestore": {
+    "message": "복원"
+  },
+  "recentClosedAllClear": {
+    "message": "모두 지우기"
+  },
+  "codeCopyBtn": {
+    "message": "복사"
+  },
+  "codeCopied": {
+    "message": "복사됨"
   }
 }

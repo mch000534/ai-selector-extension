@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Iegūt atslēgu"
+  },
+  "pasteTooManyImages": {
+    "message": "Pārāk daudz attēlu (maks. 4)"
+  },
+  "retrying": {
+    "message": "Savienojums neizdevās, mēģinu vēlreiz ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Atkārtota mēģinājuma atcelta"
+  },
+  "fallbackTextOnly": {
+    "message": "Modelis neatbalsta attēlus, pārslēdzas uz tikai teksta režīmu"
+  },
+  "dialogRestoredHint": {
+    "message": "Atjaunots no iepriekšējās sesijas"
+  },
+  "recentClosedBtn": {
+    "message": "Nesen aizvērtie"
+  },
+  "recentClosedEmpty": {
+    "message": "Nav aizvērtu sarunu"
+  },
+  "recentClosedTitle": {
+    "message": "Nesen aizvērtās sarunas"
+  },
+  "recentClosedRestore": {
+    "message": "Atjaunot"
+  },
+  "recentClosedAllClear": {
+    "message": "Notīrīt visu"
+  },
+  "codeCopyBtn": {
+    "message": "Kopēt"
+  },
+  "codeCopied": {
+    "message": "Nokopēts"
   }
 }

@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Obter chave"
+  },
+  "pasteTooManyImages": {
+    "message": "Demasiadas imagens (máx. 4)"
+  },
+  "retrying": {
+    "message": "Falha na ligação, a tentar novamente ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Tentativa cancelada"
+  },
+  "fallbackTextOnly": {
+    "message": "O modelo não suporta imagens, a mudar para modo só texto"
+  },
+  "dialogRestoredHint": {
+    "message": "Restaurado da sessão anterior"
+  },
+  "recentClosedBtn": {
+    "message": "Fechados recentemente"
+  },
+  "recentClosedEmpty": {
+    "message": "Nenhuma conversa fechada"
+  },
+  "recentClosedTitle": {
+    "message": "Conversas fechadas recentemente"
+  },
+  "recentClosedRestore": {
+    "message": "Restaurar"
+  },
+  "recentClosedAllClear": {
+    "message": "Limpar tudo"
+  },
+  "codeCopyBtn": {
+    "message": "Copiar"
+  },
+  "codeCopied": {
+    "message": "Copiado"
   }
 }

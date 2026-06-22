@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Obține cheia"
+  },
+  "pasteTooManyImages": {
+    "message": "Prea multe imagini (max 4)"
+  },
+  "retrying": {
+    "message": "Conexiunea a eșuat, reîncerc ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Reîncercare anulată"
+  },
+  "fallbackTextOnly": {
+    "message": "Modelul nu acceptă imagini, se trece la modul doar text"
+  },
+  "dialogRestoredHint": {
+    "message": "Restaurat din sesiunea anterioară"
+  },
+  "recentClosedBtn": {
+    "message": "Închise recent"
+  },
+  "recentClosedEmpty": {
+    "message": "Nicio conversație închisă"
+  },
+  "recentClosedTitle": {
+    "message": "Conversații închise recent"
+  },
+  "recentClosedRestore": {
+    "message": "Restaurează"
+  },
+  "recentClosedAllClear": {
+    "message": "Șterge tot"
+  },
+  "codeCopyBtn": {
+    "message": "Copiază"
+  },
+  "codeCopied": {
+    "message": "Copiat"
   }
 }

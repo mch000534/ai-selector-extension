@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "की मिळवा"
+  },
+  "pasteTooManyImages": {
+    "message": "खूप जास्त प्रतिमा (कमाल 4)"
+  },
+  "retrying": {
+    "message": "कनेक्शन अयशस्वी, पुन्हा प्रयत्न करत आहे ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "पुन्हा प्रयत्न रद्द केला"
+  },
+  "fallbackTextOnly": {
+    "message": "मॉडेल प्रतिमांना समर्थन देत नाही, फक्त मजकूर मोडवर जात आहे"
+  },
+  "dialogRestoredHint": {
+    "message": "मागील सत्रातून पुनर्संचयित केले"
+  },
+  "recentClosedBtn": {
+    "message": "अलीकडे बंद केलेले"
+  },
+  "recentClosedEmpty": {
+    "message": "बंद केलेले संवाद नाहीत"
+  },
+  "recentClosedTitle": {
+    "message": "अलीकडे बंद केलेले संवाद"
+  },
+  "recentClosedRestore": {
+    "message": "पुनर्संचयित करा"
+  },
+  "recentClosedAllClear": {
+    "message": "सर्व साफ करा"
+  },
+  "codeCopyBtn": {
+    "message": "कॉपी करा"
+  },
+  "codeCopied": {
+    "message": "कॉपी केले"
   }
 }

@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Få nøkkel"
+  },
+  "pasteTooManyImages": {
+    "message": "For mange bilder (maks 4)"
+  },
+  "retrying": {
+    "message": "Tilkobling mislyktes, prøver igjen ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Forsøk avbrutt"
+  },
+  "fallbackTextOnly": {
+    "message": "Modellen støtter ikke bilder, bytter til kun tekst"
+  },
+  "dialogRestoredHint": {
+    "message": "Gjenopprettet fra forrige økt"
+  },
+  "recentClosedBtn": {
+    "message": "Nylig lukket"
+  },
+  "recentClosedEmpty": {
+    "message": "Ingen lukkede samtaler"
+  },
+  "recentClosedTitle": {
+    "message": "Nylig lukkede samtaler"
+  },
+  "recentClosedRestore": {
+    "message": "Gjenopprett"
+  },
+  "recentClosedAllClear": {
+    "message": "Fjern alt"
+  },
+  "codeCopyBtn": {
+    "message": "Kopier"
+  },
+  "codeCopied": {
+    "message": "Kopiert"
   }
 }

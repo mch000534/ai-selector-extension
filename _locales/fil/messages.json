@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Kunin ang key"
+  },
+  "pasteTooManyImages": {
+    "message": "Masyadong maraming larawan (max 4)"
+  },
+  "retrying": {
+    "message": "Nabigo ang koneksyon, sinusubukan muli ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Kinansela ang pag-ulit"
+  },
+  "fallbackTextOnly": {
+    "message": "Hindi sinusuportahan ng model ang mga larawan, lilipat sa text-only mode"
+  },
+  "dialogRestoredHint": {
+    "message": "Ibinalik mula sa nakaraang session"
+  },
+  "recentClosedBtn": {
+    "message": "Kamakailang isinara"
+  },
+  "recentClosedEmpty": {
+    "message": "Walang saradong usapan"
+  },
+  "recentClosedTitle": {
+    "message": "Mga kamakailang isinara na usapan"
+  },
+  "recentClosedRestore": {
+    "message": "Ibalik"
+  },
+  "recentClosedAllClear": {
+    "message": "Burahin lahat"
+  },
+  "codeCopyBtn": {
+    "message": "Kopyahin"
+  },
+  "codeCopied": {
+    "message": "Nakopya"
   }
 }

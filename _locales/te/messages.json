@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "కీ పొందండి"
+  },
+  "pasteTooManyImages": {
+    "message": "చాలా ఎక్కువ చిత్రాలు (గరిష్ఠం 4)"
+  },
+  "retrying": {
+    "message": "కనెక్షన్ విఫలమైంది, మళ్లీ ప్రయత్నిస్తోంది ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "మళ్లీ ప్రయత్నం రద్దు చేయబడింది"
+  },
+  "fallbackTextOnly": {
+    "message": "మోడల్ చిత్రాలకు మద్దతు ఇవ్వదు, టెక్స్ట్-మాత్రమే మోడ్‌కు మారుతోంది"
+  },
+  "dialogRestoredHint": {
+    "message": "మునుపటి సెషన్ నుండి పునరుద్ధరించబడింది"
+  },
+  "recentClosedBtn": {
+    "message": "ఇటీవల మూసివేయబడినవి"
+  },
+  "recentClosedEmpty": {
+    "message": "మూసివేసిన సంభాషణలు లేవు"
+  },
+  "recentClosedTitle": {
+    "message": "ఇటీవల మూసివేసిన సంభాషణలు"
+  },
+  "recentClosedRestore": {
+    "message": "పునరుద్ధరించు"
+  },
+  "recentClosedAllClear": {
+    "message": "అన్నీ తొలగించు"
+  },
+  "codeCopyBtn": {
+    "message": "కాపీ చేయి"
+  },
+  "codeCopied": {
+    "message": "కాపీ చేయబడింది"
   }
 }

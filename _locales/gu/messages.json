@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "કી મેળવો"
+  },
+  "pasteTooManyImages": {
+    "message": "ખૂબ વધારે છબીઓ (મહત્તમ 4)"
+  },
+  "retrying": {
+    "message": "કનેક્શન નિષ્ફળ, ફરી પ્રયાસ કરી રહ્યા છીએ ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "ફરી પ્રયાસ રદ કરવામાં આવ્યો"
+  },
+  "fallbackTextOnly": {
+    "message": "મોડેલ છબીઓને સમર્થન આપતું નથી, ફક્ત ટેક્સ્ટ મોડ પર જઈ રહ્યું છે"
+  },
+  "dialogRestoredHint": {
+    "message": "પાછલા સત્રમાંથી પુનઃસ્થાપિત"
+  },
+  "recentClosedBtn": {
+    "message": "તાજેતરમાં બંધ કરેલ"
+  },
+  "recentClosedEmpty": {
+    "message": "કોઈ બંધ વાર્તાલાપ નથી"
+  },
+  "recentClosedTitle": {
+    "message": "તાજેતરમાં બંધ કરેલા વાર્તાલાપ"
+  },
+  "recentClosedRestore": {
+    "message": "પુનઃસ્થાપિત કરો"
+  },
+  "recentClosedAllClear": {
+    "message": "બધું સાફ કરો"
+  },
+  "codeCopyBtn": {
+    "message": "કૉપિ કરો"
+  },
+  "codeCopied": {
+    "message": "કૉપિ થયું"
   }
 }

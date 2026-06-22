@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Sleutel ophalen"
+  },
+  "pasteTooManyImages": {
+    "message": "Te veel afbeeldingen (max. 4)"
+  },
+  "retrying": {
+    "message": "Verbinding mislukt, opnieuw proberen ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Opnieuw proberen geannuleerd"
+  },
+  "fallbackTextOnly": {
+    "message": "Model ondersteunt geen afbeeldingen, overschakelen naar alleen tekst"
+  },
+  "dialogRestoredHint": {
+    "message": "Hersteld uit vorige sessie"
+  },
+  "recentClosedBtn": {
+    "message": "Recent gesloten"
+  },
+  "recentClosedEmpty": {
+    "message": "Geen gesloten gesprekken"
+  },
+  "recentClosedTitle": {
+    "message": "Recent gesloten gesprekken"
+  },
+  "recentClosedRestore": {
+    "message": "Herstellen"
+  },
+  "recentClosedAllClear": {
+    "message": "Alles wissen"
+  },
+  "codeCopyBtn": {
+    "message": "Kopiëren"
+  },
+  "codeCopied": {
+    "message": "Gekopieerd"
   }
 }

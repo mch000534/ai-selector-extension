@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Pata ufunguo"
+  },
+  "pasteTooManyImages": {
+    "message": "Picha nyingi mno (upeo 4)"
+  },
+  "retrying": {
+    "message": "Muunganisho umeshindwa, inajaribu tena ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Jaribio la kurudia limeghairiwa"
+  },
+  "fallbackTextOnly": {
+    "message": "Modeli haisaidii picha, inabadilisha kwenda hali ya maandishi pekee"
+  },
+  "dialogRestoredHint": {
+    "message": "Imerudishwa kutoka kipindi kilichopita"
+  },
+  "recentClosedBtn": {
+    "message": "Zilizofungwa hivi karibuni"
+  },
+  "recentClosedEmpty": {
+    "message": "Hakuna mazungumzo yaliyofungwa"
+  },
+  "recentClosedTitle": {
+    "message": "Mazungumzo yaliyofungwa hivi karibuni"
+  },
+  "recentClosedRestore": {
+    "message": "Rudisha"
+  },
+  "recentClosedAllClear": {
+    "message": "Futa zote"
+  },
+  "codeCopyBtn": {
+    "message": "Nakili"
+  },
+  "codeCopied": {
+    "message": "Imenakiliwa"
   }
 }

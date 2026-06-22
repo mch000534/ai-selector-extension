@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Získat klíč"
+  },
+  "pasteTooManyImages": {
+    "message": "Příliš mnoho obrázků (max 4)"
+  },
+  "retrying": {
+    "message": "Připojení selhalo, zkouším znovu ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Opakování zrušeno"
+  },
+  "fallbackTextOnly": {
+    "message": "Model nepodporuje obrázky, přepínám na textový režim"
+  },
+  "dialogRestoredHint": {
+    "message": "Obnoveno z předchozí relace"
+  },
+  "recentClosedBtn": {
+    "message": "Nedávno zavřené"
+  },
+  "recentClosedEmpty": {
+    "message": "Žádné zavřené konverzace"
+  },
+  "recentClosedTitle": {
+    "message": "Nedávno zavřené konverzace"
+  },
+  "recentClosedRestore": {
+    "message": "Obnovit"
+  },
+  "recentClosedAllClear": {
+    "message": "Vymazat vše"
+  },
+  "codeCopyBtn": {
+    "message": "Kopírovat"
+  },
+  "codeCopied": {
+    "message": "Zkopírováno"
   }
 }

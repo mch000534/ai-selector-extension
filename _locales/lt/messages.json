@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Gauti raktą"
+  },
+  "pasteTooManyImages": {
+    "message": "Per daug vaizdų (maks. 4)"
+  },
+  "retrying": {
+    "message": "Nepavyko prisijungti, bandoma iš naujo ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Kartojimas atšauktas"
+  },
+  "fallbackTextOnly": {
+    "message": "Modelis nepalaiko vaizdų, pereinama į tik teksto režimą"
+  },
+  "dialogRestoredHint": {
+    "message": "Atkurta iš ankstesnės sesijos"
+  },
+  "recentClosedBtn": {
+    "message": "Neseniai uždaryti"
+  },
+  "recentClosedEmpty": {
+    "message": "Nėra uždarytų pokalbių"
+  },
+  "recentClosedTitle": {
+    "message": "Neseniai uždaryti pokalbiai"
+  },
+  "recentClosedRestore": {
+    "message": "Atkurti"
+  },
+  "recentClosedAllClear": {
+    "message": "Išvalyti viską"
+  },
+  "codeCopyBtn": {
+    "message": "Kopijuoti"
+  },
+  "codeCopied": {
+    "message": "Nukopijuota"
   }
 }

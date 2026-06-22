@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "ቁልፍ ያግኙ"
+  },
+  "pasteTooManyImages": {
+    "message": "በጣም ብዙ ምስሎች (ከፍተኛ 4)"
+  },
+  "retrying": {
+    "message": "ግንኙነት አልተሳካም፣ እየደገመ ነው ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "ድገሞሽ ተሰርዟል"
+  },
+  "fallbackTextOnly": {
+    "message": "ሞዴሉ ምስሎችን አይደግፍም፣ ወደ ጽሑፍ-ብቻ ሁነታ በመቀየር ላይ"
+  },
+  "dialogRestoredHint": {
+    "message": "ከቀድሞ ክፍለ-ጊዜ ተመልሷል"
+  },
+  "recentClosedBtn": {
+    "message": "በቅርብ ጊዜ የተዘጉ"
+  },
+  "recentClosedEmpty": {
+    "message": "የተዘጉ ውይይቶች የሉም"
+  },
+  "recentClosedTitle": {
+    "message": "በቅርብ ጊዜ የተዘጉ ውይይቶች"
+  },
+  "recentClosedRestore": {
+    "message": "ይመልሱ"
+  },
+  "recentClosedAllClear": {
+    "message": "ሁሉንም ያጽዱ"
+  },
+  "codeCopyBtn": {
+    "message": "ቅዳ"
+  },
+  "codeCopied": {
+    "message": "ተቀድቷል"
   }
 }

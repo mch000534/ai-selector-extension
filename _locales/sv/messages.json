@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Hämta nyckel"
+  },
+  "pasteTooManyImages": {
+    "message": "För många bilder (max 4)"
+  },
+  "retrying": {
+    "message": "Anslutningen misslyckades, försöker igen ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Försök avbrutet"
+  },
+  "fallbackTextOnly": {
+    "message": "Modellen stöder inte bilder, byter till textläge"
+  },
+  "dialogRestoredHint": {
+    "message": "Återställd från föregående session"
+  },
+  "recentClosedBtn": {
+    "message": "Nyligen stängda"
+  },
+  "recentClosedEmpty": {
+    "message": "Inga stängda konversationer"
+  },
+  "recentClosedTitle": {
+    "message": "Nyligen stängda konversationer"
+  },
+  "recentClosedRestore": {
+    "message": "Återställ"
+  },
+  "recentClosedAllClear": {
+    "message": "Rensa allt"
+  },
+  "codeCopyBtn": {
+    "message": "Kopiera"
+  },
+  "codeCopied": {
+    "message": "Kopierat"
   }
 }

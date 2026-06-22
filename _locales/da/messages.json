@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Hent nøgle"
+  },
+  "pasteTooManyImages": {
+    "message": "For mange billeder (maks. 4)"
+  },
+  "retrying": {
+    "message": "Forbindelsen mislykkedes, prøver igen ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Forsøg annulleret"
+  },
+  "fallbackTextOnly": {
+    "message": "Modellen understøtter ikke billeder, skifter til kun tekst"
+  },
+  "dialogRestoredHint": {
+    "message": "Gendannet fra forrige session"
+  },
+  "recentClosedBtn": {
+    "message": "Senest lukkede"
+  },
+  "recentClosedEmpty": {
+    "message": "Ingen lukkede samtaler"
+  },
+  "recentClosedTitle": {
+    "message": "Senest lukkede samtaler"
+  },
+  "recentClosedRestore": {
+    "message": "Gendan"
+  },
+  "recentClosedAllClear": {
+    "message": "Ryd alt"
+  },
+  "codeCopyBtn": {
+    "message": "Kopiér"
+  },
+  "codeCopied": {
+    "message": "Kopieret"
   }
 }

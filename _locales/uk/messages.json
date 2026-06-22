@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Отримати ключ"
+  },
+  "pasteTooManyImages": {
+    "message": "Забагато зображень (макс. 4)"
+  },
+  "retrying": {
+    "message": "Помилка з'єднання, повторна спроба ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Повторну спробу скасовано"
+  },
+  "fallbackTextOnly": {
+    "message": "Модель не підтримує зображення, переключення в текстовий режим"
+  },
+  "dialogRestoredHint": {
+    "message": "Відновлено з попереднього сеансу"
+  },
+  "recentClosedBtn": {
+    "message": "Нещодавно закриті"
+  },
+  "recentClosedEmpty": {
+    "message": "Немає закритих діалогів"
+  },
+  "recentClosedTitle": {
+    "message": "Нещодавно закриті діалоги"
+  },
+  "recentClosedRestore": {
+    "message": "Відновити"
+  },
+  "recentClosedAllClear": {
+    "message": "Очистити все"
+  },
+  "codeCopyBtn": {
+    "message": "Копіювати"
+  },
+  "codeCopied": {
+    "message": "Скопійовано"
   }
 }

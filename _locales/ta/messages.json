@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "விசையைப் பெறு"
+  },
+  "pasteTooManyImages": {
+    "message": "அதிகமான படங்கள் (அதிகபட்சம் 4)"
+  },
+  "retrying": {
+    "message": "இணைப்பு தோல்வி, மீண்டும் முயற்சிக்கிறது ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "மீண்டும் முயற்சி ரத்துசெய்யப்பட்டது"
+  },
+  "fallbackTextOnly": {
+    "message": "மாதிரி படங்களை ஆதரிக்கவில்லை, உரை-மட்டும் பயன்முறைக்கு மாறுகிறது"
+  },
+  "dialogRestoredHint": {
+    "message": "முந்தைய அமர்விலிருந்து மீட்டெடுக்கப்பட்டது"
+  },
+  "recentClosedBtn": {
+    "message": "சமீபத்தில் மூடப்பட்டவை"
+  },
+  "recentClosedEmpty": {
+    "message": "மூடப்பட்ட உரையாடல்கள் இல்லை"
+  },
+  "recentClosedTitle": {
+    "message": "சமீபத்தில் மூடப்பட்ட உரையாடல்கள்"
+  },
+  "recentClosedRestore": {
+    "message": "மீட்டமை"
+  },
+  "recentClosedAllClear": {
+    "message": "அனைத்தையும் அழி"
+  },
+  "codeCopyBtn": {
+    "message": "நகலெடு"
+  },
+  "codeCopied": {
+    "message": "நகலெடுக்கப்பட்டது"
   }
 }

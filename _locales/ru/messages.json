@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Получить ключ"
+  },
+  "pasteTooManyImages": {
+    "message": "Слишком много изображений (макс. 4)"
+  },
+  "retrying": {
+    "message": "Ошибка соединения, повторная попытка ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Повторная попытка отменена"
+  },
+  "fallbackTextOnly": {
+    "message": "Модель не поддерживает изображения, переключение в текстовый режим"
+  },
+  "dialogRestoredHint": {
+    "message": "Восстановлено из предыдущего сеанса"
+  },
+  "recentClosedBtn": {
+    "message": "Недавно закрытые"
+  },
+  "recentClosedEmpty": {
+    "message": "Нет закрытых диалогов"
+  },
+  "recentClosedTitle": {
+    "message": "Недавно закрытые диалоги"
+  },
+  "recentClosedRestore": {
+    "message": "Восстановить"
+  },
+  "recentClosedAllClear": {
+    "message": "Очистить всё"
+  },
+  "codeCopyBtn": {
+    "message": "Копировать"
+  },
+  "codeCopied": {
+    "message": "Скопировано"
   }
 }

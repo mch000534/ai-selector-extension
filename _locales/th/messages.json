@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "รับคีย์"
+  },
+  "pasteTooManyImages": {
+    "message": "รูปภาพมากเกินไป (สูงสุด 4 รูป)"
+  },
+  "retrying": {
+    "message": "การเชื่อมต่อล้มเหลว กำลังลองใหม่ ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "ยกเลิกการลองใหม่"
+  },
+  "fallbackTextOnly": {
+    "message": "โมเดลไม่รองรับรูปภาพ กำลังเปลี่ยนเป็นโหมดข้อความเท่านั้น"
+  },
+  "dialogRestoredHint": {
+    "message": "กู้คืนจากเซสชันก่อนหน้า"
+  },
+  "recentClosedBtn": {
+    "message": "ปิดเมื่อเร็ว ๆ นี้"
+  },
+  "recentClosedEmpty": {
+    "message": "ไม่มีการสนทนาที่ปิด"
+  },
+  "recentClosedTitle": {
+    "message": "การสนทนาที่ปิดเมื่อเร็ว ๆ นี้"
+  },
+  "recentClosedRestore": {
+    "message": "กู้คืน"
+  },
+  "recentClosedAllClear": {
+    "message": "ล้างทั้งหมด"
+  },
+  "codeCopyBtn": {
+    "message": "คัดลอก"
+  },
+  "codeCopied": {
+    "message": "คัดลอกแล้ว"
   }
 }

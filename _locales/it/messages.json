@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Ottieni chiave"
+  },
+  "pasteTooManyImages": {
+    "message": "Troppe immagini (max 4)"
+  },
+  "retrying": {
+    "message": "Connessione fallita, riprovo ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Riprova annullato"
+  },
+  "fallbackTextOnly": {
+    "message": "Il modello non supporta le immagini, passaggio alla modalità solo testo"
+  },
+  "dialogRestoredHint": {
+    "message": "Ripristinato dalla sessione precedente"
+  },
+  "recentClosedBtn": {
+    "message": "Chiusi di recente"
+  },
+  "recentClosedEmpty": {
+    "message": "Nessuna conversazione chiusa"
+  },
+  "recentClosedTitle": {
+    "message": "Conversazioni chiuse di recente"
+  },
+  "recentClosedRestore": {
+    "message": "Ripristina"
+  },
+  "recentClosedAllClear": {
+    "message": "Cancella tutto"
+  },
+  "codeCopyBtn": {
+    "message": "Copia"
+  },
+  "codeCopied": {
+    "message": "Copiato"
   }
 }

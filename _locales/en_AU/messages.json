@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Get key"
+  },
+  "pasteTooManyImages": {
+    "message": "Too many images (max 4)"
+  },
+  "retrying": {
+    "message": "Connection failed, retrying ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Retry cancelled"
+  },
+  "fallbackTextOnly": {
+    "message": "Model doesn't support images, switching to text-only mode"
+  },
+  "dialogRestoredHint": {
+    "message": "Restored from previous session"
+  },
+  "recentClosedBtn": {
+    "message": "Recently closed"
+  },
+  "recentClosedEmpty": {
+    "message": "No closed conversations"
+  },
+  "recentClosedTitle": {
+    "message": "Recently closed conversations"
+  },
+  "recentClosedRestore": {
+    "message": "Restore"
+  },
+  "recentClosedAllClear": {
+    "message": "Clear all"
+  },
+  "codeCopyBtn": {
+    "message": "Copy"
+  },
+  "codeCopied": {
+    "message": "Copied"
   }
 }

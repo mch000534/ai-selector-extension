@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Pridobi ključ"
+  },
+  "pasteTooManyImages": {
+    "message": "Preveč slik (največ 4)"
+  },
+  "retrying": {
+    "message": "Povezava ni uspela, ponovni poskus ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Ponovni poskus preklican"
+  },
+  "fallbackTextOnly": {
+    "message": "Model ne podpira slik, preklop na besedilni način"
+  },
+  "dialogRestoredHint": {
+    "message": "Obnovljeno iz prejšnje seje"
+  },
+  "recentClosedBtn": {
+    "message": "Nedavno zaprto"
+  },
+  "recentClosedEmpty": {
+    "message": "Ni zaprtih pogovorov"
+  },
+  "recentClosedTitle": {
+    "message": "Nedavno zaprti pogovori"
+  },
+  "recentClosedRestore": {
+    "message": "Obnovi"
+  },
+  "recentClosedAllClear": {
+    "message": "Počisti vse"
+  },
+  "codeCopyBtn": {
+    "message": "Kopiraj"
+  },
+  "codeCopied": {
+    "message": "Kopirano"
   }
 }

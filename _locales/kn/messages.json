@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "ಕೀ ಪಡೆಯಿರಿ"
+  },
+  "pasteTooManyImages": {
+    "message": "ಹೆಚ್ಚು ಚಿತ್ರಗಳು (ಗರಿಷ್ಠ 4)"
+  },
+  "retrying": {
+    "message": "ಸಂಪರ್ಕ ವಿಫಲ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲಾಗುತ್ತಿದೆ ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "ಮತ್ತೆ ಪ್ರಯತ್ನವನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ"
+  },
+  "fallbackTextOnly": {
+    "message": "ಮಾಡೆಲ್ ಚಿತ್ರಗಳನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ, ಪಠ್ಯ-ಮಾತ್ರ ಮೋಡ್‌ಗೆ ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ"
+  },
+  "dialogRestoredHint": {
+    "message": "ಹಿಂದಿನ ಸೆಶನ್‌ನಿಂದ ಪುನಃಸ್ಥಾಪಿಸಲಾಗಿದೆ"
+  },
+  "recentClosedBtn": {
+    "message": "ಇತ್ತೀಚೆಗೆ ಮುಚ್ಚಿದವು"
+  },
+  "recentClosedEmpty": {
+    "message": "ಮುಚ್ಚಿದ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ"
+  },
+  "recentClosedTitle": {
+    "message": "ಇತ್ತೀಚೆಗೆ ಮುಚ್ಚಿದ ಸಂಭಾಷಣೆಗಳು"
+  },
+  "recentClosedRestore": {
+    "message": "ಪುನಃಸ್ಥಾಪಿಸಿ"
+  },
+  "recentClosedAllClear": {
+    "message": "ಎಲ್ಲವನ್ನೂ ತೆರವುಗೊಳಿಸಿ"
+  },
+  "codeCopyBtn": {
+    "message": "ನಕಲಿಸಿ"
+  },
+  "codeCopied": {
+    "message": "ನಕಲಿಸಲಾಗಿದೆ"
   }
 }

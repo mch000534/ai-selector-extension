@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Obté la clau"
+  },
+  "pasteTooManyImages": {
+    "message": "Massa imatges (màx. 4)"
+  },
+  "retrying": {
+    "message": "Ha fallat la connexió, tornant a provar ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "S'ha cancel·lat el reintent"
+  },
+  "fallbackTextOnly": {
+    "message": "El model no admet imatges, canviant a mode només text"
+  },
+  "dialogRestoredHint": {
+    "message": "Restaurat de la sessió anterior"
+  },
+  "recentClosedBtn": {
+    "message": "Tancats recentment"
+  },
+  "recentClosedEmpty": {
+    "message": "Cap conversa tancada"
+  },
+  "recentClosedTitle": {
+    "message": "Converses tancades recentment"
+  },
+  "recentClosedRestore": {
+    "message": "Restaura"
+  },
+  "recentClosedAllClear": {
+    "message": "Esborra-ho tot"
+  },
+  "codeCopyBtn": {
+    "message": "Copia"
+  },
+  "codeCopied": {
+    "message": "Copiat"
   }
 }

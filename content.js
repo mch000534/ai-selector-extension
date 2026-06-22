@@ -56,6 +56,7 @@
         assistantBubble: '#1e1e3a', assistantBubbleText: '#e0e0e0',
         codeBg: '#0d0d1a', codeText: '#d4d4d4', inlineCodeBg: '#2a2a4a',
         errorText: '#ff6b6b', errorBg: '#3d1a1a',
+        successText: '#6bcf7f', successBg: '#1a3d1a',
         warningText: '#b0b0b0',
         dotColor: '#808080',
         pinActive: '#7c8ff0', pinActiveBg: 'rgba(124,143,240,0.15)',
@@ -73,6 +74,7 @@
       assistantBubble: '#f0f2f5', assistantBubbleText: '#333',
       codeBg: '#1e1e1e', codeText: '#d4d4d4', inlineCodeBg: '#e0e0e0',
       errorText: '#e74c3c', errorBg: '#fdeaea',
+      successText: '#1a8a3a', successBg: '#d4f4dd',
       warningText: '#666',
       dotColor: '#999',
       pinActive: '#667eea', pinActiveBg: '#eef0ff',
@@ -82,10 +84,37 @@
   }
 
   let _hoveredImage = null;
+  let _shadowHost = null;
+  let _shadowRoot = null;
+  function _ensureRoot() {
+    if (_shadowRoot) return _shadowRoot;
+    if (!document.body) return null;
+    _shadowHost = document.createElement('div');
+    _shadowHost.id = 'aiext-root';
+    _shadowHost.setAttribute('data-aiext', '1');
+    Object.assign(_shadowHost.style, {
+      all: 'initial',
+      position: 'static',
+      display: 'block',
+      width: '0',
+      height: '0',
+      pointerEvents: 'none',
+      zIndex: '0'
+    });
+    document.body.appendChild(_shadowHost);
+    _shadowRoot = _shadowHost.attachShadow({ mode: 'open' });
+    return _shadowRoot;
+  }
+  function _shadow() { return _shadowRoot || _ensureRoot(); }
+  function _shadowAppend(el) { const s = _shadow(); if (s) s.appendChild(el); else document.body.appendChild(el); }
+  function _shadowQuery(sel) { const s = _shadow(); return s ? s.querySelector(sel) : document.querySelector(sel); }
+  function _shadowQueryAll(sel) { const s = _shadow(); return s ? s.querySelectorAll(sel) : document.querySelectorAll(sel); }
+
   let _iconHoverTimer = null;
 
   function injectStyles() {
-    const old = document.querySelector('style[data-aiext-styles]');
+    const root = _shadow();
+    const old = root ? root.querySelector('style[data-aiext-styles]') : document.querySelector('style[data-aiext-styles]');
     if (old) old.remove();
     const c = getThemeColors();
     const style = document.createElement('style');
@@ -361,10 +390,22 @@
         background: ${c.assistantBubble} !important;
         color: ${c.assistantBubbleText} !important;
       }
+      .${PREFIX}msg-system {
+        text-align: center !important;
+      }
+      .${PREFIX}msg-system .${PREFIX}bubble {
+        display: inline-block !important;
+        background: transparent !important;
+        color: ${c.textMuted} !important;
+        font-size: 12px !important;
+        font-style: italic !important;
+        padding: 4px 8px !important;
+      }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
+        position: relative !important;
         background: ${c.codeBg} !important;
         color: ${c.codeText} !important;
-        padding: 8px !important;
+        padding: 24px 8px 8px 8px !important;
         border-radius: 4px !important;
         overflow-x: auto !important;
         font-size: 13px !important;
@@ -379,6 +420,40 @@
       .${PREFIX}msg-assistant .${PREFIX}bubble pre code {
         background: none !important;
         padding: 0 !important;
+      }
+      .${PREFIX}code-copy {
+        all: unset;
+        position: absolute !important;
+        top: 4px !important;
+        ${_isRtl ? 'left' : 'right'}: 4px !important;
+        width: 22px !important;
+        height: 22px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        color: ${c.textMuted} !important;
+        background: ${c.bgTertiary} !important;
+        border: 1px solid ${c.border} !important;
+        border-radius: 4px !important;
+        cursor: pointer !important;
+        user-select: none !important;
+        transition: background 0.15s, color 0.15s, border-color 0.15s !important;
+        z-index: 1 !important;
+      }
+      .${PREFIX}code-copy svg {
+        width: 13px !important;
+        height: 13px !important;
+        display: block !important;
+        pointer-events: none !important;
+      }
+      .${PREFIX}code-copy:hover {
+        background: ${c.bgHover} !important;
+        color: ${c.textPrimary} !important;
+      }
+      .${PREFIX}code-copy.${PREFIX}code-copy-ok {
+        color: ${c.successText} !important;
+        border-color: ${c.successText} !important;
       }
       .${PREFIX}input-row {
         all: unset;
@@ -656,7 +731,8 @@
         scrollbar-color: ${c.textMuted} transparent;
       }
     `;
-    document.head.appendChild(style);
+    if (root) root.appendChild(style);
+    else document.head.appendChild(style);
   }
 
   function showCropOverlay(dataUrl) {
@@ -677,7 +753,7 @@
 
       overlay.appendChild(selection);
       overlay.appendChild(hint);
-      document.body.appendChild(overlay);
+      _shadowAppend(overlay);
 
       let isDragging = false;
       let startX = 0, startY = 0;
@@ -841,6 +917,61 @@
     return html;
   }
 
+  function attachCodeCopyButtons(bubble) {
+    if (!bubble) return;
+    const COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    const CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    const pres = bubble.querySelectorAll('pre');
+    pres.forEach(pre => {
+      if (pre.querySelector(`.${PREFIX}code-copy`)) return;
+      const btn = document.createElement('button');
+      btn.className = `${PREFIX}code-copy`;
+      btn.setAttribute('data-aiext', '1');
+      btn.type = 'button';
+      btn.setAttribute('aria-label', t('codeCopyBtn') || 'Copy');
+      btn.title = t('codeCopyBtn') || 'Copy';
+      btn.innerHTML = COPY_ICON;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const code = pre.querySelector('code');
+        const text = (code ? code.textContent : pre.textContent) || '';
+        const resetIcon = () => {
+          btn.innerHTML = COPY_ICON;
+          btn.classList.remove(`${PREFIX}code-copy-ok`);
+          btn.setAttribute('aria-label', t('codeCopyBtn') || 'Copy');
+          btn.title = t('codeCopyBtn') || 'Copy';
+        };
+        const onSuccess = () => {
+          btn.innerHTML = CHECK_ICON;
+          btn.classList.add(`${PREFIX}code-copy-ok`);
+          btn.setAttribute('aria-label', t('codeCopied') || 'Copied');
+          btn.title = t('codeCopied') || 'Copied';
+          setTimeout(resetIcon, 1500);
+        };
+        const onFail = () => {
+          btn.textContent = '⚠';
+          setTimeout(resetIcon, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(onSuccess).catch(onFail);
+        } else {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            onSuccess();
+          } catch (err) { onFail(); }
+        }
+      });
+      pre.appendChild(btn);
+    });
+  }
+
   function getConfig() {
     return new Promise((resolve) => {
       try {
@@ -878,9 +1009,169 @@
     });
   }
 
+  // ─── Conversation Persistence ───
+  const STORAGE_KEY = 'aiext_dialogs_v1';
+  const TTL_MS = 7 * 24 * 3600 * 1000;
+  const MAX_PER_HOST = 10;
+  const MAX_TOTAL = 50;
+  const MAX_IMAGES_PER_DIALOG = 2;
+  const MAX_IMAGE_BYTES = 300 * 1024;
+  const _persistedIds = new Set();
+
+  function _storageAvailable() {
+    return contextValid() && chrome.storage && chrome.storage.local;
+  }
+
+  async function loadDialogRecords() {
+    if (!_storageAvailable()) return [];
+    return new Promise((resolve) => {
+      try {
+        chrome.storage.local.get([STORAGE_KEY], (r) => {
+          const data = r && r[STORAGE_KEY];
+          resolve(Array.isArray(data && data.dialogs) ? data.dialogs : []);
+        });
+      } catch (e) { resolve([]); }
+    });
+  }
+
+  async function saveDialogRecords(dialogs) {
+    if (!_storageAvailable()) return;
+    try {
+      await chrome.storage.local.set({ [STORAGE_KEY]: { dialogs } });
+    } catch (e) { /* quota exceeded etc. */ }
+  }
+
+  function pruneExpired(dialogs) {
+    const now = Date.now();
+    return dialogs.filter(d => d && d.lastActive && (now - d.lastActive) < TTL_MS);
+  }
+
+  function _trimImageList(images) {
+    if (!Array.isArray(images)) return [];
+    return images
+      .filter(img => typeof img === 'string' && img.startsWith('data:'))
+      .slice(0, MAX_IMAGES_PER_DIALOG)
+      .filter(img => img.length <= MAX_IMAGE_BYTES * 1.37);  // base64 overhead
+  }
+
+  function toRecord(state) {
+    if (!state) return null;
+    const dlg = state.dialog;
+    const rect = dlg ? dlg.getBoundingClientRect() : null;
+    const pos = dlg ? {
+      x: parseFloat(dlg.style.left) || (rect ? rect.left : 0),
+      y: parseFloat(dlg.style.top) || (rect ? rect.top : 0)
+    } : null;
+    const size = dlg ? {
+      width: parseFloat(dlg.style.width) || (rect ? rect.width : 0),
+      height: parseFloat(dlg.style.height) || (rect ? rect.height : 0)
+    } : null;
+    return {
+      id: state.persistId || (state.persistId = (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random())),
+      url: location.href,
+      hostname: location.hostname,
+      createdAt: state.persistedAt || (state.persistedAt = Date.now()),
+      lastActive: Date.now(),
+      conversationHistory: (state.conversationHistory || [])
+        .filter(m => m && (m.role === 'user' || m.role === 'assistant') && (typeof m.content === 'string' || Array.isArray(m.content)))
+        .map(m => Array.isArray(m.content)
+          ? { role: m.role, content: m.content.filter(p => p && p.type === 'text').map(p => ({ type: 'text', text: p.text })) }
+          : { role: m.role, content: m.content }),
+      context: {
+        text: (state.context && state.context.text) ? String(state.context.text).slice(0, 2000) : '',
+        images: _trimImageList(state.context && state.context.images)
+      },
+      model: (state.config && state.config.model) || '',
+      position: pos,
+      size: size
+    };
+  }
+
+  async function persistState(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    let records = pruneExpired(await loadDialogRecords());
+    const rec = toRecord(state);
+    if (!rec) return;
+    const idx = records.findIndex(r => r && r.id === rec.id);
+    if (idx >= 0) records[idx] = rec;
+    else records.push(rec);
+    // per-host cap
+    const perHost = records.filter(r => r.hostname === rec.hostname);
+    if (perHost.length > MAX_PER_HOST) {
+      perHost.sort((a, b) => a.lastActive - b.lastActive);
+      const toDrop = perHost.slice(0, perHost.length - MAX_PER_HOST);
+      const dropIds = new Set(toDrop.map(d => d.id));
+      records = records.filter(r => !dropIds.has(r.id));
+    }
+    // total cap
+    if (records.length > MAX_TOTAL) {
+      records.sort((a, b) => a.lastActive - b.lastActive);
+      records = records.slice(records.length - MAX_TOTAL);
+    }
+    _persistedIds.add(rec.id);
+    await saveDialogRecords(records);
+  }
+
+  async function deleteRecord(id) {
+    const state = dialogs.get(id);
+    const persistId = state && state.persistId;
+    if (!persistId) return;
+    let records = await loadDialogRecords();
+    records = records.filter(r => r && r.id !== persistId);
+    _persistedIds.delete(persistId);
+    await saveDialogRecords(records);
+  }
+
+  async function restoreDialogsOnLoad() {
+    if (!_storageAvailable()) return;
+    let records = pruneExpired(await loadDialogRecords());
+    const hostname = location.hostname;
+    const matches = records.filter(r => r.hostname === hostname && !r.closedAt);
+    if (matches.length === 0) return;
+    const config = await getConfig();
+    if (!config || !config.apiKey) return;
+    const quickPrompts = await getQuickPrompts();
+    for (const r of matches) {
+      const ctx = { text: (r.context && r.context.text) || '', images: (r.context && r.context.images) || [] };
+      const id = createDialog(
+        { ...config, model: r.model || config.model },
+        null,
+        quickPrompts,
+        ctx
+      );
+      const st = dialogs.get(id);
+      if (!st) continue;
+      st.persistId = r.id;
+      st.persistedAt = r.createdAt;
+      _persistedIds.add(r.id);
+      if (r.position) {
+        st.dialog.style.left = r.position.x + 'px';
+        st.dialog.style.top = r.position.y + 'px';
+        st.dialog.style.right = 'auto';
+      }
+      if (r.size && r.size.width) {
+        st.dialog.style.width = r.size.width + 'px';
+        if (r.size.height) st.dialog.style.height = r.size.height + 'px';
+      }
+      st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
+      st.conversationHistory.forEach(m => {
+        if (m.role === 'user' || m.role === 'assistant') {
+          const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
+          if (content) addMessage(id, m.role, content);
+        }
+      });
+      addMessage(id, 'system', t('dialogRestoredHint'));
+    }
+    await saveDialogRecords(records);
+  }
+
   function isOurElement(el) {
+    if (!el) return false;
+    if (_shadowRoot && typeof el.getRootNode === 'function' && el.getRootNode() === _shadowRoot) return true;
     while (el) {
       if (el.getAttribute && el.getAttribute('data-aiext')) return true;
+      if (el === _shadowHost) return true;
       el = el.parentElement;
     }
     return false;
@@ -939,7 +1230,7 @@
       }
     });
 
-    document.body.appendChild(floatingIcon);
+    _shadowAppend(floatingIcon);
   }
 
   function hideFloatingIcon() {
@@ -1026,8 +1317,8 @@
       state.dialog.style.top = (80 + dialogs.size * 30) + 'px';
     }
 
-    document.body.appendChild(state.overlay);
-    document.body.appendChild(state.dialog);
+    _shadowAppend(state.overlay);
+    _shadowAppend(state.dialog);
     dialogs.set(id, state);
 
     // Events
@@ -1045,6 +1336,7 @@
         else if (type === 'images') state.context.images = [];
         const selDiv = state.dialog.querySelector(`.${PREFIX}selected`);
         if (selDiv && !selDiv.querySelector(`.${PREFIX}selected-label`)) selDiv.remove();
+        persistState(id);
       });
     });
 
@@ -1068,6 +1360,7 @@
             if (selDiv && !selDiv.querySelector(`.${PREFIX}selected-label`)) selDiv.remove();
           }
         }
+        persistState(id);
       });
     });
 
@@ -1094,8 +1387,11 @@
     });
 
     const modelInput = state.dialog.querySelector(`.${PREFIX}model-input`);
+    let _persistModelTimer = null;
     modelInput.addEventListener('input', () => {
       state.config.model = modelInput.value.trim();
+      clearTimeout(_persistModelTimer);
+      _persistModelTimer = setTimeout(() => persistState(id), 600);
     });
     modelInput.addEventListener('mousedown', (e) => e.stopPropagation());
     fetchModelsForDialog(id);
@@ -1120,8 +1416,16 @@
           e.preventDefault();
           const file = item.getAsFile();
           if (!file) continue;
+          if (state.pendingScreenshots.length >= 4) {
+            addMessage(id, 'system', t('pasteTooManyImages'));
+            return;
+          }
           const reader = new FileReader();
           reader.onload = () => {
+            if (state.pendingScreenshots.length >= 4) {
+              addMessage(id, 'system', t('pasteTooManyImages'));
+              return;
+            }
             state.pendingScreenshots.push(reader.result);
             renderScreenshotPreview();
           };
@@ -1147,6 +1451,10 @@
 
     const cameraBtn = state.dialog.querySelector(`.${PREFIX}camera`);
     cameraBtn.addEventListener('click', async () => {
+      if (state.pendingScreenshots.length >= 4) {
+        addMessage(id, 'system', t('pasteTooManyImages'));
+        return;
+      }
       cameraBtn.disabled = true;
       const origDialogDisplay = state.dialog.style.display;
       const origOverlayDisplay = state.overlay ? state.overlay.style.display : '';
@@ -1203,6 +1511,16 @@
   function closeDialog(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (state.persistId) {
+      (async () => {
+        let records = await loadDialogRecords();
+        const idx = records.findIndex(r => r && r.id === state.persistId);
+        if (idx >= 0) {
+          records[idx].closedAt = Date.now();
+          await saveDialogRecords(records);
+        }
+      })();
+    }
     if (state.overlay) state.overlay.remove();
     if (state.dialog) state.dialog.remove();
     dialogs.delete(id);
@@ -1236,7 +1554,8 @@
       state.overlay.setAttribute('data-aiext', '1');
       state.overlay.addEventListener('click', () => closeDialog(id));
       state.overlay.style.zIndex = (state.zIndex || topZ) - 1;
-      document.body.insertBefore(state.overlay, state.dialog);
+      const container = _shadow() || document.body;
+      container.insertBefore(state.overlay, state.dialog);
     }
   }
 
@@ -1322,6 +1641,7 @@
     bubble.className = `${PREFIX}bubble`;
     if (role === 'assistant') {
       bubble.innerHTML = renderMarkdown(content);
+      attachCodeCopyButtons(bubble);
     } else {
       bubble.textContent = content;
     }
@@ -1397,15 +1717,6 @@
 
       let response = await callAI(id, state.config, messages);
 
-      // If API rejects multimodal content, retry with text-only
-      if (response.error && response.error.includes('400')) {
-        const textOnlyMessages = [
-          { role: 'system', content: textPart },
-          ...state.conversationHistory
-        ];
-        response = await callAI(id, state.config, textOnlyMessages);
-      }
-
       if (response.error) {
         const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
         const errDiv = document.createElement('div');
@@ -1414,6 +1725,7 @@
         messagesEl.appendChild(errDiv);
       } else if (response.bubble) {
         response.bubble.innerHTML = renderMarkdown(response.content);
+        attachCodeCopyButtons(response.bubble);
         state.conversationHistory.push({ role: 'assistant', content: response.content });
       } else {
         addMessage(id, 'assistant', response.content);
@@ -1433,6 +1745,8 @@
         errDiv.textContent = t('errorRequestFailed', err.message);
         messagesEl.appendChild(errDiv);
       }
+    } finally {
+      persistState(id);
     }
 
     state.isStreaming = false;
@@ -1441,22 +1755,145 @@
   }
 
   // ─── AI Calls ───
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function messagesHaveImages(messages) {
+    return messages.some(m => Array.isArray(m.content) && m.content.some(p => p && p.type === 'image_url'));
+  }
+
+  function stripImagesFromMessages(messages) {
+    return messages.map(m => {
+      if (!Array.isArray(m.content)) return m;
+      const textOnly = m.content.filter(p => p && p.type !== 'image_url');
+      if (textOnly.length === 1 && textOnly[0].type === 'text') {
+        return { role: m.role, content: textOnly[0].text };
+      }
+      return { role: m.role, content: textOnly };
+    });
+  }
+
   async function callAI(id, config, messages) {
     const { apiKey, model, baseUrl } = config;
     const url = normalizeBaseUrl(baseUrl || 'https://api.openai.com/v1') + '/chat/completions';
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({ model: model || 'gpt-4o', messages, stream: true })
-    });
-    if (!res.ok) {
-      const errText = await res.text();
-      return { error: t('errorApiError', res.status, errText.slice(0, 200)) };
+
+    const state = dialogs.get(id);
+    const messagesEl = state && state.dialog ? state.dialog.querySelector(`.${PREFIX}messages`) : null;
+    const retryBubble = messagesEl ? addMessage(id, 'system', '') : null;
+    if (retryBubble && retryBubble.parentElement) retryBubble.parentElement.style.display = 'none';
+
+    let aborted = false;
+    let currentController = null;
+    let cancelEl = null;
+
+    if (retryBubble) {
+      const cancelBtn = document.createElement('span');
+      cancelBtn.className = `${PREFIX}retry-cancel`;
+      cancelBtn.setAttribute('data-aiext', '1');
+      cancelBtn.textContent = '✕';
+      cancelBtn.style.cssText = 'margin-left:8px;cursor:pointer;opacity:0.7;';
+      cancelBtn.addEventListener('click', () => {
+        aborted = true;
+        if (currentController) try { currentController.abort(); } catch (e) {}
+      });
+      retryBubble.appendChild(cancelBtn);
+      cancelEl = cancelBtn;
     }
-    return await readStream(id, res);
+
+    let attempt = 0;
+    const MAX_ATTEMPTS = 3;
+    let fallbackTriggered = false;
+    let result = { error: t('errorRequestFailed', 'unknown'), status: 0, code: 'unknown' };
+
+    try {
+      while (attempt < MAX_ATTEMPTS) {
+        if (aborted) {
+          result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
+          break;
+        }
+
+        const controller = new AbortController();
+        currentController = controller;
+        let res;
+        try {
+          res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({ model: model || 'gpt-4o', messages, stream: true }),
+            signal: controller.signal
+          });
+        } catch (fetchErr) {
+          if (aborted) {
+            result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
+            break;
+          }
+          attempt++;
+          if (attempt >= MAX_ATTEMPTS) {
+            result = { error: t('errorRequestFailed', fetchErr.message || 'network'), status: 0, code: 'network' };
+            break;
+          }
+          if (retryBubble && retryBubble.parentElement) {
+            retryBubble.parentElement.style.display = '';
+            if (cancelEl) retryBubble.insertBefore(document.createTextNode(t('retrying', String(attempt))), cancelEl);
+            const prev = cancelEl.previousSibling;
+            if (prev && prev.previousSibling && prev.previousSibling.nodeType === 3) {
+              retryBubble.removeChild(prev.previousSibling);
+            }
+          }
+          await sleep(Math.min(1000 * Math.pow(2, attempt - 1), 8000));
+          continue;
+        }
+
+        if (res.status === 400 && messagesHaveImages(messages) && !fallbackTriggered) {
+          fallbackTriggered = true;
+          if (retryBubble && retryBubble.parentElement) {
+            retryBubble.parentElement.style.display = '';
+            const notice = document.createTextNode(t('fallbackTextOnly') + ' ');
+            retryBubble.insertBefore(notice, cancelEl);
+          }
+          messages = stripImagesFromMessages(messages);
+          continue;
+        }
+
+        if (res.status === 429 || (res.status >= 500 && res.status <= 504)) {
+          attempt++;
+          if (attempt >= MAX_ATTEMPTS) {
+            const errText = await res.text().catch(() => '');
+            result = { error: t('errorApiError', String(res.status), errText.slice(0, 200)), status: res.status, code: res.status === 429 ? 'rate_limited' : 'server' };
+            break;
+          }
+          if (retryBubble && retryBubble.parentElement) {
+            retryBubble.parentElement.style.display = '';
+            const node = document.createTextNode(t('retrying', String(attempt)) + ' ');
+            retryBubble.insertBefore(node, cancelEl);
+            const prev = cancelEl.previousSibling;
+            if (prev && prev.previousSibling && prev.previousSibling.nodeType === 3 && prev.previousSibling !== node) {
+              retryBubble.removeChild(prev.previousSibling);
+            }
+          }
+          await sleep(Math.min(1000 * Math.pow(2, attempt - 1), 8000));
+          continue;
+        }
+
+        if (!res.ok) {
+          const errText = await res.text().catch(() => '');
+          result = { error: t('errorApiError', String(res.status), errText.slice(0, 200)), status: res.status, code: 'api_error' };
+          break;
+        }
+
+        result = await readStream(id, res);
+        break;
+      }
+    } finally {
+      if (retryBubble && retryBubble.parentElement) {
+        retryBubble.parentElement.remove();
+      }
+      currentController = null;
+    }
+
+    return result;
   }
 
   async function readStream(id, res) {
@@ -1514,6 +1951,7 @@
       }
     });
     if (settings.defaultPin !== false) togglePin(id);
+    persistState(id);
   }
 
   let _providersCache = null;
@@ -1574,8 +2012,8 @@
       </div>
     `;
 
-    document.body.appendChild(overlay);
-    document.body.appendChild(dlg);
+    _shadowAppend(overlay);
+    _shadowAppend(dlg);
     overlay.style.zIndex = 2147483640;
     dlg.style.zIndex = 2147483641;
     dlg.querySelector(`.${PREFIX}close`).addEventListener('click', () => { overlay.remove(); dlg.remove(); });
@@ -1657,7 +2095,7 @@
   // ─── Context Menu ───
   try {
     if (chrome.runtime && chrome.runtime.onMessage) {
-      chrome.runtime.onMessage.addListener((msg) => {
+      chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.action === 'openDialog') {
       (async () => {
         const sel = window.getSelection();
@@ -1673,6 +2111,93 @@
         currentContext = { text: '', images: [msg.srcUrl] };
         openDialog();
       })();
+    } else if (msg.action === 'listClosedDialogs') {
+      (async () => {
+        try {
+          const records = pruneExpired(await loadDialogRecords());
+          const hostname = location.hostname;
+          const closed = records
+            .filter(r => r.hostname === hostname && r.closedAt)
+            .sort((a, b) => b.closedAt - a.closedAt)
+            .slice(0, 10)
+            .map(r => {
+              const last = Array.isArray(r.conversationHistory) && r.conversationHistory.length > 0
+                ? r.conversationHistory[r.conversationHistory.length - 1]
+                : null;
+              let preview = '';
+              if (last && last.content) {
+                if (typeof last.content === 'string') preview = last.content;
+                else if (Array.isArray(last.content)) {
+                  preview = last.content
+                    .filter(p => p && p.type === 'text')
+                    .map(p => p.text)
+                    .join(' ');
+                }
+              }
+              return {
+                id: r.id,
+                hostname: r.hostname,
+                url: r.url || '',
+                closedAt: r.closedAt,
+                messageCount: Array.isArray(r.conversationHistory) ? r.conversationHistory.length : 0,
+                preview: preview.slice(0, 120),
+                model: r.model || ''
+              };
+            });
+          sendResponse({ ok: true, items: closed });
+        } catch (e) {
+          sendResponse({ ok: false, error: e.message });
+        }
+      })();
+      return true;
+    } else if (msg.action === 'restoreClosedDialog' && msg.persistId) {
+      (async () => {
+        try {
+          let records = pruneExpired(await loadDialogRecords());
+          const idx = records.findIndex(r => r && r.id === msg.persistId);
+          if (idx < 0) return sendResponse({ ok: false, error: 'not_found' });
+          const r = records[idx];
+          delete r.closedAt;
+          records[idx] = r;
+          await saveDialogRecords(records);
+          const config = await getConfig();
+          if (!config || !config.apiKey) return sendResponse({ ok: false, error: 'no_api_key' });
+          const quickPrompts = await getQuickPrompts();
+          const ctx = { text: (r.context && r.context.text) || '', images: (r.context && r.context.images) || [] };
+          const id = createDialog(
+            { ...config, model: r.model || config.model },
+            null,
+            quickPrompts,
+            ctx
+          );
+          const st = dialogs.get(id);
+          if (!st) return sendResponse({ ok: false, error: 'state_missing' });
+          st.persistId = r.id;
+          st.persistedAt = r.createdAt;
+          _persistedIds.add(r.id);
+          if (r.position) {
+            st.dialog.style.left = r.position.x + 'px';
+            st.dialog.style.top = r.position.y + 'px';
+            st.dialog.style.right = 'auto';
+          }
+          if (r.size && r.size.width) {
+            st.dialog.style.width = r.size.width + 'px';
+            if (r.size.height) st.dialog.style.height = r.size.height + 'px';
+          }
+          st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
+          st.conversationHistory.forEach(m => {
+            if (m.role === 'user' || m.role === 'assistant') {
+              const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
+              if (content) addMessage(id, m.role, content);
+            }
+          });
+          addMessage(id, 'system', t('dialogRestoredHint'));
+          sendResponse({ ok: true });
+        } catch (e) {
+          sendResponse({ ok: false, error: e.message });
+        }
+      })();
+      return true;
     }
       });
     }
@@ -1694,6 +2219,31 @@
   } catch (e) { _contextInvalid = true; }
 
   injectStyles();
+
+  window.addEventListener('beforeunload', () => {
+    if (!_storageAvailable()) return;
+    const snapshots = [];
+    for (const [id, st] of dialogs) {
+      const rec = toRecord(st);
+      if (rec) snapshots.push({ id, rec });
+    }
+    if (snapshots.length === 0) return;
+    // Best-effort synchronous-ish flush via the promise we started — chrome.storage.local.set is async,
+    // so we kick it off; browsers typically let storage calls complete during beforeunload.
+    (async () => {
+      let records = pruneExpired(await loadDialogRecords());
+      const byId = new Map(records.map(r => [r.id, r]));
+      for (const { rec } of snapshots) byId.set(rec.id, rec);
+      records = [...byId.values()];
+      if (records.length > MAX_TOTAL) {
+        records.sort((a, b) => a.lastActive - b.lastActive);
+        records = records.slice(records.length - MAX_TOTAL);
+      }
+      await saveDialogRecords(records);
+    })();
+  });
+
+  restoreDialogsOnLoad();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (!contextValid()) return;

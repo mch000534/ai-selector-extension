@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "קבל מפתח"
+  },
+  "pasteTooManyImages": {
+    "message": "יותר מדי תמונות (מקסימום 4)"
+  },
+  "retrying": {
+    "message": "החיבור נכשל, מנסה שוב ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "ניסיון חוזר בוטל"
+  },
+  "fallbackTextOnly": {
+    "message": "המודל לא תומך בתמונות, עובר למצב טקסט בלבד"
+  },
+  "dialogRestoredHint": {
+    "message": "שוחזר מההפעלה הקודמת"
+  },
+  "recentClosedBtn": {
+    "message": "נסגרו לאחרונה"
+  },
+  "recentClosedEmpty": {
+    "message": "אין שיחות סגורות"
+  },
+  "recentClosedTitle": {
+    "message": "שיחות שנסגרו לאחרונה"
+  },
+  "recentClosedRestore": {
+    "message": "שחזר"
+  },
+  "recentClosedAllClear": {
+    "message": "נקה הכל"
+  },
+  "codeCopyBtn": {
+    "message": "העתק"
+  },
+  "codeCopied": {
+    "message": "הועתק"
   }
 }

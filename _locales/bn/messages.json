@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "কি নিন"
+  },
+  "pasteTooManyImages": {
+    "message": "অনেক বেশি ছবি (সর্বোচ্চ ৪টি)"
+  },
+  "retrying": {
+    "message": "সংযোগ ব্যর্থ, আবার চেষ্টা করা হচ্ছে ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "পুনরায় চেষ্টা বাতিল করা হয়েছে"
+  },
+  "fallbackTextOnly": {
+    "message": "মডেল ছবি সমর্থন করে না, শুধু-লেখা মোডে যাচ্ছে"
+  },
+  "dialogRestoredHint": {
+    "message": "আগের সেশন থেকে পুনরুদ্ধার করা হয়েছে"
+  },
+  "recentClosedBtn": {
+    "message": "সম্প্রতি বন্ধ করা"
+  },
+  "recentClosedEmpty": {
+    "message": "কোনো বন্ধ কথোপকথন নেই"
+  },
+  "recentClosedTitle": {
+    "message": "সম্প্রতি বন্ধ করা কথোপকথন"
+  },
+  "recentClosedRestore": {
+    "message": "পুনরুদ্ধার করুন"
+  },
+  "recentClosedAllClear": {
+    "message": "সব মুছুন"
+  },
+  "codeCopyBtn": {
+    "message": "কপি করুন"
+  },
+  "codeCopied": {
+    "message": "কপি করা হয়েছে"
   }
 }

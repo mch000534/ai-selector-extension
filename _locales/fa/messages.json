@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "دریافت کلید"
+  },
+  "pasteTooManyImages": {
+    "message": "تصاویر بیش از حد (حداکثر ۴)"
+  },
+  "retrying": {
+    "message": "اتصال ناموفق بود، در حال تلاش مجدد ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "تلاش مجدد لغو شد"
+  },
+  "fallbackTextOnly": {
+    "message": "مدل از تصاویر پشتیبانی نمی‌کند، در حال تغییر به حالت فقط متنی"
+  },
+  "dialogRestoredHint": {
+    "message": "از نشست قبلی بازیابی شد"
+  },
+  "recentClosedBtn": {
+    "message": "اخیراً بسته‌شده"
+  },
+  "recentClosedEmpty": {
+    "message": "گفتگوی بسته‌شده‌ای نیست"
+  },
+  "recentClosedTitle": {
+    "message": "گفتگوهای اخیراً بسته‌شده"
+  },
+  "recentClosedRestore": {
+    "message": "بازیابی"
+  },
+  "recentClosedAllClear": {
+    "message": "پاک کردن همه"
+  },
+  "codeCopyBtn": {
+    "message": "کپی"
+  },
+  "codeCopied": {
+    "message": "کپی شد"
   }
 }

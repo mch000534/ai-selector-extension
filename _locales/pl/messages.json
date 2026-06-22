@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Pobierz klucz"
+  },
+  "pasteTooManyImages": {
+    "message": "Za dużo obrazów (maks. 4)"
+  },
+  "retrying": {
+    "message": "Połączenie nie powiodło się, ponawiam ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Ponawianie anulowane"
+  },
+  "fallbackTextOnly": {
+    "message": "Model nie obsługuje obrazów, przełączam na tryb tekstowy"
+  },
+  "dialogRestoredHint": {
+    "message": "Przywrócono z poprzedniej sesji"
+  },
+  "recentClosedBtn": {
+    "message": "Ostatnio zamknięte"
+  },
+  "recentClosedEmpty": {
+    "message": "Brak zamkniętych rozmów"
+  },
+  "recentClosedTitle": {
+    "message": "Ostatnio zamknięte rozmowy"
+  },
+  "recentClosedRestore": {
+    "message": "Przywróć"
+  },
+  "recentClosedAllClear": {
+    "message": "Wyczyść wszystko"
+  },
+  "codeCopyBtn": {
+    "message": "Kopiuj"
+  },
+  "codeCopied": {
+    "message": "Skopiowano"
   }
 }

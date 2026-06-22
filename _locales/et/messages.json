@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Hangi võti"
+  },
+  "pasteTooManyImages": {
+    "message": "Liiga palju pilte (maks 4)"
+  },
+  "retrying": {
+    "message": "Ühendus ebaõnnestus, proovin uuesti ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Uuesti proovimine tühistatud"
+  },
+  "fallbackTextOnly": {
+    "message": "Mudel ei toeta pilte, lülitun ainult teksti režiimile"
+  },
+  "dialogRestoredHint": {
+    "message": "Taastatud eelmisest seansist"
+  },
+  "recentClosedBtn": {
+    "message": "Hiljuti suletud"
+  },
+  "recentClosedEmpty": {
+    "message": "Suletud vestlusi pole"
+  },
+  "recentClosedTitle": {
+    "message": "Hiljuti suletud vestlused"
+  },
+  "recentClosedRestore": {
+    "message": "Taasta"
+  },
+  "recentClosedAllClear": {
+    "message": "Tühjenda kõik"
+  },
+  "codeCopyBtn": {
+    "message": "Kopeeri"
+  },
+  "codeCopied": {
+    "message": "Kopeeritud"
   }
 }

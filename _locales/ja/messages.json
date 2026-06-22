@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "キーを取得"
+  },
+  "pasteTooManyImages": {
+    "message": "画像が多すぎます（最大 4 枚）"
+  },
+  "retrying": {
+    "message": "接続に失敗しました。再試行中 ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "再試行がキャンセルされました"
+  },
+  "fallbackTextOnly": {
+    "message": "モデルは画像をサポートしていないため、テキスト専用モードに切り替えます"
+  },
+  "dialogRestoredHint": {
+    "message": "前回のセッションから復元しました"
+  },
+  "recentClosedBtn": {
+    "message": "最近閉じた"
+  },
+  "recentClosedEmpty": {
+    "message": "閉じた会話はありません"
+  },
+  "recentClosedTitle": {
+    "message": "最近閉じた会話"
+  },
+  "recentClosedRestore": {
+    "message": "復元"
+  },
+  "recentClosedAllClear": {
+    "message": "すべてクリア"
+  },
+  "codeCopyBtn": {
+    "message": "コピー"
+  },
+  "codeCopied": {
+    "message": "コピーしました"
   }
 }

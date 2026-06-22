@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Dapatkan kunci"
+  },
+  "pasteTooManyImages": {
+    "message": "Terlalu banyak imej (maks 4)"
+  },
+  "retrying": {
+    "message": "Sambungan gagal, mencuba semula ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Cubaan semula dibatalkan"
+  },
+  "fallbackTextOnly": {
+    "message": "Model tidak menyokong imej, bertukar ke mod teks sahaja"
+  },
+  "dialogRestoredHint": {
+    "message": "Dipulihkan dari sesi sebelumnya"
+  },
+  "recentClosedBtn": {
+    "message": "Baru ditutup"
+  },
+  "recentClosedEmpty": {
+    "message": "Tiada perbualan yang ditutup"
+  },
+  "recentClosedTitle": {
+    "message": "Perbualan yang baru ditutup"
+  },
+  "recentClosedRestore": {
+    "message": "Pulihkan"
+  },
+  "recentClosedAllClear": {
+    "message": "Kosongkan semua"
+  },
+  "codeCopyBtn": {
+    "message": "Salin"
+  },
+  "codeCopied": {
+    "message": "Disalin"
   }
 }

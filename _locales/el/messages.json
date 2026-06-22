@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Λήψη κλειδιού"
+  },
+  "pasteTooManyImages": {
+    "message": "Πάρα πολλές εικόνες (μέγ. 4)"
+  },
+  "retrying": {
+    "message": "Αποτυχία σύνδεσης, νέα προσπάθεια ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Η επανάληψη ακυρώθηκε"
+  },
+  "fallbackTextOnly": {
+    "message": "Το μοντέλο δεν υποστηρίζει εικόνες, αλλαγή σε λειτουργία μόνο κειμένου"
+  },
+  "dialogRestoredHint": {
+    "message": "Αποκαταστάθηκε από προηγούμενη περίοδο λειτουργίας"
+  },
+  "recentClosedBtn": {
+    "message": "Πρόσφατα κλεισμένα"
+  },
+  "recentClosedEmpty": {
+    "message": "Δεν υπάρχουν κλειστές συνομιλίες"
+  },
+  "recentClosedTitle": {
+    "message": "Πρόσφατα κλεισμένες συνομιλίες"
+  },
+  "recentClosedRestore": {
+    "message": "Επαναφορά"
+  },
+  "recentClosedAllClear": {
+    "message": "Εκκαθάριση όλων"
+  },
+  "codeCopyBtn": {
+    "message": "Αντιγραφή"
+  },
+  "codeCopied": {
+    "message": "Αντιγράφηκε"
   }
 }

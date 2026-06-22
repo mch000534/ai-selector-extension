@@ -330,6 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }, () => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
+    // Clear persisted conversations — they belong to the previous config.
+    try {
+      chrome.storage.local.remove('aiext_dialogs_v1');
+    } catch (e) { /* ignore */ }
   }
 
   let saveTimer = null;
@@ -374,5 +378,177 @@ document.addEventListener('DOMContentLoaded', () => {
   if (versionEl) {
     const manifest = chrome.runtime.getManifest();
     versionEl.textContent = `v${manifest.version}`;
+  }
+
+  // ─── Recently closed ───
+  const recentClosedBtn = document.getElementById('recentClosedBtn');
+  const recentClosedSection = document.getElementById('recentClosedSection');
+  const recentClosedList = document.getElementById('recentClosedList');
+  const recentClosedClearAll = document.getElementById('recentClosedClearAll');
+  const STORAGE_KEY = 'aiext_dialogs_v1';
+
+  function escapeHtmlRecent(s) {
+    if (typeof s !== 'string') return '';
+    return s.replace(/[&<>"']/g, ch => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[ch]);
+  }
+
+  function formatRelativeTime(ts) {
+    if (!ts) return '';
+    const diff = Date.now() - ts;
+    const sec = Math.floor(diff / 1000);
+    if (sec < 60) return `${sec}s`;
+    const min = Math.floor(sec / 60);
+    if (min < 60) return `${min}m`;
+    const hr = Math.floor(min / 60);
+    if (hr < 24) return `${hr}h`;
+    const day = Math.floor(hr / 24);
+    return `${day}d`;
+  }
+
+  async function getActiveTab() {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      return tab || null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function sendToActiveTab(message) {
+    const tab = await getActiveTab();
+    if (!tab || !tab.id) return { ok: false, error: 'no_active_tab' };
+    try {
+      return await chrome.tabs.sendMessage(tab.id, message);
+    } catch (e) {
+      return { ok: false, error: 'no_content_script' };
+    }
+  }
+
+  async function fetchClosedList() {
+    recentClosedList.innerHTML = '';
+    const res = await sendToActiveTab({ action: 'listClosedDialogs' });
+    if (!res || !res.ok) {
+      // Fallback: read storage directly (won't be hostname-scoped)
+      try {
+        const data = await chrome.storage.local.get([STORAGE_KEY]);
+        const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
+        const now = Date.now();
+        const TTL_MS = 7 * 24 * 3600 * 1000;
+        const closed = records
+          .filter(r => r && r.closedAt && (now - r.closedAt) < TTL_MS)
+          .sort((a, b) => b.closedAt - a.closedAt)
+          .slice(0, 10)
+          .map(r => {
+            const last = Array.isArray(r.conversationHistory) && r.conversationHistory.length > 0
+              ? r.conversationHistory[r.conversationHistory.length - 1]
+              : null;
+            let preview = '';
+            if (last && last.content) {
+              if (typeof last.content === 'string') preview = last.content;
+              else if (Array.isArray(last.content)) {
+                preview = last.content.filter(p => p && p.type === 'text').map(p => p.text).join(' ');
+              }
+            }
+            return {
+              id: r.id,
+              hostname: r.hostname || '',
+              closedAt: r.closedAt,
+              messageCount: Array.isArray(r.conversationHistory) ? r.conversationHistory.length : 0,
+              preview: preview.slice(0, 120),
+              model: r.model || ''
+            };
+          });
+        renderClosedList(closed);
+      } catch (e) {
+        renderEmpty();
+      }
+      return;
+    }
+    renderClosedList(res.items || []);
+  }
+
+  function renderEmpty() {
+    recentClosedList.innerHTML = `<div class="recent-closed-empty">${escapeHtmlRecent(chrome.i18n.getMessage('recentClosedEmpty'))}</div>`;
+  }
+
+  function renderClosedList(items) {
+    if (!Array.isArray(items) || items.length === 0) {
+      renderEmpty();
+      return;
+    }
+    const html = items.map(item => {
+      const preview = item.preview || '';
+      const host = item.hostname || '';
+      const dateStr = formatRelativeTime(item.closedAt);
+      const meta = [
+        item.messageCount ? `${item.messageCount} msg` : '',
+        item.model || ''
+      ].filter(Boolean).join(' · ');
+      return `
+        <div class="recent-closed-item" data-persist-id="${escapeHtmlRecent(item.id)}">
+          <div class="recent-closed-item-body">
+            <div class="recent-closed-item-top">
+              <span class="recent-closed-item-host">${escapeHtmlRecent(host)}</span>
+              <span class="recent-closed-item-date">${escapeHtmlRecent(dateStr)}</span>
+            </div>
+            ${preview ? `<div class="recent-closed-item-preview">${escapeHtmlRecent(preview)}</div>` : ''}
+            ${meta ? `<div class="recent-closed-item-meta">${escapeHtmlRecent(meta)}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    recentClosedList.innerHTML = html;
+    recentClosedList.querySelectorAll('.recent-closed-item').forEach(el => {
+      el.addEventListener('click', async () => {
+        const id = el.dataset.persistId;
+        if (!id) return;
+        el.style.opacity = '0.5';
+        el.style.pointerEvents = 'none';
+        const res = await sendToActiveTab({ action: 'restoreClosedDialog', persistId: id });
+        if (res && res.ok) {
+          el.remove();
+          if (!recentClosedList.querySelector('.recent-closed-item')) renderEmpty();
+          showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
+        } else {
+          el.style.opacity = '';
+          el.style.pointerEvents = '';
+          const errMsg = document.createElement('div');
+          errMsg.className = 'recent-closed-error';
+          errMsg.textContent = (res && res.error) || 'restore failed';
+          recentClosedList.prepend(errMsg);
+          setTimeout(() => errMsg.remove(), 3000);
+        }
+      });
+    });
+  }
+
+  if (recentClosedBtn && recentClosedSection) {
+    recentClosedBtn.addEventListener('click', () => {
+      const opening = recentClosedSection.hasAttribute('hidden');
+      if (opening) {
+        recentClosedSection.removeAttribute('hidden');
+        recentClosedBtn.classList.add('open');
+        fetchClosedList();
+      } else {
+        recentClosedSection.setAttribute('hidden', '');
+        recentClosedBtn.classList.remove('open');
+      }
+    });
+  }
+
+  if (recentClosedClearAll) {
+    recentClosedClearAll.addEventListener('click', async () => {
+      try {
+        const data = await chrome.storage.local.get([STORAGE_KEY]);
+        const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
+        const kept = records.filter(r => !r.closedAt);
+        await chrome.storage.local.set({ [STORAGE_KEY]: { dialogs: kept } });
+        renderEmpty();
+      } catch (e) {
+        // ignore
+      }
+    });
   }
 });

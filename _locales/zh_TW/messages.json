@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "取得金鑰"
+  },
+  "pasteTooManyImages": {
+    "message": "圖片過多（上限 4 張）"
+  },
+  "retrying": {
+    "message": "連線失敗，正在重試（$1/3）...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "已取消重試"
+  },
+  "fallbackTextOnly": {
+    "message": "模型不支援圖片，改用純文字模式"
+  },
+  "dialogRestoredHint": {
+    "message": "已還原先前的對話"
+  },
+  "recentClosedBtn": {
+    "message": "最近關閉"
+  },
+  "recentClosedEmpty": {
+    "message": "沒有已關閉的對話"
+  },
+  "recentClosedTitle": {
+    "message": "最近關閉的對話"
+  },
+  "recentClosedRestore": {
+    "message": "還原"
+  },
+  "recentClosedAllClear": {
+    "message": "清除全部"
+  },
+  "codeCopyBtn": {
+    "message": "複製"
+  },
+  "codeCopied": {
+    "message": "已複製"
   }
 }

@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Hanki avain"
+  },
+  "pasteTooManyImages": {
+    "message": "Liikaa kuvia (enintään 4)"
+  },
+  "retrying": {
+    "message": "Yhteys epäonnistui, yritetään uudelleen ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Uudelleenyritys peruutettu"
+  },
+  "fallbackTextOnly": {
+    "message": "Malli ei tue kuvia, vaihdetaan vain teksti -tilaan"
+  },
+  "dialogRestoredHint": {
+    "message": "Palautettu edellisestä istunnosta"
+  },
+  "recentClosedBtn": {
+    "message": "Äskettäin suljetut"
+  },
+  "recentClosedEmpty": {
+    "message": "Ei suljettuja keskusteluja"
+  },
+  "recentClosedTitle": {
+    "message": "Äskettäin suljetut keskustelut"
+  },
+  "recentClosedRestore": {
+    "message": "Palauta"
+  },
+  "recentClosedAllClear": {
+    "message": "Tyhjennä kaikki"
+  },
+  "codeCopyBtn": {
+    "message": "Kopioi"
+  },
+  "codeCopied": {
+    "message": "Kopioitu"
   }
 }

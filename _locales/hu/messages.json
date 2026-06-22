@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Kulcs beszerzése"
+  },
+  "pasteTooManyImages": {
+    "message": "Túl sok kép (max 4)"
+  },
+  "retrying": {
+    "message": "Kapcsolat sikertelen, újrapróbálkozás ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Újrapróbálkozás megszakítva"
+  },
+  "fallbackTextOnly": {
+    "message": "A modell nem támogatja a képeket, váltás szöveges módra"
+  },
+  "dialogRestoredHint": {
+    "message": "Visszaállítva az előző munkamenetből"
+  },
+  "recentClosedBtn": {
+    "message": "Nemrég bezárt"
+  },
+  "recentClosedEmpty": {
+    "message": "Nincs bezárt beszélgetés"
+  },
+  "recentClosedTitle": {
+    "message": "Nemrég bezárt beszélgetések"
+  },
+  "recentClosedRestore": {
+    "message": "Visszaállítás"
+  },
+  "recentClosedAllClear": {
+    "message": "Összes törlése"
+  },
+  "codeCopyBtn": {
+    "message": "Másolás"
+  },
+  "codeCopied": {
+    "message": "Másolva"
   }
 }

@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Anahtar al"
+  },
+  "pasteTooManyImages": {
+    "message": "Çok fazla resim (en fazla 4)"
+  },
+  "retrying": {
+    "message": "Bağlantı başarısız, yeniden deneniyor ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Yeniden deneme iptal edildi"
+  },
+  "fallbackTextOnly": {
+    "message": "Model resimleri desteklemiyor, yalnızca metin moduna geçiliyor"
+  },
+  "dialogRestoredHint": {
+    "message": "Önceki oturumdan geri yüklendi"
+  },
+  "recentClosedBtn": {
+    "message": "Son kapatılanlar"
+  },
+  "recentClosedEmpty": {
+    "message": "Kapatılmış konuşma yok"
+  },
+  "recentClosedTitle": {
+    "message": "Son kapatılan konuşmalar"
+  },
+  "recentClosedRestore": {
+    "message": "Geri yükle"
+  },
+  "recentClosedAllClear": {
+    "message": "Tümünü temizle"
+  },
+  "codeCopyBtn": {
+    "message": "Kopyala"
+  },
+  "codeCopied": {
+    "message": "Kopyalandı"
   }
 }

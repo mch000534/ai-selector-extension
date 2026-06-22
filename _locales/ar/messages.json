@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "احصل على المفتاح"
+  },
+  "pasteTooManyImages": {
+    "message": "صور كثيرة جداً (الحد الأقصى 4)"
+  },
+  "retrying": {
+    "message": "فشل الاتصال، جارٍ إعادة المحاولة ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "تم إلغاء إعادة المحاولة"
+  },
+  "fallbackTextOnly": {
+    "message": "النموذج لا يدعم الصور، يتم التبديل إلى وضع النص فقط"
+  },
+  "dialogRestoredHint": {
+    "message": "تمت الاستعادة من الجلسة السابقة"
+  },
+  "recentClosedBtn": {
+    "message": "المغلقة حديثًا"
+  },
+  "recentClosedEmpty": {
+    "message": "لا توجد محادثات مغلقة"
+  },
+  "recentClosedTitle": {
+    "message": "المحادثات المغلقة حديثًا"
+  },
+  "recentClosedRestore": {
+    "message": "استعادة"
+  },
+  "recentClosedAllClear": {
+    "message": "مسح الكل"
+  },
+  "codeCopyBtn": {
+    "message": "نسخ"
+  },
+  "codeCopied": {
+    "message": "تم النسخ"
   }
 }

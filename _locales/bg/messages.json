@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Вземете ключ"
+  },
+  "pasteTooManyImages": {
+    "message": "Твърде много изображения (макс. 4)"
+  },
+  "retrying": {
+    "message": "Връзката е неуспешна, нов опит ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Повторният опит е отменен"
+  },
+  "fallbackTextOnly": {
+    "message": "Моделът не поддържа изображения, преминаване към режим само текст"
+  },
+  "dialogRestoredHint": {
+    "message": "Възстановено от предишната сесия"
+  },
+  "recentClosedBtn": {
+    "message": "Наскоро затворени"
+  },
+  "recentClosedEmpty": {
+    "message": "Няма затворени разговори"
+  },
+  "recentClosedTitle": {
+    "message": "Наскоро затворени разговори"
+  },
+  "recentClosedRestore": {
+    "message": "Възстанови"
+  },
+  "recentClosedAllClear": {
+    "message": "Изчисти всичко"
+  },
+  "codeCopyBtn": {
+    "message": "Копиране"
+  },
+  "codeCopied": {
+    "message": "Копирано"
   }
 }

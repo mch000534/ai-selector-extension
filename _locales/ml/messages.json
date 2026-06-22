@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "കീ നേടുക"
+  },
+  "pasteTooManyImages": {
+    "message": "അമിതമായ ചിത്രങ്ങൾ (പരമാവധി 4)"
+  },
+  "retrying": {
+    "message": "കണക്ഷൻ പരാജയപ്പെട്ടു, വീണ്ടും ശ്രമിക്കുന്നു ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "വീണ്ടും ശ്രമിക്കൽ റദ്ദാക്കി"
+  },
+  "fallbackTextOnly": {
+    "message": "മോഡൽ ചിത്രങ്ങളെ പിന്തുണയ്ക്കുന്നില്ല, ടെക്സ്റ്റ്-മാത്രം മോഡിലേക്ക് മാറുന്നു"
+  },
+  "dialogRestoredHint": {
+    "message": "മുൻ സെഷനിൽ നിന്ന് പുനഃസ്ഥാപിച്ചു"
+  },
+  "recentClosedBtn": {
+    "message": "സമീപകാലത്ത് അടച്ചവ"
+  },
+  "recentClosedEmpty": {
+    "message": "അടച്ച സംഭാഷണങ്ങളില്ല"
+  },
+  "recentClosedTitle": {
+    "message": "സമീപകാലത്ത് അടച്ച സംഭാഷണങ്ങൾ"
+  },
+  "recentClosedRestore": {
+    "message": "പുനഃസ്ഥാപിക്കുക"
+  },
+  "recentClosedAllClear": {
+    "message": "എല്ലാം മായ്ക്കുക"
+  },
+  "codeCopyBtn": {
+    "message": "പകർത്തുക"
+  },
+  "codeCopied": {
+    "message": "പകർത്തി"
   }
 }

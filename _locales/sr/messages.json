@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "Добиј кључ"
+  },
+  "pasteTooManyImages": {
+    "message": "Превише слика (макс. 4)"
+  },
+  "retrying": {
+    "message": "Веза није успела, поновни покушај ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "Поновни покушај отказан"
+  },
+  "fallbackTextOnly": {
+    "message": "Модел не подржава слике, прелазак на режим само за текст"
+  },
+  "dialogRestoredHint": {
+    "message": "Враћено из претходне сесије"
+  },
+  "recentClosedBtn": {
+    "message": "Недавно затворено"
+  },
+  "recentClosedEmpty": {
+    "message": "Нема затворених разговора"
+  },
+  "recentClosedTitle": {
+    "message": "Недавно затворени разговори"
+  },
+  "recentClosedRestore": {
+    "message": "Врати"
+  },
+  "recentClosedAllClear": {
+    "message": "Обриши све"
+  },
+  "codeCopyBtn": {
+    "message": "Копирај"
+  },
+  "codeCopied": {
+    "message": "Копирано"
   }
 }

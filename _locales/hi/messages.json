@@ -206,5 +206,46 @@
   },
   "settingsWarningFreeGetKey": {
     "message": "की प्राप्त करें"
+  },
+  "pasteTooManyImages": {
+    "message": "बहुत अधिक चित्र (अधिकतम 4)"
+  },
+  "retrying": {
+    "message": "कनेक्शन विफल, पुनः प्रयास ($1/3)...",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "retryCancelled": {
+    "message": "पुनः प्रयास रद्द किया गया"
+  },
+  "fallbackTextOnly": {
+    "message": "मॉडल छवियों का समर्थन नहीं करता, केवल टेक्स्ट मोड पर जा रहा है"
+  },
+  "dialogRestoredHint": {
+    "message": "पिछले सत्र से पुनर्स्थापित"
+  },
+  "recentClosedBtn": {
+    "message": "हाल ही में बंद किए गए"
+  },
+  "recentClosedEmpty": {
+    "message": "कोई बंद संवाद नहीं"
+  },
+  "recentClosedTitle": {
+    "message": "हाल ही में बंद किए गए संवाद"
+  },
+  "recentClosedRestore": {
+    "message": "पुनर्स्थापित करें"
+  },
+  "recentClosedAllClear": {
+    "message": "सभी साफ़ करें"
+  },
+  "codeCopyBtn": {
+    "message": "कॉपी करें"
+  },
+  "codeCopied": {
+    "message": "कॉपी किया गया"
   }
 }
