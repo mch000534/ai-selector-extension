@@ -1,0 +1,37 @@
+{
+  "providers": {
+    "mistral": {
+      "name": "Mistral AI",
+      "host": "console.mistral.ai",
+      "baseUrl": "https://api.mistral.ai",
+      "model": "mistral-medium-latest",
+      "signup": "https://console.mistral.ai/api-keys/",
+      "free": true
+    },
+    "openai": {
+      "name": "OpenAI",
+      "host": "api.openai.com",
+      "baseUrl": "https://api.openai.com",
+      "model": "gpt-4o-mini",
+      "signup": "https://platform.openai.com/api-keys",
+      "free": false
+    },
+    "groq": {
+      "name": "Groq",
+      "host": "console.groq.com",
+      "baseUrl": "https://api.groq.com/openai",
+      "model": "llama-3.3-70b-versatile",
+      "signup": "https://console.groq.com/keys",
+      "free": true
+    },
+    "openrouter": {
+      "name": "OpenRouter",
+      "host": "openrouter.ai",
+      "baseUrl": "https://openrouter.ai/api",
+      "model": "openai/gpt-4o-mini",
+      "signup": "https://openrouter.ai/keys",
+      "free": true
+    }
+  },
+  "displayOrder": ["mistral", "openai", "groq", "openrouter"]
+}

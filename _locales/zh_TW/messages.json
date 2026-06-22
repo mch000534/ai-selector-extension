@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "清除選取"
+  },
+  "showFloatingLabel": {
+    "message": "顯示浮動按鈕"
+  },
+  "showFloatingHint": {
+    "message": "啟用後，在選取的文字或圖片附近會出現浮動按鈕"
+  },
+  "providersLabel": {
+    "message": "預設供應商"
+  },
+  "providersCustom": {
+    "message": "自訂..."
+  },
+  "providersHint": {
+    "message": "選擇供應商以自動填入 Base URL 與模型"
+  },
+  "providersFreeBadge": {
+    "message": "提供免費方案"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "或選擇以下供應商："
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "取得金鑰"
   }
 }

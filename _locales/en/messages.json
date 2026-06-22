@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Clear selection"
+  },
+  "showFloatingLabel": {
+    "message": "Show floating button"
+  },
+  "showFloatingHint": {
+    "message": "When enabled, a floating button appears near selected text or images"
+  },
+  "providersLabel": {
+    "message": "Preset providers"
+  },
+  "providersCustom": {
+    "message": "Custom..."
+  },
+  "providersHint": {
+    "message": "Pick a provider to auto-fill Base URL and model"
+  },
+  "providersFreeBadge": {
+    "message": "Free tier available"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Or choose one of these providers:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Get key"
   }
 }

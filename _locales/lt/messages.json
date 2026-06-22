@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Išvalyti pasirinkimą"
+  },
+  "showFloatingLabel": {
+    "message": "Rodyti slankųjį mygtuką"
+  },
+  "showFloatingHint": {
+    "message": "Įjungus, šalia pasirinkto teksto ar vaizdų rodomas slankusis mygtukas"
+  },
+  "providersLabel": {
+    "message": "Iš anksto nustatyti teikėjai"
+  },
+  "providersCustom": {
+    "message": "Pasirinktinis..."
+  },
+  "providersHint": {
+    "message": "Pasirinkite teikėją, kad automatiškai užpildytumėte bazinį URL ir modelį"
+  },
+  "providersFreeBadge": {
+    "message": "Yra nemokamas planas"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Arba išbandykite vieną iš šių nemokamų teikėjų:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Gauti raktą"
   }
 }

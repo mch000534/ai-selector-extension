@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Auswahl löschen"
+  },
+  "showFloatingLabel": {
+    "message": "Schwebende Schaltfläche anzeigen"
+  },
+  "showFloatingHint": {
+    "message": "Wenn aktiviert, erscheint beim Auswählen von Text oder Bildern eine schwebende Schaltfläche in der Nähe der Auswahl"
+  },
+  "providersLabel": {
+    "message": "Voreingestellte Anbieter"
+  },
+  "providersCustom": {
+    "message": "Benutzerdefiniert..."
+  },
+  "providersHint": {
+    "message": "Wählen Sie einen Anbieter, um Base URL und Modell automatisch auszufüllen"
+  },
+  "providersFreeBadge": {
+    "message": "Kostenloser Tarif verfügbar"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Oder probieren Sie einen dieser kostenlosen Anbieter aus:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Schlüssel holen"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Kosongkan pilihan"
+  },
+  "showFloatingLabel": {
+    "message": "Tunjukkan butang terapung"
+  },
+  "showFloatingHint": {
+    "message": "Apabila didayakan, butang terapung muncul berhampiran teks atau imej yang dipilih"
+  },
+  "providersLabel": {
+    "message": "Penyedia pratetap"
+  },
+  "providersCustom": {
+    "message": "Suai langgan..."
+  },
+  "providersHint": {
+    "message": "Pilih penyedia untuk mengisi Base URL dan model secara automatik"
+  },
+  "providersFreeBadge": {
+    "message": "Pelan percuma tersedia"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Atau cuba salah satu penyedia percuma ini:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Dapatkan kunci"
   }
 }

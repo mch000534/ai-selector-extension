@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Limpar seleção"
+  },
+  "showFloatingLabel": {
+    "message": "Mostrar botão flutuante"
+  },
+  "showFloatingHint": {
+    "message": "Quando ativado, um botão flutuante aparece próximo do texto ou das imagens selecionadas"
+  },
+  "providersLabel": {
+    "message": "Fornecedores predefinidos"
+  },
+  "providersCustom": {
+    "message": "Personalizado..."
+  },
+  "providersHint": {
+    "message": "Escolha um fornecedor para preencher automaticamente o URL base e o modelo"
+  },
+  "providersFreeBadge": {
+    "message": "Plano gratuito disponível"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Ou experimente um destes fornecedores gratuitos:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Obter chave"
   }
 }

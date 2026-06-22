@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Xoá vùng chọn"
+  },
+  "showFloatingLabel": {
+    "message": "Hiện nút nổi"
+  },
+  "showFloatingHint": {
+    "message": "Khi bật, một nút nổi sẽ xuất hiện gần văn bản hoặc hình ảnh được chọn"
+  },
+  "providersLabel": {
+    "message": "Nhà cung cấp cài sẵn"
+  },
+  "providersCustom": {
+    "message": "Tùy chỉnh..."
+  },
+  "providersHint": {
+    "message": "Chọn nhà cung cấp để tự động điền Base URL và mô hình"
+  },
+  "providersFreeBadge": {
+    "message": "Có gói miễn phí"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Hoặc thử một trong những nhà cung cấp miễn phí sau:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Lấy khóa"
   }
 }

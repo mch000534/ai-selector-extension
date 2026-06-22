@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "चयन साफ़ करें"
+  },
+  "showFloatingLabel": {
+    "message": "फ़्लोटिंग बटन दिखाएँ"
+  },
+  "showFloatingHint": {
+    "message": "सक्षम होने पर, चयनित पाठ या छवियों के पास एक फ़्लोटिंग बटन दिखाई देता है"
+  },
+  "providersLabel": {
+    "message": "प्रीसेट प्रदाता"
+  },
+  "providersCustom": {
+    "message": "कस्टम..."
+  },
+  "providersHint": {
+    "message": "बेस URL और मॉडल को स्वचालित रूप से भरने के लिए एक प्रदाता चुनें"
+  },
+  "providersFreeBadge": {
+    "message": "निःशुल्क स्तर उपलब्ध"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "या इनमें से किसी एक निःशुल्क प्रदाता को आज़माएँ:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "की प्राप्त करें"
   }
 }

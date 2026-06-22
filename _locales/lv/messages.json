@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Notīrīt atlasi"
+  },
+  "showFloatingLabel": {
+    "message": "Rādīt peldošo pogu"
+  },
+  "showFloatingHint": {
+    "message": "Kad iespējots, pie atlasītā teksta vai attēliem parādās peldoša poga"
+  },
+  "providersLabel": {
+    "message": "Iepriekš iestatīti nodrošinātāji"
+  },
+  "providersCustom": {
+    "message": "Pielāgots..."
+  },
+  "providersHint": {
+    "message": "Izvēlieties nodrošinātāju, lai automātiski aizpildītu pamata URL un modeli"
+  },
+  "providersFreeBadge": {
+    "message": "Pieejams bezmaksas plāns"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Vai izmēģiniet kādu no šiem bezmaksas nodrošinātājiem:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Iegūt atslēgu"
   }
 }

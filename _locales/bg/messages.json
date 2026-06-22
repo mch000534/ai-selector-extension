@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Изчистване на избора"
+  },
+  "showFloatingLabel": {
+    "message": "Показване на плаващ бутон"
+  },
+  "showFloatingHint": {
+    "message": "Когато е активирано, плаващ бутон се появява близо до избрания текст или изображения"
+  },
+  "providersLabel": {
+    "message": "Предварително зададени доставчици"
+  },
+  "providersCustom": {
+    "message": "Персонализиран..."
+  },
+  "providersHint": {
+    "message": "Изберете доставчик за автоматично попълване на базовия URL и модела"
+  },
+  "providersFreeBadge": {
+    "message": "Наличен е безплатен план"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Или опитайте някой от тези безплатни доставчици:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Вземете ключ"
   }
 }

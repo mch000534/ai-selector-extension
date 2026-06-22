@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Futa uteuzi"
+  },
+  "showFloatingLabel": {
+    "message": "Onyesha kitufe kinachoelea"
+  },
+  "showFloatingHint": {
+    "message": "Ikiwashwa, kitufe kinachoelea huonekana karibu na maandishi au picha zilizochaguliwa"
+  },
+  "providersLabel": {
+    "message": "Watoa huduma waliowekwa awali"
+  },
+  "providersCustom": {
+    "message": "Maalum..."
+  },
+  "providersHint": {
+    "message": "Chagua mtoa huduma ili kujaza kiotomatiki Base URL na modeli"
+  },
+  "providersFreeBadge": {
+    "message": "Kiwango cha bure kinapatikana"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Au jaribu mmoja wa watoa huduma hawa wa bure:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Pata ufunguo"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "ล้างสิ่งที่เลือก"
+  },
+  "showFloatingLabel": {
+    "message": "แสดงปุ่มลอย"
+  },
+  "showFloatingHint": {
+    "message": "เมื่อเปิดใช้งาน ปุ่มลอยจะปรากฏใกล้กับข้อความหรือรูปภาพที่เลือก"
+  },
+  "providersLabel": {
+    "message": "ผู้ให้บริการที่ตั้งไว้ล่วงหน้า"
+  },
+  "providersCustom": {
+    "message": "กำหนดเอง..."
+  },
+  "providersHint": {
+    "message": "เลือกผู้ให้บริการเพื่อกรอก Base URL และโมเดลอัตโนมัติ"
+  },
+  "providersFreeBadge": {
+    "message": "มีแพ็กเกจฟรี"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "หรือลองใช้ผู้ให้บริการฟรีเหล่านี้:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "รับคีย์"
   }
 }

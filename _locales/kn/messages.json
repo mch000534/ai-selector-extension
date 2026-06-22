@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "ಆಯ್ಕೆಯನ್ನು ತೆರವುಗೊಳಿಸು"
+  },
+  "showFloatingLabel": {
+    "message": "ತೇಲುವ ಬಟನ್ ತೋರಿಸು"
+  },
+  "showFloatingHint": {
+    "message": "ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, ಆಯ್ಕೆಮಾಡಿದ ಪಠ್ಯ ಅಥವಾ ಚಿತ್ರಗಳ ಬಳಿ ತೇಲುವ ಬಟನ್ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ"
+  },
+  "providersLabel": {
+    "message": "ಪೂರ್ವನಿಯೋಜಿತ ಪೂರೈಕೆದಾರರು"
+  },
+  "providersCustom": {
+    "message": "ಕಸ್ಟಮ್..."
+  },
+  "providersHint": {
+    "message": "ಬೇಸ್ URL ಮತ್ತು ಮಾಡೆಲ್ ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಭರ್ತಿ ಮಾಡಲು ಪೂರೈಕೆದಾರರನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "providersFreeBadge": {
+    "message": "ಉಚಿತ ಹಂತ ಲಭ್ಯವಿದೆ"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "ಅಥವಾ ಈ ಉಚಿತ ಪೂರೈಕೆದಾರರಲ್ಲಿ ಒಬ್ಬರನ್ನು ಪ್ರಯತ್ನಿಸಿ:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "ಕೀ ಪಡೆಯಿರಿ"
   }
 }

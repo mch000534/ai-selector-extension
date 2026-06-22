@@ -11,6 +11,14 @@
     <h1 data-i18n="popupHeading">AI Selection Assistant</h1>
 
     <div class="form-group">
+      <label for="provider" data-i18n="providersLabel">Preset providers</label>
+      <select id="provider">
+        <option value="custom" data-i18n="providersCustom">Custom...</option>
+      </select>
+      <small data-i18n="providersHint">Pick a provider to auto-fill Base URL and model</small>
+    </div>
+
+    <div class="form-group">
       <label for="baseUrl" data-i18n="baseUrlLabel">API Base URL</label>
       <input type="text" id="baseUrl" data-i18n-placeholder="baseUrlPlaceholder" placeholder="https://api.example.com/v1">
       <small id="baseUrlHint"></small>
@@ -53,6 +61,14 @@
         <span data-i18n="defaultPinLabel">Pin dialog by default</span>
       </label>
       <small data-i18n="defaultPinHint">When enabled, new dialogs are automatically pinned and won't close when clicking outside</small>
+    </div>
+
+    <div class="form-group toggle-group">
+      <label class="toggle-label">
+        <input type="checkbox" id="showFloating" checked>
+        <span data-i18n="showFloatingLabel">Show floating button</span>
+      </label>
+      <small data-i18n="showFloatingHint">When enabled, a floating button appears near selected text or images</small>
     </div>
 
     <div id="status" class="status"></div>

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "נקה בחירה"
+  },
+  "showFloatingLabel": {
+    "message": "הצג כפתור צף"
+  },
+  "showFloatingHint": {
+    "message": "כאשר מופעל, כפתור צף מופיע ליד הטקסט או התמונות הנבחרים"
+  },
+  "providersLabel": {
+    "message": "ספקים מוגדרים מראש"
+  },
+  "providersCustom": {
+    "message": "מותאם אישית..."
+  },
+  "providersHint": {
+    "message": "בחר ספק למילוי אוטומטי של כתובת הבסיס והדגם"
+  },
+  "providersFreeBadge": {
+    "message": "קיימת רמה חינמית"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "או נסו את אחד מהספקים החינמיים האלה:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "קבל מפתח"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Hapus pilihan"
+  },
+  "showFloatingLabel": {
+    "message": "Tampilkan tombol mengambang"
+  },
+  "showFloatingHint": {
+    "message": "Jika diaktifkan, tombol mengambang akan muncul di dekat teks atau gambar yang dipilih"
+  },
+  "providersLabel": {
+    "message": "Penyedia preset"
+  },
+  "providersCustom": {
+    "message": "Kustom..."
+  },
+  "providersHint": {
+    "message": "Pilih penyedia untuk mengisi otomatis Base URL dan model"
+  },
+  "providersFreeBadge": {
+    "message": "Tersedia paket gratis"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Atau coba salah satu penyedia gratis berikut:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Dapatkan kunci"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Seçimi temizle"
+  },
+  "showFloatingLabel": {
+    "message": "Yüzen düğmeyi göster"
+  },
+  "showFloatingHint": {
+    "message": "Etkinleştirildiğinde, seçili metin veya resimlerin yakınında yüzen bir düğme görünür"
+  },
+  "providersLabel": {
+    "message": "Önceden ayarlanmış sağlayıcılar"
+  },
+  "providersCustom": {
+    "message": "Özel..."
+  },
+  "providersHint": {
+    "message": "Base URL ve modeli otomatik doldurmak için bir sağlayıcı seçin"
+  },
+  "providersFreeBadge": {
+    "message": "Ücretsiz plan mevcut"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Veya şu ücretsiz sağlayıcılardan birini deneyin:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Anahtar al"
   }
 }

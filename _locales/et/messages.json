@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Tühjenda valik"
+  },
+  "showFloatingLabel": {
+    "message": "Kuva ujuv nupp"
+  },
+  "showFloatingHint": {
+    "message": "Kui lubatud, kuvatakse valitud teksti või piltide lähedal ujuv nupp"
+  },
+  "providersLabel": {
+    "message": "Eelseadistatud teenusepakkujad"
+  },
+  "providersCustom": {
+    "message": "Kohandatud..."
+  },
+  "providersHint": {
+    "message": "Vali teenusepakkuja, et täita automaatselt baas-URL ja mudel"
+  },
+  "providersFreeBadge": {
+    "message": "Saadaval on tasuta pakett"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Või proovige ühte neist tasuta teenusepakkujatest:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Hangi võti"
   }
 }

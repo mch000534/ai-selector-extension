@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Ryd markering"
+  },
+  "showFloatingLabel": {
+    "message": "Vis flydende knap"
+  },
+  "showFloatingHint": {
+    "message": "Når aktiveret, vises en flydende knap nær valgt tekst eller billeder"
+  },
+  "providersLabel": {
+    "message": "Forudindstillede udbydere"
+  },
+  "providersCustom": {
+    "message": "Brugerdefineret..."
+  },
+  "providersHint": {
+    "message": "Vælg en udbyder for automatisk at udfylde Base-URL og model"
+  },
+  "providersFreeBadge": {
+    "message": "Gratis plan tilgængelig"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Eller prøv en af disse gratis udbydere:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Hent nøgle"
   }
 }

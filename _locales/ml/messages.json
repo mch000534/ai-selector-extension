@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക"
+  },
+  "showFloatingLabel": {
+    "message": "പൊങ്ങുന്ന ബട്ടൺ കാണിക്കുക"
+  },
+  "showFloatingHint": {
+    "message": "പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, തിരഞ്ഞെടുത്ത വാചകത്തിനോ ചിത്രങ്ങൾക്കോ സമീപം പൊങ്ങുന്ന ബട്ടൺ ദൃശ്യമാകുന്നു"
+  },
+  "providersLabel": {
+    "message": "മുൻകൂട്ടി സജ്ജമാക്കിയ ദാതാക്കൾ"
+  },
+  "providersCustom": {
+    "message": "ഇഷ്‌ടാനുസൃതം..."
+  },
+  "providersHint": {
+    "message": "ബേസ് URL-ഉം മോഡലും സ്വയമേവ പൂരിപ്പിക്കാൻ ഒരു ദാതാവിനെ തിരഞ്ഞെടുക്കുക"
+  },
+  "providersFreeBadge": {
+    "message": "സൗജന്യ നിരക്ക് ലഭ്യമാണ്"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "അല്ലെങ്കിൽ ഈ സൗജന്യ ദാതാക്കളിൽ ഒരാളെ പരീക്ഷിക്കുക:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "കീ നേടുക"
   }
 }

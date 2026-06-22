@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Șterge selecția"
+  },
+  "showFloatingLabel": {
+    "message": "Afișează butonul plutitor"
+  },
+  "showFloatingHint": {
+    "message": "Când este activat, un buton plutitor apare lângă textul sau imaginile selectate"
+  },
+  "providersLabel": {
+    "message": "Furnizori predefiniți"
+  },
+  "providersCustom": {
+    "message": "Personalizat..."
+  },
+  "providersHint": {
+    "message": "Alegeți un furnizor pentru a completa automat URL-ul de bază și modelul"
+  },
+  "providersFreeBadge": {
+    "message": "Plan gratuit disponibil"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Sau încercați unul dintre acești furnizori gratuiți:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Obține cheia"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Selectie wissen"
+  },
+  "showFloatingLabel": {
+    "message": "Zwevende knop tonen"
+  },
+  "showFloatingHint": {
+    "message": "Indien ingeschakeld, verschijnt er een zwevende knop naast geselecteerde tekst of afbeeldingen"
+  },
+  "providersLabel": {
+    "message": "Vooraf ingestelde providers"
+  },
+  "providersCustom": {
+    "message": "Aangepast..."
+  },
+  "providersHint": {
+    "message": "Kies een provider om Base URL en model automatisch in te vullen"
+  },
+  "providersFreeBadge": {
+    "message": "Gratis abonnement beschikbaar"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Of probeer een van deze gratis providers:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Sleutel ophalen"
   }
 }

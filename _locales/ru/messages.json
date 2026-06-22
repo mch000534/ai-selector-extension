@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Очистить выделение"
+  },
+  "showFloatingLabel": {
+    "message": "Показывать плавающую кнопку"
+  },
+  "showFloatingHint": {
+    "message": "Когда включено, плавающая кнопка появляется рядом с выделенным текстом или изображениями"
+  },
+  "providersLabel": {
+    "message": "Предустановленные поставщики"
+  },
+  "providersCustom": {
+    "message": "Пользовательский..."
+  },
+  "providersHint": {
+    "message": "Выберите поставщика, чтобы автоматически заполнить базовый URL и модель"
+  },
+  "providersFreeBadge": {
+    "message": "Доступен бесплатный тариф"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Или попробуйте одного из этих бесплатных поставщиков:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Получить ключ"
   }
 }

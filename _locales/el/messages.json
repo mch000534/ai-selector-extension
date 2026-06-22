@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Εκκαθάριση επιλογής"
+  },
+  "showFloatingLabel": {
+    "message": "Εμφάνιση αιωρούμενου κουμπιού"
+  },
+  "showFloatingHint": {
+    "message": "Όταν είναι ενεργοποιημένο, ένα αιωρούμενο κουμπί εμφανίζεται κοντά στο επιλεγμένο κείμενο ή εικόνες"
+  },
+  "providersLabel": {
+    "message": "Προκαθορισμένοι πάροχοι"
+  },
+  "providersCustom": {
+    "message": "Προσαρμοσμένο..."
+  },
+  "providersHint": {
+    "message": "Επιλέξτε πάροχο για αυτόματη συμπλήρωση της βασικής διεύθυνσης URL και του μοντέλου"
+  },
+  "providersFreeBadge": {
+    "message": "Διαθέσιμο δωρεάν πακέτο"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Ή δοκιμάστε έναν από αυτούς τους δωρεάν παρόχους:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Λήψη κλειδιού"
   }
 }

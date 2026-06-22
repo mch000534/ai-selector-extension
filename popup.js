@@ -11,8 +11,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const addPromptBtn = document.getElementById('addPromptBtn');
 
   const defaultPinCheckbox = document.getElementById('defaultPin');
+  const showFloatingCheckbox = document.getElementById('showFloating');
   const baseUrlHint = document.getElementById('baseUrlHint');
   const toggleApiKeyBtn = document.getElementById('toggleApiKey');
+  const providerSelect = document.getElementById('provider');
+
+  let PROVIDERS = {};
+  let PROVIDER_ORDER = [];
+
+  async function loadProviders() {
+    try {
+      const res = await fetch(chrome.runtime.getURL('providers.json'));
+      const data = await res.json();
+      PROVIDERS = data.providers || {};
+      PROVIDER_ORDER = data.displayOrder || Object.keys(PROVIDERS);
+    } catch (e) {
+      PROVIDERS = {};
+      PROVIDER_ORDER = [];
+    }
+  }
+
+  function renderProviderOptions() {
+    if (!providerSelect) return;
+    const currentValue = providerSelect.value;
+    providerSelect.querySelectorAll('option:not([value="custom"])').forEach(o => o.remove());
+    PROVIDER_ORDER.forEach(key => {
+      const p = PROVIDERS[key];
+      if (!p) return;
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = `${p.name} — ${p.host}`;
+      if (p.free) opt.dataset.free = '1';
+      providerSelect.appendChild(opt);
+    });
+    if (PROVIDER_ORDER.includes(currentValue)) providerSelect.value = currentValue;
+  }
 
   let quickPrompts = [];
 
@@ -43,6 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const msg = chrome.i18n.getMessage(key);
       if (msg) el.setAttribute('aria-label', msg);
     });
+
+    if (providerSelect) {
+      const freeBadge = chrome.i18n.getMessage('providersFreeBadge') || 'Free';
+      providerSelect.querySelectorAll('option[data-free="1"]').forEach(opt => {
+        const base = opt.textContent.replace(/\s*[\(\[]?\s*Free[^)\]]*[\)\]]?\s*$/i, '').trim();
+        opt.textContent = `${base}  [${freeBadge}]`;
+        opt.dataset.baseText = base;
+      });
+    }
   }
 
   function normalizeBaseUrl(url) {
@@ -67,14 +109,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyI18n();
 
-  chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin'], (result) => {
+  function detectProvider(savedUrl) {
+    if (!savedUrl) return 'custom';
+    const u = savedUrl.trim().replace(/\/+$/, '').replace(/\/v\d+\/?$/i, '');
+    for (const [key, p] of Object.entries(PROVIDERS)) {
+      const pu = p.baseUrl.replace(/\/+$/, '');
+      if (u === pu || u.startsWith(pu + '/')) return key;
+    }
+    return 'custom';
+  }
+
+  (async () => {
+    await loadProviders();
+    renderProviderOptions();
+    applyI18n();
+
+    chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], (result) => {
     if (result.apiKey) apiKeyInput.value = result.apiKey;
     if (result.baseUrl) baseUrlInput.value = result.baseUrl;
     if (result.model) modelInput.value = result.model;
     defaultPinCheckbox.checked = result.defaultPin !== false;
+    showFloatingCheckbox.checked = result.showFloating !== false;
+    providerSelect.value = detectProvider(result.baseUrl);
     quickPrompts = result.quickPrompts || [];
     renderPrompts();
     updateBaseUrlHint();
+  });
+  })();
+
+  providerSelect.addEventListener('change', () => {
+    const key = providerSelect.value;
+    if (key === 'custom' || !PROVIDERS[key]) return;
+    const { baseUrl, model } = PROVIDERS[key];
+    baseUrlInput.value = baseUrl;
+    modelInput.value = model;
+    updateBaseUrlHint();
+    save();
+  });
+
+  baseUrlInput.addEventListener('input', () => {
+    const detected = detectProvider(baseUrlInput.value);
+    if (detected !== providerSelect.value) providerSelect.value = 'custom';
+  });
+  modelInput.addEventListener('input', () => {
+    const key = providerSelect.value;
+    if (key !== 'custom' && PROVIDERS[key] && modelInput.value.trim() !== PROVIDERS[key].model) {
+      providerSelect.value = 'custom';
+    }
   });
 
   function renderPrompts() {
@@ -245,7 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const model = modelInput.value.trim();
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
-    chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin }, () => {
+    const showFloating = showFloatingCheckbox.checked;
+    chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }, () => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
   }
@@ -274,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   apiKeyInput.addEventListener('input', debouncedSave);
   modelInput.addEventListener('input', debouncedSave);
   defaultPinCheckbox.addEventListener('change', save);
+  showFloatingCheckbox.addEventListener('change', save);
 
   toggleApiKeyBtn.addEventListener('click', () => {
     const isPassword = apiKeyInput.type === 'password';

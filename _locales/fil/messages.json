@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "I-clear ang pinili"
+  },
+  "showFloatingLabel": {
+    "message": "Ipakita ang lumulutang na pindutan"
+  },
+  "showFloatingHint": {
+    "message": "Kapag naka-enable, lumalabas ang isang lumulutang na pindutan malapit sa piniling teksto o mga larawan"
+  },
+  "providersLabel": {
+    "message": "Mga preset na provider"
+  },
+  "providersCustom": {
+    "message": "Custom..."
+  },
+  "providersHint": {
+    "message": "Pumili ng provider para auto-fill ang Base URL at model"
+  },
+  "providersFreeBadge": {
+    "message": "May libreng tier"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "O subukan ang isa sa mga libreng provider na ito:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Kunin ang key"
   }
 }

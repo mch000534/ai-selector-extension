@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "پاک کردن انتخاب"
+  },
+  "showFloatingLabel": {
+    "message": "نمایش دکمه شناور"
+  },
+  "showFloatingHint": {
+    "message": "در صورت فعال بودن، دکمه شناور نزدیک متن یا تصاویر انتخاب‌شده ظاهر می‌شود"
+  },
+  "providersLabel": {
+    "message": "ارائه‌دهندگان پیش‌تنظیم"
+  },
+  "providersCustom": {
+    "message": "سفارشی..."
+  },
+  "providersHint": {
+    "message": "برای پر کردن خودکار نشانی پایه و مدل، یک ارائه‌دهنده انتخاب کنید"
+  },
+  "providersFreeBadge": {
+    "message": "طرح رایگان موجود است"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "یا یکی از این ارائه‌دهندگان رایگان را امتحان کنید:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "دریافت کلید"
   }
 }

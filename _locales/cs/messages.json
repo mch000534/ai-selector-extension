@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Vymazat výběr"
+  },
+  "showFloatingLabel": {
+    "message": "Zobrazit plovoucí tlačítko"
+  },
+  "showFloatingHint": {
+    "message": "Když je povoleno, u vybraného textu nebo obrázků se zobrazí plovoucí tlačítko"
+  },
+  "providersLabel": {
+    "message": "Přednastavení poskytovatelé"
+  },
+  "providersCustom": {
+    "message": "Vlastní..."
+  },
+  "providersHint": {
+    "message": "Vyberte poskytovatele pro automatické vyplnění základní URL a modelu"
+  },
+  "providersFreeBadge": {
+    "message": "K dispozici bezplatný plán"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Nebo vyzkoušejte jednoho z těchto bezplatných poskytovatelů:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Získat klíč"
   }
 }

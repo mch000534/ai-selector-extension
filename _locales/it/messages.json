@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Cancella selezione"
+  },
+  "showFloatingLabel": {
+    "message": "Mostra pulsante flottante"
+  },
+  "showFloatingHint": {
+    "message": "Se abilitato, un pulsante flottante appare vicino al testo o alle immagini selezionate"
+  },
+  "providersLabel": {
+    "message": "Provider predefiniti"
+  },
+  "providersCustom": {
+    "message": "Personalizzato..."
+  },
+  "providersHint": {
+    "message": "Scegli un provider per compilare automaticamente URL di base e modello"
+  },
+  "providersFreeBadge": {
+    "message": "Piano gratuito disponibile"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Oppure prova uno di questi provider gratuiti:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Ottieni chiave"
   }
 }

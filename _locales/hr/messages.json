@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Ukloni odabir"
+  },
+  "showFloatingLabel": {
+    "message": "Prikaži plutajući gumb"
+  },
+  "showFloatingHint": {
+    "message": "Kada je omogućeno, plutajući gumb pojavljuje se blizu odabranog teksta ili slika"
+  },
+  "providersLabel": {
+    "message": "Predefinirani pružatelji usluga"
+  },
+  "providersCustom": {
+    "message": "Prilagođeno..."
+  },
+  "providersHint": {
+    "message": "Odaberite pružatelja usluga za automatsko popunjavanje osnovnog URL-a i modela"
+  },
+  "providersFreeBadge": {
+    "message": "Dostupan besplatan plan"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Ili isprobajte jednog od ovih besplatnih pružatelja usluga:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Preuzmi ključ"
   }
 }

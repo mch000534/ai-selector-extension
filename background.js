@@ -40,4 +40,33 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     })();
     return true;
   }
+
+  if (msg.action === 'fetchImageAsDataUrl' && msg.url) {
+    (async () => {
+      try {
+        const res = await fetch(msg.url);
+        if (!res.ok) return sendResponse({ error: `HTTP ${res.status}` });
+        const blob = await res.blob();
+        const reader = new FileReader();
+        reader.onload = () => sendResponse({ dataUrl: reader.result });
+        reader.onerror = () => sendResponse({ error: 'FileReader failed' });
+        reader.readAsDataURL(blob);
+      } catch (e) {
+        sendResponse({ error: e.message });
+      }
+    })();
+    return true;
+  }
+
+  if (msg.action === 'saveProviderPreset' && msg.baseUrl && msg.model) {
+    (async () => {
+      try {
+        await chrome.storage.sync.set({ baseUrl: msg.baseUrl, model: msg.model });
+        sendResponse({ ok: true });
+      } catch (e) {
+        sendResponse({ error: e.message });
+      }
+    })();
+    return true;
+  }
 });

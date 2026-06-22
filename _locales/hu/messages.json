@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Kijelölés törlése"
+  },
+  "showFloatingLabel": {
+    "message": "Lebegő gomb megjelenítése"
+  },
+  "showFloatingHint": {
+    "message": "Ha engedélyezve van, lebegő gomb jelenik meg a kijelölt szöveg vagy képek közelében"
+  },
+  "providersLabel": {
+    "message": "Előre beállított szolgáltatók"
+  },
+  "providersCustom": {
+    "message": "Egyéni..."
+  },
+  "providersHint": {
+    "message": "Válasszon szolgáltatót az alap URL és a modell automatikus kitöltéséhez"
+  },
+  "providersFreeBadge": {
+    "message": "Ingyenes csomag elérhető"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Vagy próbáljon ki egyet ezek közül az ingyenes szolgáltatók közül:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Kulcs beszerzése"
   }
 }

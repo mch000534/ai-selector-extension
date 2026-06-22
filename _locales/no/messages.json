@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Fjern valg"
+  },
+  "showFloatingLabel": {
+    "message": "Vis flytende knapp"
+  },
+  "showFloatingHint": {
+    "message": "Når aktivert, vises en flytende knapp nær valgt tekst eller bilder"
+  },
+  "providersLabel": {
+    "message": "Forhåndsinnstilte leverandører"
+  },
+  "providersCustom": {
+    "message": "Egendefinert..."
+  },
+  "providersHint": {
+    "message": "Velg en leverandør for å autofylle base-URL og modell"
+  },
+  "providersFreeBadge": {
+    "message": "Gratisplan tilgjengelig"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Eller prøv en av disse gratis leverandørene:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Få nøkkel"
   }
 }

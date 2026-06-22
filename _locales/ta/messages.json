@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "தேர்வை அழி"
+  },
+  "showFloatingLabel": {
+    "message": "மிதக்கும் பொத்தானைக் காட்டு"
+  },
+  "showFloatingHint": {
+    "message": "இயக்கப்பட்டால், தேர்ந்தெடுக்கப்பட்ட உரை அல்லது படங்களின் அருகில் மிதக்கும் பொத்தான் தோன்றும்"
+  },
+  "providersLabel": {
+    "message": "முன்னமைக்கப்பட்ட வழங்கிகள்"
+  },
+  "providersCustom": {
+    "message": "தனிப்பயன்..."
+  },
+  "providersHint": {
+    "message": "அடிப்படை URL மற்றும் மாதிரியை தானாக நிரப்ப ஒரு வழங்கியைத் தேர்ந்தெடுக்கவும்"
+  },
+  "providersFreeBadge": {
+    "message": "இலவச அடுக்கு கிடைக்கிறது"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "அல்லது இந்த இலவச வழங்கிகளில் ஒன்றை முயற்சிக்கவும்:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "விசையைப் பெறு"
   }
 }

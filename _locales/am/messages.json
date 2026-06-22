@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "ምርጫን አጽዳ"
+  },
+  "showFloatingLabel": {
+    "message": "ተንሳፋፊ አዝራር አሳይ"
+  },
+  "showFloatingHint": {
+    "message": "ሲነቃ፣ ከተመረጠው ጽሑፍ ወይም ምስሎች አጠገብ ተንሳፋፊ አዝራር ይታያል"
+  },
+  "providersLabel": {
+    "message": "ቅድመ-የተቀመጡ አቅራቢዎች"
+  },
+  "providersCustom": {
+    "message": "ብጁ..."
+  },
+  "providersHint": {
+    "message": "Base URL እና ሞዴልን በራስ-ሰር ለመሙላት አቅራቢ ይምረጡ"
+  },
+  "providersFreeBadge": {
+    "message": "ነፃ ደረጃ ይገኛል"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "ወይም ከነዚህ ነፃ አቅራቢዎች አንዱን ይሞክሩ:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "ቁልፍ ያግኙ"
   }
 }

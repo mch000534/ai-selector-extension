@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Очистити виділення"
+  },
+  "showFloatingLabel": {
+    "message": "Показувати плаваючу кнопку"
+  },
+  "showFloatingHint": {
+    "message": "Коли ввімкнено, плаваюча кнопка з'являється біля виділеного тексту або зображень"
+  },
+  "providersLabel": {
+    "message": "Попередньо налаштовані постачальники"
+  },
+  "providersCustom": {
+    "message": "Користувацький..."
+  },
+  "providersHint": {
+    "message": "Оберіть постачальника для автоматичного заповнення базової URL-адреси та моделі"
+  },
+  "providersFreeBadge": {
+    "message": "Доступний безкоштовний тариф"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Або спробуйте одного з цих безкоштовних постачальників:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Отримати ключ"
   }
 }

@@ -101,6 +101,11 @@ input:focus, select:focus {
   border-color: var(--accent);
 }
 
+#provider {
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+}
+
 small {
   display: block;
   font-size: 11px;

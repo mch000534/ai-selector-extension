@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Esborra la selecció"
+  },
+  "showFloatingLabel": {
+    "message": "Mostra el botó flotant"
+  },
+  "showFloatingHint": {
+    "message": "Quan està activat, apareix un botó flotant a prop del text o les imatges seleccionades"
+  },
+  "providersLabel": {
+    "message": "Proveïdors predefinits"
+  },
+  "providersCustom": {
+    "message": "Personalitzat..."
+  },
+  "providersHint": {
+    "message": "Trieu un proveïdor per omplir automàticament l'URL base i el model"
+  },
+  "providersFreeBadge": {
+    "message": "Hi ha un pla gratuït"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "O proveu un d'aquests proveïdors gratuïts:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Obté la clau"
   }
 }

@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "清除选择"
+  },
+  "showFloatingLabel": {
+    "message": "显示浮动按钮"
+  },
+  "showFloatingHint": {
+    "message": "启用后，在选取的文字或图片附近会出现浮动按钮"
+  },
+  "providersLabel": {
+    "message": "预设供应商"
+  },
+  "providersCustom": {
+    "message": "自定义..."
+  },
+  "providersHint": {
+    "message": "选择供应商以自动填充 Base URL 和模型"
+  },
+  "providersFreeBadge": {
+    "message": "提供免费套餐"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "或选择以下供应商："
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "获取密钥"
   }
 }

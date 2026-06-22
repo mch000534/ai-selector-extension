@@ -19,6 +19,7 @@
   const PREFIX = '__aiext_';
   let floatingIcon = null;
   let currentContext = { text: '', images: [] };
+  let _showFloating = true;
   const dialogs = new Map();
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
@@ -555,6 +556,56 @@
         color: ${c.warningText} !important;
         font-size: 13px !important;
       }
+      .${PREFIX}warning-free {
+        all: unset;
+        display: block !important;
+        margin-top: 14px !important;
+        padding-top: 14px !important;
+        border-top: 1px solid ${c.borderLight} !important;
+        font-size: 12px !important;
+        color: ${c.textMuted} !important;
+        text-align: ${_isRtl ? 'right' : 'left'} !important;
+      }
+      .${PREFIX}warning-free-title {
+        all: unset;
+        display: block !important;
+        margin-bottom: 8px !important;
+        font-size: 12px !important;
+        color: ${c.textMuted} !important;
+      }
+      .${PREFIX}warning-free-list {
+        all: unset;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .${PREFIX}warning-free-btn {
+        all: unset;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 10px !important;
+        padding: 8px 12px !important;
+        border: 1px solid ${c.border} !important;
+        border-radius: 8px !important;
+        background: ${c.bgTertiary} !important;
+        color: ${c.textPrimary} !important;
+        font-size: 13px !important;
+        cursor: pointer !important;
+        transition: border-color 0.15s, background 0.15s !important;
+      }
+      .${PREFIX}warning-free-btn:hover {
+        border-color: ${c.accent} !important;
+        background: ${c.bgHover} !important;
+      }
+      .${PREFIX}warning-free-btn-name { font-weight: 600 !important; }
+      .${PREFIX}warning-free-btn-host { color: ${c.textMuted} !important; font-size: 11px !important; }
+      .${PREFIX}warning-free-btn-cta {
+        font-size: 11px !important;
+        color: ${c.accent} !important;
+        font-weight: 600 !important;
+        flex-shrink: 0 !important;
+      }
       .${PREFIX}typing {
         display: inline-flex !important;
         gap: 4px !important;
@@ -726,12 +777,29 @@
 
   async function imageToDataURL(imgEl) {
     try {
-      const src = imgEl.src || imgEl.getAttribute('src');
-      if (!src) return null;
-      if (src.startsWith('data:')) return src;
+      const rawSrc = imgEl.src || imgEl.getAttribute('src');
+      if (!rawSrc) return null;
+      if (rawSrc.startsWith('data:')) return rawSrc;
 
-      const res = await fetch(src, { mode: 'cors' });
-      if (!res.ok) return null;
+      let absoluteSrc;
+      try { absoluteSrc = new URL(rawSrc, document.baseURI).href; }
+      catch (e) { absoluteSrc = rawSrc; }
+
+      let res;
+      try {
+        res = await fetch(absoluteSrc, { mode: 'cors' });
+      } catch (e) { res = null; }
+
+      if (!res || !res.ok) {
+        if (contextValid() && chrome.runtime && chrome.runtime.sendMessage) {
+          try {
+            const reply = await chrome.runtime.sendMessage({ action: 'fetchImageAsDataUrl', url: absoluteSrc });
+            if (reply && reply.dataUrl) return reply.dataUrl;
+          } catch (e) { /* fall through */ }
+        }
+        return null;
+      }
+
       const blob = await res.blob();
       return await new Promise((resolve) => {
         const reader = new FileReader();
@@ -797,6 +865,19 @@
     });
   }
 
+  function getShowFloating() {
+    return new Promise((resolve) => {
+      try {
+        if (!contextValid() || !chrome.storage || !chrome.storage.sync) return resolve(true);
+        chrome.storage.sync.get(['showFloating'], (result) => {
+          resolve(result.showFloating !== false);
+        });
+      } catch (e) {
+        resolve(true);
+      }
+    });
+  }
+
   function isOurElement(el) {
     while (el) {
       if (el.getAttribute && el.getAttribute('data-aiext')) return true;
@@ -807,6 +888,7 @@
 
   // ─── Floating Icon ───
   function showFloatingIcon(x, y, imgEl) {
+    if (!_showFloating) return;
     hideFloatingIcon();
     floatingIcon = document.createElement('div');
     floatingIcon.className = `${PREFIX}icon`;
@@ -1434,8 +1516,30 @@
     if (settings.defaultPin !== false) togglePin(id);
   }
 
-  function showSettingsWarning() {
+  let _providersCache = null;
+  async function getAllProviders() {
+    if (_providersCache) return _providersCache;
+    try {
+      if (!contextValid() || !chrome.runtime || !chrome.runtime.getURL) return [];
+      const res = await fetch(chrome.runtime.getURL('providers.json'));
+      const data = await res.json();
+      const order = data.displayOrder || Object.keys(data.providers || {});
+      _providersCache = order
+        .map(key => {
+          const p = (data.providers || {})[key];
+          return p ? { key, ...p } : null;
+        })
+        .filter(Boolean);
+      return _providersCache;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async function showSettingsWarning() {
     closeAllDialogs();
+    const providers = await getAllProviders();
+
     const overlay = document.createElement('div');
     overlay.className = `${PREFIX}overlay`;
     overlay.setAttribute('data-aiext', '1');
@@ -1444,7 +1548,16 @@
     const dlg = document.createElement('div');
     dlg.className = `${PREFIX}dialog`;
     dlg.setAttribute('data-aiext', '1');
-    dlg.style.cssText = 'top:50% !important; left:50% !important; transform:translate(-50%,-50%) !important;';
+    dlg.style.cssText = 'top:50% !important; left:50% !important; transform:translate(-50%,-50%) !important; width:360px !important;';
+
+    const getBtnHtml = providers.map(p => `
+      <button class="${PREFIX}warning-free-btn" data-aiext="1" data-provider="${p.key}" type="button">
+        <span class="${PREFIX}warning-free-btn-name" data-aiext="1">${escapeHtml(p.name)}</span>
+        <span class="${PREFIX}warning-free-btn-host" data-aiext="1">${escapeHtml(p.host)}</span>
+        <span class="${PREFIX}warning-free-btn-cta" data-aiext="1">${t('settingsWarningFreeGetKey')} →</span>
+      </button>
+    `).join('');
+
     dlg.innerHTML = `
       <div class="${PREFIX}header" data-aiext="1">
         <span class="${PREFIX}title">${t('settingsWarningTitle')}</span>
@@ -1453,6 +1566,11 @@
       <div class="${PREFIX}warning">
         <p>${t('settingsWarningMessage')}</p>
         <p style="margin-top:8px;font-size:12px;">${t('settingsWarningSubMessage')}</p>
+        ${providers.length > 0 ? `
+        <div class="${PREFIX}warning-free">
+          <span class="${PREFIX}warning-free-title">${t('settingsWarningFreeIntro')}</span>
+          <div class="${PREFIX}warning-free-list">${getBtnHtml}</div>
+        </div>` : ''}
       </div>
     `;
 
@@ -1461,6 +1579,25 @@
     overlay.style.zIndex = 2147483640;
     dlg.style.zIndex = 2147483641;
     dlg.querySelector(`.${PREFIX}close`).addEventListener('click', () => { overlay.remove(); dlg.remove(); });
+
+    dlg.querySelectorAll(`.${PREFIX}warning-free-btn`).forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const provider = providers.find(p => p.key === btn.dataset.provider);
+        if (!provider) return;
+        try {
+          if (contextValid() && chrome.runtime && chrome.runtime.sendMessage) {
+            await chrome.runtime.sendMessage({
+              action: 'saveProviderPreset',
+              baseUrl: provider.baseUrl,
+              model: provider.model
+            });
+          }
+        } catch (e) { /* context invalidated */ }
+        window.open(provider.signup, '_blank', 'noopener');
+        overlay.remove();
+        dlg.remove();
+      });
+    });
   }
 
   // ─── Text Selection ───
@@ -1542,6 +1679,19 @@
   } catch (e) {
     // Extension context invalidated
   }
+
+  // Initialize showFloating cache and react to user changes in popup
+  (async () => { _showFloating = await getShowFloating(); })();
+  try {
+    if (contextValid() && chrome.storage && chrome.storage.onChanged) {
+      chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync' && changes.showFloating !== undefined) {
+          _showFloating = changes.showFloating.newValue !== false;
+          if (!_showFloating) hideFloatingIcon();
+        }
+      });
+    }
+  } catch (e) { _contextInvalid = true; }
 
   injectStyles();
 

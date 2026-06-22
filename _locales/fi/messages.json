@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Tyhjennä valinta"
+  },
+  "showFloatingLabel": {
+    "message": "Näytä kelluva painike"
+  },
+  "showFloatingHint": {
+    "message": "Kun käytössä, kelluva painike näkyy valitun tekstin tai kuvien lähellä"
+  },
+  "providersLabel": {
+    "message": "Esiasetetut tarjoajat"
+  },
+  "providersCustom": {
+    "message": "Mukautettu..."
+  },
+  "providersHint": {
+    "message": "Valitse tarjoaja täyttääksesi perus-URL-osoitteen ja mallin automaattisesti"
+  },
+  "providersFreeBadge": {
+    "message": "Ilmainen taso saatavilla"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Tai kokeile jotakin näistä ilmaisista tarjoajista:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Hanki avain"
   }
 }

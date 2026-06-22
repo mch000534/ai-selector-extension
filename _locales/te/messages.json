@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "ఎంపికను తొలగించు"
+  },
+  "showFloatingLabel": {
+    "message": "తేలే బటన్‌ను చూపించు"
+  },
+  "showFloatingHint": {
+    "message": "ప్రారంభించినప్పుడు, ఎంచుకున్న టెక్స్ట్ లేదా చిత్రాల దగ్గర తేలే బటన్ కనిపిస్తుంది"
+  },
+  "providersLabel": {
+    "message": "ప్రీసెట్ ప్రొవైడర్‌లు"
+  },
+  "providersCustom": {
+    "message": "అనుకూల..."
+  },
+  "providersHint": {
+    "message": "బేస్ URL మరియు మోడల్‌ను స్వయంచాలకంగా నింపడానికి ఒక ప్రొవైడర్‌ను ఎంచుకోండి"
+  },
+  "providersFreeBadge": {
+    "message": "ఉచిత స్థాయి అందుబాటులో ఉంది"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "లేదా ఈ ఉచిత ప్రొవైడర్‌లలో ఒకదాన్ని ప్రయత్నించండి:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "కీ పొందండి"
   }
 }

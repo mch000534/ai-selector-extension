@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Rensa markering"
+  },
+  "showFloatingLabel": {
+    "message": "Visa flytande knapp"
+  },
+  "showFloatingHint": {
+    "message": "När aktiverat visas en flytande knapp nära vald text eller bilder"
+  },
+  "providersLabel": {
+    "message": "Förinställda leverantörer"
+  },
+  "providersCustom": {
+    "message": "Anpassad..."
+  },
+  "providersHint": {
+    "message": "Välj en leverantör för att autofylla bas-URL och modell"
+  },
+  "providersFreeBadge": {
+    "message": "Gratisplan tillgänglig"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Eller prova en av dessa gratisleverantörer:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Hämta nyckel"
   }
 }

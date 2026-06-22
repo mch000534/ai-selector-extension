@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Обриши избор"
+  },
+  "showFloatingLabel": {
+    "message": "Прикажи плутајуће дугме"
+  },
+  "showFloatingHint": {
+    "message": "Када је омогућено, плутајуће дугме се појављује близу изабраног текста или слика"
+  },
+  "providersLabel": {
+    "message": "Претходно подешени добављачи"
+  },
+  "providersCustom": {
+    "message": "Прилагођено..."
+  },
+  "providersHint": {
+    "message": "Изаберите добављача да бисте аутоматски попунили основни URL и модел"
+  },
+  "providersFreeBadge": {
+    "message": "Доступан бесплатан план"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Или пробајте једног од ових бесплатних добављача:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Добиј кључ"
   }
 }

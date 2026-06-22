@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "선택 지우기"
+  },
+  "showFloatingLabel": {
+    "message": "플로팅 버튼 표시"
+  },
+  "showFloatingHint": {
+    "message": "사용하도록 설정하면 선택한 텍스트나 이미지 근처에 플로팅 버튼이 표시됩니다"
+  },
+  "providersLabel": {
+    "message": "프리셋 제공업체"
+  },
+  "providersCustom": {
+    "message": "사용자 정의..."
+  },
+  "providersHint": {
+    "message": "제공업체를 선택하여 Base URL 및 모델을 자동 입력하세요"
+  },
+  "providersFreeBadge": {
+    "message": "무료 요금제 사용 가능"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "또는 다음 제공업체 중 하나를 선택하세요:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "키 받기"
   }
 }

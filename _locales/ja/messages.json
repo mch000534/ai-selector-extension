@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "選択をクリア"
+  },
+  "showFloatingLabel": {
+    "message": "フローティングボタンを表示"
+  },
+  "showFloatingHint": {
+    "message": "有効にすると、選択したテキストや画像の近くにフローティングボタンが表示されます"
+  },
+  "providersLabel": {
+    "message": "プリセットプロバイダー"
+  },
+  "providersCustom": {
+    "message": "カスタム..."
+  },
+  "providersHint": {
+    "message": "プロバイダーを選択して Base URL とモデルを自動入力します"
+  },
+  "providersFreeBadge": {
+    "message": "無料プラン利用可能"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "または以下のプロバイダーを選択："
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "キーを取得"
   }
 }

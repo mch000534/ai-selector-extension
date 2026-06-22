@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "مسح التحديد"
+  },
+  "showFloatingLabel": {
+    "message": "إظهار الزر العائم"
+  },
+  "showFloatingHint": {
+    "message": "عند التمكين، يظهر زر عائم بالقرب من النص أو الصور المحددة"
+  },
+  "providersLabel": {
+    "message": "المزودون المعتمدون مسبقاً"
+  },
+  "providersCustom": {
+    "message": "مخصص..."
+  },
+  "providersHint": {
+    "message": "اختر مزودًا لملء عنوان URL الأساسي والنموذج تلقائيًا"
+  },
+  "providersFreeBadge": {
+    "message": "متاح خطة مجانية"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "أو جرّب أحد هؤلاء المزودين المجانيين:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "احصل على المفتاح"
   }
 }

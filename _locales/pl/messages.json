@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "Wyczyść zaznaczenie"
+  },
+  "showFloatingLabel": {
+    "message": "Pokaż pływający przycisk"
+  },
+  "showFloatingHint": {
+    "message": "Po włączeniu obok zaznaczonego tekstu lub obrazów pojawia się pływający przycisk"
+  },
+  "providersLabel": {
+    "message": "Wstępnie ustawieni dostawcy"
+  },
+  "providersCustom": {
+    "message": "Niestandardowy..."
+  },
+  "providersHint": {
+    "message": "Wybierz dostawcę, aby automatycznie wypełnić podstawowy URL i model"
+  },
+  "providersFreeBadge": {
+    "message": "Dostępny plan bezpłatny"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "Lub wypróbuj jednego z tych bezpłatnych dostawców:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "Pobierz klucz"
   }
 }

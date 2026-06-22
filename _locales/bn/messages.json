@@ -182,5 +182,29 @@
   },
   "dialogClearTooltip": {
     "message": "নির্বাচন মুছুন"
+  },
+  "showFloatingLabel": {
+    "message": "ভাসমান বোতাম দেখান"
+  },
+  "showFloatingHint": {
+    "message": "সক্রিয় থাকলে, নির্বাচিত লেখা বা ছবির কাছে একটি ভাসমান বোতাম দেখায়"
+  },
+  "providersLabel": {
+    "message": "প্রিসেট প্রোভাইডার"
+  },
+  "providersCustom": {
+    "message": "কাস্টম..."
+  },
+  "providersHint": {
+    "message": "বেস URL এবং মডেল স্বয়ংক্রিয়ভাবে পূরণ করতে একটি প্রোভাইডার বেছে নিন"
+  },
+  "providersFreeBadge": {
+    "message": "বিনামূল্যের স্তর উপলব্ধ"
+  },
+  "settingsWarningFreeIntro": {
+    "message": "অথবা এই বিনামূল্যের প্রোভাইডারগুলোর মধ্যে একটি চেষ্টা করুন:"
+  },
+  "settingsWarningFreeGetKey": {
+    "message": "কি নিন"
   }
 }
