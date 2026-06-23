@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "ನಕಲಿಸಲಾಗಿದೆ"
+  },
+  "contextMenuOpenDialog": {
+    "message": "ಸಂವಾದ ತೆರೆಯಿರಿ",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "ಹೆಚ್ಚಿನ ಪ್ರಾಂಪ್ಟ್‌ಗಳು...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

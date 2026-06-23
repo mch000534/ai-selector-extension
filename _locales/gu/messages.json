@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "કૉપિ થયું"
+  },
+  "contextMenuOpenDialog": {
+    "message": "સંવાદ ખોલો",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "વધુ સૂચનો...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopioitu"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Avaa valintaikkuna",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Lisää ehdotuksia...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Imenakiliwa"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Fungua mazungumzo",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Madokezo zaidi...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

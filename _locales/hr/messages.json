@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopirano"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Otvori dijaloški okvir",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Više prijedloga...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

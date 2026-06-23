@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "복사됨"
+  },
+  "contextMenuOpenDialog": {
+    "message": "대화 상자 열기",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "추가 프롬프트...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

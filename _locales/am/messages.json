@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "ተቀድቷል"
+  },
+  "contextMenuOpenDialog": {
+    "message": "ውይይት ክፈት",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "ተጨማሪ ጥያቄዎች...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

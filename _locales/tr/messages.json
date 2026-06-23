@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopyalandı"
+  },
+  "contextMenuOpenDialog": {
+    "message": "İletişim kutusunu aç",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Daha fazla istem...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

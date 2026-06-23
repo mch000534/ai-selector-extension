@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopirano"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Odpri pogovorno okno",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Več predlogov...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

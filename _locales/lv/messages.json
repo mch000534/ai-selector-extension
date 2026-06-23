@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Nokopēts"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Atvērt dialoglodziņu",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Vairāk ieteikumu...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Gekopieerd"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Dialoogvenster openen",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Meer suggesties...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

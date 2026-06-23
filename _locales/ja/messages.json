@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "コピーしました"
+  },
+  "contextMenuOpenDialog": {
+    "message": "ダイアログを開く",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "その他のプロンプト...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

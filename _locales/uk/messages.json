@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Скопійовано"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Відкрити діалогове вікно",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Більше підказок...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

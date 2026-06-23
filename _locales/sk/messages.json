@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Skopírované"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Otvoriť dialógové okno",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Ďalšie návrhy...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

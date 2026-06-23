@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Αντιγράφηκε"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Άνοιγμα διαλόγου",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Περισσότερες προτάσεις...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

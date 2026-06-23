@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Nakopya"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Buksan ang dialog",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Higit pang mga prompt...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

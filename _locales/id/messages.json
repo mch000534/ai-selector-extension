@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Tersalin"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Buka dialog",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Prompt lainnya...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

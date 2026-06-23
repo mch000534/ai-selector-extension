@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopeeritud"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Ava dialoog",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Rohkem vihjeid...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

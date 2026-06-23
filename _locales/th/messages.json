@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "คัดลอกแล้ว"
+  },
+  "contextMenuOpenDialog": {
+    "message": "เปิดกล่องโต้ตอบ",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "พรอมต์เพิ่มเติม...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

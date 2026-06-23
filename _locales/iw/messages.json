@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "הועתק"
+  },
+  "contextMenuOpenDialog": {
+    "message": "פתח תיבת דו-שיח",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "בקשות נוספות...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

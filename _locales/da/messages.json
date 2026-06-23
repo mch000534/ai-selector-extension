@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Kopieret"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Åbn dialog",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Flere forslag...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

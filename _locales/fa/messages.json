@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "کپی شد"
+  },
+  "contextMenuOpenDialog": {
+    "message": "باز کردن کادر گفتگو",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "درخواست‌های بیشتر...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

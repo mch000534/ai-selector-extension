@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "कॉपी किया गया"
+  },
+  "contextMenuOpenDialog": {
+    "message": "डायलॉग खोलें",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "और संकेत...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

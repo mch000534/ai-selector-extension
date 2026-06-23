@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "പകർത്തി"
+  },
+  "contextMenuOpenDialog": {
+    "message": "ഡയലോഗ് തുറക്കുക",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "കൂടുതൽ പ്രോംപ്റ്റുകൾ...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

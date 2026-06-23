@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "కాపీ చేయబడింది"
+  },
+  "contextMenuOpenDialog": {
+    "message": "డైలాగ్ తెరవండి",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "మరిన్ని ప్రాంప్ట్‌లు...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

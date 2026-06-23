@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Nukopijuota"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Atidaryti dialogo langą",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Daugiau raginimų...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

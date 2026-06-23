@@ -466,11 +466,20 @@
       }
       .${PREFIX}input {
         all: unset;
+        display: block !important;
         flex: 1 !important;
         padding: 8px 12px !important;
         border: 1px solid ${c.border} !important;
         border-radius: 6px !important;
         font-size: 15px !important;
+        font-family: inherit !important;
+        line-height: 1.4 !important;
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        overflow-y: auto !important;
+        max-height: 140px !important;
+        min-height: 38px !important;
+        resize: none !important;
         box-sizing: border-box !important;
         color: ${c.text} !important;
         background: ${c.bgInput} !important;
@@ -1296,7 +1305,7 @@
         ${quickPrompts.map((p, i) => `<span class="${PREFIX}prompt-chip" data-aiext="1" data-prompt-index="${i}">${escapeHtml(p)}</span>`).join('')}
       </div>` : ''}
       <div class="${PREFIX}input-row">
-        <input class="${PREFIX}input" type="text" placeholder="${t('dialogInputPlaceholder')}" data-aiext="1" />
+        <textarea class="${PREFIX}input" rows="1" placeholder="${t('dialogInputPlaceholder')}" data-aiext="1"></textarea>
         <button class="${PREFIX}camera" data-aiext="1" title="${t('dialogCameraTooltip')}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </button>
@@ -1398,6 +1407,13 @@
 
     const input = state.dialog.querySelector(`.${PREFIX}input`);
     const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
+
+    function autoGrowInput() {
+      if (!input) return;
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+    }
+    input.addEventListener('input', autoGrowInput);
 
     sendBtn.addEventListener('click', () => sendMessage(id));
     input.addEventListener('keydown', (e) => {
@@ -1676,6 +1692,7 @@
     if (!text && !hasScreenshots) return;
 
     input.value = '';
+    input.dispatchEvent(new Event('input'));
     addMessage(id, 'user', text || t('screenshotLabel'));
     state.conversationHistory.push({ role: 'user', content: text || t('screenshotLabel') });
 
@@ -2098,19 +2115,70 @@
       chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.action === 'openDialog') {
       (async () => {
-        const sel = window.getSelection();
-        if (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0)) {
-          currentContext = await extractContextFromSelection(sel);
-        } else {
-          currentContext = { text: '', images: [] };
+        try {
+          if (msg.srcUrl) {
+            currentContext = { text: '', images: [msg.srcUrl] };
+          } else {
+            const sel = window.getSelection();
+            if (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0)) {
+              currentContext = await extractContextFromSelection(sel);
+            } else {
+              currentContext = { text: '', images: [] };
+            }
+          }
+          await openDialog();
+          if (typeof msg.initialText === 'string' && msg.initialText) {
+            await new Promise(r => setTimeout(r, 0));
+            const entries = Array.from(dialogs.values()).reverse();
+            for (const state of entries) {
+              const inputEl = state.dialog ? state.dialog.querySelector('.' + PREFIX + 'input') : null;
+              if (inputEl) {
+                inputEl.value = msg.initialText;
+                inputEl.dispatchEvent(new Event('input'));
+                inputEl.focus();
+                break;
+              }
+            }
+          }
+          sendResponse({ ok: true });
+        } catch (e) {
+          sendResponse({ ok: false, error: e && e.message ? e.message : String(e) });
         }
-        openDialog();
       })();
-    } else if (msg.action === 'openDialogWithImage' && msg.srcUrl) {
+      return true;
+    } else if (msg.action === 'fillInput' && typeof msg.text === 'string') {
       (async () => {
-        currentContext = { text: '', images: [msg.srcUrl] };
-        openDialog();
+        try {
+          if (msg.srcUrl) {
+            currentContext = { text: '', images: [msg.srcUrl] };
+            for (const state of dialogs.values()) {
+              if (!state.dialog || !state.context) continue;
+              const imgs = Array.isArray(state.context.images) ? state.context.images.slice() : [];
+              if (!imgs.includes(msg.srcUrl)) {
+                imgs.push(msg.srcUrl);
+                state.context.images = imgs;
+              }
+            }
+          }
+          const entries = Array.from(dialogs.values()).reverse();
+          for (const state of entries) {
+            if (!state.dialog) continue;
+            if (state.dialog.style.display === 'none') continue;
+            const inputEl = state.dialog.querySelector('.' + PREFIX + 'input');
+            if (inputEl) {
+              inputEl.value = msg.text;
+              inputEl.dispatchEvent(new Event('input'));
+              inputEl.focus();
+              sendResponse({ ok: true });
+              return;
+            }
+          }
+          sendResponse({ ok: false, error: 'no_dialog' });
+        } catch (e) {
+          sendResponse({ ok: false, error: e && e.message ? e.message : String(e) });
+        }
       })();
+      return true;
     } else if (msg.action === 'listClosedDialogs') {
       (async () => {
         try {

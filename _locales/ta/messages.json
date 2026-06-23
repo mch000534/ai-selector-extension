@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "நகலெடுக்கப்பட்டது"
+  },
+  "contextMenuOpenDialog": {
+    "message": "உரையாடலைத் திற",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "மேலும் தூண்டுகோல்கள்...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

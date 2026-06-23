@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Copiat"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Deschide caseta de dialog",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Mai multe sugestii...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

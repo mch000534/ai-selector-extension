@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Скопировано"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Открыть диалог",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Другие подсказки...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

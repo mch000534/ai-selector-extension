@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Másolva"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Párbeszédablak megnyitása",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "További javaslatok...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "কপি করা হয়েছে"
+  },
+  "contextMenuOpenDialog": {
+    "message": "ডায়ালগ খুলুন",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "আরও প্রম্পট...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

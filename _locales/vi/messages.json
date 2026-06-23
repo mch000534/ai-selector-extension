@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "Đã sao chép"
+  },
+  "contextMenuOpenDialog": {
+    "message": "Mở hộp thoại",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "Thêm gợi ý...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

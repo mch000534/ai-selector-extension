@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "已複製"
+  },
+  "contextMenuOpenDialog": {
+    "message": "開啟對話框",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "更多提示詞...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }

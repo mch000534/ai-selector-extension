@@ -247,5 +247,13 @@
   },
   "codeCopied": {
     "message": "تم النسخ"
+  },
+  "contextMenuOpenDialog": {
+    "message": "فتح مربع الحوار",
+    "description": "Context menu: open the dialog"
+  },
+  "contextMenuMorePrompts": {
+    "message": "المزيد من المطالبات...",
+    "description": "Context menu: show more quick prompts in the dialog"
   }
 }
