@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
+  const chat = window.__aiext.chat;
   const apiKeyInput = document.getElementById('apiKey');
   const modelInput = document.getElementById('model');
   const modelList = document.getElementById('modelList');
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modelHint = document.getElementById('modelHint');
   const fetchModelsBtn = document.getElementById('fetchModelsBtn');
   const statusEl = document.getElementById('status');
+  const openSidePanelBtn = document.getElementById('openSidePanelBtn');
   const promptsList = document.getElementById('promptsList');
   const newPromptInput = document.getElementById('newPrompt');
   const addPromptBtn = document.getElementById('addPromptBtn');
@@ -348,6 +350,20 @@ document.addEventListener('DOMContentLoaded', () => {
   modelInput.addEventListener('input', debouncedSave);
   defaultPinCheckbox.addEventListener('change', save);
   showFloatingCheckbox.addEventListener('change', save);
+
+  if (openSidePanelBtn) {
+    openSidePanelBtn.addEventListener('click', async () => {
+      try {
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        if (!tab || typeof tab.id !== 'number') throw new Error('no_active_tab');
+        const response = await chrome.tabs.sendMessage(tab.id, chat.createOpenDrawerMessage({}));
+        if (response && response.error) throw new Error(response.error);
+        window.close();
+      } catch (err) {
+        showStatus(chrome.i18n.getMessage('sidePanelOpenFailed', [err.message]), 'error');
+      }
+    });
+  }
 
   toggleApiKeyBtn.addEventListener('click', () => {
     const isPassword = apiKeyInput.type === 'password';

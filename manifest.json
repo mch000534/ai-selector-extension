@@ -32,6 +32,7 @@
         "lib/utils.js",
         "lib/shadow.js",
         "lib/markdown.js",
+        "lib/chat.js",
         "lib/theme.js",
         "content.js"
       ],

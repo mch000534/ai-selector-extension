@@ -10,9 +10,14 @@ global.chrome = { i18n: { getUILanguage: () => 'en', getMessage: (k) => k } };
 const libDir = path.join(__dirname, '..', 'lib');
 vm.runInThisContext(fs.readFileSync(path.join(libDir, 'utils.js'), 'utf8'));
 vm.runInThisContext(fs.readFileSync(path.join(libDir, 'markdown.js'), 'utf8'));
+const chatLibPath = path.join(libDir, 'chat.js');
+if (fs.existsSync(chatLibPath)) {
+  vm.runInThisContext(fs.readFileSync(chatLibPath, 'utf8'));
+}
 
 const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
 const { renderMarkdown } = window.__aiext.markdown;
+const chat = window.__aiext.chat || {};
 
 // ─── escapeHtml ───
 test('escapeHtml escapes < > & " \'', () => {
@@ -151,4 +156,107 @@ test('isSafeFetchUrl rejects non-http schemes', () => {
   assert.strictEqual(isSafeFetchUrl('file:///etc/passwd'), false);
   assert.strictEqual(isSafeFetchUrl('javascript:alert(1)'), false);
   assert.strictEqual(isSafeFetchUrl('data:text/html,<script>'), false);
+});
+
+// ─── chat helpers ───
+test('buildChatMessages includes selection context and conversation history', () => {
+  assert.strictEqual(typeof chat.buildChatMessages, 'function');
+  const messages = chat.buildChatMessages({
+    context: { text: 'Selected passage', images: [] },
+    pendingImages: [],
+    conversationHistory: [{ role: 'user', content: 'Summarize it' }],
+    uiLang: 'en-US',
+  });
+
+  assert.strictEqual(messages.length, 2);
+  assert.strictEqual(messages[0].role, 'system');
+  assert.ok(messages[0].content.includes('Selected passage'));
+  assert.ok(messages[0].content.includes('Please respond in en-US'));
+  assert.deepStrictEqual(messages[1], { role: 'user', content: 'Summarize it' });
+});
+
+test('buildChatMessages includes image context before conversation history', () => {
+  assert.strictEqual(typeof chat.buildChatMessages, 'function');
+  const messages = chat.buildChatMessages({
+    context: { text: '', images: ['data:image/png;base64,aaa'] },
+    pendingImages: ['data:image/png;base64,bbb'],
+    conversationHistory: [{ role: 'user', content: 'What is shown?' }],
+    uiLang: 'zh-TW',
+  });
+
+  assert.strictEqual(messages.length, 4);
+  assert.strictEqual(messages[1].role, 'user');
+  assert.strictEqual(messages[1].content[0].type, 'text');
+  assert.strictEqual(messages[1].content[1].image_url.url, 'data:image/png;base64,aaa');
+  assert.strictEqual(messages[1].content[2].image_url.url, 'data:image/png;base64,bbb');
+  assert.strictEqual(messages[2].role, 'assistant');
+  assert.deepStrictEqual(messages[3], { role: 'user', content: 'What is shown?' });
+});
+
+test('stripImagesFromMessages removes image parts while preserving text', () => {
+  assert.strictEqual(typeof chat.stripImagesFromMessages, 'function');
+  const stripped = chat.stripImagesFromMessages([
+    {
+      role: 'user',
+      content: [
+        { type: 'text', text: 'Describe this' },
+        { type: 'image_url', image_url: { url: 'data:image/png;base64,aaa' } },
+      ],
+    },
+  ]);
+
+  assert.deepStrictEqual(stripped, [{ role: 'user', content: 'Describe this' }]);
+});
+
+test('parseModelIds reads and sorts OpenAI-compatible model responses', () => {
+  assert.strictEqual(typeof chat.parseModelIds, 'function');
+  assert.deepStrictEqual(
+    chat.parseModelIds({
+      data: [{ id: 'z-model' }, { id: 'a-model' }],
+      models: [{ name: 'ignored-when-data-exists' }],
+    }),
+    ['a-model', 'z-model']
+  );
+  assert.deepStrictEqual(
+    chat.parseModelIds({ models: [{ name: 'beta' }, { id: 'alpha' }] }),
+    ['alpha', 'beta']
+  );
+});
+
+test('normalizeQuickPrompts keeps non-empty prompt strings', () => {
+  assert.strictEqual(typeof chat.normalizeQuickPrompts, 'function');
+  assert.deepStrictEqual(
+    chat.normalizeQuickPrompts([' Translate ', '', null, 'Summarize', 42]),
+    ['Translate', 'Summarize']
+  );
+});
+
+test('createOpenDrawerMessage builds the content-script drawer command', () => {
+  assert.strictEqual(typeof chat.createOpenDrawerMessage, 'function');
+  assert.deepStrictEqual(
+    chat.createOpenDrawerMessage({ srcUrl: 'https://example.com/image.png', initialText: 'Explain this' }),
+    {
+      action: 'openDrawer',
+      srcUrl: 'https://example.com/image.png',
+      initialText: 'Explain this',
+    }
+  );
+  assert.deepStrictEqual(chat.createOpenDrawerMessage({}), { action: 'openDrawer' });
+});
+
+test('clampDrawerWidth keeps drawer width within viewport bounds', () => {
+  assert.strictEqual(typeof chat.clampDrawerWidth, 'function');
+  assert.strictEqual(chat.clampDrawerWidth(240, 1000), 300);
+  assert.strictEqual(chat.clampDrawerWidth(500, 1000), 500);
+  assert.strictEqual(chat.clampDrawerWidth(980, 1000), 920);
+  assert.strictEqual(chat.clampDrawerWidth(360, 320), 294);
+});
+
+test('createDrawerWidthStyle returns an important width declaration', () => {
+  assert.strictEqual(typeof chat.createDrawerWidthStyle, 'function');
+  assert.deepStrictEqual(chat.createDrawerWidthStyle(980, 1000), {
+    property: 'width',
+    value: '920px',
+    priority: 'important',
+  });
 });

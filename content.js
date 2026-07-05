@@ -21,13 +21,16 @@
   let currentContext = { text: '', images: [] };
   let _showFloating = true;
   const dialogs = new Map();
+  let drawerDialogId = null;
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
   let topZ = Z_BASE;
   let _activeDragState = null;
+  let _activeDrawerResizeState = null;
   let _lastSelectionSig = '';
 
   const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
+  const chat = window.__aiext.chat;
 
   function t(key, ...args) {
     if (!contextValid() || !chrome.i18n || !chrome.i18n.getMessage) return key;
@@ -112,6 +115,60 @@
         font-size: 15px !important;
         line-height: 1.5 !important;
         resize: both !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer {
+        top: 0 !important;
+        ${_isRtl ? 'left' : 'right'}: 0 !important;
+        ${_isRtl ? 'right' : 'left'}: auto !important;
+        width: min(410px, 92vw) !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        max-height: 100vh !important;
+        max-width: 92vw !important;
+        border-radius: 0 !important;
+        border-top: 0 !important;
+        border-bottom: 0 !important;
+        ${_isRtl ? 'border-left' : 'border-right'}: 0 !important;
+        resize: none !important;
+        box-shadow: -8px 0 28px rgba(0,0,0,0.18) !important;
+      }
+      .${PREFIX}drawer-resize {
+        all: unset;
+        display: none !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}drawer-resize {
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        ${_isRtl ? 'right' : 'left'}: -5px !important;
+        width: 10px !important;
+        height: 100% !important;
+        cursor: ew-resize !important;
+        z-index: 1 !important;
+        touch-action: none !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}drawer-resize::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        ${_isRtl ? 'right' : 'left'}: 4px !important;
+        width: 2px !important;
+        height: 100% !important;
+        background: transparent !important;
+        transition: background 0.15s !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}drawer-resize:hover::after {
+        background: var(--aiext-accent) !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}header {
+        cursor: default !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}pin,
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}minimize {
+        display: none !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}model-input {
+        max-width: 110px !important;
       }
       .${PREFIX}header {
         all: unset;
@@ -855,6 +912,28 @@
     return { text, images };
   }
 
+  function selectionHasContext(sel) {
+    if (!sel) return false;
+    if (sel.toString().trim()) return true;
+    try {
+      return sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function setContextFromSelectionOrSource(srcUrl) {
+    if (srcUrl) {
+      currentContext = { text: '', images: [srcUrl] };
+      return currentContext;
+    }
+    const sel = window.getSelection();
+    currentContext = selectionHasContext(sel)
+      ? await extractContextFromSelection(sel)
+      : { text: '', images: [] };
+    return currentContext;
+  }
+
   const renderMarkdown = (text) => window.__aiext.markdown.renderMarkdown(text);
 
   function attachCodeCopyButtons(bubble) {
@@ -1201,6 +1280,7 @@
     if (_isRtl) state.dialog.setAttribute('dir', 'rtl');
     state.dialog.dataset.dialogId = id;
     state.dialog.innerHTML = `
+      <div class="${PREFIX}drawer-resize" data-aiext="1"></div>
       <div class="${PREFIX}header" data-aiext="1">
         <span class="${PREFIX}title">${t('dialogTitle')}</span>
         <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${config.model || ''}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
@@ -1308,6 +1388,7 @@
     });
 
     setupDrag(id);
+    setupDrawerResize(id);
     bringToFront(id);
 
     state.dialog.addEventListener('mousedown', () => {
@@ -1446,6 +1527,7 @@
   function closeDialog(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (drawerDialogId === id) drawerDialogId = null;
     if (state.persistId) {
       (async () => {
         let records = await loadDialogRecords();
@@ -1500,6 +1582,7 @@
     const headerEl = state.dialog.querySelector(`.${PREFIX}header`);
 
     headerEl.addEventListener('mousedown', (e) => {
+      if (state.isDrawer) return;
       if (e.target.closest(`.${PREFIX}pin`) || e.target.closest(`.${PREFIX}close`)) return;
       if (e.target.closest(`.${PREFIX}model-input`)) return;
       state.isDragging = true;
@@ -1509,6 +1592,33 @@
       state.dragOffsetY = e.clientY - rect.top;
       e.preventDefault();
     });
+  }
+
+  function setupDrawerResize(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    const handle = state.dialog.querySelector(`.${PREFIX}drawer-resize`);
+    if (!handle) return;
+
+    handle.addEventListener('mousedown', (e) => {
+      if (!state.isDrawer) return;
+      const rect = state.dialog.getBoundingClientRect();
+      _activeDrawerResizeState = {
+        state,
+        startX: e.clientX,
+        startWidth: rect.width,
+      };
+      document.documentElement.style.cursor = 'ew-resize';
+      document.documentElement.style.userSelect = 'none';
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  }
+
+  function applyDrawerWidth(dialog, width) {
+    if (!dialog) return;
+    const declaration = chat.createDrawerWidthStyle(width, window.innerWidth);
+    dialog.style.setProperty(declaration.property, declaration.value, declaration.priority);
   }
 
   const _modelCache = new Map();
@@ -1570,6 +1680,14 @@
 
   // Global drag handler
   document.addEventListener('mousemove', (e) => {
+    if (_activeDrawerResizeState) {
+      const { state, startX, startWidth } = _activeDrawerResizeState;
+      const delta = _isRtl ? (e.clientX - startX) : (startX - e.clientX);
+      applyDrawerWidth(state.dialog, startWidth + delta);
+      e.preventDefault();
+      return;
+    }
+
     const state = _activeDragState;
     if (!state) return;
     let newLeft = e.clientX - state.dragOffsetX;
@@ -1582,6 +1700,13 @@
   });
 
   document.addEventListener('mouseup', () => {
+    if (_activeDrawerResizeState) {
+      const state = _activeDrawerResizeState.state;
+      _activeDrawerResizeState = null;
+      document.documentElement.style.cursor = '';
+      document.documentElement.style.userSelect = '';
+      if (state && state.id) persistState(state.id);
+    }
     if (_activeDragState) { _activeDragState.isDragging = false; _activeDragState = null; }
   });
 
@@ -1672,33 +1797,18 @@
     const typing = addTypingIndicator(id);
 
     try {
-      const ctx = state.context;
-      const allImages = [...(ctx.images || []), ...(state.pendingScreenshots || [])];
       let uiLang = 'en';
       try {
         if (contextValid() && chrome.i18n && chrome.i18n.getUILanguage) {
           uiLang = chrome.i18n.getUILanguage() || 'en';
         }
       } catch (e) { _contextInvalid = true; }
-      const langInstruction = uiLang.startsWith('zh')
-        ? `Please respond in the same Chinese variant (Traditional or Simplified) as the user's input.`
-        : `Please respond in ${uiLang} unless the user writes in another language.`;
-      const textPart = `You are an AI assistant. ${ctx.text ? `The user selected the following text as context:\n"${ctx.text}"\n` : ''}${allImages.length > 0 ? `The user also provided ${allImages.length} image(s) as context.` : ''} ${langInstruction} Please answer the user's question based on this context. If the question is unrelated to the selection, you may answer directly.`;
-
-      const messages = [
-        { role: 'system', content: textPart },
-      ];
-
-      if (allImages.length > 0) {
-        const imgContent = [{ type: 'text', text: 'Here are the images provided by the user as context:' }];
-        for (const img of allImages) {
-          imgContent.push({ type: 'image_url', image_url: { url: img } });
-        }
-        messages.push({ role: 'user', content: imgContent });
-        messages.push({ role: 'assistant', content: 'Got it, I have reviewed the image context. Please go ahead and ask your question.' });
-      }
-
-      messages.push(...state.conversationHistory);
+      const messages = chat.buildChatMessages({
+        context: state.context,
+        pendingImages: state.pendingScreenshots,
+        conversationHistory: state.conversationHistory,
+        uiLang,
+      });
 
       if (typing) typing.remove();
 
@@ -1745,18 +1855,11 @@
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
   function messagesHaveImages(messages) {
-    return messages.some(m => Array.isArray(m.content) && m.content.some(p => p && p.type === 'image_url'));
+    return chat.messagesHaveImages(messages);
   }
 
   function stripImagesFromMessages(messages) {
-    return messages.map(m => {
-      if (!Array.isArray(m.content)) return m;
-      const textOnly = m.content.filter(p => p && p.type !== 'image_url');
-      if (textOnly.length === 1 && textOnly[0].type === 'text') {
-        return { role: m.role, content: textOnly[0].text };
-      }
-      return { role: m.role, content: textOnly };
-    });
+    return chat.stripImagesFromMessages(messages);
   }
 
   async function callAI(id, config, messages) {
@@ -1979,6 +2082,54 @@
     persistState(id);
   }
 
+  async function openDrawer(options = {}) {
+    hideFloatingIcon();
+
+    const config = await getConfig();
+    if (!config || !config.apiKey) {
+      showSettingsWarning();
+      return null;
+    }
+
+    await setContextFromSelectionOrSource(options.srcUrl || '');
+    const quickPrompts = await getQuickPrompts();
+
+    if (drawerDialogId && dialogs.has(drawerDialogId)) {
+      closeDialog(drawerDialogId);
+    }
+
+    const id = createDialog(config, null, quickPrompts, currentContext);
+    const state = dialogs.get(id);
+    if (!state) return null;
+
+    drawerDialogId = id;
+    state.isDrawer = true;
+    state.isPinned = true;
+    state.dialog.classList.add(`${PREFIX}drawer`);
+    state.dialog.style.top = '0px';
+    state.dialog.style.left = '';
+    state.dialog.style.right = _isRtl ? 'auto' : '0px';
+    if (_isRtl) state.dialog.style.left = '0px';
+    applyDrawerWidth(state.dialog, 410);
+    state.dialog.style.height = '100vh';
+    state.dialog.style.zIndex = ++topZ;
+    if (state.overlay) {
+      state.overlay.remove();
+      state.overlay = null;
+    }
+
+    if (typeof options.initialText === 'string' && options.initialText) {
+      const inputEl = state.dialog.querySelector(`.${PREFIX}input`);
+      if (inputEl) {
+        inputEl.value = options.initialText;
+        inputEl.dispatchEvent(new Event('input'));
+        inputEl.focus();
+      }
+    }
+
+    return id;
+  }
+
   let _providersCache = null;
   async function getAllProviders() {
     if (_providersCache) return _providersCache;
@@ -2128,19 +2279,38 @@
     if (chrome.runtime && chrome.runtime.onMessage) {
       chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (sender.id !== chrome.runtime.id) return;
-    if (msg.action === 'openDialog') {
+    if (msg.action === 'getSelectionContext') {
       (async () => {
         try {
-          if (msg.srcUrl) {
-            currentContext = { text: '', images: [msg.srcUrl] };
+          const sel = window.getSelection();
+          if (sel && (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0))) {
+            currentContext = await extractContextFromSelection(sel);
           } else {
-            const sel = window.getSelection();
-            if (sel.toString().trim() || (sel.rangeCount > 0 && sel.getRangeAt(0).cloneContents().querySelectorAll('img').length > 0)) {
-              currentContext = await extractContextFromSelection(sel);
-            } else {
-              currentContext = { text: '', images: [] };
-            }
+            currentContext = { text: '', images: [] };
           }
+          sendResponse({ ok: true, context: currentContext });
+        } catch (e) {
+          sendResponse({ ok: false, error: e && e.message ? e.message : String(e) });
+        }
+      })();
+      return true;
+    } else if (msg.action === 'openDrawer') {
+      (async () => {
+        try {
+          await openDrawer({
+            srcUrl: msg.srcUrl || '',
+            initialText: typeof msg.initialText === 'string' ? msg.initialText : '',
+          });
+          sendResponse({ ok: true });
+        } catch (e) {
+          sendResponse({ ok: false, error: e && e.message ? e.message : String(e) });
+        }
+      })();
+      return true;
+    } else if (msg.action === 'openDialog') {
+      (async () => {
+        try {
+          await setContextFromSelectionOrSource(msg.srcUrl || '');
           await openDialog();
           if (typeof msg.initialText === 'string' && msg.initialText) {
             await new Promise(r => setTimeout(r, 0));

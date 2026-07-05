@@ -255,5 +255,70 @@
   "contextMenuMorePrompts": {
     "message": "Další návrhy...",
     "description": "Context menu: show more quick prompts in the dialog"
+  },
+  "sidePanelTitle": {
+    "message": "AI Chat"
+  },
+  "sidePanelOpenBtn": {
+    "message": "Open side panel"
+  },
+  "sidePanelOpenFailed": {
+    "message": "Could not open side panel: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sidePanelSettingsBtn": {
+    "message": "Settings"
+  },
+  "sidePanelContextTitle": {
+    "message": "Page context"
+  },
+  "sidePanelClearContext": {
+    "message": "Clear"
+  },
+  "sidePanelUseSelection": {
+    "message": "Use selection"
+  },
+  "sidePanelClearChat": {
+    "message": "Clear chat"
+  },
+  "sidePanelEmptyState": {
+    "message": "Ask anything, or use the current page selection as context."
+  },
+  "sidePanelMissingConfig": {
+    "message": "Set API Key and Base URL in settings first"
+  },
+  "sidePanelStreaming": {
+    "message": "Thinking..."
+  },
+  "sidePanelNoActiveTab": {
+    "message": "No active tab"
+  },
+  "sidePanelSelectionFailed": {
+    "message": "Could not read selection"
+  },
+  "sidePanelSelectionLoaded": {
+    "message": "Selection loaded"
+  },
+  "sidePanelNoSelection": {
+    "message": "No selected text or images found"
+  },
+  "sidePanelSelectionError": {
+    "message": "Selection unavailable: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "sidePanelChatCleared": {
+    "message": "Chat cleared"
+  },
+  "contextMenuOpenSidePanel": {
+    "message": "Open side panel",
+    "description": "Context menu: open the side panel"
   }
 }

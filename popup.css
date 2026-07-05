@@ -69,8 +69,25 @@ body::-webkit-scrollbar {
 h1 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: var(--text-primary);
+}
+
+.btn-sidepanel {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-sidepanel:hover {
+  opacity: 0.92;
 }
 
 .form-group {

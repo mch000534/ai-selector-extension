@@ -1,11 +1,25 @@
 const MENU_PARENT_ID = 'ai-selector-parent';
 const MENU_OPEN_ID = 'ai-selector-open';
+const MENU_OPEN_SIDE_PANEL_ID = 'ai-selector-open-side-panel';
 const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
 const MENU_PROMPT_MORE = 'ai-selector-prompt-more';
 const MENU_SEPARATOR_ID = 'ai-selector-separator';
 const MAX_PROMPTS_IN_MENU = 20;
 
 let _buildMenuPromise = null;
+
+try {
+  importScripts('lib/chat.js');
+} catch {}
+
+const createOpenDrawerMessage = (options) => {
+  const helper = globalThis.__aiext && globalThis.__aiext.chat && globalThis.__aiext.chat.createOpenDrawerMessage;
+  if (helper) return helper(options || {});
+  const msg = { action: 'openDrawer' };
+  if (options && options.srcUrl) msg.srcUrl = options.srcUrl;
+  if (options && options.initialText) msg.initialText = options.initialText;
+  return msg;
+};
 
 // Reject localhost, private, and link-local hosts to prevent SSRF via
 // attacker-controlled <img src> routed through fetchImageAsDataUrl.
@@ -53,6 +67,13 @@ async function buildMenu() {
       id: MENU_OPEN_ID,
       parentId: MENU_PARENT_ID,
       title: getMessage('contextMenuOpenDialog'),
+      contexts: ['all'],
+    });
+
+    chrome.contextMenus.create({
+      id: MENU_OPEN_SIDE_PANEL_ID,
+      parentId: MENU_PARENT_ID,
+      title: getMessage('contextMenuOpenSidePanel'),
       contexts: ['all'],
     });
 
@@ -108,7 +129,10 @@ buildMenu();
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab || typeof tab.id !== 'number') return;
   try {
-    if (info.menuItemId === MENU_OPEN_ID || info.menuItemId === MENU_PROMPT_MORE) {
+    if (info.menuItemId === MENU_OPEN_SIDE_PANEL_ID) {
+      const payload = createOpenDrawerMessage({ srcUrl: info.srcUrl || '' });
+      await chrome.tabs.sendMessage(tab.id, payload);
+    } else if (info.menuItemId === MENU_OPEN_ID || info.menuItemId === MENU_PROMPT_MORE) {
       const payload = { action: 'openDialog' };
       if (info.srcUrl) payload.srcUrl = info.srcUrl;
       await chrome.tabs.sendMessage(tab.id, payload);
@@ -203,4 +227,5 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     })();
     return true;
   }
+
 });

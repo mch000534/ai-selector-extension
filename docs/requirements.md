@@ -15,6 +15,7 @@
 - 在任意網頁上劃選文字後，1 秒內出現浮動 AI 圖示可供點擊
 - 支援多模態上下文（文字 + 圖片），自動提取選取範圍內的圖片
 - 可同時開啟多個獨立 AI 對話框，各自維護對話歷史
+- 提供網頁內右側抽屜聊天入口，支援長對話與頁面選取上下文
 - AI 回覆以 SSE 串流即時顯示，支援 Markdown 渲染
 - 採用 BYOK 架構，使用者自行設定 API 供應商與金鑰
 - 純 Vanilla JS 實作，無框架、無打包工具、無建置步驟
@@ -29,6 +30,7 @@
 - 快速預設問題管理（最多 10 個）
 - 逐對話框切換模型
 - 右鍵選單整合
+- 網頁內右側抽屜聊天
 - 設定頁面（API URL、Key、模型、快速問題、預設釘選）
 - 鍵盤快捷鍵（Enter 發送、ESC 關閉）
 - 多語言 UI（55 種語言，Chrome i18n 機制）
@@ -41,7 +43,6 @@
 **Out of Scope（不納入範圍）**
 - 非 OpenAI 相容的 API 格式支援
 - 本地模型推論
-- 對話歷史持久化（頁面重新整理後對話清空）
 - 跨裝置對話同步
 
 ## 2. 用戶故事
@@ -58,6 +59,7 @@
 - **US-008**：作為使用者，我想要透過右鍵選單觸發 AI 劃詞助手，以便在無法劃選的情境下也能使用
 - **US-009**：作為使用者，我想要在設定頁面管理 API 供應商資訊，以便更換 AI 服務供應商
 - **US-010**：作為使用者，我想要使用鍵盤快捷鍵操作，以便提升操作效率
+- **US-011**：作為使用者，我想要在網頁內右側抽屜中聊天，以便在保留目前頁面脈絡的同時進行較長對話
 
 ## 3. 具體需求
 
@@ -110,6 +112,7 @@
 - 安裝時建立右鍵選單項目「AI 劃詞助手」，`contexts: ['all']`
 - 點擊後透過 `chrome.tabs.sendMessage` 發送 `{ action: 'openDialog' }` 給 content script
 - content script 接收後若有選取內容則提取上下文，否則以空上下文開啟對話框
+- 右鍵選單提供「Open side panel」入口，可開啟網頁內右側抽屜聊天
 
 #### FR-009：設定頁面
 - **API Base URL**：文字輸入框，placeholder 為 `https://api.example.com/v1`
@@ -124,6 +127,16 @@
 - `Enter`：發送訊息
 - `Shift + Enter`：輸入換行
 - `ESC`：關閉最上層未釘選的對話框
+
+#### FR-010a：網頁內右側抽屜聊天
+- popup 設定頁提供開啟 side panel 的按鈕，透過 content script 在目前頁面內開啟右側抽屜
+- 右側抽屜沿用 `apiKey`、`baseUrl`、`model`、`quickPrompts` 設定
+- 右側抽屜提供模型輸入框與 datalist，並沿用對話框既有模型清單載入行為
+- 右側抽屜的快速預設問題以晶片形式呈現，點擊後填入輸入框
+- 使用者可在右側抽屜中直接聊天，AI 回覆以 SSE 串流顯示並支援 Markdown
+- 開啟右側抽屜時會讀取目前頁面選取文字或圖片作為上下文
+- 右側抽屜以 content script DOM 注入實作，不申請 Chrome 原生 `sidePanel` 權限
+- 現有 content script 注入式浮動對話框功能需完整保留
 
 #### FR-011：錯誤處理
 - 未設定 API Key 時顯示引導提示
@@ -312,8 +325,8 @@ data: [DONE]
 ```
 ai-selector-extension/
 ├── manifest.json          # Manifest V3 設定檔（權限、背景腳本、彈出頁面、Content Script、default_locale）
-├── background.js          # Service worker：右鍵選單建立與點擊轉發（i18n）
-├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、API 呼叫、串流解析、Markdown 渲染、i18n、暗色模式、RTL）
+├── background.js          # Service worker：右鍵選單建立、抽屜/對話框點擊轉發（i18n）
+├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、右側抽屜、API 呼叫、串流解析、Markdown 渲染、i18n、暗色模式、RTL）
 ├── content.css            # 故意為空白（所有樣式由 content.js 動態注入）
 ├── popup.html             # 設定頁面 HTML（data-i18n 屬性標記）
 ├── popup.js               # 設定頁面邏輯（applyI18n、儲存讀取、模型獲取、快速問題管理、眼圖示、行內編輯）
