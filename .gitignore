@@ -25,3 +25,5 @@ package-lock.json
 
 # 工具設定
 .qoder/
+
+*.zip
