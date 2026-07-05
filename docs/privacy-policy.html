@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Selection Assistant - Privacy Policy</title>
+  <meta name="description" content="Privacy policy for the AI Selection Assistant Chrome extension">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f4ef;
+      --panel: #ffffff;
+      --text: #1f2328;
+      --muted: #5b6472;
+      --border: #d8d2c7;
+      --accent: #0f6cbd;
+      --accent-soft: rgba(15, 108, 189, 0.08);
+      --shadow: 0 18px 60px rgba(25, 31, 40, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #0d1117;
+        --panel: #161b22;
+        --text: #e6edf3;
+        --muted: #9da7b3;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --accent-soft: rgba(88, 166, 255, 0.12);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 108, 189, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(100, 181, 246, 0.08), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.98));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.15;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .content {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: var(--shadow);
+    }
+
+    section + section {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 20px 0 10px;
+      font-size: 18px;
+    }
+
+    p, li {
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .callout {
+      background: var(--accent-soft);
+      border: 1px solid rgba(88, 166, 255, 0.2);
+      border-radius: 16px;
+      padding: 16px 18px;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    code {
+      padding: 0.12em 0.34em;
+      border-radius: 6px;
+      background: rgba(127, 127, 127, 0.12);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 20px 14px 44px;
+      }
+
+      .hero,
+      .content {
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Privacy Policy</div>
+      <h1>AI Selection Assistant Privacy Policy</h1>
+      <p class="meta">Effective date: July 5, 2026</p>
+    </header>
+
+    <article class="content">
+      <section lang="en">
+        <h2>English Version</h2>
+        <p>AI Selection Assistant is a Chrome extension that lets users select text on any webpage or open an AI chat box from the context menu. We do not operate our own backend service or user account system. Most data processing happens in the user's browser or is sent directly to the API provider configured by the user.</p>
+        <div class="callout">
+          <strong>Key point:</strong> We do not upload data to our own servers. Data only flows between the user's browser, Chrome sync storage, and the third-party API provider selected by the user.
+        </div>
+
+        <h3>Data We Process</h3>
+        <ul>
+          <li>Local settings such as Quick Prompts, API Base URL, API Key, and model selection stored in <code>chrome.storage.sync</code>.</li>
+          <li>User input, selected text, and page context used to generate responses.</li>
+          <li>Page content, images, or form information when the user explicitly activates the extension.</li>
+        </ul>
+
+        <h3>How We Use Data</h3>
+        <ul>
+          <li>To display and manage the extension UI.</li>
+          <li>To save user settings and quick prompts.</li>
+          <li>To send the selected context to the user's chosen OpenAI-compatible API provider.</li>
+          <li>To temporarily read, interact with, or fill in the current webpage after user activation.</li>
+        </ul>
+
+        <h3>Permission Reasons</h3>
+        <ul>
+          <li><strong>storage:</strong> Store quick prompts, API Base URL, and API Key.</li>
+          <li><strong>activeTab:</strong> Temporarily access the current page after the user clicks the extension.</li>
+          <li><strong>contextMenus:</strong> Open the chat box even when no text is selected.</li>
+          <li><strong>Website access:</strong> Read page content, extract information, fill forms, and operate page elements.</li>
+        </ul>
+
+        <h3>Data Sharing</h3>
+        <p>We send the user's prompts, selected content, and necessary page context to the third-party API provider configured by the user for AI generation. That provider's privacy practices are governed by its own policies and terms.</p>
+
+        <h3>Retention and Deletion</h3>
+        <p>Settings are stored in <code>chrome.storage.sync</code> and may sync across the user's Chrome devices. Conversation content generally stays in the browser during runtime and is not uploaded to our own servers. Users can clear local data from the extension settings or remove the extension to stop further processing.</p>
+      </section>
+
+      <section lang="zh-Hant">
+        <h2>中文版本</h2>
+        <h3>1. 概述</h3>
+        <p>AI 劃詞助手是一款 Chrome 擴充功能，讓使用者在任意網頁上選取文字或透過右鍵選單快速開啟 AI 對話框。此擴充功能不設置獨立伺服器，也不建立使用者帳號系統；主要資料處理都發生在使用者的瀏覽器中，或是直接傳送給使用者自行設定的 API 供應商。</p>
+        <div class="callout">
+          <strong>重點：</strong>本擴充功能不會將資料上傳到我們自己的後端服務；資料僅會在使用者的瀏覽器、Chrome 同步儲存空間，以及使用者選定的第三方 API 供應商之間流動。
+        </div>
+
+        <h3>2. 我們收集或處理的資料</h3>
+        <div class="grid">
+          <div class="card">
+            <span class="label">本機設定</span>
+            <p>API Base URL、API Key、快速預設問題、模型名稱與其他設定值會儲存在 <code>chrome.storage.sync</code>，以便跨裝置同步。</p>
+          </div>
+          <div class="card">
+            <span class="label">使用者輸入</span>
+            <p>使用者在對話框輸入的問題、選取的文字、以及頁面中擷取到的上下文內容，會用於產生回覆。</p>
+          </div>
+          <div class="card">
+            <span class="label">頁面內容</span>
+            <p>當使用者啟用功能時，擴充功能可能讀取目前頁面的內容、選取範圍、圖片或表單資訊，以完成對話與填入操作。</p>
+          </div>
+        </div>
+
+        <h3>3. 資料如何使用</h3>
+        <p>我們僅會將資料用於下列目的：</p>
+        <ul>
+          <li>顯示與管理擴充功能介面。</li>
+          <li>儲存使用者的設定與快速預設問題。</li>
+          <li>依照使用者選定的 API Base URL 與 API Key，呼叫第三方 AI 服務以取得回覆。</li>
+          <li>在使用者觸發後，對目前網頁進行暫時性的讀取、互動或填入操作。</li>
+        </ul>
+
+        <h3>4. 權限與用途說明</h3>
+        <p>為了讓 Chrome Web Store 與使用者清楚了解權限用途，以下是本擴充功能所申請權限的理由：</p>
+        <div class="grid">
+          <div class="card">
+            <span class="label">storage</span>
+            <p>儲存快速預設問題、API Base URL、API Key。</p>
+          </div>
+          <div class="card">
+            <span class="label">activeTab</span>
+            <p>允許擴充功能在使用者點擊後，暫時存取目前所在頁面。</p>
+          </div>
+          <div class="card">
+            <span class="label">contextMenus</span>
+            <p>可在不劃詞時開啟對話框。</p>
+          </div>
+          <div class="card">
+            <span class="label">網站存取權限</span>
+            <p>擴充功能需要讀取頁面內容、擷取資訊、填入表單、操作頁面元素等。</p>
+          </div>
+        </div>
+
+        <h3>5. 與第三方服務的資料分享</h3>
+        <p>本擴充功能會將使用者輸入、選取內容、以及必要的頁面上下文傳送到使用者自行設定的第三方 API 供應商，以執行 AI 推論與回應生成。請注意，該第三方供應商對資料的處理方式，會依其自身隱私權政策與服務條款而定。</p>
+        <p>若使用者將 API Key 設定為第三方服務提供的金鑰，則該服務可能會依其機制記錄請求與使用資訊。</p>
+
+        <h3>6. 資料保存與刪除</h3>
+        <p>設定資料會保存在 <code>chrome.storage.sync</code>，並可能透過 Chrome 帳號在使用者裝置之間同步。對話內容主要存在於瀏覽器執行期間，不會上傳到我們自己的伺服器。</p>
+        <p>使用者可透過瀏覽器的擴充功能設定頁面清除本機資料，或移除擴充功能以停止後續資料處理。</p>
+
+        <h3>7. 資料安全</h3>
+        <p>我們採取最小權限原則設計擴充功能，並避免將 API Key 寫入程式碼或公開文件。使用者仍應自行保護 API Key 與帳號安全，並確認所使用的第三方 API 供應商具備適合的安全與隱私措施。</p>
+
+        <h3>8. 兒童隱私</h3>
+        <p>本擴充功能並非特別設計給 13 歲以下兒童使用。我們不會刻意蒐集兒童個人資料。</p>
+
+        <h3>9. 政策變更</h3>
+        <p>若我們未來更新隱私權政策，將在此頁面更新版本內容與生效日期。建議使用者定期檢視本頁，以了解最新說明。</p>
+
+        <h3>10. 聯絡方式</h3>
+        <p>如需詢問本隱私權政策，請透過專案頁面或 Chrome Web Store 列出的聯絡方式與我們聯繫。</p>
+      </section>
+
+      <p class="footer">This page is optimized for English-first review and includes the Chinese version below.</p>
+    </article>
+  </main>
+</body>
+</html>

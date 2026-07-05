@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
   const apiKeyInput = document.getElementById('apiKey');
   const modelInput = document.getElementById('model');
   const modelList = document.getElementById('modelList');
@@ -85,14 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.dataset.baseText = base;
       });
     }
-  }
-
-  function normalizeBaseUrl(url) {
-    let normalized = url.trim().replace(/\/+$/, '');
-    if (!/\/v\d+$/i.test(normalized)) {
-      normalized += '/v1';
-    }
-    return normalized;
   }
 
   function updateBaseUrlHint() {
@@ -272,12 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') { e.preventDefault(); addPrompt(); }
   });
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   fetchModelsBtn.addEventListener('click', async () => {
     const baseUrl = baseUrlInput.value.trim();
     const apiKey = apiKeyInput.value.trim();
@@ -387,13 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const recentClosedClearAll = document.getElementById('recentClosedClearAll');
   const STORAGE_KEY = 'aiext_dialogs_v1';
 
-  function escapeHtmlRecent(s) {
-    if (typeof s !== 'string') return '';
-    return s.replace(/[&<>"']/g, ch => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    })[ch]);
-  }
-
   function formatRelativeTime(ts) {
     if (!ts) return '';
     const diff = Date.now() - ts;
@@ -470,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderEmpty() {
-    recentClosedList.innerHTML = `<div class="recent-closed-empty">${escapeHtmlRecent(chrome.i18n.getMessage('recentClosedEmpty'))}</div>`;
+    recentClosedList.innerHTML = `<div class="recent-closed-empty">${escapeHtml(chrome.i18n.getMessage('recentClosedEmpty'))}</div>`;
   }
 
   function renderClosedList(items) {
@@ -487,14 +467,14 @@ document.addEventListener('DOMContentLoaded', () => {
         item.model || ''
       ].filter(Boolean).join(' · ');
       return `
-        <div class="recent-closed-item" data-persist-id="${escapeHtmlRecent(item.id)}">
+        <div class="recent-closed-item" data-persist-id="${escapeHtml(item.id)}">
           <div class="recent-closed-item-body">
             <div class="recent-closed-item-top">
-              <span class="recent-closed-item-host">${escapeHtmlRecent(host)}</span>
-              <span class="recent-closed-item-date">${escapeHtmlRecent(dateStr)}</span>
+              <span class="recent-closed-item-host">${escapeHtml(host)}</span>
+              <span class="recent-closed-item-date">${escapeHtml(dateStr)}</span>
             </div>
-            ${preview ? `<div class="recent-closed-item-preview">${escapeHtmlRecent(preview)}</div>` : ''}
-            ${meta ? `<div class="recent-closed-item-meta">${escapeHtmlRecent(meta)}</div>` : ''}
+            ${preview ? `<div class="recent-closed-item-preview">${escapeHtml(preview)}</div>` : ''}
+            ${meta ? `<div class="recent-closed-item-meta">${escapeHtml(meta)}</div>` : ''}
           </div>
         </div>
       `;

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "permissions": [
@@ -29,6 +29,10 @@
         "<all_urls>"
       ],
       "js": [
+        "lib/utils.js",
+        "lib/shadow.js",
+        "lib/markdown.js",
+        "lib/theme.js",
         "content.js"
       ],
       "css": [

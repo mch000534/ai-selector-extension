@@ -2,7 +2,31 @@ const MENU_PARENT_ID = 'ai-selector-parent';
 const MENU_OPEN_ID = 'ai-selector-open';
 const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
 const MENU_PROMPT_MORE = 'ai-selector-prompt-more';
+const MENU_SEPARATOR_ID = 'ai-selector-separator';
 const MAX_PROMPTS_IN_MENU = 20;
+
+let _buildMenuPromise = null;
+
+// Reject localhost, private, and link-local hosts to prevent SSRF via
+// attacker-controlled <img src> routed through fetchImageAsDataUrl.
+function isSafeFetchUrl(urlStr) {
+  let u;
+  try { u = new URL(urlStr); } catch (e) { return false; }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
+  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, '');
+  if (host === 'localhost' || host.endsWith('.localhost') || host === '::1') return false;
+  const v4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+  if (v4) {
+    const a = Number(v4[1]), b = Number(v4[2]);
+    if (a === 0 || a === 127) return false;
+    if (a === 10) return false;
+    if (a === 172 && b >= 16 && b <= 31) return false;
+    if (a === 192 && b === 168) return false;
+    if (a === 169 && b === 254) return false; // link-local incl. cloud metadata
+  }
+  if (host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd')) return false;
+  return true;
+}
 
 function getMessage(key) {
   try {
@@ -13,56 +37,62 @@ function getMessage(key) {
 }
 
 async function buildMenu() {
-  try {
-    await chrome.contextMenus.removeAll();
-  } catch {}
+  if (_buildMenuPromise) return _buildMenuPromise;
+  _buildMenuPromise = (async () => {
+    try {
+      await chrome.contextMenus.removeAll();
+    } catch {}
 
-  chrome.contextMenus.create({
-    id: MENU_PARENT_ID,
-    title: getMessage('contextMenuTitle'),
-    contexts: ['all'],
-  });
-
-  chrome.contextMenus.create({
-    id: MENU_OPEN_ID,
-    parentId: MENU_PARENT_ID,
-    title: getMessage('contextMenuOpenDialog'),
-    contexts: ['all'],
-  });
-
-  let quickPrompts = [];
-  try {
-    const result = await chrome.storage.sync.get(['quickPrompts']);
-    quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
-  } catch {}
-
-  if (quickPrompts.length > 0) {
     chrome.contextMenus.create({
-      type: 'separator',
-      parentId: MENU_PARENT_ID,
+      id: MENU_PARENT_ID,
+      title: getMessage('contextMenuTitle'),
       contexts: ['all'],
     });
 
-    const visible = quickPrompts.slice(0, MAX_PROMPTS_IN_MENU);
-    visible.forEach((prompt, i) => {
-      const title = (typeof prompt === 'string' && prompt.length > 80) ? prompt.slice(0, 77) + '...' : String(prompt || '');
-      chrome.contextMenus.create({
-        id: `${MENU_PROMPT_PREFIX}${i}`,
-        parentId: MENU_PARENT_ID,
-        title: title || '·',
-        contexts: ['all'],
-      });
+    chrome.contextMenus.create({
+      id: MENU_OPEN_ID,
+      parentId: MENU_PARENT_ID,
+      title: getMessage('contextMenuOpenDialog'),
+      contexts: ['all'],
     });
 
-    if (quickPrompts.length > MAX_PROMPTS_IN_MENU) {
+    let quickPrompts = [];
+    try {
+      const result = await chrome.storage.sync.get(['quickPrompts']);
+      quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
+    } catch {}
+
+    if (quickPrompts.length > 0) {
       chrome.contextMenus.create({
-        id: MENU_PROMPT_MORE,
+        id: MENU_SEPARATOR_ID,
+        type: 'separator',
         parentId: MENU_PARENT_ID,
-        title: getMessage('contextMenuMorePrompts'),
         contexts: ['all'],
       });
+
+      const visible = quickPrompts.slice(0, MAX_PROMPTS_IN_MENU);
+      visible.forEach((prompt, i) => {
+        const title = (typeof prompt === 'string' && prompt.length > 80) ? prompt.slice(0, 77) + '...' : String(prompt || '');
+        chrome.contextMenus.create({
+          id: `${MENU_PROMPT_PREFIX}${i}`,
+          parentId: MENU_PARENT_ID,
+          title: title || '·',
+          contexts: ['all'],
+        });
+      });
+
+      if (quickPrompts.length > MAX_PROMPTS_IN_MENU) {
+        chrome.contextMenus.create({
+          id: MENU_PROMPT_MORE,
+          parentId: MENU_PARENT_ID,
+          title: getMessage('contextMenuMorePrompts'),
+          contexts: ['all'],
+        });
+      }
     }
-  }
+  })();
+  try { return await _buildMenuPromise; }
+  finally { _buildMenuPromise = null; }
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -116,6 +146,8 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (sender.id !== chrome.runtime.id) return;
+
   if (msg.action === 'captureScreenshot') {
     (async () => {
       try {
@@ -131,6 +163,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'fetchImageAsDataUrl' && msg.url) {
     (async () => {
       try {
+        if (!isSafeFetchUrl(msg.url)) {
+          return sendResponse({ error: 'URL not allowed' });
+        }
         const res = await fetch(msg.url);
         if (!res.ok) return sendResponse({ error: `HTTP ${res.status}` });
         const blob = await res.blob();

@@ -24,14 +24,10 @@
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
   let topZ = Z_BASE;
+  let _activeDragState = null;
+  let _lastSelectionSig = '';
 
-  function normalizeBaseUrl(url) {
-    let normalized = url.trim().replace(/\/+$/, '');
-    if (!/\/v\d+$/i.test(normalized)) {
-      normalized += '/v1';
-    }
-    return normalized;
-  }
+  const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
 
   function t(key, ...args) {
     if (!contextValid() || !chrome.i18n || !chrome.i18n.getMessage) return key;
@@ -39,84 +35,22 @@
     catch (e) { _contextInvalid = true; return key; }
   }
 
-  const _isRtl = chrome.i18n && chrome.i18n.getUILanguage
-    ? ['ar', 'iw', 'fa', 'ur'].some(l => chrome.i18n.getUILanguage().startsWith(l))
-    : false;
-
-  function getThemeColors() {
-    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (dark) {
-      return {
-        bg: '#1a1a2e', bgGlass: 'rgba(26,26,46,0.9)', bgSecondary: '#16213e', bgTertiary: '#0f3460',
-        bgInput: '#1e1e3a', bgHover: '#2a2a4a', bgSelected: 'rgba(102,126,234,0.15)',
-        text: '#e0e0e0', textSecondary: '#b0b0b0', textMuted: '#808080',
-        border: '#2a2a4a', borderLight: '#1e1e3a',
-        accent: '#7c8ff0', accentHover: '#8fa0f5', accentActive: '#667eea',
-        userBubble: '#5a6fd6', userBubbleText: '#fff',
-        assistantBubble: '#1e1e3a', assistantBubbleText: '#e0e0e0',
-        codeBg: '#0d0d1a', codeText: '#d4d4d4', inlineCodeBg: '#2a2a4a',
-        errorText: '#ff6b6b', errorBg: '#3d1a1a',
-        successText: '#6bcf7f', successBg: '#1a3d1a',
-        warningText: '#b0b0b0',
-        dotColor: '#808080',
-        pinActive: '#7c8ff0', pinActiveBg: 'rgba(124,143,240,0.15)',
-        chipBg: '#1e1e3a', chipText: '#b0b0b0', chipHoverBg: '#2a2a4a',
-        cameraBg: '#1e1e3a', cameraText: '#b0b0b0',
-      };
-    }
-    return {
-      bg: '#fff', bgGlass: 'rgba(255,255,255,0.75)', bgSecondary: '#f5f5f5', bgTertiary: '#f9f9f9',
-      bgInput: '#fff', bgHover: '#f5f5f5', bgSelected: '#f8f9fa',
-      text: '#333', textSecondary: '#666', textMuted: '#999',
-      border: '#ddd', borderLight: '#eee',
-      accent: '#667eea', accentHover: '#5a6fd6', accentActive: '#667eea',
-      userBubble: '#667eea', userBubbleText: 'white',
-      assistantBubble: '#f0f2f5', assistantBubbleText: '#333',
-      codeBg: '#1e1e1e', codeText: '#d4d4d4', inlineCodeBg: '#e0e0e0',
-      errorText: '#e74c3c', errorBg: '#fdeaea',
-      successText: '#1a8a3a', successBg: '#d4f4dd',
-      warningText: '#666',
-      dotColor: '#999',
-      pinActive: '#667eea', pinActiveBg: '#eef0ff',
-      chipBg: '#f0f2f5', chipText: '#555', chipHoverBg: '#e0e3e8',
-      cameraBg: '#f5f5f5', cameraText: '#666',
-    };
-  }
+  const _isRtl = window.__aiext.isRtl;
+  const _shadow = () => window.__aiext.shadow.root;
+  const _shadowAppend = (el) => window.__aiext.shadow.append(el);
+  const _shadowQuery = (sel) => window.__aiext.shadow.query(sel);
+  const _shadowQueryAll = (sel) => window.__aiext.shadow.queryAll(sel);
+  const isOurElement = (el) => window.__aiext.shadow.isOurElement(el);
+  const getThemeColors = () => window.__aiext.theme.getThemeColors();
+  const applyThemeVars = () => window.__aiext.theme.applyThemeVars();
 
   let _hoveredImage = null;
-  let _shadowHost = null;
-  let _shadowRoot = null;
-  function _ensureRoot() {
-    if (_shadowRoot) return _shadowRoot;
-    if (!document.body) return null;
-    _shadowHost = document.createElement('div');
-    _shadowHost.id = 'aiext-root';
-    _shadowHost.setAttribute('data-aiext', '1');
-    Object.assign(_shadowHost.style, {
-      all: 'initial',
-      position: 'static',
-      display: 'block',
-      width: '0',
-      height: '0',
-      pointerEvents: 'none',
-      zIndex: '0'
-    });
-    document.body.appendChild(_shadowHost);
-    _shadowRoot = _shadowHost.attachShadow({ mode: 'open' });
-    return _shadowRoot;
-  }
-  function _shadow() { return _shadowRoot || _ensureRoot(); }
-  function _shadowAppend(el) { const s = _shadow(); if (s) s.appendChild(el); else document.body.appendChild(el); }
-  function _shadowQuery(sel) { const s = _shadow(); return s ? s.querySelector(sel) : document.querySelector(sel); }
-  function _shadowQueryAll(sel) { const s = _shadow(); return s ? s.querySelectorAll(sel) : document.querySelectorAll(sel); }
-
   let _iconHoverTimer = null;
 
   function injectStyles() {
     const root = _shadow();
     const old = root ? root.querySelector('style[data-aiext-styles]') : document.querySelector('style[data-aiext-styles]');
     if (old) old.remove();
-    const c = getThemeColors();
     const style = document.createElement('style');
     style.setAttribute('data-aiext-styles', '1');
     style.textContent = `
@@ -139,7 +73,14 @@
         overflow: hidden !important;
       }
       .${PREFIX}icon:hover { transform: scale(1.1) !important; }
-      .${PREFIX}icon img { width: 32px; height: 32px; border-radius: 50%; pointer-events: none; display: block; }
+      .${PREFIX}icon img { width: 32px; height: 32px; border-radius: 50%; pointer-events: none; display: block; overflow: clip !important; }
+      .${PREFIX}icon img,
+      .${PREFIX}dialog img,
+      .${PREFIX}dialog video,
+      .${PREFIX}dialog canvas {
+        overflow: hidden !important;
+        overflow: clip !important;
+      }
       .${PREFIX}overlay {
         all: initial;
         position: fixed !important;
@@ -156,10 +97,10 @@
         min-width: 280px !important;
         min-height: 250px !important;
         max-width: 90vw !important;
-        background: ${c.bgGlass} !important;
+        background: var(--aiext-bgGlass) !important;
         backdrop-filter: blur(16px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-        border: 1px solid ${c.borderLight} !important;
+        border: 1px solid var(--aiext-borderLight) !important;
         border-radius: 12px !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
         display: flex !important;
@@ -167,7 +108,7 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         overflow: auto !important;
         pointer-events: auto !important;
-        color: ${c.text} !important;
+        color: var(--aiext-text) !important;
         font-size: 15px !important;
         line-height: 1.5 !important;
         resize: both !important;
@@ -176,7 +117,7 @@
         all: unset;
         display: flex !important;
         padding: 10px 12px !important;
-        border-bottom: 1px solid ${c.borderLight} !important;
+        border-bottom: 1px solid var(--aiext-borderLight) !important;
         align-items: center !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
@@ -188,7 +129,7 @@
         all: unset;
         font-size: 16px !important;
         font-weight: 600 !important;
-        color: ${c.text} !important;
+        color: var(--aiext-text) !important;
         flex: 1 !important;
       }
       .${PREFIX}pin {
@@ -197,58 +138,58 @@
         height: 24px !important;
         cursor: pointer !important;
         font-size: 14px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
         transition: color 0.2s, background 0.2s !important;
       }
-      .${PREFIX}pin:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
+      .${PREFIX}pin:hover { background: var(--aiext-bgHover) !important; color: var(--aiext-textSecondary) !important; }
       .${PREFIX}pin-active {
-        color: ${c.pinActive} !important;
-        background: ${c.pinActiveBg} !important;
+        color: var(--aiext-pinActive) !important;
+        background: var(--aiext-pinActiveBg) !important;
       }
-      .${PREFIX}pin-active:hover { background: ${c.pinActiveBg} !important; color: ${c.accentHover} !important; }
+      .${PREFIX}pin-active:hover { background: var(--aiext-pinActiveBg) !important; color: var(--aiext-accentHover) !important; }
       .${PREFIX}model-input {
         all: unset;
         font-size: 12px !important;
         padding: 2px 6px !important;
-        border: 1px solid ${c.border} !important;
+        border: 1px solid var(--aiext-border) !important;
         border-radius: 4px !important;
-        color: ${c.textSecondary} !important;
-        background: ${c.bgInput} !important;
+        color: var(--aiext-textSecondary) !important;
+        background: var(--aiext-bgInput) !important;
         max-width: 140px !important;
         outline: none !important;
       }
-      .${PREFIX}model-input:focus { border-color: ${c.accent} !important; }
+      .${PREFIX}model-input:focus { border-color: var(--aiext-accent) !important; }
       .${PREFIX}close {
         all: unset;
         width: 24px !important;
         height: 24px !important;
         cursor: pointer !important;
         font-size: 18px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
       }
-      .${PREFIX}close:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
+      .${PREFIX}close:hover { background: var(--aiext-bgHover) !important; color: var(--aiext-textSecondary) !important; }
       .${PREFIX}minimize {
         all: unset;
         width: 24px !important;
         height: 24px !important;
         cursor: pointer !important;
         font-size: 14px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         border-radius: 4px !important;
         transition: color 0.2s, background 0.2s !important;
       }
-      .${PREFIX}minimize:hover { background: ${c.bgHover} !important; color: ${c.textSecondary} !important; }
+      .${PREFIX}minimize:hover { background: var(--aiext-bgHover) !important; color: var(--aiext-textSecondary) !important; }
       .${PREFIX}dialog-minimized {
         max-height: none !important;
         min-height: auto !important;
@@ -267,8 +208,8 @@
         all: unset;
         display: block !important;
         padding: 10px 16px !important;
-        background: ${c.bgSelected} !important;
-        border-bottom: 1px solid ${c.borderLight} !important;
+        background: var(--aiext-bgSelected) !important;
+        border-bottom: 1px solid var(--aiext-borderLight) !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
       }
@@ -278,7 +219,7 @@
         align-items: center !important;
         justify-content: space-between !important;
         font-size: 12px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         margin-bottom: 4px !important;
         gap: 6px !important;
       }
@@ -291,7 +232,7 @@
         height: 16px !important;
         font-size: 12px !important;
         line-height: 1 !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         background: transparent !important;
         border-radius: 50% !important;
         cursor: pointer !important;
@@ -299,14 +240,14 @@
         flex-shrink: 0 !important;
       }
       .${PREFIX}selected-clear:hover {
-        background: ${c.errorBg} !important;
-        color: ${c.errorText} !important;
+        background: var(--aiext-errorBg) !important;
+        color: var(--aiext-errorText) !important;
       }
       .${PREFIX}selected-text {
         all: unset;
         display: block !important;
         font-size: 14px !important;
-        color: ${c.textSecondary} !important;
+        color: var(--aiext-textSecondary) !important;
         max-height: 60px !important;
         overflow-y: auto !important;
         line-height: 1.4 !important;
@@ -326,14 +267,16 @@
         max-height: 60px !important;
       }
       .${PREFIX}selected-img {
-        all: unset;
         display: block !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
         max-height: 60px !important;
         max-width: 80px !important;
         border-radius: 4px !important;
         object-fit: cover !important;
-        border: 1px solid ${c.border} !important;
-        overflow: hidden !important;
+        border: 1px solid var(--aiext-border) !important;
+        overflow: clip !important;
       }
       .${PREFIX}selected-img-remove {
         all: unset;
@@ -345,7 +288,7 @@
         font-size: 12px !important;
         line-height: 1 !important;
         color: #fff !important;
-        background: ${c.accent} !important;
+        background: var(--aiext-accent) !important;
         border-radius: 50% !important;
         cursor: pointer !important;
         display: inline-flex !important;
@@ -354,7 +297,7 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
         transition: background 0.15s !important;
       }
-      .${PREFIX}selected-img-remove:hover { background: ${c.errorText} !important; }
+      .${PREFIX}selected-img-remove:hover { background: var(--aiext-errorText) !important; }
       .${PREFIX}messages {
         all: unset;
         display: block !important;
@@ -383,12 +326,12 @@
         box-sizing: border-box !important;
       }
       .${PREFIX}msg-user .${PREFIX}bubble {
-        background: ${c.userBubble} !important;
-        color: ${c.userBubbleText} !important;
+        background: var(--aiext-userBubble) !important;
+        color: var(--aiext-userBubbleText) !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble {
-        background: ${c.assistantBubble} !important;
-        color: ${c.assistantBubbleText} !important;
+        background: var(--aiext-assistantBubble) !important;
+        color: var(--aiext-assistantBubbleText) !important;
       }
       .${PREFIX}msg-system {
         text-align: center !important;
@@ -396,15 +339,15 @@
       .${PREFIX}msg-system .${PREFIX}bubble {
         display: inline-block !important;
         background: transparent !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         font-size: 12px !important;
         font-style: italic !important;
         padding: 4px 8px !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
         position: relative !important;
-        background: ${c.codeBg} !important;
-        color: ${c.codeText} !important;
+        background: var(--aiext-codeBg) !important;
+        color: var(--aiext-codeText) !important;
         padding: 24px 8px 8px 8px !important;
         border-radius: 4px !important;
         overflow-x: auto !important;
@@ -412,7 +355,7 @@
         margin: 4px 0 !important;
       }
       .${PREFIX}msg-assistant .${PREFIX}bubble code {
-        background: ${c.inlineCodeBg} !important;
+        background: var(--aiext-inlineCodeBg) !important;
         padding: 1px 4px !important;
         border-radius: 3px !important;
         font-size: 13px !important;
@@ -432,9 +375,9 @@
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
-        color: ${c.textMuted} !important;
-        background: ${c.bgTertiary} !important;
-        border: 1px solid ${c.border} !important;
+        color: var(--aiext-textMuted) !important;
+        background: var(--aiext-bgTertiary) !important;
+        border: 1px solid var(--aiext-border) !important;
         border-radius: 4px !important;
         cursor: pointer !important;
         user-select: none !important;
@@ -448,18 +391,18 @@
         pointer-events: none !important;
       }
       .${PREFIX}code-copy:hover {
-        background: ${c.bgHover} !important;
-        color: ${c.textPrimary} !important;
+        background: var(--aiext-bgHover) !important;
+        color: var(--aiext-text) !important;
       }
       .${PREFIX}code-copy.${PREFIX}code-copy-ok {
-        color: ${c.successText} !important;
-        border-color: ${c.successText} !important;
+        color: var(--aiext-successText) !important;
+        border-color: var(--aiext-successText) !important;
       }
       .${PREFIX}input-row {
         all: unset;
         display: flex !important;
         padding: 12px 16px !important;
-        border-top: 1px solid ${c.borderLight} !important;
+        border-top: 1px solid var(--aiext-borderLight) !important;
         gap: 8px !important;
         flex-shrink: 0 !important;
         box-sizing: border-box !important;
@@ -469,7 +412,7 @@
         display: block !important;
         flex: 1 !important;
         padding: 8px 12px !important;
-        border: 1px solid ${c.border} !important;
+        border: 1px solid var(--aiext-border) !important;
         border-radius: 6px !important;
         font-size: 15px !important;
         font-family: inherit !important;
@@ -481,27 +424,27 @@
         min-height: 38px !important;
         resize: none !important;
         box-sizing: border-box !important;
-        color: ${c.text} !important;
-        background: ${c.bgInput} !important;
+        color: var(--aiext-text) !important;
+        background: var(--aiext-bgInput) !important;
       }
-      .${PREFIX}input:focus { border-color: ${c.accent} !important; }
+      .${PREFIX}input:focus { border-color: var(--aiext-accent) !important; }
       .${PREFIX}send {
         all: unset;
         padding: 8px 16px !important;
-        background: ${c.accent} !important;
+        background: var(--aiext-accent) !important;
         color: white !important;
         border-radius: 6px !important;
         font-size: 15px !important;
         cursor: pointer !important;
         box-sizing: border-box !important;
       }
-      .${PREFIX}send:hover { background: ${c.accentHover} !important; }
-      .${PREFIX}send:disabled { background: ${c.textMuted} !important; cursor: not-allowed !important; }
+      .${PREFIX}send:hover { background: var(--aiext-accentHover) !important; }
+      .${PREFIX}send:disabled { background: var(--aiext-textMuted) !important; cursor: not-allowed !important; }
       .${PREFIX}camera {
         all: unset;
         padding: 8px 10px !important;
-        background: ${c.cameraBg} !important;
-        color: ${c.cameraText} !important;
+        background: var(--aiext-cameraBg) !important;
+        color: var(--aiext-cameraText) !important;
         border-radius: 6px !important;
         font-size: 16px !important;
         cursor: pointer !important;
@@ -511,7 +454,7 @@
         justify-content: center !important;
         transition: background 0.2s !important;
       }
-      .${PREFIX}camera:hover { background: ${c.bgHover} !important; color: ${c.text} !important; }
+      .${PREFIX}camera:hover { background: var(--aiext-bgHover) !important; color: var(--aiext-text) !important; }
       .${PREFIX}camera:disabled { opacity: 0.5 !important; cursor: not-allowed !important; }
       .${PREFIX}screenshot-preview {
         all: unset;
@@ -519,7 +462,7 @@
         flex-wrap: wrap !important;
         gap: 6px !important;
         padding: 8px 16px !important;
-        border-top: 1px solid ${c.borderLight} !important;
+        border-top: 1px solid var(--aiext-borderLight) !important;
         box-sizing: border-box !important;
       }
       .${PREFIX}screenshot-preview:empty { display: none !important; padding: 0 !important; border: none !important; }
@@ -529,14 +472,16 @@
         display: inline-block !important;
       }
       .${PREFIX}screenshot-thumb img {
-        all: unset;
         display: block !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
         max-height: 60px !important;
         max-width: 80px !important;
         border-radius: 4px !important;
         object-fit: cover !important;
-        border: 1px solid ${c.border} !important;
-        overflow: hidden !important;
+        border: 1px solid var(--aiext-border) !important;
+        overflow: clip !important;
       }
       .${PREFIX}screenshot-remove {
         all: unset;
@@ -580,7 +525,7 @@
       .${PREFIX}crop-selection {
         all: unset;
         position: absolute !important;
-        border: 2px solid ${c.accent} !important;
+        border: 2px solid var(--aiext-accent) !important;
         background: transparent !important;
         box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
         pointer-events: none !important;
@@ -606,29 +551,29 @@
         flex-wrap: wrap !important;
         gap: 6px !important;
         padding: 8px 16px !important;
-        border-top: 1px solid ${c.borderLight} !important;
+        border-top: 1px solid var(--aiext-borderLight) !important;
         box-sizing: border-box !important;
       }
       .${PREFIX}prompt-chip {
         all: unset;
         display: inline-block !important;
         padding: 4px 10px !important;
-        background: ${c.chipBg} !important;
-        color: ${c.chipText} !important;
+        background: var(--aiext-chipBg) !important;
+        color: var(--aiext-chipText) !important;
         border-radius: 12px !important;
         font-size: 13px !important;
         cursor: pointer !important;
         white-space: nowrap !important;
         transition: background 0.2s !important;
       }
-      .${PREFIX}prompt-chip:hover { background: ${c.chipHoverBg} !important; color: ${c.text} !important; }
+      .${PREFIX}prompt-chip:hover { background: var(--aiext-chipHoverBg) !important; color: var(--aiext-text) !important; }
       .${PREFIX}error {
         all: unset;
         display: block !important;
-        color: ${c.errorText} !important;
+        color: var(--aiext-errorText) !important;
         font-size: 12px !important;
         padding: 8px 12px !important;
-        background: ${c.errorBg} !important;
+        background: var(--aiext-errorBg) !important;
         border-radius: 6px !important;
         margin-bottom: 8px !important;
       }
@@ -637,7 +582,7 @@
         display: block !important;
         padding: 20px !important;
         text-align: center !important;
-        color: ${c.warningText} !important;
+        color: var(--aiext-warningText) !important;
         font-size: 13px !important;
       }
       .${PREFIX}warning-free {
@@ -645,9 +590,9 @@
         display: block !important;
         margin-top: 14px !important;
         padding-top: 14px !important;
-        border-top: 1px solid ${c.borderLight} !important;
+        border-top: 1px solid var(--aiext-borderLight) !important;
         font-size: 12px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
         text-align: ${_isRtl ? 'right' : 'left'} !important;
       }
       .${PREFIX}warning-free-title {
@@ -655,7 +600,7 @@
         display: block !important;
         margin-bottom: 8px !important;
         font-size: 12px !important;
-        color: ${c.textMuted} !important;
+        color: var(--aiext-textMuted) !important;
       }
       .${PREFIX}warning-free-list {
         all: unset;
@@ -670,23 +615,23 @@
         justify-content: space-between !important;
         gap: 10px !important;
         padding: 8px 12px !important;
-        border: 1px solid ${c.border} !important;
+        border: 1px solid var(--aiext-border) !important;
         border-radius: 8px !important;
-        background: ${c.bgTertiary} !important;
-        color: ${c.textPrimary} !important;
+        background: var(--aiext-bgTertiary) !important;
+        color: var(--aiext-text) !important;
         font-size: 13px !important;
         cursor: pointer !important;
         transition: border-color 0.15s, background 0.15s !important;
       }
       .${PREFIX}warning-free-btn:hover {
-        border-color: ${c.accent} !important;
-        background: ${c.bgHover} !important;
+        border-color: var(--aiext-accent) !important;
+        background: var(--aiext-bgHover) !important;
       }
       .${PREFIX}warning-free-btn-name { font-weight: 600 !important; }
-      .${PREFIX}warning-free-btn-host { color: ${c.textMuted} !important; font-size: 11px !important; }
+      .${PREFIX}warning-free-btn-host { color: var(--aiext-textMuted) !important; font-size: 11px !important; }
       .${PREFIX}warning-free-btn-cta {
         font-size: 11px !important;
-        color: ${c.accent} !important;
+        color: var(--aiext-accent) !important;
         font-weight: 600 !important;
         flex-shrink: 0 !important;
       }
@@ -700,7 +645,7 @@
         display: block !important;
         width: 6px !important;
         height: 6px !important;
-        background: ${c.dotColor} !important;
+        background: var(--aiext-dotColor) !important;
         border-radius: 50% !important;
         animation: ${PREFIX}bounce 1.4s infinite !important;
       }
@@ -723,25 +668,26 @@
       .${PREFIX}dialog::-webkit-scrollbar-thumb,
       .${PREFIX}messages::-webkit-scrollbar-thumb,
       .${PREFIX}selected-text::-webkit-scrollbar-thumb {
-        background: ${c.textMuted} !important;
+        background: var(--aiext-textMuted) !important;
         border-radius: 4px;
       }
       .${PREFIX}dialog::-webkit-scrollbar-thumb:hover,
       .${PREFIX}messages::-webkit-scrollbar-thumb:hover,
       .${PREFIX}selected-text::-webkit-scrollbar-thumb:hover {
-        background: ${c.textSecondary} !important;
+        background: var(--aiext-textSecondary) !important;
       }
       .${PREFIX}dialog {
         scrollbar-width: thin;
-        scrollbar-color: ${c.textMuted} transparent;
+        scrollbar-color: var(--aiext-textMuted) transparent;
       }
       .${PREFIX}messages {
         scrollbar-width: thin;
-        scrollbar-color: ${c.textMuted} transparent;
+        scrollbar-color: var(--aiext-textMuted) transparent;
       }
     `;
     if (root) root.appendChild(style);
     else document.head.appendChild(style);
+    applyThemeVars();
   }
 
   function showCropOverlay(dataUrl) {
@@ -854,12 +800,6 @@
     });
   }
 
-  function escapeHtml(str) {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
-
   async function imageToDataURL(imgEl) {
     try {
       const rawSrc = imgEl.src || imgEl.getAttribute('src');
@@ -915,16 +855,7 @@
     return { text, images };
   }
 
-  function renderMarkdown(text) {
-    if (!text) return '';
-    let html = escapeHtml(text);
-    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    html = html.replace(/\n/g, '<br>');
-    return html;
-  }
+  const renderMarkdown = (text) => window.__aiext.markdown.renderMarkdown(text);
 
   function attachCodeCopyButtons(bubble) {
     if (!bubble) return;
@@ -1066,14 +997,13 @@
   function toRecord(state) {
     if (!state) return null;
     const dlg = state.dialog;
-    const rect = dlg ? dlg.getBoundingClientRect() : null;
     const pos = dlg ? {
-      x: parseFloat(dlg.style.left) || (rect ? rect.left : 0),
-      y: parseFloat(dlg.style.top) || (rect ? rect.top : 0)
+      x: parseFloat(dlg.style.left) || 0,
+      y: parseFloat(dlg.style.top) || 0
     } : null;
     const size = dlg ? {
-      width: parseFloat(dlg.style.width) || (rect ? rect.width : 0),
-      height: parseFloat(dlg.style.height) || (rect ? rect.height : 0)
+      width: parseFloat(dlg.style.width) || 0,
+      height: parseFloat(dlg.style.height) || 0
     } : null;
     return {
       id: state.persistId || (state.persistId = (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random())),
@@ -1173,17 +1103,6 @@
       addMessage(id, 'system', t('dialogRestoredHint'));
     }
     await saveDialogRecords(records);
-  }
-
-  function isOurElement(el) {
-    if (!el) return false;
-    if (_shadowRoot && typeof el.getRootNode === 'function' && el.getRootNode() === _shadowRoot) return true;
-    while (el) {
-      if (el.getAttribute && el.getAttribute('data-aiext')) return true;
-      if (el === _shadowHost) return true;
-      el = el.parentElement;
-    }
-    return false;
   }
 
   // ─── Floating Icon ───
@@ -1297,7 +1216,7 @@
       ${hasContent ? `
       <div class="${PREFIX}selected">
         ${ctx.text ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedText')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="text" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${src}" data-aiext="1" style="overflow:hidden"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${src}" data-aiext="1"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
@@ -1511,7 +1430,7 @@
       state.pendingScreenshots.forEach((src, i) => {
         const thumb = document.createElement('div');
         thumb.className = `${PREFIX}screenshot-thumb`;
-        thumb.innerHTML = `<img src="${src}" data-aiext="1" style="overflow:hidden"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        thumb.innerHTML = `<img src="${src}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
         thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
           state.pendingScreenshots.splice(i, 1);
           renderScreenshotPreview();
@@ -1584,10 +1503,24 @@
       if (e.target.closest(`.${PREFIX}pin`) || e.target.closest(`.${PREFIX}close`)) return;
       if (e.target.closest(`.${PREFIX}model-input`)) return;
       state.isDragging = true;
+      _activeDragState = state;
       const rect = state.dialog.getBoundingClientRect();
       state.dragOffsetX = e.clientX - rect.left;
       state.dragOffsetY = e.clientY - rect.top;
       e.preventDefault();
+    });
+  }
+
+  const _modelCache = new Map();
+  const _modelFetchInFlight = new Map();
+  const MODEL_CACHE_TTL = 5 * 60 * 1000;
+
+  function populateDatalist(datalist, models) {
+    datalist.innerHTML = '';
+    models.forEach(mid => {
+      const opt = document.createElement('option');
+      opt.value = mid;
+      datalist.appendChild(opt);
     });
   }
 
@@ -1600,39 +1533,56 @@
     const datalist = state.dialog.querySelector(`#${PREFIX}model-list-${id}`);
     if (!datalist) return;
 
-    try {
-      const url = normalizeBaseUrl(baseUrl) + '/models';
-      const res = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
-      if (!res.ok) return;
-      const data = await res.json();
-      const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
-      if (models.length === 0) return;
+    const cacheKey = baseUrl + '|' + apiKey;
+    const cached = _modelCache.get(cacheKey);
+    if (cached && Date.now() - cached.ts < MODEL_CACHE_TTL) {
+      populateDatalist(datalist, cached.models);
+      return;
+    }
 
-      datalist.innerHTML = '';
-      models.forEach(mid => {
-        const opt = document.createElement('option');
-        opt.value = mid;
-        datalist.appendChild(opt);
-      });
-    } catch (e) {}
+    if (_modelFetchInFlight.has(cacheKey)) {
+      const models = await _modelFetchInFlight.get(cacheKey);
+      if (models) populateDatalist(datalist, models);
+      return;
+    }
+
+    const fetchPromise = (async () => {
+      try {
+        const url = normalizeBaseUrl(baseUrl) + '/models';
+        const res = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
+        if (!res.ok) return null;
+        const data = await res.json();
+        const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
+        if (models.length === 0) return null;
+        _modelCache.set(cacheKey, { models, ts: Date.now() });
+        return models;
+      } catch (e) { return null; }
+    })();
+
+    _modelFetchInFlight.set(cacheKey, fetchPromise);
+    try {
+      const models = await fetchPromise;
+      if (models) populateDatalist(datalist, models);
+    } finally {
+      _modelFetchInFlight.delete(cacheKey);
+    }
   }
 
   // Global drag handler
   document.addEventListener('mousemove', (e) => {
-    for (const state of dialogs.values()) {
-      if (!state.isDragging) continue;
-      let newLeft = e.clientX - state.dragOffsetX;
-      let newTop = e.clientY - state.dragOffsetY;
-      newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - 100));
-      newTop = Math.max(0, Math.min(newTop, window.innerHeight - 50));
-      state.dialog.style.left = newLeft + 'px';
-      state.dialog.style.top = newTop + 'px';
-      state.dialog.style.right = 'auto';
-    }
+    const state = _activeDragState;
+    if (!state) return;
+    let newLeft = e.clientX - state.dragOffsetX;
+    let newTop = e.clientY - state.dragOffsetY;
+    newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - 100));
+    newTop = Math.max(0, Math.min(newTop, window.innerHeight - 50));
+    state.dialog.style.left = newLeft + 'px';
+    state.dialog.style.top = newTop + 'px';
+    state.dialog.style.right = 'auto';
   });
 
   document.addEventListener('mouseup', () => {
-    for (const state of dialogs.values()) state.isDragging = false;
+    if (_activeDragState) { _activeDragState.isDragging = false; _activeDragState = null; }
   });
 
   // ─── ESC handler ───
@@ -1645,6 +1595,26 @@
   });
 
   // ─── Messages ───
+  function isNearBottom(el, threshold = 80) {
+    return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
+  }
+
+  function autoScroll(id) {
+    const state = dialogs.get(id);
+    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
+    if (m && isNearBottom(m)) m.scrollTop = m.scrollHeight;
+  }
+
+  // During streaming we cache the "user is at bottom" decision once per frame
+  // so scrollHeight/scrollTop reads don't force a layout flush on every delta.
+  let _scrollAtBottom = true;
+  function autoScrollStreaming(id) {
+    if (!_scrollAtBottom) return;
+    const state = dialogs.get(id);
+    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
+    if (m) m.scrollTop = m.scrollHeight;
+  }
+
   function addMessage(id, role, content) {
     const state = dialogs.get(id);
     if (!state) return null;
@@ -1663,7 +1633,7 @@
     }
     msg.appendChild(bubble);
     messagesEl.appendChild(msg);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+    if (role === 'user' || isNearBottom(messagesEl)) messagesEl.scrollTop = messagesEl.scrollHeight;
     return bubble;
   }
 
@@ -1917,27 +1887,65 @@
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let fullContent = '';
+    let lineBuffer = '';
     const bubble = addMessage(id, 'assistant', '');
+    let rafId = null;
+
+    {
+      const state = dialogs.get(id);
+      const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
+      _scrollAtBottom = m ? isNearBottom(m) : true;
+    }
+
+    const flush = () => {
+      rafId = null;
+      if (bubble) bubble.textContent = fullContent;
+      autoScrollStreaming(id);
+    };
+
+    let doneReceived = false;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      for (const line of chunk.split('\n')) {
+      lineBuffer += decoder.decode(value, { stream: true });
+
+      // Only consume complete lines; an SSE event may be split across chunks,
+      // so the trailing partial line must stay buffered until its '\n' arrives.
+      let nlIdx;
+      while ((nlIdx = lineBuffer.indexOf('\n')) !== -1) {
+        const line = lineBuffer.slice(0, nlIdx);
+        lineBuffer = lineBuffer.slice(nlIdx + 1);
         const trimmed = line.trim();
         if (!trimmed.startsWith('data: ')) continue;
         const data = trimmed.slice(6);
-        if (data === '[DONE]') break;
+        if (data === '[DONE]') { doneReceived = true; break; }
         try {
           const delta = JSON.parse(data).choices?.[0]?.delta?.content;
           if (delta) {
             fullContent += delta;
-            if (bubble) bubble.innerHTML = renderMarkdown(fullContent);
-            const state = dialogs.get(id);
-            const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
-            if (m) m.scrollTop = m.scrollHeight;
+            if (rafId === null) rafId = requestAnimationFrame(flush);
           }
         } catch (e) {}
       }
+      if (doneReceived) break;
+    }
+
+    // Process any final complete-ish line left in the buffer
+    if (!doneReceived && lineBuffer.trim()) {
+      const trimmed = lineBuffer.trim();
+      if (trimmed.startsWith('data: ') && trimmed.slice(6) !== '[DONE]') {
+        try {
+          const delta = JSON.parse(trimmed.slice(6)).choices?.[0]?.delta?.content;
+          if (delta) fullContent += delta;
+        } catch (e) {}
+      }
+    }
+
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    if (bubble) {
+      bubble.innerHTML = renderMarkdown(fullContent);
+      attachCodeCopyButtons(bubble);
+      autoScrollStreaming(id);
     }
     return { content: fullContent, bubble };
   }
@@ -2074,8 +2082,14 @@
 
       if (text.length === 0 && !hasImages) return;
 
-      const range = sel.getRangeAt(0);
-      const rect = range.getBoundingClientRect();
+      // Skip if the selection hasn't changed since last time
+      const range = sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
+      const sig = text.length + ':' + (range ? range.startOffset + '-' + range.endOffset + ':' + (range.commonAncestorContainer.nodeValue || '').length : '');
+      if (sig === _lastSelectionSig && floatingIcon) return;
+      _lastSelectionSig = sig;
+
+      const rect = range ? range.getBoundingClientRect() : null;
+      if (!rect) return;
       currentContext = await extractContextFromSelection(sel);
       showFloatingIcon(rect.right, rect.bottom);
     }, 10);
@@ -2113,6 +2127,7 @@
   try {
     if (chrome.runtime && chrome.runtime.onMessage) {
       chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if (sender.id !== chrome.runtime.id) return;
     if (msg.action === 'openDialog') {
       (async () => {
         try {
@@ -2315,6 +2330,6 @@
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (!contextValid()) return;
-    try { injectStyles(); } catch (e) { /* context invalidated */ }
+    try { applyThemeVars(); } catch (e) { /* context invalidated */ }
   });
 })();
