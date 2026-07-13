@@ -28,6 +28,9 @@
   let _activeDragState = null;
   let _activeDrawerResizeState = null;
   let _lastSelectionSig = '';
+  let _bodyShiftAmount = 0;
+  let _bodyShiftSide = null;
+  let _bodyShiftStyleEl = null;
 
   const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
   const chat = window.__aiext.chat;
@@ -164,8 +167,40 @@
         cursor: default !important;
       }
       .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}pin,
-      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}minimize {
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}minimize,
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}todrawer {
         display: none !important;
+      }
+      .${PREFIX}tofloat {
+        display: none !important;
+      }
+      .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}tofloat {
+        all: unset;
+        display: flex !important;
+        width: 24px !important;
+        height: 24px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+        color: var(--aiext-textMuted) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 4px !important;
+        transition: color 0.2s, background 0.2s !important;
+      }
+      .${PREFIX}tofloat:hover,
+      .${PREFIX}todrawer:hover { background: var(--aiext-bgHover) !important; color: var(--aiext-textSecondary) !important; }
+      .${PREFIX}todrawer {
+        all: unset;
+        display: flex !important;
+        width: 24px !important;
+        height: 24px !important;
+        cursor: pointer !important;
+        font-size: 14px !important;
+        color: var(--aiext-textMuted) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 4px !important;
+        transition: color 0.2s, background 0.2s !important;
       }
       .${PREFIX}dialog.${PREFIX}drawer .${PREFIX}model-input {
         max-width: 110px !important;
@@ -1248,15 +1283,16 @@
   }
 
   // ─── Dialog Instance ───
-  function createDialog(config, rect, quickPrompts, context) {
+  function createDialog(config, rect, quickPrompts, context, options) {
     const id = ++dialogIdCounter;
+    const startPinned = !!(options && options.startPinned);
     const state = {
       id,
       config,
       context: context || { text: '', images: [] },
       conversationHistory: [],
       isStreaming: false,
-      isPinned: false,
+      isPinned: startPinned,
       isDragging: false,
       dragOffsetX: 0,
       dragOffsetY: 0,
@@ -1265,11 +1301,14 @@
       pendingScreenshots: [],
     };
 
-    // Overlay
-    state.overlay = document.createElement('div');
-    state.overlay.className = `${PREFIX}overlay`;
-    state.overlay.setAttribute('data-aiext', '1');
-    state.overlay.addEventListener('click', () => closeDialog(id));
+    // Overlay (skip when the dialog starts pinned — pinned mode doesn't use a dimming overlay,
+    // and not creating it avoids any chance of a lingering 100vw × 100vh hit-target on the page).
+    if (!startPinned) {
+      state.overlay = document.createElement('div');
+      state.overlay.className = `${PREFIX}overlay`;
+      state.overlay.setAttribute('data-aiext', '1');
+      state.overlay.addEventListener('click', () => closeDialog(id));
+    }
 
     // Dialog
     const ctx = state.context;
@@ -1290,6 +1329,12 @@
         </span>
         <span class="${PREFIX}minimize" data-aiext="1" title="${t('dialogMinimizeTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </span>
+        <span class="${PREFIX}todrawer" data-aiext="1" title="${t('dialogMoveToDrawerTooltip')}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+        </span>
+        <span class="${PREFIX}tofloat" data-aiext="1" title="${t('dialogMoveToFloatTooltip')}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </span>
         <span class="${PREFIX}close" data-aiext="1">&times;</span>
       </div>
@@ -1325,13 +1370,17 @@
       state.dialog.style.top = (80 + dialogs.size * 30) + 'px';
     }
 
-    _shadowAppend(state.overlay);
+    if (state.overlay) _shadowAppend(state.overlay);
     _shadowAppend(state.dialog);
     dialogs.set(id, state);
 
     // Events
     state.dialog.querySelector(`.${PREFIX}close`).addEventListener('click', () => closeDialog(id));
     state.dialog.querySelector(`.${PREFIX}pin`).addEventListener('click', () => togglePin(id));
+    const toDrawerBtn = state.dialog.querySelector(`.${PREFIX}todrawer`);
+    if (toDrawerBtn) toDrawerBtn.addEventListener('click', () => convertFloatingToDrawer(id));
+    const toFloatBtn = state.dialog.querySelector(`.${PREFIX}tofloat`);
+    if (toFloatBtn) toFloatBtn.addEventListener('click', () => convertDrawerToFloating(id));
 
     state.dialog.querySelectorAll(`.${PREFIX}selected-clear`).forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1527,7 +1576,10 @@
   function closeDialog(id) {
     const state = dialogs.get(id);
     if (!state) return;
-    if (drawerDialogId === id) drawerDialogId = null;
+    if (drawerDialogId === id) {
+      drawerDialogId = null;
+      clearBodyShift();
+    }
     if (state.persistId) {
       (async () => {
         let records = await loadDialogRecords();
@@ -1584,6 +1636,7 @@
     headerEl.addEventListener('mousedown', (e) => {
       if (state.isDrawer) return;
       if (e.target.closest(`.${PREFIX}pin`) || e.target.closest(`.${PREFIX}close`)) return;
+      if (e.target.closest(`.${PREFIX}minimize`) || e.target.closest(`.${PREFIX}todrawer`) || e.target.closest(`.${PREFIX}tofloat`)) return;
       if (e.target.closest(`.${PREFIX}model-input`)) return;
       state.isDragging = true;
       _activeDragState = state;
@@ -1619,6 +1672,69 @@
     if (!dialog) return;
     const declaration = chat.createDrawerWidthStyle(width, window.innerWidth);
     dialog.style.setProperty(declaration.property, declaration.value, declaration.priority);
+  }
+
+  function ensureBodyShiftStyle() {
+    if (_bodyShiftStyleEl && _bodyShiftStyleEl.isConnected) return _bodyShiftStyleEl;
+    const existing = document.querySelector('style[data-aiext-body-shift]');
+    if (existing) existing.remove();
+    const style = document.createElement('style');
+    style.setAttribute('data-aiext-body-shift', '1');
+    style.textContent = `
+      body[data-aiext-shift] {
+        transition: margin-left 0.25s ease, margin-right 0.25s ease !important;
+      }
+    `;
+    document.documentElement.appendChild(style);
+    _bodyShiftStyleEl = style;
+    return style;
+  }
+
+  function applyBodyShift(amount, side) {
+    if (!document.body) return;
+    ensureBodyShiftStyle();
+    const clamped = Math.max(0, Math.round(amount));
+    document.body.setAttribute('data-aiext-shift', side || 'right');
+    if (side === 'left') {
+      document.body.style.setProperty('margin-left', clamped + 'px', 'important');
+      document.body.style.removeProperty('margin-right');
+    } else {
+      document.body.style.setProperty('margin-right', clamped + 'px', 'important');
+      document.body.style.removeProperty('margin-left');
+    }
+    _bodyShiftAmount = clamped;
+    _bodyShiftSide = side || 'right';
+  }
+
+  function clearBodyShift() {
+    if (!document.body) return;
+    document.body.removeAttribute('data-aiext-shift');
+    document.body.style.removeProperty('margin-right');
+    document.body.style.removeProperty('margin-left');
+    _bodyShiftAmount = 0;
+    _bodyShiftSide = null;
+  }
+
+  function getDrawerWidth(dialog) {
+    if (!dialog) return 0;
+    const rect = dialog.getBoundingClientRect();
+    if (rect && rect.width) return rect.width;
+    const parsed = parseFloat(dialog.style.width);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+
+  function refreshBodyShiftForDrawer() {
+    if (!drawerDialogId) {
+      clearBodyShift();
+      return;
+    }
+    const state = dialogs.get(drawerDialogId);
+    if (!state || !state.isDrawer) {
+      clearBodyShift();
+      return;
+    }
+    const width = getDrawerWidth(state.dialog) || 410;
+    applyBodyShift(width, _isRtl ? 'left' : 'right');
   }
 
   const _modelCache = new Map();
@@ -1683,7 +1799,9 @@
     if (_activeDrawerResizeState) {
       const { state, startX, startWidth } = _activeDrawerResizeState;
       const delta = _isRtl ? (e.clientX - startX) : (startX - e.clientX);
-      applyDrawerWidth(state.dialog, startWidth + delta);
+      const newWidth = startWidth + delta;
+      applyDrawerWidth(state.dialog, newWidth);
+      applyBodyShift(newWidth, _isRtl ? 'left' : 'right');
       e.preventDefault();
       return;
     }
@@ -2091,7 +2209,14 @@
       return null;
     }
 
-    await setContextFromSelectionOrSource(options.srcUrl || '');
+    if (options.context && options.skipSelection) {
+      currentContext = {
+        text: options.context.text || '',
+        images: (options.context.images || []).slice(),
+      };
+    } else {
+      await setContextFromSelectionOrSource(options.srcUrl || '');
+    }
     const quickPrompts = await getQuickPrompts();
 
     if (drawerDialogId && dialogs.has(drawerDialogId)) {
@@ -2111,6 +2236,7 @@
     state.dialog.style.right = _isRtl ? 'auto' : '0px';
     if (_isRtl) state.dialog.style.left = '0px';
     applyDrawerWidth(state.dialog, 410);
+    applyBodyShift(410, _isRtl ? 'left' : 'right');
     state.dialog.style.height = '100vh';
     state.dialog.style.zIndex = ++topZ;
     if (state.overlay) {
@@ -2128,6 +2254,85 @@
     }
 
     return id;
+  }
+
+  function snapshotDialogState(id) {
+    const state = dialogs.get(id);
+    if (!state) return null;
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    const msgNodes = messagesEl ? Array.from(messagesEl.children) : [];
+    const inputEl = state.dialog.querySelector(`.${PREFIX}input`);
+    const messagesContainer = state.dialog.querySelector(`.${PREFIX}messages`);
+    return {
+      conversationHistory: (state.conversationHistory || []).map(h => ({ ...h })),
+      context: {
+        text: state.context && state.context.text || '',
+        images: (state.context && state.context.images || []).slice(),
+      },
+      config: state.config ? { ...state.config } : {},
+      inputValue: inputEl ? inputEl.value : '',
+      wasPinned: !!state.isPinned,
+      scrollTop: messagesContainer ? messagesContainer.scrollTop : 0,
+      msgNodes,
+    };
+  }
+
+  function restoreDialogState(newId, snap) {
+    const state = dialogs.get(newId);
+    if (!state || !snap) return;
+    state.conversationHistory = snap.conversationHistory;
+    state.context = snap.context;
+    currentContext = {
+      text: snap.context.text,
+      images: snap.context.images.slice(),
+    };
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (messagesEl) {
+      snap.msgNodes.forEach(n => messagesEl.appendChild(n));
+      messagesEl.scrollTop = snap.scrollTop;
+    }
+    const inputEl = state.dialog.querySelector(`.${PREFIX}input`);
+    if (inputEl && snap.inputValue) {
+      inputEl.value = snap.inputValue;
+      inputEl.dispatchEvent(new Event('input'));
+    }
+  }
+
+  async function convertFloatingToDrawer(id) {
+    const snap = snapshotDialogState(id);
+    if (!snap) return null;
+    closeDialog(id);
+    const newId = await openDrawer({
+      initialText: '',
+      context: snap.context,
+      skipSelection: true,
+    });
+    if (!newId) return null;
+    restoreDialogState(newId, snap);
+    if (snap.wasPinned) {
+      const newState = dialogs.get(newId);
+      if (newState && !newState.isPinned) togglePin(newId);
+    }
+    return newId;
+  }
+
+  async function convertDrawerToFloating(id) {
+    const snap = snapshotDialogState(id);
+    if (!snap) return null;
+    closeDialog(id);
+    if (_showFloating) showFloatingIcon(window.innerWidth - 48, 80);
+    currentContext = {
+      text: snap.context.text,
+      images: snap.context.images.slice(),
+    };
+    const quickPrompts = await getQuickPrompts();
+    const newId = createDialog(snap.config, null, quickPrompts, currentContext, { startPinned: true });
+    const newState = dialogs.get(newId);
+    if (!newState) return null;
+    const pinBtn = newState.dialog.querySelector(`.${PREFIX}pin`);
+    if (pinBtn) pinBtn.classList.add(`${PREFIX}pin-active`);
+    restoreDialogState(newId, snap);
+    return newId;
   }
 
   let _providersCache = null;

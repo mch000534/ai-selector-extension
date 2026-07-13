@@ -320,5 +320,11 @@
   "contextMenuOpenSidePanel": {
     "message": "Open side panel",
     "description": "Context menu: open the side panel"
+  },
+  "dialogMoveToDrawerTooltip": {
+    "message": "移至側欄"
+  },
+  "dialogMoveToFloatTooltip": {
+    "message": "移至浮動視窗"
   }
 }
