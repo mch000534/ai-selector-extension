@@ -96,7 +96,8 @@ async function buildMenu() {
     let quickPrompts = [];
     try {
       const result = await syncGet(['quickPrompts']);
-      quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
+      const normalize = globalThis.__aiext && globalThis.__aiext.chat && globalThis.__aiext.chat.normalizeQuickPrompts;
+      quickPrompts = normalize ? normalize(result.quickPrompts) : [];
     } catch {}
 
     // User quick prompts: listed directly (no submenu level) for selections.
@@ -181,7 +182,8 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       if (!isNaN(index)) {
         try {
           const result = await syncGet(['quickPrompts']);
-          const prompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
+          const normalize = globalThis.__aiext && globalThis.__aiext.chat && globalThis.__aiext.chat.normalizeQuickPrompts;
+          const prompts = normalize ? normalize(result.quickPrompts) : [];
           prompt = prompts[index] || '';
         } catch {}
       }

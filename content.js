@@ -500,6 +500,20 @@
       .${PREFIX}msg-edit-save:hover, .${PREFIX}msg-edit-cancel:hover {
         background: var(--aiext-chipHoverBg) !important;
       }
+      .${PREFIX}msg-thumbs {
+        all: unset;
+        display: flex !important;
+        gap: 4px !important;
+        margin-top: 4px !important;
+        justify-content: flex-end !important;
+      }
+      .${PREFIX}msg-thumb {
+        width: 48px !important;
+        height: 48px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        cursor: zoom-in !important;
+      }
       .${PREFIX}token-line {
         all: unset;
         display: flex !important;
@@ -1389,9 +1403,22 @@
   // Renders one history entry (shared by restore and post-summarize re-render).
   function appendHistoryMessage(id, m, hIdx) {
     if (!m || (m.role !== 'user' && m.role !== 'assistant')) return;
-    const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
-    if (!content) return;
-    const bubble = addMessage(id, m.role, content, hIdx);
+    let images = null;
+    let content;
+    if (typeof m.content === 'string') {
+      content = m.content;
+    } else if (Array.isArray(m.content)) {
+      content = m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n');
+      images = m.content
+        .filter(p => p && p.type === 'image_url' && p.image_url && typeof p.image_url.url === 'string')
+        .map(p => p.image_url.url);
+    } else {
+      content = '';
+    }
+    const hasDataImages = Array.isArray(images) &&
+      images.some(src => typeof src === 'string' && src.startsWith('data:'));
+    if (!content && !(m.role === 'user' && hasDataImages)) return;
+    const bubble = addMessage(id, m.role, content || t('screenshotLabel'), hIdx, images);
     if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, m.role, hIdx);
   }
 
@@ -2158,7 +2185,7 @@
     if (m) m.scrollTop = m.scrollHeight;
   }
 
-  function addMessage(id, role, content, historyIndex) {
+  function addMessage(id, role, content, historyIndex, images) {
     const state = dialogs.get(id);
     if (!state) return null;
     const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
@@ -2176,6 +2203,27 @@
       bubble.textContent = content;
     }
     msg.appendChild(bubble);
+    // Sent-image thumbnail strip (data: URLs only — remote URLs are never
+    // fetched just for display). Click enlarges via the shared lightbox.
+    if (role === 'user' && Array.isArray(images) && images.length > 0) {
+      const strip = document.createElement('div');
+      strip.className = `${PREFIX}msg-thumbs`;
+      strip.setAttribute('data-aiext', '1');
+      images.slice(0, MAX_PENDING_IMAGES).forEach(src => {
+        if (typeof src !== 'string' || !src.startsWith('data:')) return;
+        const thumb = document.createElement('img');
+        thumb.className = `${PREFIX}msg-thumb`;
+        thumb.setAttribute('data-aiext', '1');
+        thumb.src = src;
+        thumb.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showImageLightbox(src);
+        });
+        strip.appendChild(thumb);
+      });
+      if (strip.children.length > 0) msg.appendChild(strip);
+    }
     messagesEl.appendChild(msg);
     if (role === 'user' || isNearBottom(messagesEl)) messagesEl.scrollTop = messagesEl.scrollHeight;
     return bubble;
@@ -2234,17 +2282,18 @@
 
     input.value = '';
     input.dispatchEvent(new Event('input'));
-    appendUserMessage(id, text || t('screenshotLabel'));
+    appendUserMessage(id, text || t('screenshotLabel'),
+      (state.pendingScreenshots || []).slice());
     await runCompletion(id);
   }
 
   // Appends a user message to history + DOM. Returns the history index.
-  function appendUserMessage(id, text) {
+  function appendUserMessage(id, text, images) {
     const state = dialogs.get(id);
     if (!state) return -1;
     const idx = state.conversationHistory.length;
     state.conversationHistory.push({ role: 'user', content: text });
-    const bubble = addMessage(id, 'user', text, idx);
+    const bubble = addMessage(id, 'user', text, idx, images);
     if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, 'user', idx);
     return idx;
   }
