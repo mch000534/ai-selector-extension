@@ -296,6 +296,24 @@ test('buildClosedListItem joins array content and rejects open records', () => {
   assert.strictEqual(chat.buildClosedListItem(null), null);
 });
 
+test('lastUserIndexBefore finds the nearest user message at or before index', () => {
+  assert.strictEqual(typeof chat.lastUserIndexBefore, 'function');
+  const h = [
+    { role: 'user', content: 'a' },
+    { role: 'assistant', content: 'b' },
+    { role: 'user', content: 'c' },
+    { role: 'assistant', content: 'd' },
+  ];
+  assert.strictEqual(chat.lastUserIndexBefore(h, 3), 2);
+  assert.strictEqual(chat.lastUserIndexBefore(h, 2), 2);
+  assert.strictEqual(chat.lastUserIndexBefore(h, 1), 0);
+  assert.strictEqual(chat.lastUserIndexBefore(h, 0), 0);
+  assert.strictEqual(chat.lastUserIndexBefore([{ role: 'assistant', content: 'x' }], 0), -1);
+  assert.strictEqual(chat.lastUserIndexBefore([], 0), -1);
+  assert.strictEqual(chat.lastUserIndexBefore(null, 0), -1);
+  assert.strictEqual(chat.lastUserIndexBefore(h, 99), 2);
+});
+
 test('createOpenDrawerMessage builds the content-script drawer command', () => {
   assert.strictEqual(typeof chat.createOpenDrawerMessage, 'function');
   assert.deepStrictEqual(

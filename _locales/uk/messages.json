@@ -284,5 +284,20 @@
   },
   "profilesHint": {
     "message": "Save the current key, URL and model as one profile; keys stay on this device"
+  },
+  "messageEdit": {
+    "message": "Edit"
+  },
+  "messageRegenerate": {
+    "message": "Regenerate"
+  },
+  "messageCopy": {
+    "message": "Copy"
+  },
+  "messageSave": {
+    "message": "Save"
+  },
+  "messageCancel": {
+    "message": "Cancel"
   }
 }

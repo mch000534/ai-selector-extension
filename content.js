@@ -433,6 +433,65 @@
         font-style: italic !important;
         padding: 4px 8px !important;
       }
+      .${PREFIX}msg-actions {
+        all: unset;
+        display: none !important;
+        gap: 4px !important;
+        margin-top: 4px !important;
+        font-size: 12px !important;
+      }
+      .${PREFIX}msg:hover .${PREFIX}msg-actions {
+        display: flex !important;
+      }
+      .${PREFIX}msg-action {
+        all: unset;
+        cursor: pointer !important;
+        color: var(--aiext-textSecondary) !important;
+        font-size: 12px !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+      }
+      .${PREFIX}msg-action:hover {
+        background: var(--aiext-bgHover) !important;
+        color: var(--aiext-text) !important;
+      }
+      .${PREFIX}msg-editor {
+        all: unset;
+        display: block !important;
+        margin-top: 4px !important;
+      }
+      .${PREFIX}msg-edit-input {
+        all: unset;
+        display: block !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        min-height: 60px !important;
+        padding: 8px !important;
+        border: 1px solid var(--aiext-border) !important;
+        border-radius: 8px !important;
+        background: var(--aiext-bgInput) !important;
+        color: var(--aiext-text) !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+      }
+      .${PREFIX}msg-edit-row {
+        all: unset;
+        display: flex !important;
+        gap: 6px !important;
+        margin-top: 4px !important;
+      }
+      .${PREFIX}msg-edit-save, .${PREFIX}msg-edit-cancel {
+        all: unset;
+        cursor: pointer !important;
+        font-size: 12px !important;
+        padding: 4px 10px !important;
+        border-radius: 6px !important;
+        background: var(--aiext-chipBg) !important;
+        color: var(--aiext-chipText) !important;
+      }
+      .${PREFIX}msg-edit-save:hover, .${PREFIX}msg-edit-cancel:hover {
+        background: var(--aiext-chipHoverBg) !important;
+      }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
         position: relative !important;
         background: var(--aiext-codeBg) !important;
@@ -1014,16 +1073,7 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(onSuccess).catch(onFail);
         } else {
-          try {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            ta.remove();
-            onSuccess();
-          } catch (err) { onFail(); }
+          copyTextToClipboard(text, onSuccess, onFail);
         }
       });
       pre.appendChild(btn);
@@ -1237,10 +1287,13 @@
       if (r.size.height) st.dialog.style.height = r.size.height + 'px';
     }
     st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
-    st.conversationHistory.forEach(m => {
+    st.conversationHistory.forEach((m, hIdx) => {
       if (m.role === 'user' || m.role === 'assistant') {
         const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
-        if (content) addMessage(id, m.role, content);
+        if (content) {
+          const bubble = addMessage(id, m.role, content, hIdx);
+          if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, m.role, hIdx);
+        }
       }
     });
     addMessage(id, 'system', t('dialogRestoredHint'));
@@ -1921,7 +1974,7 @@
     if (m) m.scrollTop = m.scrollHeight;
   }
 
-  function addMessage(id, role, content) {
+  function addMessage(id, role, content, historyIndex) {
     const state = dialogs.get(id);
     if (!state) return null;
     const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
@@ -1929,6 +1982,7 @@
     const msg = document.createElement('div');
     msg.className = `${PREFIX}msg ${PREFIX}msg-${role}`;
     msg.setAttribute('data-aiext', '1');
+    if (typeof historyIndex === 'number') msg.dataset.historyIndex = String(historyIndex);
     const bubble = document.createElement('div');
     bubble.className = `${PREFIX}bubble`;
     if (role === 'assistant') {
@@ -1957,20 +2011,68 @@
   }
 
   // ─── Send Message ───
+  function clearPendingScreenshots(state) {
+    if (state) state.pendingScreenshots.length = 0;
+    const previewEl = state && state.dialog.querySelector(`.${PREFIX}screenshot-preview`);
+    if (previewEl) previewEl.innerHTML = '';
+  }
+
+  // Copies text with a textarea fallback for non-secure contexts. Shared by
+  // code-block copy buttons and message-level copy.
+  function copyTextToClipboard(text, onSuccess, onFail) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(onFail);
+      return;
+    }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      if (ok && onSuccess) onSuccess();
+      else if (!ok && onFail) onFail();
+    } catch (e) {
+      if (onFail) onFail();
+    }
+  }
+
   async function sendMessage(id) {
     const state = dialogs.get(id);
     if (!state || state.isStreaming) return;
 
     const input = state.dialog.querySelector(`.${PREFIX}input`);
-    const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
     const text = input.value.trim();
     const hasScreenshots = state.pendingScreenshots && state.pendingScreenshots.length > 0;
     if (!text && !hasScreenshots) return;
 
     input.value = '';
     input.dispatchEvent(new Event('input'));
-    addMessage(id, 'user', text || t('screenshotLabel'));
-    state.conversationHistory.push({ role: 'user', content: text || t('screenshotLabel') });
+    appendUserMessage(id, text || t('screenshotLabel'));
+    await runCompletion(id);
+  }
+
+  // Appends a user message to history + DOM. Returns the history index.
+  function appendUserMessage(id, text) {
+    const state = dialogs.get(id);
+    if (!state) return -1;
+    const idx = state.conversationHistory.length;
+    state.conversationHistory.push({ role: 'user', content: text });
+    const bubble = addMessage(id, 'user', text, idx);
+    if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, 'user', idx);
+    return idx;
+  }
+
+  // Runs the AI round-trip for the current history (used by fresh sends,
+  // edits and regenerates alike).
+  async function runCompletion(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+
+    const input = state.dialog.querySelector(`.${PREFIX}input`);
+    const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
 
     state.isStreaming = true;
     sendBtn.disabled = true;
@@ -2004,16 +2106,21 @@
       } else if (response.bubble) {
         response.bubble.innerHTML = renderMarkdown(response.content);
         attachCodeCopyButtons(response.bubble);
+        const aIdx = state.conversationHistory.length;
         state.conversationHistory.push({ role: 'assistant', content: response.content });
+        const msgEl = response.bubble.parentElement;
+        if (msgEl) {
+          msgEl.dataset.historyIndex = String(aIdx);
+          attachMessageActions(msgEl, id, 'assistant', aIdx);
+        }
       } else {
-        addMessage(id, 'assistant', response.content);
+        const aIdx = state.conversationHistory.length;
         state.conversationHistory.push({ role: 'assistant', content: response.content });
+        const bubble = addMessage(id, 'assistant', response.content, aIdx);
+        if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, 'assistant', aIdx);
       }
 
-      // Clear pending screenshots
-      state.pendingScreenshots.length = 0;
-      const previewEl = state.dialog.querySelector(`.${PREFIX}screenshot-preview`);
-      if (previewEl) previewEl.innerHTML = '';
+      clearPendingScreenshots(state);
     } catch (err) {
       if (typing) typing.remove();
       const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
@@ -2030,6 +2137,177 @@
     state.isStreaming = false;
     sendBtn.disabled = false;
     input.focus();
+  }
+
+  // ─── Message actions (edit / regenerate / copy) ───
+  // History indices are append-only + tail-truncated, so a dataset index
+  // stamped at creation stays valid for the node's lifetime.
+  function attachMessageActions(msgEl, id, role, idx) {
+    if (!msgEl || msgEl.querySelector(`.${PREFIX}msg-actions`)) return;
+    const state = dialogs.get(id);
+    if (!state) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry) return;
+    const bar = document.createElement('div');
+    bar.className = `${PREFIX}msg-actions`;
+    bar.setAttribute('data-aiext', '1');
+    function mkBtn(label, fn) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `${PREFIX}msg-action`;
+      b.setAttribute('data-aiext', '1');
+      b.textContent = label;
+      b.title = label;
+      b.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fn(b);
+      });
+      bar.appendChild(b);
+      return b;
+    }
+    if (role === 'user') {
+      if (typeof entry.content === 'string') {
+        mkBtn(t('messageEdit'), () => startEditMessage(id, msgEl, idx));
+      }
+      mkBtn(t('messageRegenerate'), () => regenerateFromUser(id, msgEl, idx));
+    } else if (role === 'assistant') {
+      mkBtn(t('messageRegenerate'), () => regenerateAssistant(id, msgEl, idx));
+      mkBtn(t('messageCopy'), (btn) => copyMessageText(id, idx, btn));
+    }
+    msgEl.appendChild(bar);
+  }
+
+  function copyMessageText(id, idx, btn) {
+    const state = dialogs.get(id);
+    const entry = state && state.conversationHistory[idx];
+    const text = entry && typeof entry.content === 'string' ? entry.content : '';
+    if (!text) return;
+    const done = () => {
+      if (!btn) return;
+      const orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    };
+    copyTextToClipboard(text, done, done);
+  }
+
+  function removeMessageNodesFrom(messagesEl, fromNode, inclusive) {
+    let n = inclusive ? fromNode : fromNode.nextSibling;
+    while (n) {
+      const nx = n.nextSibling;
+      n.remove();
+      n = nx;
+    }
+  }
+
+  function startEditMessage(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    if (msgEl.querySelector(`.${PREFIX}msg-editor`)) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry || entry.role !== 'user' || typeof entry.content !== 'string') return;
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!messagesEl) return;
+    const bubble = msgEl.querySelector(`.${PREFIX}bubble`);
+    const bar = msgEl.querySelector(`.${PREFIX}msg-actions`);
+    if (bubble) bubble.style.display = 'none';
+    if (bar) bar.style.display = 'none';
+
+    const editor = document.createElement('div');
+    editor.className = `${PREFIX}msg-editor`;
+    editor.setAttribute('data-aiext', '1');
+    const ta = document.createElement('textarea');
+    ta.className = `${PREFIX}msg-edit-input`;
+    ta.setAttribute('data-aiext', '1');
+    ta.value = entry.content;
+    const row = document.createElement('div');
+    row.className = `${PREFIX}msg-edit-row`;
+    row.setAttribute('data-aiext', '1');
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.className = `${PREFIX}msg-edit-save`;
+    saveBtn.setAttribute('data-aiext', '1');
+    saveBtn.textContent = t('messageSave');
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.className = `${PREFIX}msg-edit-cancel`;
+    cancelBtn.setAttribute('data-aiext', '1');
+    cancelBtn.textContent = t('messageCancel');
+    row.appendChild(saveBtn);
+    row.appendChild(cancelBtn);
+    editor.appendChild(ta);
+    editor.appendChild(row);
+    msgEl.appendChild(editor);
+    ta.focus();
+    ta.addEventListener('keydown', (ev) => {
+      // Cancel editing without letting Escape reach the global handler
+      // (which would close the whole dialog when unpinned).
+      if (ev.key === 'Escape') {
+        ev.preventDefault();
+        ev.stopPropagation();
+        closeEditor();
+        const input = state.dialog.querySelector(`.${PREFIX}input`);
+        if (input) input.focus();
+      }
+    });
+
+    function closeEditor() {
+      editor.remove();
+      if (bubble) bubble.style.display = '';
+      if (bar) bar.style.display = '';
+    }
+    cancelBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeEditor();
+      const input = state.dialog.querySelector(`.${PREFIX}input`);
+      if (input) input.focus();
+    });
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const newText = ta.value.trim();
+      if (!newText || newText === entry.content) {
+        closeEditor();
+        return;
+      }
+      // Truncate (never branch): drop this message and everything after it,
+      // then resend the edited text as a fresh turn.
+      state.conversationHistory = state.conversationHistory.slice(0, idx);
+      clearPendingScreenshots(state);
+      removeMessageNodesFrom(messagesEl, msgEl, true);
+      appendUserMessage(id, newText);
+      runCompletion(id);
+    });
+  }
+
+  function regenerateFromUser(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry || entry.role !== 'user') return;
+    state.conversationHistory = state.conversationHistory.slice(0, idx + 1);
+    clearPendingScreenshots(state);
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (messagesEl) removeMessageNodesFrom(messagesEl, msgEl, false);
+    runCompletion(id);
+  }
+
+  function regenerateAssistant(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const k = chat.lastUserIndexBefore(state.conversationHistory, idx);
+    if (k < 0) return;
+    state.conversationHistory = state.conversationHistory.slice(0, k + 1);
+    clearPendingScreenshots(state);
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (messagesEl) {
+      const userNode = messagesEl.querySelector(`[data-history-index="${k}"]`);
+      if (userNode) removeMessageNodesFrom(messagesEl, userNode, false);
+      else removeMessageNodesFrom(messagesEl, msgEl, false);
+    }
+    runCompletion(id);
   }
 
   // ─── AI Calls ───
