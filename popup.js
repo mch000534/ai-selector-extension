@@ -154,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPrompts();
     updateBaseUrlHint();
     await loadProfiles();
-  })();
+    await loadBuiltInActions();
+  });
 
   providerSelect.addEventListener('change', () => {
     const key = providerSelect.value;
@@ -168,6 +169,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─── Provider profiles (per-endpoint keys in storage.local) ───
   let profiles = [];
+
+  // ─── Built-in quick actions (independent of the prompt quota) ───
+  const builtInList = document.getElementById('builtInList');
+
+  async function loadBuiltInActions() {
+    if (!builtInList || !window.__aiext.actions) return;
+    const data = await window.__aiext.storage.getSync(['builtInActions'], {});
+    const enabled = new Set(window.__aiext.actions.normalizeEnabledIds(data.builtInActions));
+    builtInList.textContent = '';
+    window.__aiext.actions.DEFINITIONS.forEach(def => {
+      const label = document.createElement('label');
+      label.className = 'toggle-label';
+      const box = document.createElement('input');
+      box.type = 'checkbox';
+      box.checked = enabled.has(def.id);
+      box.dataset.action = def.id;
+      box.addEventListener('change', async () => {
+        const ids = Array.from(builtInList.querySelectorAll('input[data-action]:checked'))
+          .map(el => el.dataset.action);
+        // normalizeEnabledIds falls back to all when empty; an explicit
+        // empty selection is preserved so users can disable the whole group.
+        await window.__aiext.storage.setSync({ builtInActions: ids });
+      });
+      const text = document.createElement('span');
+      text.textContent = chrome.i18n.getMessage(def.labelKey) || def.id;
+      label.appendChild(box);
+      label.appendChild(text);
+      builtInList.appendChild(label);
+    });
+  }
 
   async function persistProfiles() {
     await window.__aiext.storage.setLocal({ [window.__aiext.profiles.STORAGE_KEY]: profiles });

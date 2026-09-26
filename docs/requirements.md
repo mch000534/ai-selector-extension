@@ -113,6 +113,7 @@
 - 點擊後透過 `chrome.tabs.sendMessage` 發送 `{ action: 'openDialog' }` 給 content script
 - content script 接收後若有選取內容則提取上下文，否則以空上下文開啟對話框
 - 右鍵選單提供「Open drawer」入口，可開啟網頁內右側抽屜聊天
+- 選取文字時右鍵選單直接列出前 5 個 quickPrompts（無子選單層級）與內建快捷動作（翻譯、繁簡轉換、解釋、摘要、潤稿、產生教學），內建動作走獨立 `builtInActions` 設定、不佔用 10 個額度；點擊後以選取文字組裝 prompt 開啟對話框
 
 #### FR-009：設定頁面
 - **API Base URL**：文字輸入框，placeholder 為 `https://api.example.com/v1`

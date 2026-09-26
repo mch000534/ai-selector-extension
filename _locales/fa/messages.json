@@ -237,10 +237,6 @@
     "message": "باز کردن کادر گفتگو",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "درخواست‌های بیشتر...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
   },
@@ -320,5 +316,26 @@
   },
   "conversationsClosedBadge": {
     "message": "Closed"
+  },
+  "builtInActionsLabel": {
+    "message": "Built-in quick actions"
+  },
+  "actionTranslate": {
+    "message": "Translate"
+  },
+  "actionConvertChinese": {
+    "message": "Convert Chinese variant"
+  },
+  "actionExplain": {
+    "message": "Explain"
+  },
+  "actionSummarize": {
+    "message": "Summarize"
+  },
+  "actionPolish": {
+    "message": "Polish"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
   }
 }

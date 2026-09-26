@@ -237,10 +237,6 @@
     "message": "開啟對話框",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "更多提示詞...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "移至浮動視窗"
   },
@@ -320,5 +316,26 @@
   },
   "conversationsClosedBadge": {
     "message": "Closed"
+  },
+  "builtInActionsLabel": {
+    "message": "Built-in quick actions"
+  },
+  "actionTranslate": {
+    "message": "Translate"
+  },
+  "actionConvertChinese": {
+    "message": "Convert Chinese variant"
+  },
+  "actionExplain": {
+    "message": "Explain"
+  },
+  "actionSummarize": {
+    "message": "Summarize"
+  },
+  "actionPolish": {
+    "message": "Polish"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
   }
 }

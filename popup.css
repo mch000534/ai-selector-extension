@@ -356,6 +356,13 @@ small {
   cursor: pointer;
 }
 
+.builtin-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 12px;
+  margin-top: 4px;
+}
+
 .input-with-toggle {
   position: relative;
 }

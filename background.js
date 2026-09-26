@@ -2,14 +2,15 @@ const MENU_PARENT_ID = 'ai-selector-parent';
 const MENU_OPEN_ID = 'ai-selector-open';
 const MENU_OPEN_DRAWER_ID = 'ai-selector-open-drawer';
 const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
-const MENU_PROMPT_MORE = 'ai-selector-prompt-more';
-const MENU_SEPARATOR_ID = 'ai-selector-separator';
-const MAX_PROMPTS_IN_MENU = 20;
+const MENU_ACTION_PREFIX = 'ai-selector-action-';
+const MENU_SEPARATOR_PROMPTS = 'ai-selector-separator-prompts';
+const MENU_SEPARATOR_ACTIONS = 'ai-selector-separator-actions';
+const QUICK_PROMPTS_IN_MENU = 5;
 
 let _buildMenuPromise = null;
 
 try {
-  importScripts('lib/chat.js', 'lib/net.js', 'lib/storage.js');
+  importScripts('lib/chat.js', 'lib/net.js', 'lib/storage.js', 'lib/actions.js');
 } catch {}
 
 const createOpenDrawerMessage = (options) => {
@@ -38,6 +39,19 @@ function getMessage(key) {
   } catch {
     return key;
   }
+}
+
+function getUILanguage() {
+  try {
+    if (chrome.i18n && chrome.i18n.getUILanguage) return chrome.i18n.getUILanguage() || 'en';
+  } catch {}
+  return 'en';
+}
+
+function getActionDefs() {
+  const lib = globalThis.__aiext && globalThis.__aiext.actions;
+  if (lib && Array.isArray(lib.DEFINITIONS)) return lib.DEFINITIONS;
+  return [];
 }
 
 // Storage access with lib/storage.js when loaded, raw chrome API otherwise.
@@ -85,33 +99,51 @@ async function buildMenu() {
       quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
     } catch {}
 
+    // User quick prompts: listed directly (no submenu level) for selections.
     if (quickPrompts.length > 0) {
       chrome.contextMenus.create({
-        id: MENU_SEPARATOR_ID,
+        id: MENU_SEPARATOR_PROMPTS,
         type: 'separator',
         parentId: MENU_PARENT_ID,
-        contexts: ['all'],
+        contexts: ['selection'],
       });
 
-      const visible = quickPrompts.slice(0, MAX_PROMPTS_IN_MENU);
-      visible.forEach((prompt, i) => {
+      quickPrompts.slice(0, QUICK_PROMPTS_IN_MENU).forEach((prompt, i) => {
         const title = (typeof prompt === 'string' && prompt.length > 80) ? prompt.slice(0, 77) + '...' : String(prompt || '');
         chrome.contextMenus.create({
           id: `${MENU_PROMPT_PREFIX}${i}`,
           parentId: MENU_PARENT_ID,
           title: title || '·',
-          contexts: ['all'],
+          contexts: ['selection'],
         });
       });
+    }
 
-      if (quickPrompts.length > MAX_PROMPTS_IN_MENU) {
+    // Built-in quick actions: independent of the user's prompt quota.
+    let enabledActions = [];
+    try {
+      const lib = globalThis.__aiext && globalThis.__aiext.actions;
+      const result = await syncGet(['builtInActions']);
+      enabledActions = lib
+        ? lib.normalizeEnabledIds(result.builtInActions)
+        : (Array.isArray(result.builtInActions) ? result.builtInActions : []);
+    } catch {}
+    const defs = getActionDefs().filter(d => enabledActions.includes(d.id));
+    if (defs.length > 0) {
+      chrome.contextMenus.create({
+        id: MENU_SEPARATOR_ACTIONS,
+        type: 'separator',
+        parentId: MENU_PARENT_ID,
+        contexts: ['selection'],
+      });
+      defs.forEach(d => {
         chrome.contextMenus.create({
-          id: MENU_PROMPT_MORE,
+          id: `${MENU_ACTION_PREFIX}${d.id}`,
           parentId: MENU_PARENT_ID,
-          title: getMessage('contextMenuMorePrompts'),
-          contexts: ['all'],
+          title: getMessage(d.labelKey),
+          contexts: ['selection'],
         });
-      }
+      });
     }
   })();
   try { return await _buildMenuPromise; }
@@ -139,7 +171,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     if (info.menuItemId === MENU_OPEN_DRAWER_ID) {
       const payload = createOpenDrawerMessage({ srcUrl: info.srcUrl || '' });
       await chrome.tabs.sendMessage(tab.id, payload);
-    } else if (info.menuItemId === MENU_OPEN_ID || info.menuItemId === MENU_PROMPT_MORE) {
+    } else if (info.menuItemId === MENU_OPEN_ID) {
       const payload = { action: 'openDialog' };
       if (info.srcUrl) payload.srcUrl = info.srcUrl;
       await chrome.tabs.sendMessage(tab.id, payload);
@@ -164,6 +196,18 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           await chrome.tabs.sendMessage(tab.id, fallback);
         }
       }
+    } else if (typeof info.menuItemId === 'string' && info.menuItemId.startsWith(MENU_ACTION_PREFIX)) {
+      const actionId = info.menuItemId.slice(MENU_ACTION_PREFIX.length);
+      const lib = globalThis.__aiext && globalThis.__aiext.actions;
+      const selection = (info.selectionText || '').trim();
+      if (!lib || !selection) return;
+      const initialText = lib.buildActionPrompt(actionId, { selection, uiLang: getUILanguage() });
+      if (!initialText) return;
+      try {
+        await chrome.tabs.sendMessage(tab.id, { action: 'openDialog', initialText });
+      } catch {
+        await chrome.tabs.sendMessage(tab.id, { action: 'fillInput', text: initialText });
+      }
     }
   } catch {
     // content script not loaded on this page (e.g. chrome:// URLs)
@@ -171,7 +215,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes.quickPrompts) {
+  if (changes.quickPrompts || changes.builtInActions) {
     buildMenu();
   }
 });
