@@ -54,6 +54,21 @@ test('normalizeBaseUrl trims whitespace', () => {
   assert.strictEqual(normalizeBaseUrl('  https://api.openai.com  '), 'https://api.openai.com/v1');
 });
 
+// KNOWN LIMITATION (roadmap §3.8): normalizeBaseUrl does not validate scheme
+// or provider path style. These tests lock the current behavior so a future
+// fix must consciously update them.
+test('normalizeBaseUrl currently appends /v1 to Azure-style paths', () => {
+  assert.strictEqual(
+    normalizeBaseUrl('https://myres.openai.azure.com/openai/deployments/gpt4'),
+    'https://myres.openai.azure.com/openai/deployments/gpt4/v1'
+  );
+});
+
+test('normalizeBaseUrl currently accepts non-http schemes and garbage', () => {
+  assert.strictEqual(normalizeBaseUrl('javascript:alert(1)'), 'javascript:alert(1)/v1');
+  assert.strictEqual(normalizeBaseUrl('not a url'), 'not a url/v1');
+});
+
 // ─── renderMarkdown ───
 test('renderMarkdown returns empty for empty input', () => {
   assert.strictEqual(renderMarkdown(''), '');
@@ -110,34 +125,9 @@ test('renderMarkdown renders blockquotes', () => {
   assert.strictEqual(renderMarkdown('> quoted'), '<blockquote>quoted</blockquote>');
 });
 
-// ─── isSafeFetchUrl (copied from background.js for testing) ───
-// NOTE: keep in sync with background.js until it moves to lib/net.js (roadmap §5 phase 2 item 7).
-function isSafeFetchUrl(urlStr) {
-  let u;
-  try { u = new URL(urlStr); } catch (e) { return false; }
-  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
-  let host = u.hostname.toLowerCase().replace(/^\[|\]$/g, '');
-  if (host.startsWith('::ffff:')) return false;
-  const mapped = host.match(/^::ffff:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/);
-  if (mapped) host = mapped[1];
-  if (host === 'localhost' || host.endsWith('.localhost') || host === '::1') return false;
-  const v4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
-  if (v4) {
-    const a = Number(v4[1]), b = Number(v4[2]);
-    if (a === 0 || a === 127) return false;
-    if (a === 10) return false;
-    if (a === 172 && b >= 16 && b <= 31) return false;
-    if (a === 192 && b === 168) return false;
-    if (a === 169 && b === 254) return false;
-    if (a === 100 && b >= 64 && b <= 127) return false;
-    if (a === 198 && (b === 18 || b === 19)) return false;
-    if (a >= 224) return false;
-  }
-  if (host.startsWith('fe80:') || host.startsWith('fec0:')) return false;
-  if (host.startsWith('fc') || host.startsWith('fd')) return false;
-  if (host.startsWith('64:ff9b:')) return false;
-  return true;
-}
+// ─── isSafeFetchUrl (loaded from the real lib/net.js, shared with background.js) ───
+vm.runInThisContext(fs.readFileSync(path.join(libDir, 'net.js'), 'utf8'));
+const { isSafeFetchUrl } = window.__aiext.net;
 
 test('isSafeFetchUrl allows public HTTPS', () => {
   assert.strictEqual(isSafeFetchUrl('https://example.com/img.png'), true);
@@ -184,10 +174,11 @@ test('isSafeFetchUrl rejects CGNAT, benchmark and multicast ranges', () => {
 });
 
 test('background.js fetchImageAsDataUrl uses manual redirect handling', () => {
-  const src = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');
-  assert.ok(src.includes("redirect: 'manual'"), 'fetch must use redirect: manual');
-  assert.ok(src.includes('MAX_FETCH_REDIRECTS'), 'redirect hop limit must exist');
-  assert.ok(src.includes('MAX_FETCH_IMAGE_BYTES'), 'response size cap must exist');
+  const bg = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');
+  const net = fs.readFileSync(path.join(libDir, 'net.js'), 'utf8');
+  assert.ok(bg.includes("redirect: 'manual'"), 'fetch must use redirect: manual');
+  assert.ok(net.includes('MAX_FETCH_REDIRECTS'), 'redirect hop limit must exist');
+  assert.ok(net.includes('MAX_FETCH_IMAGE_BYTES'), 'response size cap must exist');
 });
 
 test('content.js dialog template escapes config.model', () => {

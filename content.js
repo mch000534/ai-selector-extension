@@ -38,16 +38,13 @@
   function t(key, ...args) {
     if (!contextValid() || !chrome.i18n || !chrome.i18n.getMessage) return key;
     try { return chrome.i18n.getMessage(key, args) || key; }
-    catch (e) { _contextInvalid = true; return key; }
+    catch (e) { return key; }
   }
 
   const _isRtl = window.__aiext.isRtl;
   const _shadow = () => window.__aiext.shadow.root;
   const _shadowAppend = (el) => window.__aiext.shadow.append(el);
-  const _shadowQuery = (sel) => window.__aiext.shadow.query(sel);
-  const _shadowQueryAll = (sel) => window.__aiext.shadow.queryAll(sel);
   const isOurElement = (el) => window.__aiext.shadow.isOurElement(el);
-  const getThemeColors = () => window.__aiext.theme.getThemeColors();
   const applyThemeVars = () => window.__aiext.theme.applyThemeVars();
 
   let _hoveredImage = null;
@@ -808,6 +805,8 @@
       function cleanup() {
         overlay.remove();
         document.removeEventListener('keydown', onKeyDown);
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('mouseup', onDragEnd);
       }
 
       function onKeyDown(e) {
@@ -831,7 +830,10 @@
         e.preventDefault();
       });
 
-      overlay.addEventListener('mousemove', (e) => {
+      // Tracked on document (not the overlay) so releasing the mouse outside
+      // the overlay still ends the drag and resolves the promise. Otherwise
+      // the awaiting caller hangs forever with its dialog hidden.
+      function onDragMove(e) {
         if (!isDragging) return;
         const currentX = e.clientX;
         const currentY = e.clientY;
@@ -844,9 +846,10 @@
         selection.style.width = width + 'px';
         selection.style.height = height + 'px';
         e.preventDefault();
-      });
+      }
+      document.addEventListener('mousemove', onDragMove);
 
-      overlay.addEventListener('mouseup', async (e) => {
+      async function onDragEnd(e) {
         if (!isDragging) return;
         isDragging = false;
 
@@ -888,7 +891,8 @@
         };
         img.src = dataUrl;
         e.preventDefault();
-      });
+      }
+      document.addEventListener('mouseup', onDragEnd);
     });
   }
 
@@ -1042,7 +1046,7 @@
       try {
         if (!chrome.storage || !chrome.storage.sync) return resolve([]);
         chrome.storage.sync.get(['quickPrompts'], (result) => {
-          resolve(result.quickPrompts || []);
+          resolve(chat.normalizeQuickPrompts(result && result.quickPrompts));
         });
       } catch (e) {
         resolve([]);
@@ -1234,7 +1238,7 @@
       if (contextValid() && chrome.runtime && chrome.runtime.getURL) {
         _iconUrl = chrome.runtime.getURL('icons/icon48.png');
       }
-    } catch (e) { _contextInvalid = true; }
+    } catch (e) { /* transient getURL failure: keep context flag untouched */ }
     floatingIcon.innerHTML = _iconUrl ? `<img src="${_iconUrl}" alt="">` : '';
 
     if (imgEl) {
@@ -1279,6 +1283,7 @@
   }
 
   function hideFloatingIcon() {
+    if (_iconHoverTimer) { clearTimeout(_iconHoverTimer); _iconHoverTimer = null; }
     if (floatingIcon) {
       floatingIcon.remove();
       floatingIcon = null;
@@ -1781,7 +1786,7 @@
         const res = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
         if (!res.ok) return null;
         const data = await res.json();
-        const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
+        const models = chat.parseModelIds(data);
         if (models.length === 0) return null;
         _modelCache.set(cacheKey, { models, ts: Date.now() });
         return models;
@@ -1843,12 +1848,6 @@
   // ─── Messages ───
   function isNearBottom(el, threshold = 80) {
     return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
-  }
-
-  function autoScroll(id) {
-    const state = dialogs.get(id);
-    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
-    if (m && isNearBottom(m)) m.scrollTop = m.scrollHeight;
   }
 
   // During streaming we cache the "user is at bottom" decision once per frame
@@ -1923,7 +1922,7 @@
         if (contextValid() && chrome.i18n && chrome.i18n.getUILanguage) {
           uiLang = chrome.i18n.getUILanguage() || 'en';
         }
-      } catch (e) { _contextInvalid = true; }
+      } catch (e) { /* transient getUILanguage failure: keep default 'en' */ }
       const messages = chat.buildChatMessages({
         context: state.context,
         pendingImages: state.pendingScreenshots,
@@ -1974,14 +1973,6 @@
 
   // ─── AI Calls ───
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  function messagesHaveImages(messages) {
-    return chat.messagesHaveImages(messages);
-  }
-
-  function stripImagesFromMessages(messages) {
-    return chat.stripImagesFromMessages(messages);
-  }
 
   async function callAI(id, config, messages) {
     const { apiKey, model, baseUrl } = config;
@@ -2057,14 +2048,14 @@
           continue;
         }
 
-        if (res.status === 400 && messagesHaveImages(messages) && !fallbackTriggered) {
+        if (res.status === 400 && chat.messagesHaveImages(messages) && !fallbackTriggered) {
           fallbackTriggered = true;
           if (retryBubble && retryBubble.parentElement) {
             retryBubble.parentElement.style.display = '';
             const notice = document.createTextNode(t('fallbackTextOnly') + ' ');
             retryBubble.insertBefore(notice, cancelEl);
           }
-          messages = stripImagesFromMessages(messages);
+          messages = chat.stripImagesFromMessages(messages);
           continue;
         }
 
@@ -2680,7 +2671,7 @@
         }
       });
     }
-  } catch (e) { _contextInvalid = true; }
+  } catch (e) { /* storage listener unavailable: floating toggle just won't live-update */ }
 
   injectStyles();
 
@@ -2712,5 +2703,10 @@
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (!contextValid()) return;
     try { applyThemeVars(); } catch (e) { /* context invalidated */ }
+  });
+
+  window.addEventListener('resize', () => {
+    if (!contextValid()) return;
+    try { refreshBodyShiftForDrawer(); } catch (e) { /* context invalidated */ }
   });
 })();
