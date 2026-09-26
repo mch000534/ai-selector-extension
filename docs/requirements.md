@@ -122,8 +122,7 @@
 - **模型名稱**：文字輸入框附 datalist，點擊「獲取」按鈕從 `{baseUrl}/models` 取得列表
 - **快速預設問題**：可新增（Enter 或按鈕）、刪除（× 按鈕），上限 10 個
 - **預設釘住**：勾選框，開啟後新對話框自動釘選
-- **儲存**：驗證必填欄位（API Key、Base URL、模型）後存入 `chrome.storage.sync`
-- 所有設定以 `chrome.storage.sync` 同步，鍵值：`apiKey`、`model`、`baseUrl`、`quickPrompts`、`defaultPin`
+- **儲存**：API Key 寫入 `chrome.storage.local`，其餘（`model`、`baseUrl`、`quickPrompts`、`defaultPin`、`showFloating`、`builtInActions`）寫入 `chrome.storage.sync`；僅當 key 或 URL 變動時清除已存對話
 
 #### FR-010：鍵盤快捷鍵
 - `Enter`：發送訊息
@@ -172,13 +171,11 @@
 - `popup.html` 透過 `data-i18n*` 屬性標記可翻譯元素，`popup.js` 的 `applyI18n()` 套用翻譯
 - `content.js` 透過 `t()` 輔助函式取得翻譯字串
 - 系統提示詞為英文，但根據使用者 UI 語言指示 AI 以該語言回應
-- RTL 語言（ar、iw、fa）自動設定 `dir="rtl"`，訊息氣泡對齊方向翻轉
+- RTL 語言（ar、iw、fa、ur）自動設定 `dir="rtl"`，訊息氣泡對齊方向翻轉
 
 #### FR-013：暗色/亮色模式
 - 依系統 `prefers-color-scheme` 自動切換，無需手動設定
-- `popup.css` 使用 CSS 自訂屬性 + `@media (prefers-color-scheme: dark)` 覆寫
-- `content.js` 的 `getThemeColors()` 根據 `matchMedia` 回傳對應色彩組
-- 系統切換主題時自動重新注入 content script 樣式
+- 色票單一來源為 `lib/theme.js`：content 經 shadow `:host` 變數、popup 經 `applyDocumentVars` 寫入 `documentElement`；系統切換時監聽 `matchMedia` 即時更新
 - 滾動條顏色跟隨主題切換
 
 #### FR-014：Base URL 自動正規化
