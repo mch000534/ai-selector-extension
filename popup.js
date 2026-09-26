@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modelHint = document.getElementById('modelHint');
   const fetchModelsBtn = document.getElementById('fetchModelsBtn');
   const statusEl = document.getElementById('status');
-  const openSidePanelBtn = document.getElementById('openSidePanelBtn');
+  const openDrawerBtn = document.getElementById('openDrawerBtn');
   const promptsList = document.getElementById('promptsList');
   const newPromptInput = document.getElementById('newPrompt');
   const addPromptBtn = document.getElementById('addPromptBtn');
@@ -124,9 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
   (async () => {
     await loadProviders();
     renderProviderOptions();
-    applyI18n();
+  applyI18n();
 
-    chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], (result) => {
+  try {
+    if (window.__aiext.theme && window.__aiext.theme.applyDocumentVars) {
+      window.__aiext.theme.applyDocumentVars(document);
+    }
+  } catch (e) { /* popup keeps CSS fallbacks */ }
+
+    window.__aiext.storage.getSync(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], {}).then((result) => {
     if (result.apiKey) apiKeyInput.value = result.apiKey;
     if (result.baseUrl) baseUrlInput.value = result.baseUrl;
     if (result.model) modelInput.value = result.model;
@@ -164,13 +170,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderPrompts() {
     const editTooltip = chrome.i18n.getMessage('quickPromptsEditTooltip');
-    promptsList.innerHTML = quickPrompts.map((p, i) => `
-      <div class="prompt-item" data-index="${i}">
-        <span class="prompt-drag" draggable="true">⠿</span>
-        <span class="prompt-text" title="${escapeHtml(editTooltip)}">${escapeHtml(p)}</span>
-        <button class="prompt-remove" data-index="${i}">&times;</button>
-      </div>
-    `).join('');
+    // Built with DOM APIs (not innerHTML) so prompt text can never break out
+    // into markup: textContent assigns, never parses.
+    promptsList.textContent = '';
+    quickPrompts.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'prompt-item';
+      item.dataset.index = String(i);
+
+      const drag = document.createElement('span');
+      drag.className = 'prompt-drag';
+      drag.draggable = true;
+      drag.textContent = '⠿';
+      item.appendChild(drag);
+
+      const label = document.createElement('span');
+      label.className = 'prompt-text';
+      label.title = editTooltip;
+      label.textContent = p;
+      item.appendChild(label);
+
+      const remove = document.createElement('button');
+      remove.className = 'prompt-remove';
+      remove.dataset.index = String(i);
+      remove.textContent = '×';
+      item.appendChild(remove);
+
+      promptsList.appendChild(item);
+    });
 
     promptsList.querySelectorAll('.prompt-remove').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -289,15 +316,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modelHint.textContent = chrome.i18n.getMessage('modelFetchingHint');
 
     try {
-      const url = normalizeBaseUrl(baseUrl) + '/models';
-      const res = await fetch(url, {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
+      const models = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
 
-      if (models.length === 0) {
+      if (!models || models.length === 0) {
         showStatus(chrome.i18n.getMessage('modelNoModels'), 'error');
         return;
       }
@@ -325,18 +346,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
     const showFloating = showFloatingCheckbox.checked;
-    chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }, () => {
+    window.__aiext.storage.setSync({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }).then(() => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
     // Only clear persisted conversations when the connection config actually
-    // changed — they belong to the previous endpoint/credential. Covers both
-    // the floating-dialog store and the sidepanel store so they can't diverge.
+    // changed — they belong to the previous endpoint/credential.
     if (baselineApiKey !== null && baselineBaseUrl !== null &&
         (apiKey !== baselineApiKey || baseUrl !== baselineBaseUrl)) {
       baselineApiKey = apiKey;
       baselineBaseUrl = baseUrl;
       try {
-        chrome.storage.local.remove(['aiext_dialogs_v1', 'aiext_sidepanel_chat_v1']);
+        chrome.storage.local.remove(['aiext_dialogs_v1']);
       } catch (e) { /* ignore */ }
     }
   }
@@ -367,8 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
   defaultPinCheckbox.addEventListener('change', save);
   showFloatingCheckbox.addEventListener('change', save);
 
-  if (openSidePanelBtn) {
-    openSidePanelBtn.addEventListener('click', async () => {
+  if (openDrawerBtn) {
+    openDrawerBtn.addEventListener('click', async () => {
       try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (!tab || typeof tab.id !== 'number') throw new Error('no_active_tab');
@@ -376,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response && response.error) throw new Error(response.error);
         window.close();
       } catch (err) {
-        showStatus(chrome.i18n.getMessage('sidePanelOpenFailed', [err.message]), 'error');
+        showStatus(chrome.i18n.getMessage('openDrawerFailed', [err.message]), 'error');
       }
     });
   }
@@ -444,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!res || !res.ok) {
       // Fallback: read storage directly (won't be hostname-scoped)
       try {
-        const data = await chrome.storage.local.get([STORAGE_KEY]);
+        const data = await window.__aiext.storage.getLocal([STORAGE_KEY], {});
         const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
         const now = Date.now();
         const TTL_MS = 7 * 24 * 3600 * 1000;
@@ -452,26 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .filter(r => r && r.closedAt && (now - r.closedAt) < TTL_MS)
           .sort((a, b) => b.closedAt - a.closedAt)
           .slice(0, 10)
-          .map(r => {
-            const last = Array.isArray(r.conversationHistory) && r.conversationHistory.length > 0
-              ? r.conversationHistory[r.conversationHistory.length - 1]
-              : null;
-            let preview = '';
-            if (last && last.content) {
-              if (typeof last.content === 'string') preview = last.content;
-              else if (Array.isArray(last.content)) {
-                preview = last.content.filter(p => p && p.type === 'text').map(p => p.text).join(' ');
-              }
-            }
-            return {
-              id: r.id,
-              hostname: r.hostname || '',
-              closedAt: r.closedAt,
-              messageCount: Array.isArray(r.conversationHistory) ? r.conversationHistory.length : 0,
-              preview: preview.slice(0, 120),
-              model: r.model || ''
-            };
-          });
+          .map(r => chat.buildClosedListItem(r))
+          .filter(Boolean);
         renderClosedList(closed);
       } catch (e) {
         renderEmpty();
@@ -490,7 +492,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderEmpty();
       return;
     }
-    const html = items.map(item => {
+    // Built with DOM APIs (not innerHTML): preview/host/meta come from stored
+    // conversation data and are assigned via textContent, never parsed.
+    recentClosedList.textContent = '';
+    items.forEach(item => {
       const preview = item.preview || '';
       const host = item.hostname || '';
       const dateStr = formatRelativeTime(item.closedAt);
@@ -498,21 +503,42 @@ document.addEventListener('DOMContentLoaded', () => {
         item.messageCount ? `${item.messageCount} msg` : '',
         item.model || ''
       ].filter(Boolean).join(' · ');
-      return `
-        <div class="recent-closed-item" data-persist-id="${escapeHtml(item.id)}">
-          <div class="recent-closed-item-body">
-            <div class="recent-closed-item-top">
-              <span class="recent-closed-item-host">${escapeHtml(host)}</span>
-              <span class="recent-closed-item-date">${escapeHtml(dateStr)}</span>
-            </div>
-            ${preview ? `<div class="recent-closed-item-preview">${escapeHtml(preview)}</div>` : ''}
-            ${meta ? `<div class="recent-closed-item-meta">${escapeHtml(meta)}</div>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-    recentClosedList.innerHTML = html;
-    recentClosedList.querySelectorAll('.recent-closed-item').forEach(el => {
+
+      const el = document.createElement('div');
+      el.className = 'recent-closed-item';
+      el.dataset.persistId = item.id || '';
+
+      const body = document.createElement('div');
+      body.className = 'recent-closed-item-body';
+      el.appendChild(body);
+
+      const top = document.createElement('div');
+      top.className = 'recent-closed-item-top';
+      body.appendChild(top);
+
+      const hostEl = document.createElement('span');
+      hostEl.className = 'recent-closed-item-host';
+      hostEl.textContent = host;
+      top.appendChild(hostEl);
+
+      const dateEl = document.createElement('span');
+      dateEl.className = 'recent-closed-item-date';
+      dateEl.textContent = dateStr;
+      top.appendChild(dateEl);
+
+      if (preview) {
+        const previewEl = document.createElement('div');
+        previewEl.className = 'recent-closed-item-preview';
+        previewEl.textContent = preview;
+        body.appendChild(previewEl);
+      }
+      if (meta) {
+        const metaEl = document.createElement('div');
+        metaEl.className = 'recent-closed-item-meta';
+        metaEl.textContent = meta;
+        body.appendChild(metaEl);
+      }
+
       el.addEventListener('click', async () => {
         const id = el.dataset.persistId;
         if (!id) return;
@@ -533,6 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => errMsg.remove(), 3000);
         }
       });
+      recentClosedList.appendChild(el);
     });
   }
 
@@ -553,10 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (recentClosedClearAll) {
     recentClosedClearAll.addEventListener('click', async () => {
       try {
-        const data = await chrome.storage.local.get([STORAGE_KEY]);
+        const data = await window.__aiext.storage.getLocal([STORAGE_KEY], {});
         const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
         const kept = records.filter(r => !r.closedAt);
-        await chrome.storage.local.set({ [STORAGE_KEY]: { dialogs: kept } });
+        await window.__aiext.storage.setLocal({ [STORAGE_KEY]: { dialogs: kept } });
         renderEmpty();
       } catch (e) {
         // ignore

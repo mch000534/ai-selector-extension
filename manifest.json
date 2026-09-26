@@ -33,6 +33,9 @@
         "lib/shadow.js",
         "lib/markdown.js",
         "lib/chat.js",
+        "lib/net.js",
+        "lib/api.js",
+        "lib/storage.js",
         "lib/theme.js",
         "content.js"
       ],

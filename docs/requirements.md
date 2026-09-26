@@ -112,7 +112,7 @@
 - 安裝時建立右鍵選單項目「AI 劃詞助手」，`contexts: ['all']`
 - 點擊後透過 `chrome.tabs.sendMessage` 發送 `{ action: 'openDialog' }` 給 content script
 - content script 接收後若有選取內容則提取上下文，否則以空上下文開啟對話框
-- 右鍵選單提供「Open side panel」入口，可開啟網頁內右側抽屜聊天
+- 右鍵選單提供「Open drawer」入口，可開啟網頁內右側抽屜聊天
 
 #### FR-009：設定頁面
 - **API Base URL**：文字輸入框，placeholder 為 `https://api.example.com/v1`
@@ -129,7 +129,7 @@
 - `ESC`：關閉最上層未釘選的對話框
 
 #### FR-010a：網頁內右側抽屜聊天
-- popup 設定頁提供開啟 side panel 的按鈕，透過 content script 在目前頁面內開啟右側抽屜
+- popup 設定頁提供開啟抽屜的按鈕，透過 content script 在目前頁面內開啟右側抽屜
 - 右側抽屜沿用 `apiKey`、`baseUrl`、`model`、`quickPrompts` 設定
 - 右側抽屜提供模型輸入框與 datalist，並沿用對話框既有模型清單載入行為
 - 右側抽屜的快速預設問題以晶片形式呈現，點擊後填入輸入框

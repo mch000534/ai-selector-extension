@@ -1,6 +1,6 @@
 const MENU_PARENT_ID = 'ai-selector-parent';
 const MENU_OPEN_ID = 'ai-selector-open';
-const MENU_OPEN_SIDE_PANEL_ID = 'ai-selector-open-side-panel';
+const MENU_OPEN_DRAWER_ID = 'ai-selector-open-drawer';
 const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
 const MENU_PROMPT_MORE = 'ai-selector-prompt-more';
 const MENU_SEPARATOR_ID = 'ai-selector-separator';
@@ -9,7 +9,7 @@ const MAX_PROMPTS_IN_MENU = 20;
 let _buildMenuPromise = null;
 
 try {
-  importScripts('lib/chat.js', 'lib/net.js');
+  importScripts('lib/chat.js', 'lib/net.js', 'lib/storage.js');
 } catch {}
 
 const createOpenDrawerMessage = (options) => {
@@ -40,6 +40,18 @@ function getMessage(key) {
   }
 }
 
+// Storage access with lib/storage.js when loaded, raw chrome API otherwise.
+async function syncGet(keys) {
+  try {
+    if (globalThis.__aiext && globalThis.__aiext.storage) {
+      return await globalThis.__aiext.storage.getSync(keys, {});
+    }
+    return await chrome.storage.sync.get(keys);
+  } catch {
+    return {};
+  }
+}
+
 async function buildMenu() {
   if (_buildMenuPromise) return _buildMenuPromise;
   _buildMenuPromise = (async () => {
@@ -61,15 +73,15 @@ async function buildMenu() {
     });
 
     chrome.contextMenus.create({
-      id: MENU_OPEN_SIDE_PANEL_ID,
+      id: MENU_OPEN_DRAWER_ID,
       parentId: MENU_PARENT_ID,
-      title: getMessage('contextMenuOpenSidePanel'),
+      title: getMessage('openDrawer'),
       contexts: ['all'],
     });
 
     let quickPrompts = [];
     try {
-      const result = await chrome.storage.sync.get(['quickPrompts']);
+      const result = await syncGet(['quickPrompts']);
       quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
     } catch {}
 
@@ -108,6 +120,11 @@ async function buildMenu() {
 
 chrome.runtime.onInstalled.addListener(() => {
   buildMenu();
+  try {
+    if (globalThis.__aiext && globalThis.__aiext.storage) {
+      globalThis.__aiext.storage.ensureSchema();
+    }
+  } catch {}
 });
 
 chrome.runtime.onStartup.addListener(() => {
@@ -119,7 +136,7 @@ buildMenu();
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab || typeof tab.id !== 'number') return;
   try {
-    if (info.menuItemId === MENU_OPEN_SIDE_PANEL_ID) {
+    if (info.menuItemId === MENU_OPEN_DRAWER_ID) {
       const payload = createOpenDrawerMessage({ srcUrl: info.srcUrl || '' });
       await chrome.tabs.sendMessage(tab.id, payload);
     } else if (info.menuItemId === MENU_OPEN_ID || info.menuItemId === MENU_PROMPT_MORE) {
@@ -131,7 +148,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       let prompt = '';
       if (!isNaN(index)) {
         try {
-          const result = await chrome.storage.sync.get(['quickPrompts']);
+          const result = await syncGet(['quickPrompts']);
           const prompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
           prompt = prompts[index] || '';
         } catch {}
@@ -231,7 +248,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'saveProviderPreset' && msg.baseUrl && msg.model) {
     (async () => {
       try {
-        await chrome.storage.sync.set({ baseUrl: msg.baseUrl, model: msg.model });
+        if (globalThis.__aiext && globalThis.__aiext.storage) {
+          await globalThis.__aiext.storage.setSync({ baseUrl: msg.baseUrl, model: msg.model });
+        } else {
+          await chrome.storage.sync.set({ baseUrl: msg.baseUrl, model: msg.model });
+        }
         sendResponse({ ok: true });
       } catch (e) {
         sendResponse({ error: e.message });

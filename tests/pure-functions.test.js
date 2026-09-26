@@ -266,6 +266,36 @@ test('normalizeQuickPrompts keeps non-empty prompt strings', () => {
   );
 });
 
+test('buildClosedListItem normalizes a closed record', () => {
+  assert.strictEqual(typeof chat.buildClosedListItem, 'function');
+  assert.deepStrictEqual(
+    chat.buildClosedListItem({
+      id: 'd1', hostname: 'ex.com', url: 'https://ex.com/p', closedAt: 1700000000000,
+      conversationHistory: [{ role: 'user', content: 'hello' }],
+      model: 'gpt-4o',
+    }),
+    {
+      id: 'd1', hostname: 'ex.com', url: 'https://ex.com/p', closedAt: 1700000000000,
+      messageCount: 1, preview: 'hello', model: 'gpt-4o',
+    }
+  );
+});
+
+test('buildClosedListItem joins array content and rejects open records', () => {
+  assert.deepStrictEqual(
+    chat.buildClosedListItem({
+      id: 'd2', hostname: '', closedAt: 1700000000000,
+      conversationHistory: [{ role: 'user', content: [{ type: 'text', text: 'a' }, { type: 'image_url', image_url: {} }] }],
+    }),
+    {
+      id: 'd2', hostname: '', url: '', closedAt: 1700000000000,
+      messageCount: 1, preview: 'a', model: '',
+    }
+  );
+  assert.strictEqual(chat.buildClosedListItem({ id: 'd3' }), null);
+  assert.strictEqual(chat.buildClosedListItem(null), null);
+});
+
 test('createOpenDrawerMessage builds the content-script drawer command', () => {
   assert.strictEqual(typeof chat.createOpenDrawerMessage, 'function');
   assert.deepStrictEqual(
