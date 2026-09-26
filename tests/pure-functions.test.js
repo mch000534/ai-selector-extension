@@ -111,11 +111,15 @@ test('renderMarkdown renders blockquotes', () => {
 });
 
 // ─── isSafeFetchUrl (copied from background.js for testing) ───
+// NOTE: keep in sync with background.js until it moves to lib/net.js (roadmap §5 phase 2 item 7).
 function isSafeFetchUrl(urlStr) {
   let u;
   try { u = new URL(urlStr); } catch (e) { return false; }
   if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
-  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, '');
+  let host = u.hostname.toLowerCase().replace(/^\[|\]$/g, '');
+  if (host.startsWith('::ffff:')) return false;
+  const mapped = host.match(/^::ffff:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/);
+  if (mapped) host = mapped[1];
   if (host === 'localhost' || host.endsWith('.localhost') || host === '::1') return false;
   const v4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
   if (v4) {
@@ -125,8 +129,13 @@ function isSafeFetchUrl(urlStr) {
     if (a === 172 && b >= 16 && b <= 31) return false;
     if (a === 192 && b === 168) return false;
     if (a === 169 && b === 254) return false;
+    if (a === 100 && b >= 64 && b <= 127) return false;
+    if (a === 198 && (b === 18 || b === 19)) return false;
+    if (a >= 224) return false;
   }
-  if (host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd')) return false;
+  if (host.startsWith('fe80:') || host.startsWith('fec0:')) return false;
+  if (host.startsWith('fc') || host.startsWith('fd')) return false;
+  if (host.startsWith('64:ff9b:')) return false;
   return true;
 }
 
@@ -156,6 +165,41 @@ test('isSafeFetchUrl rejects non-http schemes', () => {
   assert.strictEqual(isSafeFetchUrl('file:///etc/passwd'), false);
   assert.strictEqual(isSafeFetchUrl('javascript:alert(1)'), false);
   assert.strictEqual(isSafeFetchUrl('data:text/html,<script>'), false);
+});
+
+test('isSafeFetchUrl rejects IPv4-mapped IPv6 and NAT64/site-local variants', () => {
+  assert.strictEqual(isSafeFetchUrl('http://[::ffff:127.0.0.1]/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://[::ffff:7f00:1]/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://[64:ff9b::7f00:1]/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://[fec0::1]/'), false);
+});
+
+test('isSafeFetchUrl rejects CGNAT, benchmark and multicast ranges', () => {
+  assert.strictEqual(isSafeFetchUrl('http://100.64.0.1/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://100.127.255.255/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://198.18.0.1/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://198.19.255.255/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://224.0.0.1/'), false);
+  assert.strictEqual(isSafeFetchUrl('http://255.255.255.255/'), false);
+});
+
+test('background.js fetchImageAsDataUrl uses manual redirect handling', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');
+  assert.ok(src.includes("redirect: 'manual'"), 'fetch must use redirect: manual');
+  assert.ok(src.includes('MAX_FETCH_REDIRECTS'), 'redirect hop limit must exist');
+  assert.ok(src.includes('MAX_FETCH_IMAGE_BYTES'), 'response size cap must exist');
+});
+
+test('content.js dialog template escapes config.model', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'content.js'), 'utf8');
+  assert.ok(
+    src.includes('escapeHtml(config.model'),
+    'config.model must be escaped before innerHTML interpolation'
+  );
+  assert.ok(
+    !src.includes('value="${config.model'),
+    'unescaped config.model interpolation must not remain'
+  );
 });
 
 // ─── chat helpers ───

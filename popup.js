@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let quickPrompts = [];
 
+  // Baseline of connection-critical settings. Dialog history is only cleared
+  // when apiKey or baseUrl actually changes — not on every save() (e.g.
+  // typing the API key fires debouncedSave every 500ms, editing quick
+  // prompts also calls save()). Null until initial load completes.
+  let baselineApiKey = null;
+  let baselineBaseUrl = null;
+
   function applyI18n() {
     const lang = chrome.i18n.getUILanguage();
     const rtlLangs = ['ar', 'iw', 'fa', 'ur'];
@@ -123,6 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (result.apiKey) apiKeyInput.value = result.apiKey;
     if (result.baseUrl) baseUrlInput.value = result.baseUrl;
     if (result.model) modelInput.value = result.model;
+    baselineApiKey = (result.apiKey || '').trim();
+    baselineBaseUrl = (result.baseUrl || '').trim();
     defaultPinCheckbox.checked = result.defaultPin !== false;
     showFloatingCheckbox.checked = result.showFloating !== false;
     providerSelect.value = detectProvider(result.baseUrl);
@@ -319,10 +328,17 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }, () => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
-    // Clear persisted conversations — they belong to the previous config.
-    try {
-      chrome.storage.local.remove('aiext_dialogs_v1');
-    } catch (e) { /* ignore */ }
+    // Only clear persisted conversations when the connection config actually
+    // changed — they belong to the previous endpoint/credential. Covers both
+    // the floating-dialog store and the sidepanel store so they can't diverge.
+    if (baselineApiKey !== null && baselineBaseUrl !== null &&
+        (apiKey !== baselineApiKey || baseUrl !== baselineBaseUrl)) {
+      baselineApiKey = apiKey;
+      baselineBaseUrl = baseUrl;
+      try {
+        chrome.storage.local.remove(['aiext_dialogs_v1', 'aiext_sidepanel_chat_v1']);
+      } catch (e) { /* ignore */ }
+    }
   }
 
   let saveTimer = null;

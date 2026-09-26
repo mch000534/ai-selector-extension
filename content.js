@@ -1191,10 +1191,13 @@
         { ...config, model: r.model || config.model },
         null,
         quickPrompts,
-        ctx
+        ctx,
+        { startPinned: true }
       );
       const st = dialogs.get(id);
       if (!st) continue;
+      const pinBtn = st.dialog.querySelector(`.${PREFIX}pin`);
+      if (pinBtn) pinBtn.classList.add(`${PREFIX}pin-active`);
       st.persistId = r.id;
       st.persistedAt = r.createdAt;
       _persistedIds.add(r.id);
@@ -1322,7 +1325,7 @@
       <div class="${PREFIX}drawer-resize" data-aiext="1"></div>
       <div class="${PREFIX}header" data-aiext="1">
         <span class="${PREFIX}title">${t('dialogTitle')}</span>
-        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${config.model || ''}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
+        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${escapeHtml(config.model || '')}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
         <datalist id="${PREFIX}model-list-${id}"></datalist>
         <span class="${PREFIX}pin" data-aiext="1" title="${t('dialogPinTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>
@@ -1341,7 +1344,7 @@
       ${hasContent ? `
       <div class="${PREFIX}selected">
         ${ctx.text ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedText')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="text" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${src}" data-aiext="1"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${escapeHtml(src)}" data-aiext="1"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
@@ -1560,7 +1563,7 @@
       state.pendingScreenshots.forEach((src, i) => {
         const thumb = document.createElement('div');
         thumb.className = `${PREFIX}screenshot-thumb`;
-        thumb.innerHTML = `<img src="${src}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        thumb.innerHTML = `<img src="${escapeHtml(src)}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
         thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
           state.pendingScreenshots.splice(i, 1);
           renderScreenshotPreview();
@@ -2626,10 +2629,13 @@
             { ...config, model: r.model || config.model },
             null,
             quickPrompts,
-            ctx
+            ctx,
+            { startPinned: true }
           );
           const st = dialogs.get(id);
           if (!st) return sendResponse({ ok: false, error: 'state_missing' });
+          const pinBtn = st.dialog.querySelector(`.${PREFIX}pin`);
+          if (pinBtn) pinBtn.classList.add(`${PREFIX}pin-active`);
           st.persistId = r.id;
           st.persistedAt = r.createdAt;
           _persistedIds.add(r.id);
