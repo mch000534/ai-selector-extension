@@ -272,5 +272,17 @@
   },
   "moveToDrawer": {
     "message": "Move to drawer"
+  },
+  "profilesLabel": {
+    "message": "Provider profiles"
+  },
+  "profileSaveBtn": {
+    "message": "Save current"
+  },
+  "profileDeleteBtn": {
+    "message": "Delete"
+  },
+  "profilesHint": {
+    "message": "Save the current key, URL and model as one profile; keys stay on this device"
   }
 }

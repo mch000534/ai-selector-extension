@@ -1030,8 +1030,25 @@
     });
   }
 
-  function getConfig() {
-    return window.__aiext.storage.getSync(['apiKey', 'model', 'baseUrl'], {});
+  // API keys live in storage.local (this device); the rest roams via sync.
+  // The sync fallback covers installs that have not opened the popup since
+  // the migration (popup migrates on open via ensureLocalApiKey).
+  async function getConfig() {
+    const store = window.__aiext.storage;
+    const [sync, local] = await Promise.all([
+      store.getSync(['model', 'baseUrl'], {}),
+      store.getLocal(['apiKey'], {}),
+    ]);
+    let apiKey = (local && local.apiKey) || '';
+    if (!apiKey) {
+      const legacy = await store.getSync(['apiKey'], {});
+      apiKey = (legacy && legacy.apiKey) || '';
+    }
+    return {
+      apiKey,
+      model: (sync && sync.model) || '',
+      baseUrl: (sync && sync.baseUrl) || '',
+    };
   }
 
   function getQuickPrompts() {

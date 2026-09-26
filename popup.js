@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const baseUrlHint = document.getElementById('baseUrlHint');
   const toggleApiKeyBtn = document.getElementById('toggleApiKey');
   const providerSelect = document.getElementById('provider');
+  const profileSelect = document.getElementById('profile');
+  const saveProfileBtn = document.getElementById('saveProfileBtn');
+  const deleteProfileBtn = document.getElementById('deleteProfileBtn');
 
   let PROVIDERS = {};
   let PROVIDER_ORDER = [];
@@ -132,7 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) { /* popup keeps CSS fallbacks */ }
 
-    window.__aiext.storage.getSync(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], {}).then((result) => {
+    // API keys live in storage.local (this device); the rest stays in sync.
+    await window.__aiext.storage.ensureLocalApiKey();
+    const [syncResult, localResult] = await Promise.all([
+      window.__aiext.storage.getSync(['model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], {}),
+      window.__aiext.storage.getLocal(['apiKey'], {}),
+    ]);
+    const result = { ...syncResult, apiKey: (localResult && localResult.apiKey) || syncResult.apiKey || '' };
     if (result.apiKey) apiKeyInput.value = result.apiKey;
     if (result.baseUrl) baseUrlInput.value = result.baseUrl;
     if (result.model) modelInput.value = result.model;
@@ -144,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     quickPrompts = result.quickPrompts || [];
     renderPrompts();
     updateBaseUrlHint();
-  });
+    await loadProfiles();
   })();
 
   providerSelect.addEventListener('change', () => {
@@ -156,6 +165,95 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBaseUrlHint();
     save();
   });
+
+  // ─── Provider profiles (per-endpoint keys in storage.local) ───
+  let profiles = [];
+
+  async function persistProfiles() {
+    await window.__aiext.storage.setLocal({ [window.__aiext.profiles.STORAGE_KEY]: profiles });
+  }
+
+  function renderProfileOptions(selectedId) {
+    if (!profileSelect) return;
+    profileSelect.textContent = '';
+    profiles.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.model ? `${p.name} · ${p.model}` : p.name;
+      profileSelect.appendChild(opt);
+    });
+    if (selectedId && profiles.some(p => p.id === selectedId)) {
+      profileSelect.value = selectedId;
+    } else {
+      const match = profiles.find(p => p.baseUrl === baseUrlInput.value.trim());
+      profileSelect.value = match ? match.id : '';
+    }
+  }
+
+  function applyProfile(id) {
+    const p = window.__aiext.profiles.findProfile(profiles, id);
+    if (!p) return;
+    apiKeyInput.value = p.apiKey || '';
+    baseUrlInput.value = p.baseUrl || '';
+    modelInput.value = p.model || '';
+    providerSelect.value = detectProvider(p.baseUrl);
+    updateBaseUrlHint();
+    save();
+  }
+
+  async function loadProfiles() {
+    const data = await window.__aiext.storage.getLocal([window.__aiext.profiles.STORAGE_KEY], {});
+    profiles = window.__aiext.profiles.normalizeProfiles(data && data[window.__aiext.profiles.STORAGE_KEY]);
+    if (profiles.length === 0) {
+      // Seed one profile from the current connection so existing users keep
+      // one-click switching without re-entering credentials.
+      const baseUrl = baseUrlInput.value.trim();
+      if (baseUrl) {
+        const seeded = window.__aiext.profiles.upsertProfile([], {
+          baseUrl,
+          apiKey: apiKeyInput.value.trim(),
+          model: modelInput.value.trim(),
+        });
+        profiles = seeded.profiles;
+        await persistProfiles();
+      }
+    }
+    renderProfileOptions();
+  }
+
+  if (profileSelect) {
+    profileSelect.addEventListener('change', () => {
+      if (profileSelect.value) applyProfile(profileSelect.value);
+    });
+  }
+  if (saveProfileBtn) {
+    saveProfileBtn.addEventListener('click', async () => {
+      const baseUrl = baseUrlInput.value.trim();
+      if (!baseUrl) {
+        showStatus(chrome.i18n.getMessage('statusNeedUrlAndKey'), 'error');
+        return;
+      }
+      const { profiles: next, id } = window.__aiext.profiles.upsertProfile(profiles, {
+        baseUrl,
+        apiKey: apiKeyInput.value.trim(),
+        model: modelInput.value.trim(),
+      });
+      profiles = next;
+      await persistProfiles();
+      renderProfileOptions(id);
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
+    });
+  }
+  if (deleteProfileBtn) {
+    deleteProfileBtn.addEventListener('click', async () => {
+      const id = profileSelect && profileSelect.value;
+      if (!id) return;
+      profiles = window.__aiext.profiles.deleteProfile(profiles, id);
+      await persistProfiles();
+      renderProfileOptions();
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
+    });
+  }
 
   baseUrlInput.addEventListener('input', () => {
     const detected = detectProvider(baseUrlInput.value);
@@ -346,7 +444,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
     const showFloating = showFloatingCheckbox.checked;
-    window.__aiext.storage.setSync({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }).then(() => {
+    // Keys stay on this device (local); the rest roams via sync.
+    Promise.all([
+      window.__aiext.storage.setLocal({ apiKey }),
+      window.__aiext.storage.setSync({ model, baseUrl, quickPrompts, defaultPin, showFloating }),
+    ]).then(() => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
     // Only clear persisted conversations when the connection config actually

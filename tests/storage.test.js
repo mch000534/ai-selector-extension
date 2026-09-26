@@ -76,3 +76,38 @@ test('ensureSchema never throws without chrome', async () => {
   const res = await storage.ensureSchema();
   assert.strictEqual(res.migrated, false);
 });
+
+function mockStores(syncData, localData) {
+  const sync = { ...syncData };
+  const local = { ...localData };
+  setMockChrome({
+    runtime: { id: 'x' },
+    storage: {
+      sync: {
+        get: async () => ({ ...sync }),
+        set: async (obj) => { Object.assign(sync, obj); },
+        remove: async (keys) => { for (const k of keys) delete sync[k]; },
+      },
+      local: {
+        get: async () => ({ ...local }),
+        set: async (obj) => { Object.assign(local, obj); },
+      },
+    },
+  });
+  return { sync, local };
+}
+
+test('ensureLocalApiKey migrates sync key to local once', async () => {
+  const { sync, local } = mockStores({ apiKey: 'sk-abc' }, {});
+  assert.deepStrictEqual(await storage.ensureLocalApiKey(), { migrated: true, from: 0 });
+  assert.strictEqual(local.apiKey, 'sk-abc');
+  assert.strictEqual('apiKey' in sync, false);
+  assert.deepStrictEqual(await storage.ensureLocalApiKey(), { migrated: false });
+});
+
+test('ensureLocalApiKey is a no-op when local key exists or none exists', async () => {
+  mockStores({ apiKey: 'sk-sync' }, { apiKey: 'sk-local' });
+  assert.deepStrictEqual(await storage.ensureLocalApiKey(), { migrated: false });
+  mockStores({}, {});
+  assert.deepStrictEqual(await storage.ensureLocalApiKey(), { migrated: false });
+});

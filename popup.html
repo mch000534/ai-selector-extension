@@ -21,6 +21,16 @@
     </div>
 
     <div class="form-group">
+      <label for="profile" data-i18n="profilesLabel">Provider profiles</label>
+      <div class="profile-row">
+        <select id="profile"></select>
+        <button id="saveProfileBtn" class="btn-fetch btn-auto" type="button" data-i18n="profileSaveBtn">Save current</button>
+        <button id="deleteProfileBtn" class="btn-fetch btn-auto" type="button" data-i18n="profileDeleteBtn">Delete</button>
+      </div>
+      <small data-i18n="profilesHint">Save the current key, URL and model as one profile; keys stay on this device</small>
+    </div>
+
+    <div class="form-group">
       <label for="baseUrl" data-i18n="baseUrlLabel">API Base URL</label>
       <input type="text" id="baseUrl" data-i18n-placeholder="baseUrlPlaceholder" placeholder="https://api.example.com/v1">
       <small id="baseUrlHint"></small>
@@ -96,6 +106,7 @@
   <script src="lib/chat.js"></script>
   <script src="lib/api.js"></script>
   <script src="lib/storage.js"></script>
+  <script src="lib/profiles.js"></script>
   <script src="lib/theme.js"></script>
   <script src="popup.js"></script>
 </body>

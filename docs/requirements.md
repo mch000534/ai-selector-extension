@@ -116,7 +116,8 @@
 
 #### FR-009：設定頁面
 - **API Base URL**：文字輸入框，placeholder 為 `https://api.example.com/v1`
-- **API Key**：密碼輸入框
+- **API Key**：密碼輸入框，僅存於 `chrome.storage.local`（本機，不隨帳號漫遊）
+- **Provider profiles**：同一組 key/URL/model 存為具名設定檔（`aiext_profiles_v1`，local），下拉切換即套用；同 endpoint 重複儲存會更新而非新增；首次開啟自動以目前連線建立一個
 - **模型名稱**：文字輸入框附 datalist，點擊「獲取」按鈕從 `{baseUrl}/models` 取得列表
 - **快速預設問題**：可新增（Enter 或按鈕）、刪除（× 按鈕），上限 10 個
 - **預設釘住**：勾選框，開啟後新對話框自動釘選
