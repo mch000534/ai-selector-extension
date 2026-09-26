@@ -24,6 +24,8 @@
   let drawerDialogId = null;
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
+  const Z_MAX = 2147483647;
+  const Z_ICON = Z_BASE - 1;
   let topZ = Z_BASE;
   let _activeDragState = null;
   let _activeDrawerResizeState = null;
@@ -51,6 +53,12 @@
   let _iconHoverTimer = null;
 
   function injectStyles() {
+    // Shadow isolation needs a body to host. If the script ever runs
+    // pre-body, wait instead of leaking the stylesheet into document.head.
+    if (!document.body) {
+      document.addEventListener('DOMContentLoaded', injectStyles, { once: true });
+      return;
+    }
     const root = _shadow();
     const old = root ? root.querySelector('style[data-aiext-styles]') : document.querySelector('style[data-aiext-styles]');
     if (old) old.remove();
@@ -69,7 +77,7 @@
         align-items: center !important;
         justify-content: center !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-        z-index: 2147483647 !important;
+        z-index: ${Z_ICON} !important;
         transition: transform 0.15s !important;
         user-select: none !important;
         pointer-events: auto !important;
@@ -999,15 +1007,20 @@
     if (sel.rangeCount > 0) {
       const range = sel.getRangeAt(0);
       const fragment = range.cloneContents();
-      const imgEls = fragment.querySelectorAll('img');
-      for (const img of imgEls) {
-        if (images.length >= MAX_PENDING_IMAGES) break;
-        const dataURL = await imageToDataURL(img);
+      const imgEls = Array.from(fragment.querySelectorAll('img')).slice(0, MAX_PENDING_IMAGES);
+      const results = await Promise.all(imgEls.map((img) => imageToDataURL(img)));
+      for (const dataURL of results) {
         if (dataURL) images.push(dataURL);
       }
     }
 
     return { text, images };
+  }
+
+  // Image sources the extension accepts from messages (see
+  // utils.isTrustedImageSrc): data: images or http(s) URLs.
+  function isTrustedImageSrc(src) {
+    return window.__aiext.utils.isTrustedImageSrc(src, document.baseURI);
   }
 
   function selectionHasContext(sel) {
@@ -1119,6 +1132,10 @@
   const TTL_MS = 7 * 24 * 3600 * 1000;
   const MAX_PER_HOST = 10;
   const MAX_TOTAL = 50;
+  // Auto-restore is capped well below MAX_PER_HOST: silently reopening a
+  // wall of dialogs (e.g. same host, different SPA routes) is surprising;
+  // the rest stay restorable from the conversation manager.
+  const MAX_AUTO_RESTORE = 3;
   // Two-tier image budget: the in-memory pending buffer holds up to 4 (paste,
   // screenshot, selection), while only 2 survive persistence (storage quota).
   const MAX_PENDING_IMAGES = 4;
@@ -1311,7 +1328,10 @@
     if (!_storageAvailable()) return;
     let records = pruneExpired(await loadDialogRecords());
     const hostname = location.hostname;
-    const matches = records.filter(r => r.hostname === hostname && !r.closedAt);
+    const matches = records
+      .filter(r => r.hostname === hostname && !r.closedAt)
+      .sort((a, b) => (b.lastActive || 0) - (a.lastActive || 0))
+      .slice(0, MAX_AUTO_RESTORE);
     if (matches.length === 0) return;
     const config = await getConfig();
     if (!config || !config.apiKey) return;
@@ -1473,12 +1493,16 @@
       </div>
     `;
 
-    // Position
+    // Position (clamped into the viewport; RTL cascades from the selection end)
+    const MIN_W = 280, MIN_H = 250;
     if (rect) {
       let left = rect.left + dialogs.size * 30;
       let top = rect.bottom + 8 + dialogs.size * 30;
+      if (_isRtl) left = rect.right - 420 - dialogs.size * 30;
       if (left + 420 > window.innerWidth) left = Math.max(10, window.innerWidth - 440);
       if (top + 400 > window.innerHeight) top = Math.max(10, rect.top - 420);
+      left = Math.max(10, Math.min(left, Math.max(10, window.innerWidth - MIN_W - 10)));
+      top = Math.max(10, Math.min(top, Math.max(10, window.innerHeight - MIN_H - 10)));
       state.dialog.style.left = left + 'px';
       state.dialog.style.top = top + 'px';
     } else {
@@ -1555,6 +1579,18 @@
     setupDrag(id);
     setupDrawerResize(id);
     bringToFront(id);
+
+    // Manual resizes (CSS resize:both writes inline size; drawer drags write
+    // it too) persist debounced, so adjusted sizes survive reload.
+    if (typeof ResizeObserver !== 'undefined') {
+      let resizeTimer = null;
+      const ro = new ResizeObserver(() => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => persistState(id), 600);
+      });
+      ro.observe(state.dialog);
+      state._resizeObserver = ro;
+    }
 
     state.dialog.addEventListener('mousedown', () => {
       if (!state.isDragging && state.zIndex !== topZ) bringToFront(id);
@@ -1709,12 +1745,31 @@
     }
     if (state.overlay) state.overlay.remove();
     if (state.dialog) state.dialog.remove();
+    if (state._resizeObserver) {
+      try { state._resizeObserver.disconnect(); } catch (e) {}
+      state._resizeObserver = null;
+    }
     dialogs.delete(id);
+  }
+
+  // Renormalizes stacking order when topZ approaches the CSS limit, so
+  // z-index never overflows into invalid values no matter how often
+  // dialogs are focused.
+  function normalizeZOrder() {
+    const ordered = [...dialogs.values()].sort((a, b) => (a.zIndex || 0) - (b.zIndex || 0));
+    topZ = Z_BASE;
+    for (const st of ordered) {
+      topZ++;
+      st.zIndex = topZ;
+      if (st.dialog) st.dialog.style.zIndex = topZ;
+      if (st.overlay) st.overlay.style.zIndex = topZ - 1;
+    }
   }
 
   function bringToFront(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
     topZ++;
     state.zIndex = topZ;
     state.dialog.style.zIndex = topZ;
@@ -1946,7 +2001,10 @@
     }
   });
 
-  document.addEventListener('mouseup', () => {
+  // Ends drag/resize gestures and restores page cursor/selection. Bound to
+  // mouseup and window blur (a mouseup lost outside the window must not
+  // leave the page stuck in ew-resize with selection disabled).
+  function endActiveGestures() {
     if (_activeDrawerResizeState) {
       const state = _activeDrawerResizeState.state;
       _activeDrawerResizeState = null;
@@ -1955,7 +2013,9 @@
       if (state && state.id) persistState(state.id);
     }
     if (_activeDragState) { _activeDragState.isDragging = false; _activeDragState = null; }
-  });
+  }
+  document.addEventListener('mouseup', endActiveGestures);
+  window.addEventListener('blur', endActiveGestures);
 
   // ─── ESC handler ───
   document.addEventListener('keydown', (e) => {
@@ -1971,13 +2031,13 @@
     return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
   }
 
-  // During streaming we cache the "user is at bottom" decision once per frame
-  // so scrollHeight/scrollTop reads don't force a layout flush on every delta.
-  let _scrollAtBottom = true;
+  // During streaming each dialog caches its own "user is at bottom" decision
+  // once per frame, so scrollHeight/scrollTop reads don't force a layout
+  // flush on every delta (and concurrent streams can't pollute each other).
   function autoScrollStreaming(id) {
-    if (!_scrollAtBottom) return;
     const state = dialogs.get(id);
-    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!state || state.scrollAtBottom === false) return;
+    const m = state.dialog.querySelector(`.${PREFIX}messages`);
     if (m) m.scrollTop = m.scrollHeight;
   }
 
@@ -2111,14 +2171,20 @@
         errDiv.textContent = response.error;
         messagesEl.appendChild(errDiv);
       } else if (response.bubble) {
-        response.bubble.innerHTML = renderMarkdown(response.content);
-        attachCodeCopyButtons(response.bubble);
-        const aIdx = state.conversationHistory.length;
-        state.conversationHistory.push({ role: 'assistant', content: response.content });
-        const msgEl = response.bubble.parentElement;
-        if (msgEl) {
-          msgEl.dataset.historyIndex = String(aIdx);
-          attachMessageActions(msgEl, id, 'assistant', aIdx);
+        if (!response.content) {
+          // Empty reply: drop the blank bubble instead of writing an empty
+          // turn into history (which would be sent back to the API).
+          if (response.bubble.parentElement) response.bubble.parentElement.remove();
+        } else {
+          response.bubble.innerHTML = renderMarkdown(response.content);
+          attachCodeCopyButtons(response.bubble);
+          const aIdx = state.conversationHistory.length;
+          state.conversationHistory.push({ role: 'assistant', content: response.content });
+          const msgEl = response.bubble.parentElement;
+          if (msgEl) {
+            msgEl.dataset.historyIndex = String(aIdx);
+            attachMessageActions(msgEl, id, 'assistant', aIdx);
+          }
         }
       } else {
         const aIdx = state.conversationHistory.length;
@@ -2382,7 +2448,7 @@
             bubble = addMessage(id, 'assistant', '');
             const st = dialogs.get(id);
             const m = st && st.dialog.querySelector(`.${PREFIX}messages`);
-            _scrollAtBottom = m ? isNearBottom(m) : true;
+            if (st) st.scrollAtBottom = m ? isNearBottom(m) : true;
           } else if (ev.type === 'delta') {
             fullContent = ev.fullContent;
             if (rafId === null) rafId = requestAnimationFrame(flush);
@@ -2427,7 +2493,7 @@
   }
 
   // ─── Open Dialog ───
-  async function openDialog() {
+  async function openDialog(options = {}) {
     hideFloatingIcon();
 
     const config = await getConfig();
@@ -2436,6 +2502,10 @@
       return;
     }
 
+    // Re-read the live selection like openDrawer does, instead of reusing a
+    // possibly stale currentContext. Callers that already set the context
+    // (e.g. the openDialog message handler) opt out to avoid double fetch.
+    if (!options.skipSelectionRefresh) await setContextFromSelectionOrSource('');
     const sel = window.getSelection();
     const range = sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
     const rect = range ? range.getBoundingClientRect() : null;
@@ -2486,6 +2556,7 @@
     applyDrawerWidth(state.dialog, 410);
     applyBodyShift(410, _isRtl ? 'left' : 'right');
     state.dialog.style.height = '100vh';
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
     state.dialog.style.zIndex = ++topZ;
     if (state.overlay) {
       state.overlay.remove();
@@ -2643,8 +2714,9 @@
 
     _shadowAppend(overlay);
     _shadowAppend(dlg);
-    overlay.style.zIndex = 2147483640;
-    dlg.style.zIndex = 2147483641;
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
+    overlay.style.zIndex = ++topZ;
+    dlg.style.zIndex = ++topZ;
     dlg.querySelector(`.${PREFIX}close`).addEventListener('click', () => { overlay.remove(); dlg.remove(); });
 
     dlg.querySelectorAll(`.${PREFIX}warning-free-btn`).forEach(btn => {
@@ -2771,7 +2843,7 @@
       (async () => {
         try {
           await setContextFromSelectionOrSource(msg.srcUrl || '');
-          await openDialog();
+          await openDialog({ skipSelectionRefresh: true });
           if (typeof msg.initialText === 'string' && msg.initialText) {
             await new Promise(r => setTimeout(r, 0));
             const entries = Array.from(dialogs.values()).reverse();
@@ -2794,7 +2866,9 @@
     } else if (msg.action === 'fillInput' && typeof msg.text === 'string') {
       (async () => {
         try {
-          if (msg.srcUrl) {
+          // Only accept same-shape image sources the extension itself could
+          // have produced (data: images or http(s) URLs).
+          if (msg.srcUrl && isTrustedImageSrc(msg.srcUrl)) {
             currentContext = { text: '', images: [msg.srcUrl] };
             for (const state of dialogs.values()) {
               if (!state.dialog || !state.context) continue;
@@ -2882,6 +2956,21 @@
           _showFloating = changes.showFloating.newValue !== false;
           if (!_showFloating) hideFloatingIcon();
         }
+        // Propagate connection settings to live dialogs so the next turn
+        // uses them (in-flight requests already captured their config).
+        // The visible model inputs keep their text to avoid clobbering edits.
+        if (area === 'sync' && (changes.model || changes.baseUrl)) {
+          for (const st of dialogs.values()) {
+            if (!st.config) continue;
+            if (changes.model) st.config.model = changes.model.newValue || '';
+            if (changes.baseUrl) st.config.baseUrl = changes.baseUrl.newValue || '';
+          }
+        }
+        if (area === 'local' && changes.apiKey) {
+          for (const st of dialogs.values()) {
+            if (st.config) st.config.apiKey = changes.apiKey.newValue || '';
+          }
+        }
       });
     }
   } catch (e) { /* storage listener unavailable: floating toggle just won't live-update */ }
@@ -2909,6 +2998,16 @@
 
   window.addEventListener('beforeunload', () => { flushAllDialogs(); });
   window.addEventListener('pagehide', () => { flushAllDialogs(); });
+
+  // SPA navigations keep the content script alive with a stale selection
+  // context. Drop it on route changes (pushState-based routers don't fire
+  // these; that residual case is a known limitation).
+  function clearStaleContext() {
+    currentContext = { text: '', images: [] };
+    hideFloatingIcon();
+  }
+  window.addEventListener('popstate', clearStaleContext);
+  window.addEventListener('hashchange', clearStaleContext);
 
   restoreDialogsOnLoad();
 

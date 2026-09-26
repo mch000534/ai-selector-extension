@@ -64,8 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function applyI18n() {
     const lang = chrome.i18n.getUILanguage();
-    const rtlLangs = ['ar', 'iw', 'fa', 'ur'];
-    const isRtl = rtlLangs.some(l => lang.startsWith(l));
+    // Single RTL source (lib/theme.js); inline list is only a fallback.
+    const isRtl = window.__aiext.isRtlLang
+      ? window.__aiext.isRtlLang(lang)
+      : ['ar', 'iw', 'fa', 'ur'].some(l => lang.startsWith(l));
     document.documentElement.lang = lang;
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
 

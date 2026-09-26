@@ -237,7 +237,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'captureScreenshot') {
     (async () => {
       try {
-        const dataUrl = await chrome.tabs.captureVisibleTab(null, { format: 'png' });
+        // Bind the capture to the sender's window: a background tab must not
+        // be able to screenshot whatever the user is currently viewing.
+        const winId = sender && sender.tab && sender.tab.windowId;
+        if (typeof winId !== 'number') return sendResponse({ error: 'no_sender_tab' });
+        const dataUrl = await chrome.tabs.captureVisibleTab(winId, { format: 'png' });
         sendResponse({ dataUrl });
       } catch (e) {
         sendResponse({ error: e.message });
@@ -303,10 +307,20 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'saveProviderPreset' && msg.baseUrl && msg.model) {
     (async () => {
       try {
+        const rawUrl = String(msg.baseUrl || '').trim();
+        const rawModel = String(msg.model || '').trim();
+        let httpUrl = false;
+        try {
+          const u = new URL(rawUrl);
+          httpUrl = u.protocol === 'http:' || u.protocol === 'https:';
+        } catch (e) { httpUrl = false; }
+        if (!httpUrl || !rawModel || rawModel.length > 200) {
+          return sendResponse({ error: 'invalid preset' });
+        }
         if (globalThis.__aiext && globalThis.__aiext.storage) {
-          await globalThis.__aiext.storage.setSync({ baseUrl: msg.baseUrl, model: msg.model });
+          await globalThis.__aiext.storage.setSync({ baseUrl: rawUrl, model: rawModel });
         } else {
-          await chrome.storage.sync.set({ baseUrl: msg.baseUrl, model: msg.model });
+          await chrome.storage.sync.set({ baseUrl: rawUrl, model: rawModel });
         }
         sendResponse({ ok: true });
       } catch (e) {

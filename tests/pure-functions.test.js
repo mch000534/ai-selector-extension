@@ -15,8 +15,7 @@ if (fs.existsSync(chatLibPath)) {
   vm.runInThisContext(fs.readFileSync(chatLibPath, 'utf8'));
 }
 
-const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
-const { renderMarkdown } = window.__aiext.markdown;
+const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;const { renderMarkdown } = window.__aiext.markdown;
 const chat = window.__aiext.chat || {};
 
 // ─── escapeHtml ───
@@ -54,9 +53,7 @@ test('normalizeBaseUrl trims whitespace', () => {
   assert.strictEqual(normalizeBaseUrl('  https://api.openai.com  '), 'https://api.openai.com/v1');
 });
 
-// KNOWN LIMITATION (roadmap §3.8): normalizeBaseUrl does not validate scheme
-// or provider path style. These tests lock the current behavior so a future
-// fix must consciously update them.
+// Non-URL input and non-http(s) schemes pass through untouched (no /v1).
 test('normalizeBaseUrl currently appends /v1 to Azure-style paths', () => {
   assert.strictEqual(
     normalizeBaseUrl('https://myres.openai.azure.com/openai/deployments/gpt4'),
@@ -64,9 +61,29 @@ test('normalizeBaseUrl currently appends /v1 to Azure-style paths', () => {
   );
 });
 
-test('normalizeBaseUrl currently accepts non-http schemes and garbage', () => {
-  assert.strictEqual(normalizeBaseUrl('javascript:alert(1)'), 'javascript:alert(1)/v1');
-  assert.strictEqual(normalizeBaseUrl('not a url'), 'not a url/v1');
+test('normalizeBaseUrl passes through non-http schemes and garbage', () => {
+  assert.strictEqual(normalizeBaseUrl('javascript:alert(1)'), 'javascript:alert(1)');
+  assert.strictEqual(normalizeBaseUrl('not a url'), 'not a url');
+});
+
+test('isTrustedImageSrc allows data: images and http(s) only', () => {
+  const { isTrustedImageSrc } = window.__aiext.utils;
+  assert.strictEqual(isTrustedImageSrc('data:image/png;base64,AAA'), true);
+  assert.strictEqual(isTrustedImageSrc('https://example.com/i.png'), true);
+  assert.strictEqual(isTrustedImageSrc('http://example.com/i.png'), true);
+  assert.strictEqual(isTrustedImageSrc('/rel/path.png', 'https://example.com/'), true);
+  assert.strictEqual(isTrustedImageSrc('blob:https://example.com/x'), false);
+  assert.strictEqual(isTrustedImageSrc('javascript:alert(1)'), false);
+  assert.strictEqual(isTrustedImageSrc('data:text/html,<script>'), false);
+  assert.strictEqual(isTrustedImageSrc(''), false);
+  assert.strictEqual(isTrustedImageSrc(null), false);
+});
+
+test('background binds screenshot capture and validates presets', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');
+  assert.ok(src.includes('sender.tab.windowId'), 'capture must bind to sender tab');
+  assert.ok(src.includes('captureVisibleTab(winId'), 'must capture the sender window');
+  assert.ok(src.includes('invalid preset'), 'saveProviderPreset must validate input');
 });
 
 // ─── renderMarkdown ───
