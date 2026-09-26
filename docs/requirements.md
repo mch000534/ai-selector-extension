@@ -215,7 +215,7 @@
 
 - **語言/框架**：純 Vanilla JS（ES2020+），不使用任何前端框架或打包工具
 - **平台**：Chrome Extension（Manifest V3）
-- **第三方服務**：OpenAI 相容 API（`/v1/chat/completions` + SSE streaming、`/models`）
+- **第三方服務**：OpenAI 相容 API（`/v1/chat/completions` + SSE streaming、`/models`）；`api.anthropic.com` 與 `generativelanguage.googleapis.com` 自動切換專用 adapter（URL、auth header、body、SSE 事件格式）
 - **限制與相容性**：
   - Manifest V3 service worker 限制（`background.js` 無 DOM 存取）
   - `chrome.storage.sync` 每項最大 8KB，總計 100KB

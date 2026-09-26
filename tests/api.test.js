@@ -129,7 +129,7 @@ test('chatCompletion streams deltas and emits start/delta/end', async () => {
   const events = [];
   const fetchFn = async () => sseOk(['data: {"choices":[{"delta":{"content":"Hi"}}]}\n\n', 'data: [DONE]\n\n']);
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, fetchFn, hasImages, stripImages, onEvent: e => events.push(e),
   });
   assert.deepStrictEqual(res, { ok: true, content: 'Hi' });
@@ -145,7 +145,7 @@ test('chatCompletion retries 429 then succeeds', async () => {
     ? statusRes(429, 'slow down')
     : sseOk(['data: {"choices":[{"delta":{"content":"ok"}}]}\n\n', 'data: [DONE]\n\n']));
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, fetchFn, hasImages, stripImages, onEvent: e => events.push(e),
   });
   assert.strictEqual(res.ok, true);
@@ -161,7 +161,7 @@ test('chatCompletion falls back to text-only once on 400 with images', async () 
   };
   const events = [];
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: IMG_MSG, fetchFn, hasImages, stripImages, onEvent: e => events.push(e),
   });
   assert.strictEqual(res.ok, true);
@@ -173,7 +173,7 @@ test('chatCompletion falls back to text-only once on 400 with images', async () 
 
 test('chatCompletion returns api_error for non-retryable status', async () => {
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, fetchFn: async () => statusRes(403, 'denied'),
     hasImages, stripImages,
   });
@@ -183,7 +183,7 @@ test('chatCompletion returns api_error for non-retryable status', async () => {
 test('chatCompletion exhausts network retries with code network', async () => {
   let calls = 0;
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG,
     fetchFn: async () => { calls++; throw new Error('boom'); },
     hasImages, stripImages,
@@ -194,7 +194,7 @@ test('chatCompletion exhausts network retries with code network', async () => {
 
 test('chatCompletion returns rate_limited when 429 persists', async () => {
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, maxAttempts: 2,
     fetchFn: async () => statusRes(429, 'slow'),
     hasImages, stripImages,
@@ -208,7 +208,7 @@ test('chatCompletion honours pre-aborted signal without fetching', async () => {
   c.abort();
   let calls = 0;
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, signal: c.signal,
     fetchFn: async () => { calls++; return sseOk([]); },
     hasImages, stripImages,
@@ -222,11 +222,165 @@ test('chatCompletion aborts the retry wait', async () => {
   setTimeout(() => c.abort(), 20);
   const start = Date.now();
   const res = await api.chatCompletion({
-    url: 'https://x.test/v1/chat/completions', apiKey: 'k', model: 'm',
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, signal: c.signal,
     fetchFn: async () => { throw new Error('down'); },
     hasImages, stripImages,
   });
   assert.strictEqual(res.code, 'cancelled');
   assert.ok(Date.now() - start < 2000, 'cancel must not wait the backoff delay');
+});
+
+// ─── multi-format adapters ───
+test('detectFormat routes by hostname, defaulting to openai', () => {
+  assert.strictEqual(api.detectFormat('https://api.anthropic.com'), 'anthropic');
+  assert.strictEqual(api.detectFormat('https://api.anthropic.com/v1'), 'anthropic');
+  assert.strictEqual(api.detectFormat('https://generativelanguage.googleapis.com'), 'gemini');
+  assert.strictEqual(api.detectFormat('https://api.openai.com'), 'openai');
+  assert.strictEqual(api.detectFormat('https://api.groq.com/openai'), 'openai');
+  assert.strictEqual(api.detectFormat('not a url'), 'openai');
+  assert.strictEqual(api.detectFormat(''), 'openai');
+});
+
+test('anthropic adapter builds versioned headers and system-split body', () => {
+  const a = api.adapters.anthropic;
+  const headers = a.buildHeaders('sk-ant');
+  assert.strictEqual(headers['x-api-key'], 'sk-ant');
+  assert.strictEqual(headers['anthropic-version'], api.ANTHROPIC_VERSION);
+  assert.ok(!('Authorization' in headers));
+  const body = a.buildBody({
+    model: 'claude-x',
+    messages: [
+      { role: 'system', content: 'sys' },
+      { role: 'user', content: 'hi' },
+      { role: 'assistant', content: 'yo' },
+    ],
+  });
+  assert.strictEqual(body.model, 'claude-x');
+  assert.strictEqual(body.system, 'sys');
+  assert.strictEqual(body.stream, true);
+  assert.ok(typeof body.max_tokens === 'number');
+  assert.deepStrictEqual(body.messages.map(m => m.role), ['user', 'assistant']);
+  const fallback = a.buildBody({ model: '', messages: TXT_MSG });
+  assert.strictEqual(fallback.model, api.DEFAULT_MODELS.anthropic);
+});
+
+test('anthropic adapter converts data-URL images, drops remote URLs', () => {
+  const out = api.toAnthropicContent([
+    { type: 'text', text: 'see' },
+    { type: 'image_url', image_url: { url: 'data:image/png;base64,AAA' } },
+    { type: 'image_url', image_url: { url: 'https://x.test/i.png' } },
+  ]);
+  assert.deepStrictEqual(out, [
+    { type: 'text', text: 'see' },
+    { type: 'image', source: { type: 'base64', media_type: 'image/png', data: 'AAA' } },
+  ]);
+  assert.strictEqual(api.toAnthropicContent('plain'), 'plain');
+});
+
+test('gemini adapter builds contents with model roles and system instruction', () => {
+  const a = api.adapters.gemini;
+  const url = a.buildChatUrl('https://gen.test/v1', { model: 'gemini-x', apiKey: 'k' });
+  assert.ok(url.includes(':streamGenerateContent') && url.includes('key=k'));
+  const body = a.buildBody({
+    model: 'gemini-x',
+    messages: [
+      { role: 'system', content: 'sys' },
+      { role: 'user', content: 'hi' },
+      { role: 'assistant', content: 'yo' },
+    ],
+  });
+  assert.deepStrictEqual(body.contents.map(c => c.role), ['user', 'model']);
+  assert.deepStrictEqual(body.systemInstruction, { parts: [{ text: 'sys' }] });
+  assert.deepStrictEqual(a.buildHeaders('k'), { 'Content-Type': 'application/json' });
+});
+
+test('delta parsers extract per-format events', () => {
+  assert.strictEqual(api.parseOpenAIDelta({ choices: [{ delta: { content: 'a' } }] }), 'a');
+  assert.strictEqual(api.parseOpenAIDelta({}), null);
+  assert.strictEqual(
+    api.parseAnthropicDelta({ type: 'content_block_delta', delta: { type: 'text_delta', text: 'b' } }),
+    'b'
+  );
+  assert.strictEqual(api.parseAnthropicDelta({ type: 'message_start' }), null);
+  assert.strictEqual(
+    api.parseGeminiDelta({ candidates: [{ content: { parts: [{ text: 'c' }, { text: 'd' }] } }] }),
+    'cd'
+  );
+  assert.strictEqual(api.parseGeminiDelta({}), null);
+  const deltas = [];
+  const p = api.createSseParser(d => deltas.push(d), (obj) => api.parseAnthropicDelta(obj));
+  p.push('event: content_block_delta\ndata: {"type":"content_block_delta","delta":{"type":"text_delta","text":"Hi"}}\n\n');
+  assert.deepStrictEqual(deltas, ['Hi']);
+});
+
+test('chatCompletion streams anthropic deltas end to end', async () => {
+  const seen = {};
+  const fetchFn = async (url, init) => {
+    seen.url = url;
+    seen.body = JSON.parse(init.body);
+    seen.headers = init.headers;
+    return sseOk([
+      'event: content_block_delta\ndata: {"type":"content_block_delta","delta":{"type":"text_delta","text":"Hel"}}\n\n',
+      'event: content_block_delta\ndata: {"type":"content_block_delta","delta":{"type":"text_delta","text":"lo"}}\n\n',
+      'event: message_stop\ndata: {"type":"message_stop"}\n\n',
+    ]);
+  };
+  const res = await api.chatCompletion({
+    baseUrl: 'https://api.anthropic.com', apiKey: 'sk', model: 'claude-x',
+    messages: [{ role: 'system', content: 's' }, ...TXT_MSG],
+    fetchFn, hasImages, stripImages,
+  });
+  assert.deepStrictEqual(res, { ok: true, content: 'Hello' });
+  assert.ok(seen.url.endsWith('/messages'));
+  assert.strictEqual(seen.headers['x-api-key'], 'sk');
+  assert.strictEqual(seen.body.system, 's');
+});
+
+test('chatCompletion streams gemini candidates end to end', async () => {
+  const seen = {};
+  const fetchFn = async (url, init) => {
+    seen.url = url;
+    seen.body = JSON.parse(init.body);
+    return sseOk(['data: {"candidates":[{"content":{"parts":[{"text":"G"}]}}]}\n\n']);
+  };
+  const res = await api.chatCompletion({
+    baseUrl: 'https://generativelanguage.googleapis.com', apiKey: 'gk', model: 'gemini-x',
+    messages: [{ role: 'system', content: 's' }, ...TXT_MSG],
+    fetchFn, hasImages, stripImages,
+  });
+  assert.deepStrictEqual(res, { ok: true, content: 'G' });
+  assert.ok(seen.url.includes(':streamGenerateContent') && seen.url.includes('key=gk'));
+  assert.ok(!seen.url.includes('/chat/completions'));
+});
+
+test('fetchModels adapts auth and id shapes per format', async () => {
+  const calls = [];
+  const mkFetch = (payload) => async (url, init) => {
+    calls.push({ url, headers: init.headers });
+    return { ok: true, json: async () => payload };
+  };
+  const anthropic = await api.fetchModels({
+    baseUrl: 'https://api.anthropic.com', apiKey: 'sk',
+    fetchFn: mkFetch({ data: [{ id: 'claude-x' }] }),
+  });
+  assert.deepStrictEqual(anthropic, ['claude-x']);
+  assert.strictEqual(calls[0].headers['x-api-key'], 'sk');
+
+  const gemini = await api.fetchModels({
+    baseUrl: 'https://generativelanguage.googleapis.com', apiKey: 'gk',
+    fetchFn: mkFetch({ models: [{ name: 'models/gemini-b' }, { name: 'models/gemini-a' }] }),
+  });
+  assert.deepStrictEqual(gemini, ['gemini-a', 'gemini-b']);
+  assert.ok(calls[1].url.includes('key=gk'));
+});
+
+test('customHeaders override adapter defaults', async () => {
+  let headers;
+  const fetchFn = async (url, init) => {
+    headers = init.headers;
+    return { ok: true, json: async () => ({ data: [] }) };
+  };
+  await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn, customHeaders: { Authorization: 'Bearer custom' } });
+  assert.strictEqual(headers.Authorization, 'Bearer custom');
 });

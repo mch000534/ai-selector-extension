@@ -32,7 +32,7 @@
   let _bodyShiftSide = null;
   let _bodyShiftStyleEl = null;
 
-  const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
+  const { escapeHtml } = window.__aiext.utils;
   const chat = window.__aiext.chat;
 
   function t(key, ...args) {
@@ -2320,7 +2320,6 @@
   // ─── AI Calls ───
   async function callAI(id, config, messages) {
     const { apiKey, model, baseUrl } = config;
-    const url = normalizeBaseUrl(baseUrl || 'https://api.openai.com/v1') + window.__aiext.api.CHAT_COMPLETIONS_PATH;
 
     const state = dialogs.get(id);
     const messagesEl = state && state.dialog ? state.dialog.querySelector(`.${PREFIX}messages`) : null;
@@ -2371,7 +2370,7 @@
     let result;
     try {
       const r = await window.__aiext.api.chatCompletion({
-        url,
+        baseUrl: baseUrl || 'https://api.openai.com/v1',
         apiKey,
         model,
         messages,
