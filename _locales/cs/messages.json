@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Obnoveno z předchozí relace"
   },
-  "recentClosedBtn": {
-    "message": "Nedávno zavřené"
-  },
-  "recentClosedEmpty": {
-    "message": "Žádné zavřené konverzace"
-  },
-  "recentClosedTitle": {
-    "message": "Nedávno zavřené konverzace"
-  },
-  "recentClosedRestore": {
-    "message": "Obnovit"
-  },
-  "recentClosedAllClear": {
-    "message": "Vymazat vše"
-  },
   "codeCopyBtn": {
     "message": "Kopírovat"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

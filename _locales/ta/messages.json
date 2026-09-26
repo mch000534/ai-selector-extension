@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "முந்தைய அமர்விலிருந்து மீட்டெடுக்கப்பட்டது"
   },
-  "recentClosedBtn": {
-    "message": "சமீபத்தில் மூடப்பட்டவை"
-  },
-  "recentClosedEmpty": {
-    "message": "மூடப்பட்ட உரையாடல்கள் இல்லை"
-  },
-  "recentClosedTitle": {
-    "message": "சமீபத்தில் மூடப்பட்ட உரையாடல்கள்"
-  },
-  "recentClosedRestore": {
-    "message": "மீட்டமை"
-  },
-  "recentClosedAllClear": {
-    "message": "அனைத்தையும் அழி"
-  },
   "codeCopyBtn": {
     "message": "நகலெடு"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

@@ -85,14 +85,14 @@
 
     <div id="status" class="status"></div>
 
-    <div class="recent-closed">
-      <button id="recentClosedBtn" class="recent-closed-btn" type="button" data-i18n="recentClosedBtn">Recently closed</button>
-      <div id="recentClosedSection" class="recent-closed-section" hidden>
-        <div class="recent-closed-header">
-          <span class="recent-closed-title" data-i18n="recentClosedTitle">Recently closed conversations</span>
-          <button id="recentClosedClearAll" class="recent-closed-clear-all" type="button" data-i18n="recentClosedAllClear">Clear all</button>
+    <div class="conv">
+      <button id="convBtn" class="conv-btn" type="button" data-i18n="conversationsBtn">Conversations</button>
+      <div id="convSection" class="conv-section" hidden>
+        <div class="conv-toolbar">
+          <input id="convSearch" class="conv-search" type="text" data-i18n-placeholder="conversationsSearchPlaceholder" placeholder="Search conversations...">
+          <button id="convDeleteSelected" class="conv-delete-selected" type="button" data-i18n="conversationsDeleteSelected">Delete selected</button>
         </div>
-        <div id="recentClosedList" class="recent-closed-list"></div>
+        <div id="convList" class="conv-list"></div>
       </div>
     </div>
 

@@ -139,6 +139,13 @@
 - 右側抽屜以 content script DOM 注入實作，不申請 Chrome 原生 `sidePanel` 權限
 - 現有 content script 注入式浮動對話框功能需完整保留
 
+#### FR-010b：對話管理
+- popup 設定頁提供「Conversations」管理器，列出全部儲存紀錄（開啟中 + 已關閉，跨 host，取最新 50 筆）
+- 關鍵字搜尋比對標題、預覽、host 與模型
+- 重新命名：record 加 `title`/`titleExplicit` 欄位，預設取首則使用者訊息；改名後 persist 不覆寫
+- 匯出：單筆下載 Markdown / JSON，Markdown 可複製（供貼至 NotebookLM）
+- 刪除：單筆刪除與勾選批次刪除（直接寫 storage；開啟中對話下次 persist 會重建）
+
 #### FR-011：錯誤處理
 - 未設定 API Key 時顯示引導提示
 - API 回傳錯誤時在對話框內顯示錯誤訊息（HTTP 狀態碼 + 回應前 200 字）

@@ -399,12 +399,12 @@ small {
 }
 
 /* Recently closed */
-.recent-closed {
+.conv {
   margin-top: 12px;
   margin-bottom: 8px;
 }
 
-.recent-closed-btn {
+.conv-btn {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid var(--border-color);
@@ -417,113 +417,150 @@ small {
   transition: background 0.15s, border-color 0.15s;
 }
 
-.recent-closed-btn:hover {
+.conv-btn:hover {
   background: var(--bg-hover);
   border-color: var(--accent);
 }
 
-.recent-closed-btn.open {
+.conv-btn.open {
   border-color: var(--accent);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.recent-closed-section {
+.conv-section {
   border: 1px solid var(--accent);
   border-top: none;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   background: var(--bg-primary);
-  max-height: 240px;
+  max-height: 260px;
   overflow-y: auto;
 }
 
-.recent-closed-section[hidden] {
+.conv-section[hidden] {
   display: none;
 }
 
-.recent-closed-header {
+.conv-toolbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 6px;
   padding: 6px 12px;
   border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
 }
 
-.recent-closed-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+.conv-search {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  padding: 4px 8px;
 }
 
-.recent-closed-clear-all {
-  padding: 2px 6px;
+.conv-delete-selected {
+  padding: 4px 8px;
   font-size: 11px;
   border: none;
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
   border-radius: 4px;
+  white-space: nowrap;
 }
 
-.recent-closed-clear-all:hover {
+.conv-delete-selected:hover:not(:disabled) {
   background: var(--error-bg);
   color: var(--error-text);
 }
 
-.recent-closed-list {
+.conv-delete-selected:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.conv-list {
   padding: 4px 0;
 }
 
-.recent-closed-item {
+.conv-item {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   padding: 8px 12px;
-  cursor: pointer;
   border-bottom: 1px solid var(--border-light);
-  transition: background 0.15s;
 }
 
-.recent-closed-item:last-child {
+.conv-item:last-child {
   border-bottom: none;
 }
 
-.recent-closed-item:hover {
-  background: var(--bg-hover);
+.conv-select {
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 
-.recent-closed-item-body {
+.conv-item-body {
   flex: 1;
   min-width: 0;
 }
 
-.recent-closed-item-top {
+.conv-item-top {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
+  align-items: baseline;
+  gap: 6px;
   font-size: 12px;
-  color: var(--text-secondary);
   margin-bottom: 2px;
 }
 
-.recent-closed-item-host {
+.conv-item-title {
   font-weight: 600;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
 }
 
-.recent-closed-item-date {
+.conv-item-title:hover {
+  color: var(--accent);
+}
+
+.conv-badge {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.conv-badge-open {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.conv-badge-closed {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+}
+
+.conv-item-date {
   color: var(--text-muted);
   font-size: 11px;
   flex-shrink: 0;
 }
 
-.recent-closed-item-preview {
+.conv-item-host {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conv-item-preview {
   font-size: 12px;
   color: var(--text-muted);
   line-height: 1.4;
@@ -534,13 +571,41 @@ small {
   word-break: break-word;
 }
 
-.recent-closed-item-meta {
-  font-size: 10px;
-  color: var(--text-faint);
-  margin-top: 2px;
+.conv-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
 }
 
-.recent-closed-empty {
+.conv-action {
+  padding: 2px 8px;
+  font-size: 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.conv-action:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.conv-action-danger:hover {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-color: transparent;
+}
+
+.conv-rename-input {
+  width: 100%;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.conv-empty {
   padding: 16px;
   text-align: center;
   font-size: 12px;
@@ -548,7 +613,7 @@ small {
   font-style: italic;
 }
 
-.recent-closed-error {
+.conv-error {
   padding: 12px;
   font-size: 12px;
   color: var(--error-text);

@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "మునుపటి సెషన్ నుండి పునరుద్ధరించబడింది"
   },
-  "recentClosedBtn": {
-    "message": "ఇటీవల మూసివేయబడినవి"
-  },
-  "recentClosedEmpty": {
-    "message": "మూసివేసిన సంభాషణలు లేవు"
-  },
-  "recentClosedTitle": {
-    "message": "ఇటీవల మూసివేసిన సంభాషణలు"
-  },
-  "recentClosedRestore": {
-    "message": "పునరుద్ధరించు"
-  },
-  "recentClosedAllClear": {
-    "message": "అన్నీ తొలగించు"
-  },
   "codeCopyBtn": {
     "message": "కాపీ చేయి"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

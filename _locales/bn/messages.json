@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "আগের সেশন থেকে পুনরুদ্ধার করা হয়েছে"
   },
-  "recentClosedBtn": {
-    "message": "সম্প্রতি বন্ধ করা"
-  },
-  "recentClosedEmpty": {
-    "message": "কোনো বন্ধ কথোপকথন নেই"
-  },
-  "recentClosedTitle": {
-    "message": "সম্প্রতি বন্ধ করা কথোপকথন"
-  },
-  "recentClosedRestore": {
-    "message": "পুনরুদ্ধার করুন"
-  },
-  "recentClosedAllClear": {
-    "message": "সব মুছুন"
-  },
   "codeCopyBtn": {
     "message": "কপি করুন"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

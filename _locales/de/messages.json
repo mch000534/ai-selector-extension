@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Aus vorheriger Sitzung wiederhergestellt"
   },
-  "recentClosedBtn": {
-    "message": "Zuletzt geschlossen"
-  },
-  "recentClosedEmpty": {
-    "message": "Keine geschlossenen Unterhaltungen"
-  },
-  "recentClosedTitle": {
-    "message": "Zuletzt geschlossene Unterhaltungen"
-  },
-  "recentClosedRestore": {
-    "message": "Wiederherstellen"
-  },
-  "recentClosedAllClear": {
-    "message": "Alle löschen"
-  },
   "codeCopyBtn": {
     "message": "Kopieren"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

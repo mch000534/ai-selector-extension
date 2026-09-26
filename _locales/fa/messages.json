@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "از نشست قبلی بازیابی شد"
   },
-  "recentClosedBtn": {
-    "message": "اخیراً بسته‌شده"
-  },
-  "recentClosedEmpty": {
-    "message": "گفتگوی بسته‌شده‌ای نیست"
-  },
-  "recentClosedTitle": {
-    "message": "گفتگوهای اخیراً بسته‌شده"
-  },
-  "recentClosedRestore": {
-    "message": "بازیابی"
-  },
-  "recentClosedAllClear": {
-    "message": "پاک کردن همه"
-  },
   "codeCopyBtn": {
     "message": "کپی"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

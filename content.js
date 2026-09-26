@@ -1174,6 +1174,7 @@
       id: state.persistId || (state.persistId = (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random())),
       url: location.href,
       hostname: location.hostname,
+      title: chat.deriveTitle({ conversationHistory: state.conversationHistory }, 60),
       createdAt: state.persistedAt || (state.persistedAt = Date.now()),
       lastActive: Date.now(),
       conversationHistory: (state.conversationHistory || [])
@@ -1212,6 +1213,12 @@
       const existing = records[idx];
       if (existing && existing.closedAt && (!rec.closedAt || existing.closedAt > rec.closedAt)) {
         rec.closedAt = existing.closedAt;
+      }
+      // Preserve an explicit rename across persists; freshly derived titles
+      // refresh otherwise.
+      if (existing && existing.titleExplicit && existing.title) {
+        rec.title = existing.title;
+        rec.titleExplicit = true;
       }
       records[idx] = rec;
     } else {

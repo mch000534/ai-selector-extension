@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Восстановлено из предыдущего сеанса"
   },
-  "recentClosedBtn": {
-    "message": "Недавно закрытые"
-  },
-  "recentClosedEmpty": {
-    "message": "Нет закрытых диалогов"
-  },
-  "recentClosedTitle": {
-    "message": "Недавно закрытые диалоги"
-  },
-  "recentClosedRestore": {
-    "message": "Восстановить"
-  },
-  "recentClosedAllClear": {
-    "message": "Очистить всё"
-  },
   "codeCopyBtn": {
     "message": "Копировать"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Đã khôi phục từ phiên trước"
   },
-  "recentClosedBtn": {
-    "message": "Đã đóng gần đây"
-  },
-  "recentClosedEmpty": {
-    "message": "Không có cuộc trò chuyện đã đóng"
-  },
-  "recentClosedTitle": {
-    "message": "Các cuộc trò chuyện đã đóng gần đây"
-  },
-  "recentClosedRestore": {
-    "message": "Khôi phục"
-  },
-  "recentClosedAllClear": {
-    "message": "Xóa tất cả"
-  },
   "codeCopyBtn": {
     "message": "Sao chép"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

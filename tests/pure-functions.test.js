@@ -271,12 +271,13 @@ test('buildClosedListItem normalizes a closed record', () => {
   assert.deepStrictEqual(
     chat.buildClosedListItem({
       id: 'd1', hostname: 'ex.com', url: 'https://ex.com/p', closedAt: 1700000000000,
+      lastActive: 1700000001000,
       conversationHistory: [{ role: 'user', content: 'hello' }],
       model: 'gpt-4o',
     }),
     {
       id: 'd1', hostname: 'ex.com', url: 'https://ex.com/p', closedAt: 1700000000000,
-      messageCount: 1, preview: 'hello', model: 'gpt-4o',
+      lastActive: 1700000001000, messageCount: 1, preview: 'hello', model: 'gpt-4o',
     }
   );
 });
@@ -289,11 +290,53 @@ test('buildClosedListItem joins array content and rejects open records', () => {
     }),
     {
       id: 'd2', hostname: '', url: '', closedAt: 1700000000000,
-      messageCount: 1, preview: 'a', model: '',
+      lastActive: 0, messageCount: 1, preview: 'a', model: '',
     }
   );
-  assert.strictEqual(chat.buildClosedListItem({ id: 'd3' }), null);
   assert.strictEqual(chat.buildClosedListItem(null), null);
+});
+
+test('buildClosedListItem maps open records with closedAt 0', () => {
+  const item = chat.buildClosedListItem({
+    id: 'd3', hostname: 'ex.com', lastActive: 1700000002000,
+    conversationHistory: [{ role: 'user', content: 'hi' }],
+  });
+  assert.strictEqual(item.closedAt, 0);
+  assert.strictEqual(item.lastActive, 1700000002000);
+});
+
+test('deriveTitle prefers explicit title, then first user message', () => {
+  assert.strictEqual(typeof chat.deriveTitle, 'function');
+  assert.strictEqual(chat.deriveTitle({ title: '  My chat  ' }), 'My chat');
+  assert.strictEqual(
+    chat.deriveTitle({ conversationHistory: [{ role: 'assistant', content: 'x' }, { role: 'user', content: '  hello\nworld  ' }] }),
+    'hello world'
+  );
+  assert.strictEqual(
+    chat.deriveTitle({ conversationHistory: [{ role: 'user', content: [{ type: 'text', text: 'pic' }, { type: 'image_url', image_url: {} }] }] }),
+    'pic'
+  );
+  assert.strictEqual(chat.deriveTitle({ conversationHistory: [] }), '');
+  assert.strictEqual(chat.deriveTitle(null), '');
+  assert.strictEqual(chat.deriveTitle({ conversationHistory: [{ role: 'user', content: 'abcdefgh' }] }, 4), 'abcd');
+});
+
+test('buildConversationMarkdown renders meta and turns', () => {
+  assert.strictEqual(typeof chat.buildConversationMarkdown, 'function');
+  const md = chat.buildConversationMarkdown({
+    title: 'Demo', hostname: 'ex.com', url: 'https://ex.com/', model: 'm',
+    createdAt: 1700000000000,
+    conversationHistory: [
+      { role: 'user', content: 'Hi' },
+      { role: 'assistant', content: 'Hello!' },
+      { role: 'user', content: [{ type: 'text', text: 'pic?' }, { type: 'image_url', image_url: {} }] },
+    ],
+  });
+  assert.ok(md.startsWith('# Demo\n'));
+  assert.ok(md.includes('- Host: ex.com'));
+  assert.ok(md.includes('## User\n\nHi'));
+  assert.ok(md.includes('## Assistant\n\nHello!'));
+  assert.ok(md.includes('[image]'));
 });
 
 test('lastUserIndexBefore finds the nearest user message at or before index', () => {

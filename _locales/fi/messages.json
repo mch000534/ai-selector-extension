@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Palautettu edellisestä istunnosta"
   },
-  "recentClosedBtn": {
-    "message": "Äskettäin suljetut"
-  },
-  "recentClosedEmpty": {
-    "message": "Ei suljettuja keskusteluja"
-  },
-  "recentClosedTitle": {
-    "message": "Äskettäin suljetut keskustelut"
-  },
-  "recentClosedRestore": {
-    "message": "Palauta"
-  },
-  "recentClosedAllClear": {
-    "message": "Tyhjennä kaikki"
-  },
   "codeCopyBtn": {
     "message": "Kopioi"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }

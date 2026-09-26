@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Restaurat din sesiunea anterioară"
   },
-  "recentClosedBtn": {
-    "message": "Închise recent"
-  },
-  "recentClosedEmpty": {
-    "message": "Nicio conversație închisă"
-  },
-  "recentClosedTitle": {
-    "message": "Conversații închise recent"
-  },
-  "recentClosedRestore": {
-    "message": "Restaurează"
-  },
-  "recentClosedAllClear": {
-    "message": "Șterge tot"
-  },
   "codeCopyBtn": {
     "message": "Copiază"
   },
@@ -299,5 +284,41 @@
   },
   "messageCancel": {
     "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
   }
 }
