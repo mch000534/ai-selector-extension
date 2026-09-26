@@ -132,7 +132,7 @@ test('chatCompletion streams deltas and emits start/delta/end', async () => {
     baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
     messages: TXT_MSG, fetchFn, hasImages, stripImages, onEvent: e => events.push(e),
   });
-  assert.deepStrictEqual(res, { ok: true, content: 'Hi' });
+  assert.deepStrictEqual(res, { ok: true, content: 'Hi', truncated: false });
   assert.strictEqual(events[0].type, 'start');
   assert.strictEqual(events[events.length - 1].type, 'end');
   assert.ok(events.some(e => e.type === 'delta' && e.delta === 'Hi'));
@@ -331,7 +331,7 @@ test('chatCompletion streams anthropic deltas end to end', async () => {
     messages: [{ role: 'system', content: 's' }, ...TXT_MSG],
     fetchFn, hasImages, stripImages,
   });
-  assert.deepStrictEqual(res, { ok: true, content: 'Hello' });
+  assert.deepStrictEqual(res, { ok: true, content: 'Hello', truncated: false });
   assert.ok(seen.url.endsWith('/messages'));
   assert.strictEqual(seen.headers['x-api-key'], 'sk');
   assert.strictEqual(seen.body.system, 's');
@@ -349,7 +349,7 @@ test('chatCompletion streams gemini candidates end to end', async () => {
     messages: [{ role: 'system', content: 's' }, ...TXT_MSG],
     fetchFn, hasImages, stripImages,
   });
-  assert.deepStrictEqual(res, { ok: true, content: 'G' });
+  assert.deepStrictEqual(res, { ok: true, content: 'G', truncated: true });
   assert.ok(seen.url.includes(':streamGenerateContent') && seen.url.includes('key=gk'));
   assert.ok(!seen.url.includes('/chat/completions'));
 });
@@ -383,4 +383,39 @@ test('customHeaders override adapter defaults', async () => {
   };
   await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn, customHeaders: { Authorization: 'Bearer custom' } });
   assert.strictEqual(headers.Authorization, 'Bearer custom');
+});
+
+test('adapter isDone recognizes terminators', () => {
+  assert.strictEqual(api.adapters.openai.isDone({}), false);
+  assert.strictEqual(api.adapters.anthropic.isDone({ type: 'message_stop' }), true);
+  assert.strictEqual(api.adapters.anthropic.isDone({ type: 'content_block_delta' }), false);
+  assert.strictEqual(api.adapters.gemini.isDone({ candidates: [{ finishReason: 'STOP' }] }), true);
+  assert.strictEqual(api.adapters.gemini.isDone({ candidates: [{}] }), false);
+  assert.strictEqual(api.adapters.gemini.isDone({}), false);
+});
+
+test('parser stops at adapter terminators', () => {
+  const deltas = [];
+  const p = api.createSseParser(
+    d => deltas.push(d),
+    (obj) => api.parseAnthropicDelta(obj),
+    (obj) => api.adapters.anthropic.isDone(obj)
+  );
+  p.push('event: content_block_delta\ndata: {"type":"content_block_delta","delta":{"type":"text_delta","text":"A"}}\n\n');
+  p.push('event: message_stop\ndata: {"type":"message_stop"}\n\n');
+  p.push('event: content_block_delta\ndata: {"type":"content_block_delta","delta":{"type":"text_delta","text":"B"}}\n\n');
+  assert.deepStrictEqual(deltas, ['A']);
+  assert.strictEqual(p.done, true);
+  assert.strictEqual(p.finish(), true);
+});
+
+test('chatCompletion flags truncated streams', async () => {
+  const fetchFn = async () => sseOk(['data: {"choices":[{"delta":{"content":"half"}}]}\n\n']);
+  const res = await api.chatCompletion({
+    baseUrl: 'https://x.test', apiKey: 'k', model: 'm',
+    messages: TXT_MSG, fetchFn, hasImages, stripImages,
+  });
+  assert.strictEqual(res.ok, true);
+  assert.strictEqual(res.content, 'half');
+  assert.strictEqual(res.truncated, true);
 });

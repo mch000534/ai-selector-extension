@@ -356,8 +356,7 @@ test('buildConversationMarkdown renders meta and turns', () => {
   assert.ok(md.includes('[image]'));
 });
 
-test('lastUserIndexBefore finds the nearest user message at or before index', () => {
-  assert.strictEqual(typeof chat.lastUserIndexBefore, 'function');
+test('lastUserIndexBefore finds the nearest user message at or before index', () => {  assert.strictEqual(typeof chat.lastUserIndexBefore, 'function');
   const h = [
     { role: 'user', content: 'a' },
     { role: 'assistant', content: 'b' },
@@ -372,6 +371,44 @@ test('lastUserIndexBefore finds the nearest user message at or before index', ()
   assert.strictEqual(chat.lastUserIndexBefore([], 0), -1);
   assert.strictEqual(chat.lastUserIndexBefore(null, 0), -1);
   assert.strictEqual(chat.lastUserIndexBefore(h, 99), 2);
+});
+
+test('estimateTextTokens uses ~4 chars per token', () => {
+  assert.strictEqual(chat.estimateTextTokens(''), 0);
+  assert.strictEqual(chat.estimateTextTokens('abcd'), 1);
+  assert.strictEqual(chat.estimateTextTokens('abcde'), 2);
+  assert.strictEqual(chat.estimateTextTokens(null), 0);
+});
+
+test('estimateMessagesTokens sums text and image parts', () => {
+  assert.strictEqual(chat.estimateMessagesTokens(null), 0);
+  assert.strictEqual(
+    chat.estimateMessagesTokens([
+      { role: 'user', content: 'abcd' },
+      { role: 'user', content: [{ type: 'text', text: 'abcdefgh' }, { type: 'image_url', image_url: {} }] },
+      { role: 'assistant', content: '' },
+    ]),
+    1 + 2 + 1000 + 0
+  );
+});
+
+test('formatTokenCount abbreviates thousands and millions', () => {
+  assert.strictEqual(chat.formatTokenCount(0), '0');
+  assert.strictEqual(chat.formatTokenCount(999), '999');
+  assert.strictEqual(chat.formatTokenCount(1500), '1.5k');
+  assert.strictEqual(chat.formatTokenCount(128000), '128.0k');
+  assert.strictEqual(chat.formatTokenCount(2500000), '2.5M');
+});
+
+test('contextWindowForModel matches known families', () => {
+  assert.strictEqual(chat.contextWindowForModel('gpt-4o'), 128000);
+  assert.strictEqual(chat.contextWindowForModel('gpt-3.5-turbo'), 16385);
+  assert.strictEqual(chat.contextWindowForModel('claude-sonnet-4-20250514'), 200000);
+  assert.strictEqual(chat.contextWindowForModel('gemini-2.0-flash'), 1000000);
+  assert.strictEqual(chat.contextWindowForModel('llama-3.3-70b-versatile'), 128000);
+  assert.strictEqual(chat.contextWindowForModel('mistral-medium-latest'), 128000);
+  assert.strictEqual(chat.contextWindowForModel('some-future-model'), 128000);
+  assert.strictEqual(chat.contextWindowForModel(''), 128000);
 });
 
 test('manifest declares keyboard shortcuts', () => {

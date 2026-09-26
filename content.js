@@ -500,6 +500,30 @@
       .${PREFIX}msg-edit-save:hover, .${PREFIX}msg-edit-cancel:hover {
         background: var(--aiext-chipHoverBg) !important;
       }
+      .${PREFIX}token-line {
+        all: unset;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 2px 16px !important;
+        font-size: 11px !important;
+        color: var(--aiext-textMuted) !important;
+      }
+      .${PREFIX}token-warn {
+        color: var(--aiext-errorText) !important;
+      }
+      .${PREFIX}token-summarize {
+        all: unset;
+        cursor: pointer !important;
+        font-size: 11px !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        background: var(--aiext-chipBg) !important;
+        color: var(--aiext-chipText) !important;
+      }
+      .${PREFIX}token-summarize:hover {
+        background: var(--aiext-chipHoverBg) !important;
+      }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
         position: relative !important;
         background: var(--aiext-codeBg) !important;
@@ -701,6 +725,30 @@
         z-index: 2147483647 !important;
         pointer-events: none !important;
       }
+      .${PREFIX}lightbox {
+        all: initial;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important;
+        width: 100vw !important; height: 100vh !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: zoom-out !important;
+        z-index: 2147483647 !important;
+      }
+      .${PREFIX}lightbox-img {
+        max-width: 92vw !important;
+        max-height: 92vh !important;
+        border-radius: 8px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .${PREFIX}icon, .${PREFIX}dialog, .${PREFIX}bubble, .${PREFIX}drawer {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
       .${PREFIX}prompts {
         all: unset;
         display: flex !important;
@@ -844,6 +892,21 @@
     if (root) root.appendChild(style);
     else document.head.appendChild(style);
     applyThemeVars();
+  }
+
+  // ─── Image lightbox ───
+  function showImageLightbox(src) {
+    if (!src) return;
+    const overlay = document.createElement('div');
+    overlay.className = `${PREFIX}lightbox`;
+    overlay.setAttribute('data-aiext', '1');
+    const img = document.createElement('img');
+    img.className = `${PREFIX}lightbox-img`;
+    img.setAttribute('data-aiext', '1');
+    img.src = src;
+    overlay.appendChild(img);
+    overlay.addEventListener('click', () => overlay.remove());
+    _shadowAppend(overlay);
   }
 
   function showCropOverlay(dataUrl) {
@@ -1203,6 +1266,8 @@
         text: (state.context && state.context.text) ? String(state.context.text).slice(0, 2000) : '',
         images: _trimImageList(state.context && state.context.images)
       },
+      // Unsent screenshots survive reload (same quota rules as context images).
+      pendingScreenshots: _trimImageList(state.pendingScreenshots),
       model: (state.config && state.config.model) || '',
       position: pos,
       size: size
@@ -1311,17 +1376,23 @@
       if (r.size.height) st.dialog.style.height = r.size.height + 'px';
     }
     st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
-    st.conversationHistory.forEach((m, hIdx) => {
-      if (m.role === 'user' || m.role === 'assistant') {
-        const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
-        if (content) {
-          const bubble = addMessage(id, m.role, content, hIdx);
-          if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, m.role, hIdx);
-        }
-      }
-    });
+    st.conversationHistory.forEach((m, hIdx) => appendHistoryMessage(id, m, hIdx));
+    if (Array.isArray(r.pendingScreenshots) && r.pendingScreenshots.length > 0) {
+      st.pendingScreenshots = _trimImageList(r.pendingScreenshots);
+      if (typeof st.renderScreenshotPreview === 'function') st.renderScreenshotPreview();
+    }
     addMessage(id, 'system', t('dialogRestoredHint'));
+    updateTokenLine(id);
     return id;
+  }
+
+  // Renders one history entry (shared by restore and post-summarize re-render).
+  function appendHistoryMessage(id, m, hIdx) {
+    if (!m || (m.role !== 'user' && m.role !== 'assistant')) return;
+    const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
+    if (!content) return;
+    const bubble = addMessage(id, m.role, content, hIdx);
+    if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, m.role, hIdx);
   }
 
   async function restoreDialogsOnLoad() {
@@ -1484,6 +1555,7 @@
       <div class="${PREFIX}prompts">
         ${quickPrompts.map((p, i) => `<span class="${PREFIX}prompt-chip" data-aiext="1" data-prompt-index="${i}">${escapeHtml(p)}</span>`).join('')}
       </div>` : ''}
+      <div class="${PREFIX}token-line" data-aiext="1"></div>
       <div class="${PREFIX}input-row">
         <textarea class="${PREFIX}input" rows="1" placeholder="${t('dialogInputPlaceholder')}" data-aiext="1"></textarea>
         <button class="${PREFIX}camera" data-aiext="1" title="${t('dialogCameraTooltip')}">
@@ -1513,6 +1585,15 @@
     if (state.overlay) _shadowAppend(state.overlay);
     _shadowAppend(state.dialog);
     dialogs.set(id, state);
+
+    // Enlarge selected-context images on click.
+    state.dialog.addEventListener('click', (e) => {
+      const target = e.target;
+      const img = target && typeof target.closest === 'function'
+        ? target.closest(`.${PREFIX}selected-img`)
+        : null;
+      if (img && img.src) showImageLightbox(img.src);
+    });
 
     // Events
     state.dialog.querySelector(`.${PREFIX}close`).addEventListener('click', () => closeDialog(id));
@@ -1602,12 +1683,32 @@
       state.config.model = modelInput.value.trim();
       clearTimeout(_persistModelTimer);
       _persistModelTimer = setTimeout(() => persistState(id), 600);
+      updateTokenLine(id);
     });
     modelInput.addEventListener('mousedown', (e) => e.stopPropagation());
     fetchModelsForDialog(id);
 
     const input = state.dialog.querySelector(`.${PREFIX}input`);
     const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
+
+    // Stages an image file (paste or drop) into pending screenshots.
+    function addPendingImageFile(dialogId, file) {
+      if (!file) return;
+      if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
+        addMessage(dialogId, 'system', t('pasteTooManyImages'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
+          addMessage(dialogId, 'system', t('pasteTooManyImages'));
+          return;
+        }
+        state.pendingScreenshots.push(reader.result);
+        renderScreenshotPreview();
+      };
+      reader.readAsDataURL(file);
+    }
 
     function autoGrowInput() {
       if (!input) return;
@@ -1633,21 +1734,23 @@
           e.preventDefault();
           const file = item.getAsFile();
           if (!file) continue;
-          if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
-            addMessage(id, 'system', t('pasteTooManyImages'));
-            return;
-          }
-          const reader = new FileReader();
-          reader.onload = () => {
-            if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
-              addMessage(id, 'system', t('pasteTooManyImages'));
-              return;
-            }
-            state.pendingScreenshots.push(reader.result);
-            renderScreenshotPreview();
-          };
-          reader.readAsDataURL(file);
+          addPendingImageFile(id, file);
         }
+      }
+    });
+
+    // Dropping image files onto the dialog stages them like pasting does.
+    state.dialog.addEventListener('dragover', (e) => {
+      const types = (e.dataTransfer && e.dataTransfer.types) || [];
+      if (Array.from(types).includes('Files')) e.preventDefault();
+    });
+    state.dialog.addEventListener('drop', (e) => {
+      const files = (e.dataTransfer && e.dataTransfer.files) || [];
+      if (!files.length) return;
+      e.preventDefault();
+      e.stopPropagation();
+      for (const file of files) {
+        if (file.type && file.type.startsWith('image/')) addPendingImageFile(id, file);
       }
     });
 
@@ -1713,15 +1816,24 @@
         const thumb = document.createElement('div');
         thumb.className = `${PREFIX}screenshot-thumb`;
         thumb.innerHTML = `<img src="${escapeHtml(src)}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        const img = thumb.querySelector('img');
+        if (img) img.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showImageLightbox(src);
+        });
         thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
           state.pendingScreenshots.splice(i, 1);
           renderScreenshotPreview();
         });
         screenshotPreview.appendChild(thumb);
       });
+      persistState(id);
     }
+    state.renderScreenshotPreview = renderScreenshotPreview;
 
     setTimeout(() => input.focus(), 50);
+    updateTokenLine(id);
     return id;
   }
 
@@ -2020,6 +2132,11 @@
   // ─── ESC handler ───
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      try {
+        const root = _shadow();
+        const lb = root ? root.querySelector(`.${PREFIX}lightbox`) : null;
+        if (lb) { lb.remove(); return; }
+      } catch (err) {}
       for (const state of dialogs.values()) {
         if (!state.isPinned) { closeDialog(state.id); break; }
       }
@@ -2143,6 +2260,7 @@
 
     state.isStreaming = true;
     sendBtn.disabled = true;
+    updateTokenLine(id);
 
     const typing = addTypingIndicator(id);
 
@@ -2185,6 +2303,11 @@
             msgEl.dataset.historyIndex = String(aIdx);
             attachMessageActions(msgEl, id, 'assistant', aIdx);
           }
+          if (response.truncated) {
+            // The stream ended without a terminator; the content may be cut
+            // off. The message toolbar already offers Regenerate to retry.
+            addMessage(id, 'system', t('streamTruncated'));
+          }
         }
       } else {
         const aIdx = state.conversationHistory.length;
@@ -2209,6 +2332,7 @@
 
     state.isStreaming = false;
     sendBtn.disabled = false;
+    updateTokenLine(id);
     input.focus();
   }
 
@@ -2381,6 +2505,100 @@
       else removeMessageNodesFrom(messagesEl, msgEl, false);
     }
     runCompletion(id);
+  }
+
+  // ─── Token awareness (4.8) ───
+  function estimateDialogTokens(state) {
+    const ctx = state.context || { text: '', images: [] };
+    let total = chat.estimateTextTokens(ctx.text || '');
+    total += (Array.isArray(ctx.images) ? ctx.images.length : 0) * chat.TOKENS_PER_IMAGE;
+    total += (Array.isArray(state.pendingScreenshots) ? state.pendingScreenshots.length : 0) * chat.TOKENS_PER_IMAGE;
+    total += chat.estimateMessagesTokens(state.conversationHistory);
+    return total;
+  }
+
+  function updateTokenLine(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    const line = state.dialog.querySelector(`.${PREFIX}token-line`);
+    if (!line) return;
+    const model = (state.config && state.config.model) || '';
+    const budget = chat.contextWindowForModel(model);
+    const used = estimateDialogTokens(state);
+    const frac = budget > 0 ? used / budget : 0;
+    line.textContent = '';
+    const label = document.createElement('span');
+    label.setAttribute('data-aiext', '1');
+    label.textContent = t('tokenUsage',
+      chat.formatTokenCount(used),
+      chat.formatTokenCount(budget),
+      `${Math.round(frac * 100)}%`);
+    line.appendChild(label);
+    line.classList.toggle(`${PREFIX}token-warn`, frac >= chat.WARN_TOKEN_FRACTION);
+    if (frac >= chat.SUMMARIZE_TOKEN_FRACTION && (state.conversationHistory || []).length > 8 && !state.isStreaming) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `${PREFIX}token-summarize`;
+      btn.setAttribute('data-aiext', '1');
+      btn.textContent = t('summarizeOld');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        summarizeOldestTurns(id);
+      });
+      line.appendChild(btn);
+    }
+  }
+
+  function rerenderHistory(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!messagesEl) return;
+    messagesEl.textContent = '';
+    (state.conversationHistory || []).forEach((m, hIdx) => appendHistoryMessage(id, m, hIdx));
+  }
+
+  // Compresses all but the last 6 turns into one summary message so long
+  // conversations fit the context window. Text-only by construction.
+  async function summarizeOldestTurns(id) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const history = state.conversationHistory || [];
+    if (history.length <= 8) return;
+    const keepFrom = history.length - 6;
+    const old = chat.stripImagesFromMessages(history.slice(0, keepFrom));
+    const recent = history.slice(keepFrom);
+    state.isStreaming = true;
+    updateTokenLine(id);
+    try {
+      const statusEl = addMessage(id, 'system', t('summarizingStatus'));
+      const r = await window.__aiext.api.chatCompletion({
+        baseUrl: (state.config && state.config.baseUrl) || 'https://api.openai.com/v1',
+        apiKey: state.config && state.config.apiKey,
+        model: state.config && state.config.model,
+        messages: [
+          { role: 'system', content: 'Summarize the following conversation briefly in the same language, preserving key facts, decisions and open questions.' },
+          ...old,
+        ],
+        hasImages: (m) => chat.messagesHaveImages(m),
+        stripImages: (m) => chat.stripImagesFromMessages(m),
+      });
+      if (statusEl && statusEl.parentElement) statusEl.parentElement.remove();
+      if (!r.ok || !r.content || !r.content.trim()) {
+        addMessage(id, 'system', t('errorRequestFailed', 'summarize'));
+        return;
+      }
+      state.conversationHistory = [
+        { role: 'assistant', content: `Summary of earlier conversation:\n${r.content.trim()}` },
+        ...recent,
+      ];
+      rerenderHistory(id);
+      persistState(id);
+    } finally {
+      state.isStreaming = false;
+      updateTokenLine(id);
+    }
   }
 
   // ─── AI Calls ───

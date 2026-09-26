@@ -148,6 +148,17 @@
 - 匯出：單筆下載 Markdown / JSON，Markdown 可複製（供貼至 NotebookLM）
 - 刪除：單筆刪除與勾選批次刪除（直接寫 storage；開啟中對話下次 persist 會重建）
 
+#### FR-010c：上下文感知
+- 對話框顯示粗略 token 估算（`ceil(chars/4)`，圖片每張 1000）與模型 window 佔比；超過 80% 警示
+- 超過 90% 且歷史超過 8 則時提供「Summarize older messages」：保留最後 6 則，其餘壓縮為一則摘要後重繪
+
+#### FR-010d：圖片與小改善
+- 未送出的截圖/貼上/拖放圖片隨對話紀錄持久化，還原時一併恢復預覽
+- 縮圖點擊放大燈箱（ESC 或點擊關閉）；圖片可拖放進對話框（與貼上同額度）
+- 串流未收到終止標記時顯示可能截斷提示（附帶的 Regenerate 可重試）
+- 設定頁支援設定匯出/匯入（JSON；API 金鑰一律不匯出）
+- 尊重 `prefers-reduced-motion`（content 與 popup 動畫全關）
+
 #### FR-011：錯誤處理
 - 未設定 API Key 時顯示引導提示
 - API 回傳錯誤時在對話框內顯示錯誤訊息（HTTP 狀態碼 + 回應前 200 字）

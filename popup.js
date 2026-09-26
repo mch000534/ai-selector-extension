@@ -554,6 +554,76 @@ document.addEventListener('DOMContentLoaded', () => {
     versionEl.textContent = `v${manifest.version}`;
   }
 
+  // ─── Settings export / import (API keys are never exported) ───
+  const exportSettingsBtn = document.getElementById('exportSettingsBtn');
+  const importSettingsBtn = document.getElementById('importSettingsBtn');
+  const importSettingsFile = document.getElementById('importSettingsFile');
+
+  if (exportSettingsBtn) {
+    exportSettingsBtn.addEventListener('click', async () => {
+      try {
+        const store = window.__aiext.storage;
+        const [sync, local] = await Promise.all([
+          store.getSync(['model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating', 'builtInActions'], {}),
+          store.getLocal([window.__aiext.profiles.STORAGE_KEY], {}),
+        ]);
+        const profiles = window.__aiext.profiles
+          .normalizeProfiles(local && local[window.__aiext.profiles.STORAGE_KEY])
+          .map(p => ({ ...p, apiKey: '' }));
+        const payload = {
+          app: 'ai-selector-extension',
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          sync: {
+            model: sync.model || '',
+            baseUrl: sync.baseUrl || '',
+            quickPrompts: chat.normalizeQuickPrompts(sync.quickPrompts),
+            defaultPin: sync.defaultPin !== false,
+            showFloating: sync.showFloating !== false,
+            builtInActions: window.__aiext.actions.normalizeEnabledIds(sync.builtInActions),
+          },
+          profiles,
+        };
+        downloadFile('ai-selector-settings.json', JSON.stringify(payload, null, 2), 'application/json');
+      } catch (e) {
+        showStatus(chrome.i18n.getMessage('settingsImportFailed', [e.message]), 'error');
+      }
+    });
+  }
+
+  if (importSettingsBtn && importSettingsFile) {
+    importSettingsBtn.addEventListener('click', () => importSettingsFile.click());
+    importSettingsFile.addEventListener('change', async () => {
+      const file = importSettingsFile.files && importSettingsFile.files[0];
+      importSettingsFile.value = '';
+      if (!file) return;
+      try {
+        const payload = JSON.parse(await file.text());
+        if (!payload || typeof payload !== 'object' || payload.app !== 'ai-selector-extension') {
+          throw new Error('unrecognized file');
+        }
+        const store = window.__aiext.storage;
+        const s = (payload.sync && typeof payload.sync === 'object') ? payload.sync : {};
+        await store.setSync({
+          model: typeof s.model === 'string' ? s.model.slice(0, 200) : '',
+          baseUrl: typeof s.baseUrl === 'string' ? s.baseUrl.slice(0, 500) : '',
+          quickPrompts: chat.normalizeQuickPrompts(s.quickPrompts).slice(0, 10),
+          defaultPin: s.defaultPin !== false,
+          showFloating: s.showFloating !== false,
+          builtInActions: window.__aiext.actions.normalizeEnabledIds(s.builtInActions),
+        });
+        const profiles = window.__aiext.profiles
+          .normalizeProfiles(payload.profiles)
+          .map(p => ({ ...p, apiKey: '' }));
+        await store.setLocal({ [window.__aiext.profiles.STORAGE_KEY]: profiles });
+        showStatus(chrome.i18n.getMessage('settingsImported'), 'success');
+        setTimeout(() => window.location.reload(), 800);
+      } catch (e) {
+        showStatus(chrome.i18n.getMessage('settingsImportFailed', [(e && e.message) || 'error']), 'error');
+      }
+    });
+  }
+
   // ─── Conversation manager ───
   // Lists every stored record (open + closed, all hosts) with search,
   // rename, export and batch delete. Reads storage directly; only Restore

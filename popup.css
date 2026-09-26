@@ -628,3 +628,16 @@ small {
   border-radius: 4px;
   margin: 8px 12px;
 }
+
+.settings-io {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

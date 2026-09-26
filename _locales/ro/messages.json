@@ -346,5 +346,45 @@
   },
   "shortcutsHint": {
     "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Summarize older messages"
+  },
+  "summarizingStatus": {
+    "message": "Summarizing older messages…"
+  },
+  "settingsExportBtn": {
+    "message": "Export settings"
+  },
+  "settingsImportBtn": {
+    "message": "Import"
+  },
+  "settingsImported": {
+    "message": "Settings imported (API keys are never exported)"
+  },
+  "settingsImportFailed": {
+    "message": "Settings import failed: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
   }
 }
