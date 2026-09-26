@@ -129,6 +129,7 @@
 - `Enter`：發送訊息
 - `Shift + Enter`：輸入換行
 - `ESC`：關閉最上層未釘選的對話框
+- 全域快捷鍵（`manifest.commands`）：`Alt+Shift+A` 開啟 popup，`Alt+Shift+D` 在目前分頁開啟右側抽屜；使用者可在 `chrome://extensions/shortcuts` 自訂按鍵
 
 #### FR-010a：網頁內右側抽屜聊天
 - popup 設定頁提供開啟抽屜的按鈕，透過 content script 在目前頁面內開啟右側抽屜

@@ -220,6 +220,17 @@ chrome.storage.onChanged.addListener((changes) => {
   }
 });
 
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== 'open-drawer') return;
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || typeof tab.id !== 'number') return;
+    await chrome.tabs.sendMessage(tab.id, createOpenDrawerMessage({}));
+  } catch {
+    // content script not loaded on this page (e.g. chrome:// URLs)
+  }
+});
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (sender.id !== chrome.runtime.id) return;
 

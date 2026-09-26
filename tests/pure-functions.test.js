@@ -357,6 +357,20 @@ test('lastUserIndexBefore finds the nearest user message at or before index', ()
   assert.strictEqual(chat.lastUserIndexBefore(h, 99), 2);
 });
 
+test('manifest declares keyboard shortcuts', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.json'), 'utf8'));
+  assert.ok(manifest.commands, 'commands section must exist');
+  assert.ok(manifest.commands['_execute_action'], '_execute_action must be declared');
+  assert.ok(manifest.commands['open-drawer'], 'open-drawer must be declared');
+  assert.ok(manifest.commands['open-drawer'].suggested_key, 'open-drawer needs a suggested key');
+});
+
+test('background handles the open-drawer command', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'background.js'), 'utf8');
+  assert.ok(src.includes('chrome.commands.onCommand'), 'must listen for commands');
+  assert.ok(src.includes("command !== 'open-drawer'"), 'must route open-drawer');
+});
+
 test('createOpenDrawerMessage builds the content-script drawer command', () => {
   assert.strictEqual(typeof chat.createOpenDrawerMessage, 'function');
   assert.deepStrictEqual(

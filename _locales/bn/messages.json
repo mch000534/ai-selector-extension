@@ -337,5 +337,14 @@
   },
   "actionTutorial": {
     "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Open AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Open chat drawer"
+  },
+  "shortcutsHint": {
+    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
   }
 }

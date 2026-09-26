@@ -23,6 +23,20 @@
       "128": "icons/icon128.png"
     }
   },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "__MSG_commandOpenPopup__"
+    },
+    "open-drawer": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "__MSG_commandOpenDrawer__"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
