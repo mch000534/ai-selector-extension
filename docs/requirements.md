@@ -1,6 +1,6 @@
 # AI 劃詞助手 — 需求文件
 
-> 版本：1.0.4 | 最後更新：2026-06-21
+> 版本：1.2.0 | 最後更新：2026-09-28
 
 ## 1. 專案概述
 
@@ -121,7 +121,9 @@
 - **Provider profiles**：同一組 key/URL/model 存為具名設定檔（`aiext_profiles_v1`，local），下拉切換即套用；同 endpoint 重複儲存會更新而非新增；首次開啟自動以目前連線建立一個
 - **模型名稱**：文字輸入框附 datalist，點擊「獲取」按鈕從 `{baseUrl}/models` 取得列表
 - **快速預設問題**：可新增（Enter 或按鈕）、刪除（× 按鈕），上限 10 個
+- **內建快速動作**：勾選清單可個別啟用/停用翻譯、繁簡轉換、解釋、摘要、潤稿、產生教學等內建動作，儲存於 `builtInActions`
 - **預設釘住**：勾選框，開啟後新對話框自動釘選
+- **顯示浮動按鈕**：勾選框，關閉後劃選文字或圖片不再出現浮動 AI 圖示，儲存於 `showFloating`
 - **儲存**：API Key 寫入 `chrome.storage.local`，其餘（`model`、`baseUrl`、`quickPrompts`、`defaultPin`、`showFloating`、`builtInActions`）寫入 `chrome.storage.sync`；僅當 key 或 URL 變動時清除已存對話
 
 #### FR-010：鍵盤快捷鍵
@@ -203,7 +205,7 @@
 - 多對話框拖曳時 `mousemove` 事件需高效遍歷，僅處理 `isDragging` 為 true 的對話框
 
 #### NFR-002：安全
-- API Key 僅儲存於 `chrome.storage.sync`，不透過 URL 參數傳輸
+- API Key 與服務供應商設定檔僅儲存於 `chrome.storage.local`（本機裝置，不隨 Chrome 帳號同步），不透過 URL 參數傳輸
 - 所有使用者輸入（快速問題、選取文字）在插入 DOM 前必須經 `escapeHtml()` 處理
 - 對話框內容渲染前必須先跳脫 HTML 再套用 Markdown 轉換
 
@@ -338,17 +340,37 @@ data: [DONE]
 }
 ```
 
-## 6. 建議專案目錄結構
+## 6. 實際專案目錄結構
 
 ```
 ai-selector-extension/
 ├── manifest.json          # Manifest V3 設定檔（權限、背景腳本、彈出頁面、Content Script、default_locale）
 ├── background.js          # Service worker：右鍵選單建立、抽屜/對話框點擊轉發（i18n）
-├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、右側抽屜、API 呼叫、串流解析、Markdown 渲染、i18n、暗色模式、RTL）
+├── content.js             # 主要邏輯 IIFE（浮動圖示、對話框、右側抽屜、串流解析、i18n、暗色模式、RTL）
 ├── content.css            # 故意為空白（所有樣式由 content.js 動態注入）
 ├── popup.html             # 設定頁面 HTML（data-i18n 屬性標記）
-├── popup.js               # 設定頁面邏輯（applyI18n、儲存讀取、模型獲取、快速問題管理、眼圖示、行內編輯）
+├── popup.js               # 設定頁面邏輯（applyI18n、儲存讀取、模型獲取、快速問題/內建動作管理、設定檔、對話記錄管理器、匯出匯入）
 ├── popup.css              # 設定頁面樣式（CSS variables + @media dark 暗色模式）
+├── providers.json         # 內建供應商預設值（Mistral/OpenAI/Groq/OpenRouter/Anthropic/Gemini 的 Base URL 與建議模型）
+├── lib/                   # content script 與 popup 共用模組
+│   ├── utils.js           # normalizeBaseUrl 等共用工具
+│   ├── shadow.js          # Shadow DOM 建立與樣式隔離
+│   ├── markdown.js        # Markdown → HTML 渲染（先 escapeHtml 再轉換）
+│   ├── chat.js            # 對話狀態、token 估算、摘要邏輯
+│   ├── net.js             # 網路請求與重試邏輯
+│   ├── api.js             # OpenAI/Anthropic/Gemini API adapter 與 SSE 解析
+│   ├── storage.js         # chrome.storage 包裝、API Key sync→local 遷移
+│   ├── theme.js           # 暗色/亮色模式色彩來源
+│   ├── profiles.js        # 服務供應商設定檔（aiext_profiles_v1）管理
+│   └── actions.js         # 內建快速動作（翻譯/繁簡轉換/解釋/摘要/潤稿/產生教學）提示詞
+├── tests/                 # Node 內建測試框架（node --test tests/*.test.js）
+│   ├── pure-functions.test.js
+│   ├── api.test.js
+│   ├── actions.test.js
+│   ├── profiles.test.js
+│   ├── storage.test.js
+│   ├── shadow.test.js
+│   └── i18n.test.js
 ├── _locales/              # 多語言檔案目錄（55 種語言）
 │   ├── en/                # 英文（預設語言）
 │   │   └── messages.json
@@ -357,9 +379,15 @@ ai-selector-extension/
 │   ├── zh_CN/             # 簡體中文
 │   │   └── messages.json
 │   └── ...                # 其餘 52 種語言
-├── AGENTS.md              # AI agent 工作指引
-├── README.md              # 專案說明文件
-├── requirements.md        # 本需求文件
+├── docs/                  # 專案文件
+│   ├── README.md          # 專案說明文件
+│   ├── requirements.md    # 本需求文件
+│   ├── testcase.md        # 測試案例
+│   ├── code-review-and-roadmap.md  # 歷史程式碼審查快照
+│   ├── privacy-policy.html # 隱私權政策
+│   └── AGENTS.md          # docs 專屬的 AI agent 補充指引
+├── .github/workflows/     # CI：node --test 與 node --check 語法檢查
+├── AGENTS.md              # 專案根目錄的 AI agent 工作指引（含程式風格、i18n、安全規範）
 └── icons/
     ├── icon16.png         # 工具列圖示（16×16）
     ├── icon48.png         # 管理頁面圖示（48×48）

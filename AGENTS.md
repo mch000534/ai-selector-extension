@@ -4,11 +4,11 @@
 
 此專案是 Chrome Manifest V3 擴充套件，採純 Vanilla JavaScript，沒有框架、打包器或安裝依賴。主要入口在根目錄：`manifest.json` 定義權限、content scripts 與 popup；`content.js` 負責頁面內 AI 對話框；`background.js` 負責 service worker 與右鍵選單；`popup.html`、`popup.js`、`popup.css` 負責設定介面。
 
-共用邏輯放在 `lib/`，例如 `lib/utils.js`、`lib/markdown.js`、`lib/shadow.js`、`lib/theme.js`。測試放在 `tests/`，目前以 `tests/pure-functions.test.js` 覆蓋純函式。圖示在 `icons/`，本地化字串在 `_locales/<lang>/messages.json`，文件在 `docs/`。
+共用邏輯放在 `lib/`，例如 `lib/utils.js`、`lib/markdown.js`、`lib/shadow.js`、`lib/theme.js`。測試放在 `tests/`，以 `tests/*.test.js`（共 7 個檔案）覆蓋純函式與各模組行為。圖示在 `icons/`，本地化字串在 `_locales/<lang>/messages.json`，文件在 `docs/`。
 
 ## 建置、測試與本機開發指令
 
-- `node --test tests/pure-functions.test.js`：執行 Node 內建測試，驗證 Markdown、URL 正規化與安全 URL 判斷等純函式。
+- `node --test tests/*.test.js`：執行 Node 內建測試（含 Markdown、URL 正規化、安全 URL 判斷等純函式，以及 API adapter、profiles、storage 遷移等模組測試）。CI（`.github/workflows/test.yml`）也使用此指令，並額外對 `background.js`、`content.js`、`popup.js`、`lib/*.js` 執行 `node --check` 語法檢查。
 - `git status --short`：提交前確認只包含本次相關變更。
 - 本機載入方式：開啟 `chrome://extensions`，啟用開發人員模式，選擇「載入未封裝項目」並指定專案根目錄。
 
@@ -32,4 +32,4 @@ PR 應包含變更摘要、測試結果、手動驗證步驟；若修改 UI，�
 
 ## 安全與設定注意事項
 
-API Key 僅應透過 `chrome.storage.sync` 儲存，不要寫入程式碼、文件範例或測試資料。維持 OpenAI 相容 `/v1/chat/completions` 與 SSE streaming 合約；調整遠端圖片抓取或 URL 處理時，保留私有網段與非 HTTP(S) scheme 防護。
+API Key 僅應透過 `chrome.storage.local` 儲存（本機裝置，不隨 Chrome 帳號同步），不要寫入程式碼、文件範例或測試資料。維持 OpenAI 相容 `/v1/chat/completions` 與 SSE streaming 合約；調整遠端圖片抓取或 URL 處理時，保留私有網段與非 HTTP(S) scheme 防護。
