@@ -1,9 +1,12 @@
-# AI 劃詞助手 — 程式碼審查與改善建議
+# AI 劃詞助手 — 程式碼審查與改善建議（歷史紀錄）
 
+> ⚠️ **本文件為歷史快照，非目前待辦清單。**
 > 審查日期：2026-09-26
 > 審查對象：`shrimp` 工作區 @ commit `84fdf49`（manifest v1.1.1）
 > 審查範圍：`content.js`、`background.js`、`popup.js`、`sidepanel.js`、`lib/*`、`tests/*`、`_locales/*`、`manifest.json`
 > 性質：唯讀分析，未修改任何程式碼
+>
+> **狀態更新（2026-09-28）**：本文件雖於 commit `62f25db` 才加入 repo，但內容對應的是遠早於該時間點的舊快照。截至目前，文件列出的全部 4 項 P0 缺陷（資料遺失、overlay 攔截點擊、model XSS、SSRF redirect 繞過）與全部 5 項 P2 建議功能（多 Provider 設定檔、多格式 API adapter、對話管理、訊息編輯重發、右鍵快捷動作）皆已於後續 commit 修復/實作完成，`sidepanel.js` 死碼也已移除。內容保留作為歷史紀錄與設計脈絡參考，若要了解目前實際待辦，請以最新程式碼審查結果為準，不要依此文件行動。
 
 ---
 
