@@ -5,7 +5,9 @@ const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
 const MENU_ACTION_PREFIX = 'ai-selector-action-';
 const MENU_SEPARATOR_PROMPTS = 'ai-selector-separator-prompts';
 const MENU_SEPARATOR_ACTIONS = 'ai-selector-separator-actions';
-const QUICK_PROMPTS_IN_MENU = 5;
+// Must match the max quick prompts a user can save (popup.js), or prompts
+// beyond this count become permanently unreachable from the context menu.
+const QUICK_PROMPTS_IN_MENU = 10;
 
 let _buildMenuPromise = null;
 

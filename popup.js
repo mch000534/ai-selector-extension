@@ -447,24 +447,26 @@ document.addEventListener('DOMContentLoaded', () => {
     modelHint.textContent = chrome.i18n.getMessage('modelFetchingHint');
 
     try {
-      const models = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
+      const r = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
 
-      if (!models || models.length === 0) {
+      if (!r.ok) {
+        showStatus(chrome.i18n.getMessage('modelFetchFailed', [r.detail || `HTTP ${r.status}`]), 'error');
+        modelHint.textContent = chrome.i18n.getMessage('modelFetchFailedHint');
+        return;
+      }
+      if (r.models.length === 0) {
         showStatus(chrome.i18n.getMessage('modelNoModels'), 'error');
         return;
       }
 
       modelList.innerHTML = '';
-      models.forEach(id => {
+      r.models.forEach(id => {
         const opt = document.createElement('option');
         opt.value = id;
         modelList.appendChild(opt);
       });
-      modelHint.textContent = chrome.i18n.getMessage('modelFound', [String(models.length)]);
+      modelHint.textContent = chrome.i18n.getMessage('modelFound', [String(r.models.length)]);
       showStatus(chrome.i18n.getMessage('modelUpdated'), 'success');
-    } catch (err) {
-      showStatus(chrome.i18n.getMessage('modelFetchFailed', [err.message]), 'error');
-      modelHint.textContent = chrome.i18n.getMessage('modelFetchFailedHint');
     } finally {
       fetchModelsBtn.disabled = false;
       fetchModelsBtn.textContent = chrome.i18n.getMessage('modelFetchBtn');
@@ -735,22 +737,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ok ? chrome.i18n.getMessage('statusAutoSaved') : 'copy failed',
       ok ? 'success' : 'error'
     );
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => done(true)).catch(() => done(false));
-      return;
-    }
-    try {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
-      document.body.appendChild(ta);
-      ta.select();
-      const ok = document.execCommand('copy');
-      ta.remove();
-      done(!!ok);
-    } catch (e) {
-      done(false);
-    }
+    window.__aiext.utils.copyTextToClipboard(text, {
+      onSuccess: () => done(true),
+      onFail: () => done(false),
+    });
   }
 
   function renderConvItem(rec) {

@@ -1111,7 +1111,7 @@
   }
 
   async function setContextFromSelectionOrSource(srcUrl) {
-    if (srcUrl) {
+    if (srcUrl && isTrustedImageSrc(srcUrl)) {
       currentContext = { text: '', images: [srcUrl] };
       return currentContext;
     }
@@ -1867,6 +1867,9 @@
   function closeDialog(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (state.summarizeController) {
+      try { state.summarizeController.abort(); } catch (e) {}
+    }
     if (drawerDialogId === id) {
       drawerDialogId = null;
       clearBodyShift();
@@ -2084,12 +2087,10 @@
     }
 
     const fetchPromise = (async () => {
-      try {
-        const models = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
-        if (!models || models.length === 0) return null;
-        _modelCache.set(cacheKey, { models, ts: Date.now() });
-        return models;
-      } catch (e) { return null; }
+      const r = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
+      if (!r.ok || !r.models || r.models.length === 0) return null;
+      _modelCache.set(cacheKey, { models: r.models, ts: Date.now() });
+      return r.models;
     })();
 
     _modelFetchInFlight.set(cacheKey, fetchPromise);
@@ -2252,23 +2253,7 @@
   // Copies text with a textarea fallback for non-secure contexts. Shared by
   // code-block copy buttons and message-level copy.
   function copyTextToClipboard(text, onSuccess, onFail) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(onSuccess).catch(onFail);
-      return;
-    }
-    try {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
-      document.body.appendChild(ta);
-      ta.select();
-      const ok = document.execCommand('copy');
-      ta.remove();
-      if (ok && onSuccess) onSuccess();
-      else if (!ok && onFail) onFail();
-    } catch (e) {
-      if (onFail) onFail();
-    }
+    window.__aiext.utils.copyTextToClipboard(text, { onSuccess, onFail, markExtensionElement: true });
   }
 
   async function sendMessage(id) {
@@ -2620,6 +2605,8 @@
     const recent = history.slice(keepFrom);
     state.isStreaming = true;
     updateTokenLine(id);
+    const controller = new AbortController();
+    state.summarizeController = controller;
     try {
       const statusEl = addMessage(id, 'system', t('summarizingStatus'));
       const r = await window.__aiext.api.chatCompletion({
@@ -2630,12 +2617,13 @@
           { role: 'system', content: 'Summarize the following conversation briefly in the same language, preserving key facts, decisions and open questions.' },
           ...old,
         ],
+        signal: controller.signal,
         hasImages: (m) => chat.messagesHaveImages(m),
         stripImages: (m) => chat.stripImagesFromMessages(m),
       });
       if (statusEl && statusEl.parentElement) statusEl.parentElement.remove();
       if (!r.ok || !r.content || !r.content.trim()) {
-        addMessage(id, 'system', t('errorRequestFailed', 'summarize'));
+        if (r.code !== 'cancelled') addMessage(id, 'system', t('errorRequestFailed', 'summarize'));
         return;
       }
       state.conversationHistory = [
@@ -2646,6 +2634,7 @@
       persistState(id);
     } finally {
       state.isStreaming = false;
+      state.summarizeController = null;
       updateTokenLine(id);
     }
   }
@@ -2739,7 +2728,7 @@
         }
       });
       if (r.ok) {
-        result = { content: r.content, bubble };
+        result = { content: r.content, bubble, truncated: r.truncated };
       } else if (r.code === 'cancelled') {
         result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
       } else if (r.code === 'network') {

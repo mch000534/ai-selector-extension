@@ -81,16 +81,22 @@ test('createSseParser stops after [DONE] and finish() flushes trailing line', ()
 // ─── fetchModels ───
 test('fetchModels returns sorted ids and [] when empty', async () => {
   const ok = async () => ({ ok: true, json: async () => ({ data: [{ id: 'z' }, { id: 'a' }] }) });
-  assert.deepStrictEqual(await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: ok }), ['a', 'z']);
+  assert.deepStrictEqual(await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: ok }), { ok: true, models: ['a', 'z'] });
   const empty = async () => ({ ok: true, json: async () => ({ data: [] }) });
-  assert.deepStrictEqual(await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: empty }), []);
+  assert.deepStrictEqual(await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: empty }), { ok: true, models: [] });
 });
 
-test('fetchModels throws on HTTP error and propagates transport errors', async () => {
-  const bad = async () => ({ ok: false, status: 401 });
-  await assert.rejects(() => api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: bad }), /HTTP 401/);
+test('fetchModels never throws: resolves {ok:false} on HTTP error and transport errors', async () => {
+  const bad = async () => ({ ok: false, status: 401, text: async () => 'unauthorized' });
+  assert.deepStrictEqual(
+    await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: bad }),
+    { ok: false, code: 'api_error', status: 401, detail: 'unauthorized' }
+  );
   const down = async () => { throw new Error('socket hang up'); };
-  await assert.rejects(() => api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: down }), /socket hang up/);
+  assert.deepStrictEqual(
+    await api.fetchModels({ baseUrl: 'https://x.test', apiKey: 'k', fetchFn: down }),
+    { ok: false, code: 'network', status: 0, detail: 'socket hang up' }
+  );
 });
 
 // ─── chatCompletion ───
@@ -350,8 +356,10 @@ test('chatCompletion streams gemini candidates end to end', async () => {
     fetchFn, hasImages, stripImages,
   });
   assert.deepStrictEqual(res, { ok: true, content: 'G', truncated: true });
-  assert.ok(seen.url.includes(':streamGenerateContent') && seen.url.includes('key=gk'));
-  assert.ok(!seen.url.includes('/chat/completions'));
+  // Gemini's own path already carries a version segment (/v1beta), so the
+  // shared base-URL normalizer must not additionally inject /v1 in front of
+  // it (regression guard: this used to 404 as .../v1/v1beta/models/...).
+  assert.strictEqual(seen.url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-x:streamGenerateContent?alt=sse&key=gk');
 });
 
 test('fetchModels adapts auth and id shapes per format', async () => {
@@ -364,15 +372,15 @@ test('fetchModels adapts auth and id shapes per format', async () => {
     baseUrl: 'https://api.anthropic.com', apiKey: 'sk',
     fetchFn: mkFetch({ data: [{ id: 'claude-x' }] }),
   });
-  assert.deepStrictEqual(anthropic, ['claude-x']);
+  assert.deepStrictEqual(anthropic, { ok: true, models: ['claude-x'] });
   assert.strictEqual(calls[0].headers['x-api-key'], 'sk');
 
   const gemini = await api.fetchModels({
     baseUrl: 'https://generativelanguage.googleapis.com', apiKey: 'gk',
     fetchFn: mkFetch({ models: [{ name: 'models/gemini-b' }, { name: 'models/gemini-a' }] }),
   });
-  assert.deepStrictEqual(gemini, ['gemini-a', 'gemini-b']);
-  assert.ok(calls[1].url.includes('key=gk'));
+  assert.deepStrictEqual(gemini, { ok: true, models: ['gemini-a', 'gemini-b'] });
+  assert.strictEqual(calls[1].url, 'https://generativelanguage.googleapis.com/v1beta/models?key=gk');
 });
 
 test('customHeaders override adapter defaults', async () => {
