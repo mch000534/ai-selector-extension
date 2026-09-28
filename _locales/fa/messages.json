@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "باز کردن کشو"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "باز کردن کشو ممکن نشد: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "انتقال به کشو"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "نمایه‌های ارائه‌دهنده"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "ذخیره وضعیت فعلی"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "حذف"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "کلید، URL و مدل فعلی را به‌عنوان یک نمایه ذخیره کنید؛ کلیدها روی همین دستگاه باقی می‌مانند"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "ویرایش"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "تولید دوباره"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "کپی"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "ذخیره"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "لغو"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "گفتگوها"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "جستجوی گفتگوها..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "تغییر نام"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "بازیابی"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "کپی"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "حذف"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "حذف موارد انتخاب‌شده"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "هنوز گفتگویی وجود ندارد"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "باز"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "بسته‌شده"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "اقدامات سریع داخلی"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "ترجمه"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "تبدیل گونه چینی"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "توضیح"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "خلاصه‌سازی"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "ویرایش متن"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "آموزش"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "باز کردن AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "باز کردن کشوی گفتگو"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "نکته: میان‌برها را در chrome://extensions/shortcuts سفارشی کنید"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "خلاصه‌سازی پیام‌های قدیمی‌تر"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "در حال خلاصه‌سازی پیام‌های قدیمی‌تر…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "خروجی گرفتن از تنظیمات"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "وارد کردن"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "تنظیمات وارد شد (کلیدهای API هرگز خروجی گرفته نمی‌شوند)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "وارد کردن تنظیمات ناموفق بود: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "ممکن است پاسخ ناقص باشد (پخش زودتر از موعد پایان یافت). برای تلاش دوباره از «تولید دوباره» استفاده کنید."
   }
 }

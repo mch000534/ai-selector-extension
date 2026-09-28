@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Paneel openen"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Kan paneel niet openen: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Naar paneel verplaatsen"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Providerprofielen"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Huidige opslaan"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Verwijderen"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Sla de huidige sleutel, URL en model op als één profiel; sleutels blijven op dit apparaat"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Bewerken"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Opnieuw genereren"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopiëren"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Opslaan"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Annuleren"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Gesprekken"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Gesprekken zoeken..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Naam wijzigen"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Herstellen"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopiëren"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Verwijderen"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Selectie verwijderen"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Nog geen gesprekken"
   },
   "conversationsOpenBadge": {
     "message": "Open"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Gesloten"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Ingebouwde snelle acties"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Vertalen"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Chinese variant converteren"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Uitleggen"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Samenvatten"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Tekst verbeteren"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Handleiding"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant openen"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Chatpaneel openen"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tip: pas sneltoetsen aan op chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Oudere berichten samenvatten"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Oudere berichten worden samengevat…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Instellingen exporteren"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importeren"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Instellingen geïmporteerd (API-sleutels worden nooit geëxporteerd)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Instellingen importeren mislukt: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Het antwoord is mogelijk onvolledig (stream is voortijdig gestopt). Gebruik Opnieuw genereren om het nogmaals te proberen."
   }
 }

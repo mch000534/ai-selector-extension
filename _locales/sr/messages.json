@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Отвори панел"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Панел није могуће отворити: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Премести у панел"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Профили добављача"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Сачувај тренутно"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Обриши"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Сачувајте тренутни кључ, URL и модел као један профил; кључеви остају на овом уређају"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Уреди"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Поново генериши"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Копирај"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Сачувај"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Откажи"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Разговори"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Претражи разговоре..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Преименуј"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Врати"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Копирај"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Обриши"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Обриши изабране"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Још увек нема разговора"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Отворен"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Затворен"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Уграђене брзе радње"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Преведи"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Конвертуј кинеску варијанту"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Објасни"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Сажми"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Побољшај текст"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Водич"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Отвори AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Отвори панел за ћаскање"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Савет: прилагодите пречице на chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Сажми старије поруке"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Сажимање старијих порука…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Извези подешавања"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Увези"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Подешавања су увезена (API кључеви се никада не извозе)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Увоз подешавања није успео: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Одговор можда није потпун (пренос је прерано завршен). Користите Поново генериши да покушате поново."
   }
 }

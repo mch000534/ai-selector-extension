@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "டிராயரைத் திற"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "டிராயரைத் திறக்க முடியவில்லை: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "டிராயருக்கு நகர்த்து"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "வழங்குநர் சுயவிவரங்கள்"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "தற்போதையதைச் சேமி"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "நீக்கு"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "தற்போதைய கீ, URL மற்றும் மாடலை ஒரு சுயவிவரமாகச் சேமிக்கவும்; கீகள் இந்தச் சாதனத்திலேயே இருக்கும்"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "திருத்து"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "மீண்டும் உருவாக்கு"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "நகலெடு"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "சேமி"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "ரத்துசெய்"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "உரையாடல்கள்"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "உரையாடல்களைத் தேடு..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "பெயர் மாற்று"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "மீட்டமை"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "நகலெடு"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "நீக்கு"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "தேர்ந்தெடுத்தவற்றை நீக்கு"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "இதுவரை உரையாடல்கள் இல்லை"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "திறந்துள்ளது"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "மூடப்பட்டது"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "உள்ளமைந்த விரைவு செயல்கள்"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "மொழிபெயர்"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "சீன வேறுபாட்டை மாற்று"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "விளக்கு"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "சுருக்கு"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "எழுத்தை மேம்படுத்து"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "பயிற்சி"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant ஐத் திற"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "அரட்டை டிராயரைத் திற"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "குறிப்பு: chrome://extensions/shortcuts இல் குறுக்குவழிகளைத் தனிப்பயனாக்கவும்"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "பழைய செய்திகளைச் சுருக்கு"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "பழைய செய்திகளைச் சுருக்குகிறது…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "அமைப்புகளை ஏற்றுமதி செய்"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "இறக்குமதி செய்"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "அமைப்புகள் இறக்குமதி செய்யப்பட்டன (API கீகள் ஒருபோதும் ஏற்றுமதி செய்யப்படாது)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "அமைப்புகளை இறக்குமதி செய்வது தோல்வியடைந்தது: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "பதில் முழுமையடையாமல் இருக்கலாம் (ஸ்ட்ரீம் முன்னதாக முடிந்தது). மீண்டும் முயற்சிக்க மீண்டும் உருவாக்கு பயன்படுத்தவும்."
   }
 }

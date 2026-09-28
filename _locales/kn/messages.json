@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ಡ್ರಾಯರ್ ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ಡ್ರಾಯರ್‌ಗೆ ಸರಿಸಿ"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "ಪೂರೈಕೆದಾರ ಪ್ರೊಫೈಲ್‌ಗಳು"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "ಪ್ರಸ್ತುತವನ್ನು ಉಳಿಸಿ"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "ಅಳಿಸಿ"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "ಪ್ರಸ್ತುತ ಕೀ, URL ಮತ್ತು ಮಾದರಿಯನ್ನು ಒಂದು ಪ್ರೊಫೈಲ್ ಆಗಿ ಉಳಿಸಿ; ಕೀಗಳು ಈ ಸಾಧನದಲ್ಲಿಯೇ ಉಳಿಯುತ್ತವೆ"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "ಸಂಪಾದಿಸಿ"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "ಮತ್ತೆ ರಚಿಸಿ"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "ನಕಲಿಸಿ"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "ಉಳಿಸಿ"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "ರದ್ದುಮಾಡಿ"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "ಸಂಭಾಷಣೆಗಳು"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "ಸಂಭಾಷಣೆಗಳನ್ನು ಹುಡುಕಿ..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "ಮರುಹೆಸರಿಸಿ"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "ಮರುಸ್ಥಾಪಿಸಿ"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "ನಕಲಿಸಿ"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "ಅಳಿಸಿ"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "ಆಯ್ಕೆಮಾಡಿದವುಗಳನ್ನು ಅಳಿಸಿ"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "ಇನ್ನೂ ಯಾವುದೇ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "ತೆರೆದಿದೆ"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "ಮುಚ್ಚಲಾಗಿದೆ"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "ಅಂತರ್ನಿರ್ಮಿತ ತ್ವರಿತ ಕ್ರಿಯೆಗಳು"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "ಅನುವಾದಿಸಿ"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "ಚೀನೀ ಭಿನ್ನರೂಪವನ್ನು ಪರಿವರ್ತಿಸಿ"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "ವಿವರಿಸಿ"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "ಸಾರಾಂಶ ಮಾಡಿ"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "ಬರವಣಿಗೆ ಸುಧಾರಿಸಿ"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "ಟ್ಯುಟೋರಿಯಲ್"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant ತೆರೆಯಿರಿ"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "ಚಾಟ್ ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "ಸಲಹೆ: chrome://extensions/shortcuts ನಲ್ಲಿ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "ಹಳೆಯ ಸಂದೇಶಗಳನ್ನು ಸಾರಾಂಶ ಮಾಡಿ"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "ಹಳೆಯ ಸಂದೇಶಗಳನ್ನು ಸಾರಾಂಶ ಮಾಡಲಾಗುತ್ತಿದೆ…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಿ"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "ಆಮದು ಮಾಡಿ"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗಿದೆ (API ಕೀಗಳನ್ನು ಎಂದಿಗೂ ರಫ್ತು ಮಾಡುವುದಿಲ್ಲ)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಆಮದು ವಿಫಲವಾಗಿದೆ: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "ಪ್ರತಿಕ್ರಿಯೆ ಅಪೂರ್ಣವಾಗಿರಬಹುದು (ಸ್ಟ್ರೀಮ್ ಮೊದಲೇ ಕೊನೆಗೊಂಡಿದೆ). ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲು ಮತ್ತೆ ರಚಿಸಿ ಬಳಸಿ."
   }
 }

@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "መሳቢያ ክፈት"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "መሳቢያውን መክፈት አልተቻለም፦ $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ወደ መሳቢያ ውሰድ"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "የአቅራቢ መገለጫዎች"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "የአሁኑን አስቀምጥ"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "ሰርዝ"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "የአሁኑን ቁልፍ፣ URL እና ሞዴል እንደ አንድ መገለጫ አስቀምጥ፤ ቁልፎች በዚህ መሣሪያ ብቻ ይቆያሉ"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "አርትዕ"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "እንደገና ፍጠር"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "ቅዳ"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "አስቀምጥ"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "ሰርዝ"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "ውይይቶች"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "ውይይቶችን ፈልግ..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "ስም ቀይር"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "መልስ"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "ቅዳ"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "ሰርዝ"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "የተመረጡትን ሰርዝ"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "እስካሁን ምንም ውይይት የለም"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "ክፍት"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "ተዘግቷል"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "አብሮ የተሰሩ ፈጣን እርምጃዎች"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "ተርጉም"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "የቻይንኛ ዝርያ ለውጥ"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "ማብራሪያ"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "አጠቃልል"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "ጽሑፍ አሻሽል"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "አጋዥ ስልጠና"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant ክፈት"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "የውይይት መሳቢያ ክፈት"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "ጠቃሚ ምክር፦ አቋራጮችን በ chrome://extensions/shortcuts ላይ አብጅ"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "የቆዩ መልዕክቶችን አጠቃልል"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "የቆዩ መልዕክቶችን በማጠቃለል ላይ…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "ቅንብሮችን ላክ"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "አስመጣ"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "ቅንብሮች ገብተዋል (የAPI ቁልፎች በጭራሽ አይላኩም)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "ቅንብሮችን ማስመጣት አልተሳካም፦ $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "ምላሹ ያልተሟላ ሊሆን ይችላል (ዥረቱ ቀደም ብሎ አብቅቷል)። እንደገና ለመሞከር እንደገና ፍጠር ተጠቀም።"
   }
 }

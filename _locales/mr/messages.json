@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ड्रॉवर उघडा"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ड्रॉवर उघडता आले नाही: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ड्रॉवरमध्ये हलवा"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "प्रदाता प्रोफाइल"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "सध्याचे जतन करा"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "हटवा"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "सध्याची की, URL आणि मॉडेल एक प्रोफाइल म्हणून जतन करा; की या डिव्हाइसवरच राहतात"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "संपादित करा"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "पुन्हा तयार करा"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "कॉपी करा"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "जतन करा"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "रद्द करा"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "संभाषणे"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "संभाषणे शोधा..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "नाव बदला"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "पुनर्संचयित करा"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "कॉपी करा"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "हटवा"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "निवडलेले हटवा"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "अद्याप कोणतीही संभाषणे नाहीत"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "उघडे"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "बंद"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "अंगभूत क्विक अ‍ॅक्शन्स"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "भाषांतर करा"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "चिनी वेरिएंट रूपांतरित करा"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "स्पष्ट करा"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "सारांश तयार करा"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "लेखन सुधारा"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "ट्यूटोरियल"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant उघडा"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "चॅट ड्रॉवर उघडा"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "टीप: chrome://extensions/shortcuts येथे शॉर्टकट सानुकूल करा"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "जुने संदेश सारांशित करा"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "जुने संदेश सारांशित करत आहे…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "सेटिंग्ज निर्यात करा"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "आयात करा"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "सेटिंग्ज आयात केल्या (API की कधीही निर्यात केल्या जात नाहीत)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "सेटिंग्ज आयात करणे अयशस्वी: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "उत्तर अपूर्ण असू शकते (स्ट्रीम लवकर संपली). पुन्हा प्रयत्न करण्यासाठी पुन्हा तयार करा वापरा."
   }
 }

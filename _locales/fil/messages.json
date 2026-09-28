@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Buksan ang drawer"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Hindi mabuksan ang drawer: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Ilipat sa drawer"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Mga profile ng provider"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "I-save ang kasalukuyan"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Tanggalin"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "I-save ang kasalukuyang key, URL, at modelo bilang isang profile; nananatili ang mga key sa device na ito"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "I-edit"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Buuin muli"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopyahin"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "I-save"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Kanselahin"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Mga Usapan"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Maghanap ng mga usapan..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Palitan ang pangalan"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Ibalik"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopyahin"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Tanggalin"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Tanggalin ang napili"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Wala pang usapan"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Bukas"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Sarado"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Mga built-in na mabilisang aksyon"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Isalin"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "I-convert ang variant ng Chinese"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Ipaliwanag"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Ibuod"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Pinuhin ang pagsulat"
   },
   "actionTutorial": {
     "message": "Tutorial"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Buksan ang AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Buksan ang chat drawer"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tip: i-customize ang mga shortcut sa chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Ibuod ang mas lumang mga mensahe"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Binubuod ang mas lumang mga mensahe…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "I-export ang mga setting"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "I-import"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Na-import ang mga setting (hindi kailanman ine-export ang mga API key)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Nabigo ang pag-import ng mga setting: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Maaaring hindi kumpleto ang sagot (naputol nang maaga ang stream). Gamitin ang Buuin Muli para subukan ulit."
   }
 }

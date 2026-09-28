@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ড্রয়ার খুলুন"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ড্রয়ার খোলা যায়নি: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ড্রয়ারে সরান"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "প্রদানকারী প্রোফাইল"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "বর্তমানটি সংরক্ষণ করুন"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "মুছুন"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "বর্তমান কী, URL এবং মডেলকে একটি প্রোফাইল হিসেবে সংরক্ষণ করুন; কী এই ডিভাইসেই থেকে যায়"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "সম্পাদনা করুন"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "পুনরায় তৈরি করুন"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "কপি করুন"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "সংরক্ষণ করুন"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "বাতিল করুন"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "কথোপকথন"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "কথোপকথন খুঁজুন..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "নাম পরিবর্তন করুন"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "পুনরুদ্ধার করুন"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "কপি করুন"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "মুছুন"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "নির্বাচিতগুলি মুছুন"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "এখনো কোনো কথোপকথন নেই"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "চলমান"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "বন্ধ"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "অন্তর্নির্মিত দ্রুত কার্যক্রম"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "অনুবাদ করুন"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "চীনা ভ্যারিয়েন্ট রূপান্তর করুন"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "ব্যাখ্যা করুন"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "সংক্ষিপ্তসার করুন"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "লেখা উন্নত করুন"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "টিউটোরিয়াল"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant খুলুন"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "চ্যাট ড্রয়ার খুলুন"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "টিপ: chrome://extensions/shortcuts এ শর্টকাট কাস্টমাইজ করুন"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "পুরনো বার্তাগুলোর সংক্ষিপ্তসার করুন"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "পুরনো বার্তাগুলোর সংক্ষিপ্তসার করা হচ্ছে…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "সেটিংস রপ্তানি করুন"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "আমদানি করুন"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "সেটিংস আমদানি করা হয়েছে (API কী কখনো রপ্তানি করা হয় না)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "সেটিংস আমদানি ব্যর্থ হয়েছে: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "উত্তরটি অসম্পূর্ণ হতে পারে (স্ট্রিম আগেভাগে শেষ হয়েছে)। আবার চেষ্টা করতে পুনরায় তৈরি করুন ব্যবহার করুন।"
   }
 }

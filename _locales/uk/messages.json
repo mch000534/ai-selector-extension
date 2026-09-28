@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Відкрити панель"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Не вдалося відкрити панель: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Перемістити на панель"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Профілі постачальників"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Зберегти поточний"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Видалити"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Збережіть поточний ключ, URL та модель як один профіль; ключі залишаються на цьому пристрої"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Редагувати"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Згенерувати знову"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Копіювати"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Зберегти"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Скасувати"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Розмови"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Пошук розмов..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Перейменувати"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Відновити"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Копіювати"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Видалити"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Видалити вибрані"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Розмов поки немає"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Відкрито"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Закрито"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Вбудовані швидкі дії"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Перекласти"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Перетворити варіант китайської"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Пояснити"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Підсумувати"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Покращити текст"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Посібник"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Відкрити AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Відкрити панель чату"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Порада: налаштуйте комбінації клавіш на сторінці chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Підсумувати старіші повідомлення"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Підсумовування старіших повідомлень…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Експортувати налаштування"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Імпортувати"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Налаштування імпортовано (ключі API ніколи не експортуються)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Не вдалося імпортувати налаштування: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Відповідь може бути неповною (потік завершився передчасно). Скористайтеся кнопкою «Згенерувати знову», щоб повторити спробу."
   }
 }

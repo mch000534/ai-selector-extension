@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Atverti skydelį"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Nepavyko atverti skydelio: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Perkelti į skydelį"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Teikėjų profiliai"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Išsaugoti dabartinį"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Ištrinti"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Išsaugokite dabartinį raktą, URL ir modelį kaip vieną profilį; raktai lieka šiame įrenginyje"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Redaguoti"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Generuoti iš naujo"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopijuoti"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Išsaugoti"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Atšaukti"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Pokalbiai"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Ieškoti pokalbių..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Pervadinti"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Atkurti"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopijuoti"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Ištrinti"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Ištrinti pažymėtus"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Kol kas pokalbių nėra"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Atviras"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Uždarytas"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Integruoti spartieji veiksmai"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Versti"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Konvertuoti kinų rašto variantą"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Paaiškinti"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Apibendrinti"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Patobulinti tekstą"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Vadovas"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Atverti AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Atverti pokalbio skydelį"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Patarimas: pritaikykite sparčiuosius klavišus adresu chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Apibendrinti senesnes žinutes"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Apibendrinamos senesnės žinutės…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Eksportuoti nustatymus"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importuoti"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Nustatymai importuoti (API raktai niekada neeksportuojami)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Nepavyko importuoti nustatymų: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Atsakymas gali būti nepilnas (srautas baigėsi anksčiau laiko). Bandykite dar kartą naudodami „Generuoti iš naujo“."
   }
 }

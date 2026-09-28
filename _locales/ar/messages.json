@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "فتح اللوحة"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "تعذر فتح اللوحة: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "نقل إلى اللوحة"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "ملفات تعريف المزوّد"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "حفظ الحالي"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "حذف"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "احفظ المفتاح وعنوان URL والنموذج الحاليين كملف تعريف واحد؛ تبقى المفاتيح على هذا الجهاز"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "تعديل"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "إعادة الإنشاء"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "نسخ"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "حفظ"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "إلغاء"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "المحادثات"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "بحث في المحادثات..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "إعادة تسمية"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "استعادة"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "نسخ"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "حذف"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "حذف المحدد"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "لا توجد محادثات بعد"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "مفتوحة"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "مغلقة"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "الإجراءات السريعة المدمجة"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "ترجمة"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "تحويل نوع الصينية"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "شرح"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "تلخيص"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "تحسين الصياغة"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "دليل تعليمي"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "فتح AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "فتح لوحة المحادثة"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "نصيحة: خصّص الاختصارات على chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "تلخيص الرسائل الأقدم"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "جارٍ تلخيص الرسائل الأقدم…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "تصدير الإعدادات"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "استيراد"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "تم استيراد الإعدادات (لا يتم تصدير مفاتيح API أبدًا)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "فشل استيراد الإعدادات: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "قد يكون الرد غير مكتمل (انتهى البث مبكرًا). استخدم إعادة الإنشاء للمحاولة مرة أخرى."
   }
 }

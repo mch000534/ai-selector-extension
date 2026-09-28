@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Ouvrir le tiroir"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Impossible d'ouvrir le tiroir : $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Déplacer vers le tiroir"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Profils de fournisseur"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Enregistrer l'actuel"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Supprimer"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Enregistre la clé, l'URL et le modèle actuels comme un profil ; les clés restent sur cet appareil"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Modifier"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Régénérer"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Copier"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Enregistrer"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Annuler"
   },
   "conversationsBtn": {
     "message": "Conversations"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Rechercher des conversations..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Renommer"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Restaurer"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Copier"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Supprimer"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Supprimer la sélection"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Aucune conversation pour le moment"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Ouverte"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Fermée"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Actions rapides intégrées"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Traduire"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Convertir la variante du chinois"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Expliquer"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Résumer"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Améliorer le texte"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Tutoriel"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Ouvrir AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Ouvrir le tiroir de discussion"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Astuce : personnalisez les raccourcis sur chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Résumer les anciens messages"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Résumé des anciens messages en cours…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Exporter les paramètres"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importer"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Paramètres importés (les clés API ne sont jamais exportées)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Échec de l'importation des paramètres : $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "La réponse est peut-être incomplète (le flux s'est terminé prématurément). Utilisez Régénérer pour réessayer."
   }
 }

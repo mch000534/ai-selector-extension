@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ドロワーを開く"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ドロワーを開けませんでした: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ドロワーに移動"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "プロバイダープロファイル"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "現在の設定を保存"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "削除"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "現在のキー、URL、モデルを1つのプロファイルとして保存します。キーはこの端末にのみ保存されます"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "編集"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "再生成"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "コピー"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "保存"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "キャンセル"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "会話"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "会話を検索..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "名前を変更"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "復元"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "コピー"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "削除"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "選択項目を削除"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "まだ会話がありません"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "進行中"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "終了済み"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "組み込みのクイックアクション"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "翻訳する"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "中国語の字体を変換"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "説明する"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "要約する"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "文章を推敲する"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "チュートリアル"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant を開く"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "チャットドロワーを開く"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "ヒント: chrome://extensions/shortcuts でショートカットをカスタマイズできます"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "古いメッセージを要約する"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "古いメッセージを要約しています…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "設定をエクスポート"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "インポート"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "設定をインポートしました（APIキーはエクスポートされません）"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "設定のインポートに失敗しました: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "応答が不完全な可能性があります（ストリームが早期に終了しました）。再生成をお試しください。"
   }
 }

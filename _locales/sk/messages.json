@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Otvoriť panel"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Panel sa nepodarilo otvoriť: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Presunúť do panela"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Profily poskytovateľov"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Uložiť aktuálne"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Odstrániť"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Uložte aktuálny kľúč, URL a model ako jeden profil; kľúče zostávajú v tomto zariadení"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Upraviť"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Znova vygenerovať"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopírovať"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Uložiť"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Zrušiť"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Konverzácie"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Hľadať konverzácie..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Premenovať"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Obnoviť"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopírovať"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Odstrániť"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Odstrániť vybrané"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Zatiaľ žiadne konverzácie"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Otvorená"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Uzavretá"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Vstavané rýchle akcie"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Preložiť"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Konvertovať variant čínštiny"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Vysvetliť"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Zhrnúť"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Vylepšiť text"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Návod"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Otvoriť AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Otvoriť panel chatu"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tip: prispôsobte si klávesové skratky na chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Zhrnúť staršie správy"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Zhŕňanie starších správ…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Exportovať nastavenia"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importovať"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Nastavenia boli importované (API kľúče sa nikdy needportujú)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Import nastavení zlyhal: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Odpoveď môže byť neúplná (prenos predčasne skončil). Skúste to znova pomocou Znova vygenerovať."
   }
 }

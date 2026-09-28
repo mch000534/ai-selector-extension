@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "డ్రాయర్‌ను తెరవండి"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "డ్రాయర్‌ను తెరవడం సాధ్యం కాలేదు: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "డ్రాయర్‌కు తరలించండి"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "ప్రొవైడర్ ప్రొఫైల్‌లు"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "ప్రస్తుతది సేవ్ చేయండి"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "తొలగించండి"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "ప్రస్తుత కీ, URL మరియు మోడల్‌ను ఒక ప్రొఫైల్‌గా సేవ్ చేయండి; కీలు ఈ పరికరంలోనే ఉంటాయి"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "సవరించండి"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "మళ్లీ రూపొందించండి"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "కాపీ చేయండి"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "సేవ్ చేయండి"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "రద్దు చేయండి"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "సంభాషణలు"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "సంభాషణలను వెతకండి..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "పేరు మార్చండి"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "పునరుద్ధరించండి"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "కాపీ చేయండి"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "తొలగించండి"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "ఎంచుకున్నవి తొలగించండి"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "ఇంకా సంభాషణలు లేవు"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "తెరిచి ఉంది"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "మూసివేయబడింది"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "అంతర్నిర్మిత శీఘ్ర చర్యలు"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "అనువదించండి"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "చైనీస్ వేరియంట్‌ను మార్చండి"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "వివరించండి"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "సారాంశం చేయండి"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "రచనను మెరుగుపరచండి"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "ట్యుటోరియల్"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant తెరవండి"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "చాట్ డ్రాయర్‌ను తెరవండి"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "చిట్కా: chrome://extensions/shortcuts వద్ద షార్ట్‌కట్‌లను అనుకూలీకరించండి"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "పాత సందేశాలను సారాంశం చేయండి"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "పాత సందేశాలను సారాంశం చేస్తోంది…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "సెట్టింగ్‌లను ఎగుమతి చేయండి"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "దిగుమతి చేయండి"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "సెట్టింగ్‌లు దిగుమతి చేయబడ్డాయి (API కీలు ఎప్పుడూ ఎగుమతి చేయబడవు)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "సెట్టింగ్‌ల దిగుమతి విఫలమైంది: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "ప్రతిస్పందన అసంపూర్ణంగా ఉండవచ్చు (స్ట్రీమ్ ముందుగానే ముగిసింది). మళ్లీ ప్రయత్నించడానికి మళ్లీ రూపొందించండి ఉపయోగించండి."
   }
 }

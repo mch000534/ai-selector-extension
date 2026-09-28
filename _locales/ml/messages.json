@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ഡ്രോയർ തുറക്കുക"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ഡ്രോയർ തുറക്കാൻ കഴിഞ്ഞില്ല: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ഡ്രോയറിലേക്ക് നീക്കുക"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "ദാതാവിന്റെ പ്രൊഫൈലുകൾ"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "നിലവിലുള്ളത് സംരക്ഷിക്കുക"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "ഇല്ലാതാക്കുക"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "നിലവിലെ കീ, URL, മോഡൽ എന്നിവ ഒരു പ്രൊഫൈലായി സംരക്ഷിക്കുക; കീകൾ ഈ ഉപകരണത്തിൽ മാത്രം നിലനിൽക്കും"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "എഡിറ്റ് ചെയ്യുക"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "വീണ്ടും സൃഷ്ടിക്കുക"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "പകർത്തുക"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "സംരക്ഷിക്കുക"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "റദ്ദാക്കുക"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "സംഭാഷണങ്ങൾ"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "സംഭാഷണങ്ങൾ തിരയുക..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "പേര് മാറ്റുക"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "പുനഃസ്ഥാപിക്കുക"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "പകർത്തുക"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "ഇല്ലാതാക്കുക"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "തിരഞ്ഞെടുത്തവ ഇല്ലാതാക്കുക"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "ഇതുവരെ സംഭാഷണങ്ങളൊന്നുമില്ല"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "തുറന്നത്"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "അടച്ചു"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "ബിൽറ്റ്-ഇൻ ക്വിക്ക് ആക്ഷനുകൾ"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "വിവർത്തനം ചെയ്യുക"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "ചൈനീസ് വേരിയന്റ് പരിവർത്തനം ചെയ്യുക"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "വിശദീകരിക്കുക"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "സംഗ്രഹിക്കുക"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "എഴുത്ത് മെച്ചപ്പെടുത്തുക"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "ട്യൂട്ടോറിയൽ"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant തുറക്കുക"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "ചാറ്റ് ഡ്രോയർ തുറക്കുക"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "നുറുങ്ങ്: chrome://extensions/shortcuts എന്നതിൽ കുറുക്കുവഴികൾ ക്രമീകരിക്കുക"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "പഴയ സന്ദേശങ്ങൾ സംഗ്രഹിക്കുക"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "പഴയ സന്ദേശങ്ങൾ സംഗ്രഹിക്കുന്നു…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "ക്രമീകരണങ്ങൾ എക്സ്പോർട്ട് ചെയ്യുക"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "ഇംപോർട്ട് ചെയ്യുക"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "ക്രമീകരണങ്ങൾ ഇംപോർട്ട് ചെയ്തു (API കീകൾ ഒരിക്കലും എക്സ്പോർട്ട് ചെയ്യില്ല)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "ക്രമീകരണങ്ങൾ ഇംപോർട്ട് ചെയ്യുന്നത് പരാജയപ്പെട്ടു: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "മറുപടി അപൂർണ്ണമായിരിക്കാം (സ്ട്രീം നേരത്തെ അവസാനിച്ചു). വീണ്ടും ശ്രമിക്കാൻ വീണ്ടും സൃഷ്ടിക്കുക ഉപയോഗിക്കുക."
   }
 }

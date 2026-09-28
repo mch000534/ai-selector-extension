@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Открыть панель"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Не удалось открыть панель: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Переместить на панель"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Профили провайдеров"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Сохранить текущий"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Удалить"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Сохраните текущий ключ, URL и модель как один профиль; ключи остаются на этом устройстве"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Изменить"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Сгенерировать заново"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Копировать"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Сохранить"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Отмена"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Беседы"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Поиск бесед..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Переименовать"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Восстановить"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Копировать"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Удалить"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Удалить выбранные"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Бесед пока нет"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Открыта"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Закрыта"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Встроенные быстрые действия"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Перевести"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Преобразовать вариант китайского письма"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Объяснить"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Сделать краткое изложение"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Улучшить текст"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Инструкция"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Открыть AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Открыть панель чата"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Совет: настройте сочетания клавиш на странице chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Кратко изложить более старые сообщения"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Составление краткого изложения старых сообщений…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Экспортировать настройки"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Импортировать"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Настройки импортированы (ключи API никогда не экспортируются)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Не удалось импортировать настройки: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Ответ может быть неполным (передача завершилась преждевременно). Нажмите «Сгенерировать заново», чтобы повторить попытку."
   }
 }

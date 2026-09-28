@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "เปิดแผง"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ไม่สามารถเปิดแผงได้: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ย้ายไปที่แผง"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "โปรไฟล์ผู้ให้บริการ"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "บันทึกค่าปัจจุบัน"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "ลบ"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "บันทึกคีย์ URL และโมเดลปัจจุบันเป็นโปรไฟล์เดียว คีย์จะเก็บไว้ในอุปกรณ์นี้เท่านั้น"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "แก้ไข"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "สร้างใหม่"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "คัดลอก"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "บันทึก"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "ยกเลิก"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "บทสนทนา"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "ค้นหาบทสนทนา..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "เปลี่ยนชื่อ"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "กู้คืน"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "คัดลอก"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "ลบ"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "ลบรายการที่เลือก"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "ยังไม่มีบทสนทนา"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "เปิดอยู่"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "ปิดแล้ว"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "การดำเนินการด่วนในตัว"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "แปล"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "แปลงรูปแบบภาษาจีน"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "อธิบาย"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "สรุป"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "ขัดเกลาข้อความ"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "บทแนะนำ"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "เปิด AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "เปิดแผงแชท"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "เคล็ดลับ: ปรับแต่งทางลัดได้ที่ chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "สรุปข้อความเก่า"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "กำลังสรุปข้อความเก่า…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "ส่งออกการตั้งค่า"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "นำเข้า"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "นำเข้าการตั้งค่าแล้ว (จะไม่มีการส่งออกคีย์ API เด็ดขาด)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "นำเข้าการตั้งค่าไม่สำเร็จ: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "คำตอบอาจไม่สมบูรณ์ (สตรีมสิ้นสุดก่อนกำหนด) ใช้ปุ่มสร้างใหม่เพื่อลองอีกครั้ง"
   }
 }

@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Deschide panoul"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Panoul nu a putut fi deschis: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Mută în panou"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Profiluri de furnizor"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Salvează curentul"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Șterge"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Salvează cheia, URL-ul și modelul curente ca un profil; cheile rămân pe acest dispozitiv"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Editează"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Regenerează"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Copiază"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Salvează"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Anulează"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Conversații"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Caută conversații..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Redenumește"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Restaurează"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Copiază"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Șterge"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Șterge selecția"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Încă nu există conversații"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Deschisă"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Închisă"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Acțiuni rapide integrate"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Traduce"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Convertește varianta de chineză"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Explică"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Rezumă"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Îmbunătățește textul"
   },
   "actionTutorial": {
     "message": "Tutorial"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Deschide AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Deschide panoul de chat"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Sfat: personalizează comenzile rapide la chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Rezumă mesajele mai vechi"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Se rezumă mesajele mai vechi…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Exportă setările"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importă"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Setările au fost importate (cheile API nu sunt niciodată exportate)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Importul setărilor a eșuat: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Răspunsul poate fi incomplet (transmisia s-a încheiat prematur). Folosește Regenerează pentru a încerca din nou."
   }
 }

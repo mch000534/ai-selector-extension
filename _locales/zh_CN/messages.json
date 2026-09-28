@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "打开抽屉"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "无法打开抽屉：$1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "移到抽屉"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "服务商配置"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "保存当前设置"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "删除"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "将当前的密钥、URL 和模型保存为一个配置；密钥仅保存在本设备上"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "编辑"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "重新生成"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "复制"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "保存"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "取消"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "对话记录"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "搜索对话记录..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "重命名"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "恢复"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "复制"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "删除"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "删除所选"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "暂无对话记录"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "进行中"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "已关闭"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "内置快捷操作"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "翻译"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "转换中文简繁"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "解释"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "摘要"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "润色"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "生成教程"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "打开 AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "打开聊天抽屉"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "提示：可在 chrome://extensions/shortcuts 自定义快捷键"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "总结较早的消息"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "正在总结较早的消息…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "导出设置"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "导入"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "设置已导入（API 密钥不会被导出）"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "导入设置失败：$1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "回复可能不完整（流式传输提前结束）。可使用“重新生成”重试。"
   }
 }

@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Fungua droo"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Imeshindwa kufungua droo: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Hamishia kwenye droo"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Wasifu za mtoa huduma"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Hifadhi ya sasa"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Futa"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Hifadhi ufunguo, URL na modeli ya sasa kama wasifu mmoja; funguo zinabaki kwenye kifaa hiki"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Hariri"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Tengeneza upya"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Nakili"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Hifadhi"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Ghairi"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Mazungumzo"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Tafuta mazungumzo..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Badilisha jina"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Rejesha"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Nakili"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Futa"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Futa zilizochaguliwa"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Bado hakuna mazungumzo"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Wazi"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Imefungwa"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Vitendo vya haraka vilivyojengwa ndani"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Tafsiri"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Badilisha lahaja ya Kichina"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Eleza"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Fupisha"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Boresha maandishi"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Mafunzo"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Fungua AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Fungua droo ya gumzo"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Kidokezo: badilisha njia za mkato kwenye chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Fupisha ujumbe wa zamani"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Inafupisha ujumbe wa zamani…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Hamisha mipangilio"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Ingiza"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Mipangilio imeingizwa (funguo za API haziwahi kuhamishwa nje)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Kuingiza mipangilio kumeshindwa: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Jibu huenda halijakamilika (mtiririko uliisha mapema). Tumia Tengeneza Upya kujaribu tena."
   }
 }

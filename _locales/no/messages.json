@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Åpne panel"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Kunne ikke åpne panelet: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Flytt til panel"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Leverandørprofiler"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Lagre gjeldende"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Slett"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Lagre gjeldende nøkkel, URL og modell som én profil; nøkler blir værende på denne enheten"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Rediger"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Generer på nytt"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopier"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Lagre"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Avbryt"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Samtaler"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Søk i samtaler..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Gi nytt navn"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Gjenopprett"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopier"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Slett"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Slett valgte"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Ingen samtaler ennå"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Åpen"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Lukket"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Innebygde hurtighandlinger"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Oversett"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Konverter kinesisk variant"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Forklar"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Oppsummer"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Forbedre teksten"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Veiledning"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Åpne AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Åpne chattepanel"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tips: tilpass snarveier på chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Oppsummer eldre meldinger"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Oppsummerer eldre meldinger…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Eksporter innstillinger"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importer"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Innstillinger importert (API-nøkler eksporteres aldri)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Import av innstillinger mislyktes: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Svaret kan være ufullstendig (strømmen ble avsluttet for tidlig). Bruk Generer på nytt for å prøve igjen."
   }
 }

@@ -68,8 +68,8 @@
       .${PREFIX}icon {
         all: initial;
         position: fixed !important;
-        width: 32px !important;
-        height: 32px !important;
+        width: 19px !important;
+        height: 19px !important;
         background: transparent !important;
         border-radius: 50% !important;
         cursor: pointer !important;
@@ -84,7 +84,7 @@
         overflow: hidden !important;
       }
       .${PREFIX}icon:hover { transform: scale(1.1) !important; }
-      .${PREFIX}icon img { width: 32px; height: 32px; border-radius: 50%; pointer-events: none; display: block; overflow: clip !important; }
+      .${PREFIX}icon img { width: 19px; height: 19px; border-radius: 50%; pointer-events: none; display: block; overflow: clip !important; }
       .${PREFIX}icon img,
       .${PREFIX}dialog img,
       .${PREFIX}dialog video,
@@ -1498,7 +1498,7 @@
           const src = imgEl.src || imgEl.getAttribute('src');
           const imageUrl = dataUrl || (src && !src.startsWith('blob:') ? src : null);
           currentContext = { text: '', images: imageUrl ? [imageUrl] : [] };
-          openDialog();
+          openDialog({ skipSelectionRefresh: true });
         })();
       } else {
         openDialog();

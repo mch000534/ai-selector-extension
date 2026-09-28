@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Atvērt paneli"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Neizdevās atvērt paneli: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Pārvietot uz paneli"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Pakalpojumu sniedzēju profili"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Saglabāt pašreizējo"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Dzēst"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Saglabājiet pašreizējo atslēgu, URL un modeli kā vienu profilu; atslēgas paliek šajā ierīcē"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Rediģēt"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Ģenerēt no jauna"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopēt"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Saglabāt"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Atcelt"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Sarunas"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Meklēt sarunas..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Pārdēvēt"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Atjaunot"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopēt"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Dzēst"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Dzēst atlasītās"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Pagaidām nav sarunu"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Atvērta"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Slēgta"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Iebūvētās ātrās darbības"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Tulkot"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Konvertēt ķīniešu rakstības variantu"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Paskaidrot"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Apkopot"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Uzlabot tekstu"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Pamācība"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Atvērt AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Atvērt tērzēšanas paneli"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Padoms: pielāgojiet saīsnes vietnē chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Apkopot vecākas ziņas"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Notiek vecāku ziņu apkopošana…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Eksportēt iestatījumus"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importēt"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Iestatījumi importēti (API atslēgas nekad netiek eksportētas)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Neizdevās importēt iestatījumus: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Atbilde var būt nepilnīga (straumēšana beidzās priekšlaicīgi). Izmantojiet Ģenerēt no jauna, lai mēģinātu vēlreiz."
   }
 }

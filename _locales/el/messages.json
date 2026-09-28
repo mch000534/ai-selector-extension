@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Άνοιγμα συρταριού"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Δεν ήταν δυνατό το άνοιγμα του συρταριού: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Μετακίνηση στο συρτάρι"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Προφίλ παρόχων"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Αποθήκευση τρέχοντος"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Διαγραφή"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Αποθηκεύστε το τρέχον κλειδί, URL και μοντέλο ως ένα προφίλ· τα κλειδιά παραμένουν σε αυτήν τη συσκευή"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Επεξεργασία"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Επαναδημιουργία"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Αντιγραφή"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Αποθήκευση"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Ακύρωση"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Συνομιλίες"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Αναζήτηση συνομιλιών..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Μετονομασία"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Επαναφορά"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Αντιγραφή"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Διαγραφή"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Διαγραφή επιλεγμένων"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Δεν υπάρχουν ακόμη συνομιλίες"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Ανοιχτή"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Κλειστή"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Ενσωματωμένες γρήγορες ενέργειες"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Μετάφραση"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Μετατροπή παραλλαγής κινεζικών"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Επεξήγηση"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Σύνοψη"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Βελτίωση κειμένου"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Οδηγός"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Άνοιγμα AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Άνοιγμα συρταριού συνομιλίας"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Συμβουλή: προσαρμόστε τις συντομεύσεις στο chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Σύνοψη παλαιότερων μηνυμάτων"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Γίνεται σύνοψη παλαιότερων μηνυμάτων…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Εξαγωγή ρυθμίσεων"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Εισαγωγή"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Οι ρυθμίσεις εισήχθησαν (τα κλειδιά API δεν εξάγονται ποτέ)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Η εισαγωγή ρυθμίσεων απέτυχε: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Η απάντηση μπορεί να είναι ελλιπής (η ροή τερματίστηκε νωρίς). Χρησιμοποιήστε Επαναδημιουργία για να δοκιμάσετε ξανά."
   }
 }

@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Buka panel"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Panel tidak dapat dibuka: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Pindahkan ke panel"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Profil penyedia"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Simpan saat ini"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Hapus"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Simpan kunci, URL, dan model saat ini sebagai satu profil; kunci tetap berada di perangkat ini"
   },
   "messageEdit": {
     "message": "Edit"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Buat ulang"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Salin"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Simpan"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Batal"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Percakapan"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Cari percakapan..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Ganti nama"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Pulihkan"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Salin"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Hapus"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Hapus yang dipilih"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Belum ada percakapan"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Terbuka"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Ditutup"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Tindakan cepat bawaan"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Terjemahkan"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Konversi varian bahasa Tionghoa"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Jelaskan"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Ringkas"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Sempurnakan tulisan"
   },
   "actionTutorial": {
     "message": "Tutorial"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "Buka AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Buka panel obrolan"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tips: sesuaikan pintasan di chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Ringkas pesan lama"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Meringkas pesan lama…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Ekspor pengaturan"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Impor"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Pengaturan diimpor (kunci API tidak pernah diekspor)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Impor pengaturan gagal: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Jawaban mungkin belum lengkap (streaming berakhir lebih awal). Gunakan Buat Ulang untuk mencoba lagi."
   }
 }

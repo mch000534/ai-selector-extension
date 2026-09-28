@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "ડ્રોઅર ખોલો"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "ડ્રોઅર ખોલી શકાયું નથી: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "ડ્રોઅરમાં ખસેડો"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "પ્રોવાઇડર પ્રોફાઇલો"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "વર્તમાન સાચવો"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "કાઢી નાખો"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "વર્તમાન કી, URL અને મોડેલને એક પ્રોફાઇલ તરીકે સાચવો; કી આ ડિવાઇસ પર જ રહે છે"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "સંપાદિત કરો"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "ફરીથી બનાવો"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "કૉપિ કરો"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "સાચવો"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "રદ કરો"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "વાર્તાલાપો"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "વાર્તાલાપો શોધો..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "નામ બદલો"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "પુનઃસ્થાપિત કરો"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "કૉપિ કરો"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "કાઢી નાખો"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "પસંદ કરેલા કાઢી નાખો"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "હજી સુધી કોઈ વાર્તાલાપ નથી"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "ખુલ્લું"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "બંધ"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "બિલ્ટ-ઇન ઝડપી ક્રિયાઓ"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "અનુવાદ કરો"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "ચાઇનીઝ વેરિઅન્ટ કન્વર્ટ કરો"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "સમજાવો"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "સારાંશ"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "લખાણ સુધારો"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "ટ્યુટોરિયલ"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant ખોલો"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "ચેટ ડ્રોઅર ખોલો"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "ટિપ: chrome://extensions/shortcuts પર શોર્ટકટ કસ્ટમાઇઝ કરો"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "જૂના સંદેશાઓનો સારાંશ આપો"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "જૂના સંદેશાઓનો સારાંશ આપી રહ્યાં છીએ…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "સેટિંગ્સ નિકાસ કરો"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "આયાત કરો"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "સેટિંગ્સ આયાત થઈ (API કી ક્યારેય નિકાસ થતી નથી)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "સેટિંગ્સની આયાત નિષ્ફળ થઈ: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "જવાબ અધૂરો હોઈ શકે છે (સ્ટ્રીમ વહેલી સમાપ્ત થઈ). ફરી પ્રયાસ કરવા ફરીથી બનાવોનો ઉપયોગ કરો."
   }
 }

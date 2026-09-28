@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBaseUrlHint();
     await loadProfiles();
     await loadBuiltInActions();
-  });
+  })();
 
   providerSelect.addEventListener('change', () => {
     const key = providerSelect.value;

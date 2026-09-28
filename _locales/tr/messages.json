@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Paneli aç"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Panel açılamadı: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Panele taşı"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Sağlayıcı profilleri"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Geçerli olanı kaydet"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Sil"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Geçerli anahtarı, URL ve modeli tek bir profil olarak kaydedin; anahtarlar bu cihazda kalır"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Düzenle"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Yeniden oluştur"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Kopyala"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Kaydet"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "İptal"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Konuşmalar"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Konuşmalarda ara..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Yeniden adlandır"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Geri yükle"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Kopyala"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Sil"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Seçilenleri sil"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Henüz konuşma yok"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Açık"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Kapalı"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Yerleşik hızlı eylemler"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Çevir"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Çince yazım biçimini dönüştür"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Açıkla"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Özetle"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Metni iyileştir"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Eğitim"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant'ı aç"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Sohbet panelini aç"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "İpucu: kısayolları chrome://extensions/shortcuts adresinden özelleştirin"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Eski mesajları özetle"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Eski mesajlar özetleniyor…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Ayarları dışa aktar"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "İçe aktar"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "Ayarlar içe aktarıldı (API anahtarları asla dışa aktarılmaz)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "Ayarlar içe aktarılamadı: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "Yanıt eksik olabilir (akış erken sona erdi). Tekrar denemek için Yeniden Oluştur'u kullanın."
   }
 }

@@ -241,10 +241,10 @@
     "message": "移至浮動視窗"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "開啟抽屜"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "無法開啟抽屜：$1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "移到抽屜"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "服務供應商設定檔"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "儲存目前設定"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "刪除"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "將目前的金鑰、URL 與模型儲存為一組設定檔；金鑰僅保存在這台裝置上"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "編輯"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "重新產生"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "複製"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "儲存"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "取消"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "對話記錄"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "搜尋對話記錄..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "重新命名"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "還原"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "複製"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "刪除"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "刪除所選"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "尚無對話記錄"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "進行中"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "已關閉"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "內建快速動作"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "翻譯"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "轉換中文繁簡"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "解釋"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "摘要"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "潤稿"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "產生教學"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "開啟 AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "開啟聊天抽屜"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "提示：可在 chrome://extensions/shortcuts 自訂快捷鍵"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "摘要較舊的訊息"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "正在摘要較舊的訊息…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "匯出設定"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "匯入"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "設定已匯入（API 金鑰不會被匯出）"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "匯入設定失敗：$1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "回覆可能不完整（串流提前結束）。可使用「重新產生」重試。"
   }
 }

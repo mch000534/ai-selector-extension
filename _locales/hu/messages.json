@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "Panel megnyitása"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "Nem sikerült megnyitni a panelt: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "Áthelyezés a panelre"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "Szolgáltatói profilok"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "Jelenlegi mentése"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "Törlés"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "Mentse a jelenlegi kulcsot, URL-t és modellt egy profilként; a kulcsok ezen az eszközön maradnak"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "Szerkesztés"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "Újragenerálás"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "Másolás"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "Mentés"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "Mégse"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "Beszélgetések"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "Beszélgetések keresése..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "Átnevezés"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "Visszaállítás"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "Másolás"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "Törlés"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "Kijelöltek törlése"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "Még nincs beszélgetés"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "Nyitott"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "Lezárva"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "Beépített gyorsműveletek"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "Fordítás"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "Kínai írásváltozat átalakítása"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "Magyarázat"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "Összefoglalás"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "Szöveg csiszolása"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "Útmutató"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "AI Selection Assistant megnyitása"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "Csevegőpanel megnyitása"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "Tipp: testreszabhatja a gyorsbillentyűket a chrome://extensions/shortcuts oldalon"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "Régebbi üzenetek összefoglalása"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "Régebbi üzenetek összefoglalása…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "Beállítások exportálása"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "Importálás"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "A beállítások importálva (az API-kulcsokat soha nem exportáljuk)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "A beállítások importálása sikertelen: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "A válasz hiányos lehet (a streamelés idő előtt véget ért). Próbálja újra az Újragenerálás gombbal."
   }
 }

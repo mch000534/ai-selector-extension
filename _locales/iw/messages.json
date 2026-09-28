@@ -241,10 +241,10 @@
     "message": "Move to floating window"
   },
   "openDrawer": {
-    "message": "Open drawer"
+    "message": "פתיחת המגירה"
   },
   "openDrawerFailed": {
-    "message": "Could not open drawer: $1",
+    "message": "לא ניתן היה לפתוח את המגירה: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -252,100 +252,100 @@
     }
   },
   "moveToDrawer": {
-    "message": "Move to drawer"
+    "message": "העברה למגירה"
   },
   "profilesLabel": {
-    "message": "Provider profiles"
+    "message": "פרופילי ספקים"
   },
   "profileSaveBtn": {
-    "message": "Save current"
+    "message": "שמירת הנוכחי"
   },
   "profileDeleteBtn": {
-    "message": "Delete"
+    "message": "מחיקה"
   },
   "profilesHint": {
-    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+    "message": "שמירת המפתח, כתובת ה-URL והמודל הנוכחיים כפרופיל אחד; המפתחות נשארים במכשיר הזה"
   },
   "messageEdit": {
-    "message": "Edit"
+    "message": "עריכה"
   },
   "messageRegenerate": {
-    "message": "Regenerate"
+    "message": "יצירה מחדש"
   },
   "messageCopy": {
-    "message": "Copy"
+    "message": "העתקה"
   },
   "messageSave": {
-    "message": "Save"
+    "message": "שמירה"
   },
   "messageCancel": {
-    "message": "Cancel"
+    "message": "ביטול"
   },
   "conversationsBtn": {
-    "message": "Conversations"
+    "message": "שיחות"
   },
   "conversationsSearchPlaceholder": {
-    "message": "Search conversations..."
+    "message": "חיפוש שיחות..."
   },
   "conversationsRename": {
-    "message": "Rename"
+    "message": "שינוי שם"
   },
   "conversationsRestore": {
-    "message": "Restore"
+    "message": "שחזור"
   },
   "conversationsExportMd": {
     "message": "Markdown"
   },
   "conversationsCopyMd": {
-    "message": "Copy"
+    "message": "העתקה"
   },
   "conversationsExportJson": {
     "message": "JSON"
   },
   "conversationsDelete": {
-    "message": "Delete"
+    "message": "מחיקה"
   },
   "conversationsDeleteSelected": {
-    "message": "Delete selected"
+    "message": "מחיקת הנבחרים"
   },
   "conversationsEmpty": {
-    "message": "No conversations yet"
+    "message": "אין עדיין שיחות"
   },
   "conversationsOpenBadge": {
-    "message": "Open"
+    "message": "פתוחה"
   },
   "conversationsClosedBadge": {
-    "message": "Closed"
+    "message": "סגורה"
   },
   "builtInActionsLabel": {
-    "message": "Built-in quick actions"
+    "message": "פעולות מהירות מובנות"
   },
   "actionTranslate": {
-    "message": "Translate"
+    "message": "תרגום"
   },
   "actionConvertChinese": {
-    "message": "Convert Chinese variant"
+    "message": "המרת גרסת סינית"
   },
   "actionExplain": {
-    "message": "Explain"
+    "message": "הסבר"
   },
   "actionSummarize": {
-    "message": "Summarize"
+    "message": "סיכום"
   },
   "actionPolish": {
-    "message": "Polish"
+    "message": "שיפור הניסוח"
   },
   "actionTutorial": {
-    "message": "Tutorial"
+    "message": "מדריך"
   },
   "commandOpenPopup": {
-    "message": "Open AI Selection Assistant"
+    "message": "פתיחת AI Selection Assistant"
   },
   "commandOpenDrawer": {
-    "message": "Open chat drawer"
+    "message": "פתיחת מגירת הצ׳אט"
   },
   "shortcutsHint": {
-    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+    "message": "טיפ: התאימו אישית את קיצורי הדרך בכתובת chrome://extensions/shortcuts"
   },
   "tokenUsage": {
     "message": "≈$1 / $2 tokens ($3)",
@@ -362,22 +362,22 @@
     }
   },
   "summarizeOld": {
-    "message": "Summarize older messages"
+    "message": "סיכום הודעות ישנות יותר"
   },
   "summarizingStatus": {
-    "message": "Summarizing older messages…"
+    "message": "מתבצע סיכום של הודעות ישנות יותר…"
   },
   "settingsExportBtn": {
-    "message": "Export settings"
+    "message": "ייצוא הגדרות"
   },
   "settingsImportBtn": {
-    "message": "Import"
+    "message": "ייבוא"
   },
   "settingsImported": {
-    "message": "Settings imported (API keys are never exported)"
+    "message": "ההגדרות יובאו (מפתחות API לעולם אינם מיוצאים)"
   },
   "settingsImportFailed": {
-    "message": "Settings import failed: $1",
+    "message": "ייבוא ההגדרות נכשל: $1",
     "placeholders": {
       "error": {
         "content": "$1"
@@ -385,6 +385,6 @@
     }
   },
   "streamTruncated": {
-    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
+    "message": "ייתכן שהתשובה אינה שלמה (ההזרמה הסתיימה מוקדם מדי). השתמשו ב״יצירה מחדש״ כדי לנסות שוב."
   }
 }
