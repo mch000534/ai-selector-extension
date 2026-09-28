@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Palautettu edellisestä istunnosta"
   },
-  "recentClosedBtn": {
-    "message": "Äskettäin suljetut"
-  },
-  "recentClosedEmpty": {
-    "message": "Ei suljettuja keskusteluja"
-  },
-  "recentClosedTitle": {
-    "message": "Äskettäin suljetut keskustelut"
-  },
-  "recentClosedRestore": {
-    "message": "Palauta"
-  },
-  "recentClosedAllClear": {
-    "message": "Tyhjennä kaikki"
-  },
   "codeCopyBtn": {
     "message": "Kopioi"
   },
@@ -252,79 +237,154 @@
     "message": "Avaa valintaikkuna",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Lisää ehdotuksia...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Avaa paneeli"
+  },
+  "openDrawerFailed": {
+    "message": "Paneelin avaaminen epäonnistui: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Siirrä paneeliin"
+  },
+  "profilesLabel": {
+    "message": "Palveluntarjoajaprofiilit"
+  },
+  "profileSaveBtn": {
+    "message": "Tallenna nykyinen"
+  },
+  "profileDeleteBtn": {
+    "message": "Poista"
+  },
+  "profilesHint": {
+    "message": "Tallenna nykyinen avain, URL ja malli yhtenä profiilina; avaimet pysyvät tällä laitteella"
+  },
+  "messageEdit": {
+    "message": "Muokkaa"
+  },
+  "messageRegenerate": {
+    "message": "Luo uudelleen"
+  },
+  "messageCopy": {
+    "message": "Kopioi"
+  },
+  "messageSave": {
+    "message": "Tallenna"
+  },
+  "messageCancel": {
+    "message": "Peruuta"
+  },
+  "conversationsBtn": {
+    "message": "Keskustelut"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Hae keskusteluja..."
+  },
+  "conversationsRename": {
+    "message": "Nimeä uudelleen"
+  },
+  "conversationsRestore": {
+    "message": "Palauta"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopioi"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Poista"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Poista valitut"
+  },
+  "conversationsEmpty": {
+    "message": "Ei vielä keskusteluja"
+  },
+  "conversationsOpenBadge": {
+    "message": "Avoin"
+  },
+  "conversationsClosedBadge": {
+    "message": "Suljettu"
+  },
+  "builtInActionsLabel": {
+    "message": "Sisäänrakennetut pikatoiminnot"
+  },
+  "actionTranslate": {
+    "message": "Käännä"
+  },
+  "actionConvertChinese": {
+    "message": "Muunna kiinan kirjoitusmuoto"
+  },
+  "actionExplain": {
+    "message": "Selitä"
+  },
+  "actionSummarize": {
+    "message": "Tiivistä"
+  },
+  "actionPolish": {
+    "message": "Paranna tekstiä"
+  },
+  "actionTutorial": {
+    "message": "Ohje"
+  },
+  "commandOpenPopup": {
+    "message": "Avaa AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Avaa keskustelupaneeli"
+  },
+  "shortcutsHint": {
+    "message": "Vinkki: mukauta pikanäppäimiä osoitteessa chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Tiivistä vanhemmat viestit"
+  },
+  "summarizingStatus": {
+    "message": "Tiivistetään vanhempia viestejä…"
+  },
+  "settingsExportBtn": {
+    "message": "Vie asetukset"
+  },
+  "settingsImportBtn": {
+    "message": "Tuo"
+  },
+  "settingsImported": {
+    "message": "Asetukset tuotu (API-avaimia ei koskaan viedä)"
+  },
+  "settingsImportFailed": {
+    "message": "Asetusten tuonti epäonnistui: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Vastaus saattaa olla puutteellinen (suoratoisto päättyi ennenaikaisesti). Yritä uudelleen käyttämällä Luo uudelleen -toimintoa."
   }
 }

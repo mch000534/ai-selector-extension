@@ -1,0 +1,21 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run unit tests
+        run: node --test tests/*.test.js
+      - name: Syntax-check extension scripts
+        run: |
+          for f in background.js content.js popup.js lib/*.js; do
+            node --check "$f" || exit 1
+          done

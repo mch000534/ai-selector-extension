@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "முந்தைய அமர்விலிருந்து மீட்டெடுக்கப்பட்டது"
   },
-  "recentClosedBtn": {
-    "message": "சமீபத்தில் மூடப்பட்டவை"
-  },
-  "recentClosedEmpty": {
-    "message": "மூடப்பட்ட உரையாடல்கள் இல்லை"
-  },
-  "recentClosedTitle": {
-    "message": "சமீபத்தில் மூடப்பட்ட உரையாடல்கள்"
-  },
-  "recentClosedRestore": {
-    "message": "மீட்டமை"
-  },
-  "recentClosedAllClear": {
-    "message": "அனைத்தையும் அழி"
-  },
   "codeCopyBtn": {
     "message": "நகலெடு"
   },
@@ -252,79 +237,154 @@
     "message": "உரையாடலைத் திற",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "மேலும் தூண்டுகோல்கள்...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "டிராயரைத் திற"
+  },
+  "openDrawerFailed": {
+    "message": "டிராயரைத் திறக்க முடியவில்லை: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "டிராயருக்கு நகர்த்து"
+  },
+  "profilesLabel": {
+    "message": "வழங்குநர் சுயவிவரங்கள்"
+  },
+  "profileSaveBtn": {
+    "message": "தற்போதையதைச் சேமி"
+  },
+  "profileDeleteBtn": {
+    "message": "நீக்கு"
+  },
+  "profilesHint": {
+    "message": "தற்போதைய கீ, URL மற்றும் மாடலை ஒரு சுயவிவரமாகச் சேமிக்கவும்; கீகள் இந்தச் சாதனத்திலேயே இருக்கும்"
+  },
+  "messageEdit": {
+    "message": "திருத்து"
+  },
+  "messageRegenerate": {
+    "message": "மீண்டும் உருவாக்கு"
+  },
+  "messageCopy": {
+    "message": "நகலெடு"
+  },
+  "messageSave": {
+    "message": "சேமி"
+  },
+  "messageCancel": {
+    "message": "ரத்துசெய்"
+  },
+  "conversationsBtn": {
+    "message": "உரையாடல்கள்"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "உரையாடல்களைத் தேடு..."
+  },
+  "conversationsRename": {
+    "message": "பெயர் மாற்று"
+  },
+  "conversationsRestore": {
+    "message": "மீட்டமை"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "நகலெடு"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "நீக்கு"
+  },
+  "conversationsDeleteSelected": {
+    "message": "தேர்ந்தெடுத்தவற்றை நீக்கு"
+  },
+  "conversationsEmpty": {
+    "message": "இதுவரை உரையாடல்கள் இல்லை"
+  },
+  "conversationsOpenBadge": {
+    "message": "திறந்துள்ளது"
+  },
+  "conversationsClosedBadge": {
+    "message": "மூடப்பட்டது"
+  },
+  "builtInActionsLabel": {
+    "message": "உள்ளமைந்த விரைவு செயல்கள்"
+  },
+  "actionTranslate": {
+    "message": "மொழிபெயர்"
+  },
+  "actionConvertChinese": {
+    "message": "சீன வேறுபாட்டை மாற்று"
+  },
+  "actionExplain": {
+    "message": "விளக்கு"
+  },
+  "actionSummarize": {
+    "message": "சுருக்கு"
+  },
+  "actionPolish": {
+    "message": "எழுத்தை மேம்படுத்து"
+  },
+  "actionTutorial": {
+    "message": "பயிற்சி"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant ஐத் திற"
+  },
+  "commandOpenDrawer": {
+    "message": "அரட்டை டிராயரைத் திற"
+  },
+  "shortcutsHint": {
+    "message": "குறிப்பு: chrome://extensions/shortcuts இல் குறுக்குவழிகளைத் தனிப்பயனாக்கவும்"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "பழைய செய்திகளைச் சுருக்கு"
+  },
+  "summarizingStatus": {
+    "message": "பழைய செய்திகளைச் சுருக்குகிறது…"
+  },
+  "settingsExportBtn": {
+    "message": "அமைப்புகளை ஏற்றுமதி செய்"
+  },
+  "settingsImportBtn": {
+    "message": "இறக்குமதி செய்"
+  },
+  "settingsImported": {
+    "message": "அமைப்புகள் இறக்குமதி செய்யப்பட்டன (API கீகள் ஒருபோதும் ஏற்றுமதி செய்யப்படாது)"
+  },
+  "settingsImportFailed": {
+    "message": "அமைப்புகளை இறக்குமதி செய்வது தோல்வியடைந்தது: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "பதில் முழுமையடையாமல் இருக்கலாம் (ஸ்ட்ரீம் முன்னதாக முடிந்தது). மீண்டும் முயற்சிக்க மீண்டும் உருவாக்கு பயன்படுத்தவும்."
   }
 }

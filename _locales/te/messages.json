@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "మునుపటి సెషన్ నుండి పునరుద్ధరించబడింది"
   },
-  "recentClosedBtn": {
-    "message": "ఇటీవల మూసివేయబడినవి"
-  },
-  "recentClosedEmpty": {
-    "message": "మూసివేసిన సంభాషణలు లేవు"
-  },
-  "recentClosedTitle": {
-    "message": "ఇటీవల మూసివేసిన సంభాషణలు"
-  },
-  "recentClosedRestore": {
-    "message": "పునరుద్ధరించు"
-  },
-  "recentClosedAllClear": {
-    "message": "అన్నీ తొలగించు"
-  },
   "codeCopyBtn": {
     "message": "కాపీ చేయి"
   },
@@ -252,79 +237,154 @@
     "message": "డైలాగ్ తెరవండి",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "మరిన్ని ప్రాంప్ట్‌లు...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "డ్రాయర్‌ను తెరవండి"
+  },
+  "openDrawerFailed": {
+    "message": "డ్రాయర్‌ను తెరవడం సాధ్యం కాలేదు: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "డ్రాయర్‌కు తరలించండి"
+  },
+  "profilesLabel": {
+    "message": "ప్రొవైడర్ ప్రొఫైల్‌లు"
+  },
+  "profileSaveBtn": {
+    "message": "ప్రస్తుతది సేవ్ చేయండి"
+  },
+  "profileDeleteBtn": {
+    "message": "తొలగించండి"
+  },
+  "profilesHint": {
+    "message": "ప్రస్తుత కీ, URL మరియు మోడల్‌ను ఒక ప్రొఫైల్‌గా సేవ్ చేయండి; కీలు ఈ పరికరంలోనే ఉంటాయి"
+  },
+  "messageEdit": {
+    "message": "సవరించండి"
+  },
+  "messageRegenerate": {
+    "message": "మళ్లీ రూపొందించండి"
+  },
+  "messageCopy": {
+    "message": "కాపీ చేయండి"
+  },
+  "messageSave": {
+    "message": "సేవ్ చేయండి"
+  },
+  "messageCancel": {
+    "message": "రద్దు చేయండి"
+  },
+  "conversationsBtn": {
+    "message": "సంభాషణలు"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "సంభాషణలను వెతకండి..."
+  },
+  "conversationsRename": {
+    "message": "పేరు మార్చండి"
+  },
+  "conversationsRestore": {
+    "message": "పునరుద్ధరించండి"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "కాపీ చేయండి"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "తొలగించండి"
+  },
+  "conversationsDeleteSelected": {
+    "message": "ఎంచుకున్నవి తొలగించండి"
+  },
+  "conversationsEmpty": {
+    "message": "ఇంకా సంభాషణలు లేవు"
+  },
+  "conversationsOpenBadge": {
+    "message": "తెరిచి ఉంది"
+  },
+  "conversationsClosedBadge": {
+    "message": "మూసివేయబడింది"
+  },
+  "builtInActionsLabel": {
+    "message": "అంతర్నిర్మిత శీఘ్ర చర్యలు"
+  },
+  "actionTranslate": {
+    "message": "అనువదించండి"
+  },
+  "actionConvertChinese": {
+    "message": "చైనీస్ వేరియంట్‌ను మార్చండి"
+  },
+  "actionExplain": {
+    "message": "వివరించండి"
+  },
+  "actionSummarize": {
+    "message": "సారాంశం చేయండి"
+  },
+  "actionPolish": {
+    "message": "రచనను మెరుగుపరచండి"
+  },
+  "actionTutorial": {
+    "message": "ట్యుటోరియల్"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant తెరవండి"
+  },
+  "commandOpenDrawer": {
+    "message": "చాట్ డ్రాయర్‌ను తెరవండి"
+  },
+  "shortcutsHint": {
+    "message": "చిట్కా: chrome://extensions/shortcuts వద్ద షార్ట్‌కట్‌లను అనుకూలీకరించండి"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "పాత సందేశాలను సారాంశం చేయండి"
+  },
+  "summarizingStatus": {
+    "message": "పాత సందేశాలను సారాంశం చేస్తోంది…"
+  },
+  "settingsExportBtn": {
+    "message": "సెట్టింగ్‌లను ఎగుమతి చేయండి"
+  },
+  "settingsImportBtn": {
+    "message": "దిగుమతి చేయండి"
+  },
+  "settingsImported": {
+    "message": "సెట్టింగ్‌లు దిగుమతి చేయబడ్డాయి (API కీలు ఎప్పుడూ ఎగుమతి చేయబడవు)"
+  },
+  "settingsImportFailed": {
+    "message": "సెట్టింగ్‌ల దిగుమతి విఫలమైంది: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "ప్రతిస్పందన అసంపూర్ణంగా ఉండవచ్చు (స్ట్రీమ్ ముందుగానే ముగిసింది). మళ్లీ ప్రయత్నించడానికి మళ్లీ రూపొందించండి ఉపయోగించండి."
   }
 }

@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Restaurat de la sessió anterior"
   },
-  "recentClosedBtn": {
-    "message": "Tancats recentment"
-  },
-  "recentClosedEmpty": {
-    "message": "Cap conversa tancada"
-  },
-  "recentClosedTitle": {
-    "message": "Converses tancades recentment"
-  },
-  "recentClosedRestore": {
-    "message": "Restaura"
-  },
-  "recentClosedAllClear": {
-    "message": "Esborra-ho tot"
-  },
   "codeCopyBtn": {
     "message": "Copia"
   },
@@ -252,79 +237,154 @@
     "message": "Obre el diàleg",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Més suggeriments...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Obrir el calaix"
+  },
+  "openDrawerFailed": {
+    "message": "No s'ha pogut obrir el calaix: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Moure al calaix"
+  },
+  "profilesLabel": {
+    "message": "Perfils de proveïdor"
+  },
+  "profileSaveBtn": {
+    "message": "Desar actual"
+  },
+  "profileDeleteBtn": {
+    "message": "Suprimir"
+  },
+  "profilesHint": {
+    "message": "Desa la clau, l'URL i el model actuals com un perfil; les claus romanen en aquest dispositiu"
+  },
+  "messageEdit": {
+    "message": "Editar"
+  },
+  "messageRegenerate": {
+    "message": "Tornar a generar"
+  },
+  "messageCopy": {
+    "message": "Copiar"
+  },
+  "messageSave": {
+    "message": "Desar"
+  },
+  "messageCancel": {
+    "message": "Cancel·lar"
+  },
+  "conversationsBtn": {
+    "message": "Converses"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Cercar converses..."
+  },
+  "conversationsRename": {
+    "message": "Canviar el nom"
+  },
+  "conversationsRestore": {
+    "message": "Restaurar"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copiar"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Suprimir"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Suprimir seleccionades"
+  },
+  "conversationsEmpty": {
+    "message": "Encara no hi ha converses"
+  },
+  "conversationsOpenBadge": {
+    "message": "Oberta"
+  },
+  "conversationsClosedBadge": {
+    "message": "Tancada"
+  },
+  "builtInActionsLabel": {
+    "message": "Accions ràpides integrades"
+  },
+  "actionTranslate": {
+    "message": "Traduir"
+  },
+  "actionConvertChinese": {
+    "message": "Convertir variant xinesa"
+  },
+  "actionExplain": {
+    "message": "Explicar"
+  },
+  "actionSummarize": {
+    "message": "Resumir"
+  },
+  "actionPolish": {
+    "message": "Millorar redacció"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Obrir AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Obrir el calaix de xat"
+  },
+  "shortcutsHint": {
+    "message": "Consell: personalitza les dreceres a chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Resumir missatges antics"
+  },
+  "summarizingStatus": {
+    "message": "Resumint missatges antics…"
+  },
+  "settingsExportBtn": {
+    "message": "Exportar configuració"
+  },
+  "settingsImportBtn": {
+    "message": "Importar"
+  },
+  "settingsImported": {
+    "message": "Configuració importada (les claus d'API mai s'exporten)"
+  },
+  "settingsImportFailed": {
+    "message": "Ha fallat la importació de la configuració: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "La resposta pot estar incompleta (la transmissió ha acabat abans d'hora). Utilitza Tornar a generar per reintentar-ho."
   }
 }

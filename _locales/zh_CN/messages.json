@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "已从之前的会话恢复"
   },
-  "recentClosedBtn": {
-    "message": "最近关闭的"
-  },
-  "recentClosedEmpty": {
-    "message": "没有已关闭的对话"
-  },
-  "recentClosedTitle": {
-    "message": "最近关闭的对话"
-  },
-  "recentClosedRestore": {
-    "message": "恢复"
-  },
-  "recentClosedAllClear": {
-    "message": "清除全部"
-  },
   "codeCopyBtn": {
     "message": "复制"
   },
@@ -252,79 +237,154 @@
     "message": "打开对话框",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "更多提示词...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "打开抽屉"
+  },
+  "openDrawerFailed": {
+    "message": "无法打开抽屉：$1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "移到抽屉"
+  },
+  "profilesLabel": {
+    "message": "服务商配置"
+  },
+  "profileSaveBtn": {
+    "message": "保存当前设置"
+  },
+  "profileDeleteBtn": {
+    "message": "删除"
+  },
+  "profilesHint": {
+    "message": "将当前的密钥、URL 和模型保存为一个配置；密钥仅保存在本设备上"
+  },
+  "messageEdit": {
+    "message": "编辑"
+  },
+  "messageRegenerate": {
+    "message": "重新生成"
+  },
+  "messageCopy": {
+    "message": "复制"
+  },
+  "messageSave": {
+    "message": "保存"
+  },
+  "messageCancel": {
+    "message": "取消"
+  },
+  "conversationsBtn": {
+    "message": "对话记录"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "搜索对话记录..."
+  },
+  "conversationsRename": {
+    "message": "重命名"
+  },
+  "conversationsRestore": {
+    "message": "恢复"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "复制"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "删除"
+  },
+  "conversationsDeleteSelected": {
+    "message": "删除所选"
+  },
+  "conversationsEmpty": {
+    "message": "暂无对话记录"
+  },
+  "conversationsOpenBadge": {
+    "message": "进行中"
+  },
+  "conversationsClosedBadge": {
+    "message": "已关闭"
+  },
+  "builtInActionsLabel": {
+    "message": "内置快捷操作"
+  },
+  "actionTranslate": {
+    "message": "翻译"
+  },
+  "actionConvertChinese": {
+    "message": "转换中文简繁"
+  },
+  "actionExplain": {
+    "message": "解释"
+  },
+  "actionSummarize": {
+    "message": "摘要"
+  },
+  "actionPolish": {
+    "message": "润色"
+  },
+  "actionTutorial": {
+    "message": "生成教程"
+  },
+  "commandOpenPopup": {
+    "message": "打开 AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "打开聊天抽屉"
+  },
+  "shortcutsHint": {
+    "message": "提示：可在 chrome://extensions/shortcuts 自定义快捷键"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "总结较早的消息"
+  },
+  "summarizingStatus": {
+    "message": "正在总结较早的消息…"
+  },
+  "settingsExportBtn": {
+    "message": "导出设置"
+  },
+  "settingsImportBtn": {
+    "message": "导入"
+  },
+  "settingsImported": {
+    "message": "设置已导入（API 密钥不会被导出）"
+  },
+  "settingsImportFailed": {
+    "message": "导入设置失败：$1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "回复可能不完整（流式传输提前结束）。可使用“重新生成”重试。"
   }
 }

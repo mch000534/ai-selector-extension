@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Відновлено з попереднього сеансу"
   },
-  "recentClosedBtn": {
-    "message": "Нещодавно закриті"
-  },
-  "recentClosedEmpty": {
-    "message": "Немає закритих діалогів"
-  },
-  "recentClosedTitle": {
-    "message": "Нещодавно закриті діалоги"
-  },
-  "recentClosedRestore": {
-    "message": "Відновити"
-  },
-  "recentClosedAllClear": {
-    "message": "Очистити все"
-  },
   "codeCopyBtn": {
     "message": "Копіювати"
   },
@@ -252,79 +237,154 @@
     "message": "Відкрити діалогове вікно",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Більше підказок...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Відкрити панель"
+  },
+  "openDrawerFailed": {
+    "message": "Не вдалося відкрити панель: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Перемістити на панель"
+  },
+  "profilesLabel": {
+    "message": "Профілі постачальників"
+  },
+  "profileSaveBtn": {
+    "message": "Зберегти поточний"
+  },
+  "profileDeleteBtn": {
+    "message": "Видалити"
+  },
+  "profilesHint": {
+    "message": "Збережіть поточний ключ, URL та модель як один профіль; ключі залишаються на цьому пристрої"
+  },
+  "messageEdit": {
+    "message": "Редагувати"
+  },
+  "messageRegenerate": {
+    "message": "Згенерувати знову"
+  },
+  "messageCopy": {
+    "message": "Копіювати"
+  },
+  "messageSave": {
+    "message": "Зберегти"
+  },
+  "messageCancel": {
+    "message": "Скасувати"
+  },
+  "conversationsBtn": {
+    "message": "Розмови"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Пошук розмов..."
+  },
+  "conversationsRename": {
+    "message": "Перейменувати"
+  },
+  "conversationsRestore": {
+    "message": "Відновити"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Копіювати"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Видалити"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Видалити вибрані"
+  },
+  "conversationsEmpty": {
+    "message": "Розмов поки немає"
+  },
+  "conversationsOpenBadge": {
+    "message": "Відкрито"
+  },
+  "conversationsClosedBadge": {
+    "message": "Закрито"
+  },
+  "builtInActionsLabel": {
+    "message": "Вбудовані швидкі дії"
+  },
+  "actionTranslate": {
+    "message": "Перекласти"
+  },
+  "actionConvertChinese": {
+    "message": "Перетворити варіант китайської"
+  },
+  "actionExplain": {
+    "message": "Пояснити"
+  },
+  "actionSummarize": {
+    "message": "Підсумувати"
+  },
+  "actionPolish": {
+    "message": "Покращити текст"
+  },
+  "actionTutorial": {
+    "message": "Посібник"
+  },
+  "commandOpenPopup": {
+    "message": "Відкрити AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Відкрити панель чату"
+  },
+  "shortcutsHint": {
+    "message": "Порада: налаштуйте комбінації клавіш на сторінці chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Підсумувати старіші повідомлення"
+  },
+  "summarizingStatus": {
+    "message": "Підсумовування старіших повідомлень…"
+  },
+  "settingsExportBtn": {
+    "message": "Експортувати налаштування"
+  },
+  "settingsImportBtn": {
+    "message": "Імпортувати"
+  },
+  "settingsImported": {
+    "message": "Налаштування імпортовано (ключі API ніколи не експортуються)"
+  },
+  "settingsImportFailed": {
+    "message": "Не вдалося імпортувати налаштування: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Відповідь може бути неповною (потік завершився передчасно). Скористайтеся кнопкою «Згенерувати знову», щоб повторити спробу."
   }
 }

@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Vraćeno iz prethodne sesije"
   },
-  "recentClosedBtn": {
-    "message": "Nedavno zatvoreno"
-  },
-  "recentClosedEmpty": {
-    "message": "Nema zatvorenih razgovora"
-  },
-  "recentClosedTitle": {
-    "message": "Nedavno zatvoreni razgovori"
-  },
-  "recentClosedRestore": {
-    "message": "Vrati"
-  },
-  "recentClosedAllClear": {
-    "message": "Obriši sve"
-  },
   "codeCopyBtn": {
     "message": "Kopiraj"
   },
@@ -252,79 +237,154 @@
     "message": "Otvori dijaloški okvir",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Više prijedloga...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Otvori ladicu"
+  },
+  "openDrawerFailed": {
+    "message": "Ladicu nije moguće otvoriti: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Premjesti u ladicu"
+  },
+  "profilesLabel": {
+    "message": "Profili davatelja usluge"
+  },
+  "profileSaveBtn": {
+    "message": "Spremi trenutačno"
+  },
+  "profileDeleteBtn": {
+    "message": "Izbriši"
+  },
+  "profilesHint": {
+    "message": "Spremite trenutačni ključ, URL i model kao jedan profil; ključevi ostaju na ovom uređaju"
+  },
+  "messageEdit": {
+    "message": "Uredi"
+  },
+  "messageRegenerate": {
+    "message": "Ponovno generiraj"
+  },
+  "messageCopy": {
+    "message": "Kopiraj"
+  },
+  "messageSave": {
+    "message": "Spremi"
+  },
+  "messageCancel": {
+    "message": "Odustani"
+  },
+  "conversationsBtn": {
+    "message": "Razgovori"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Pretraži razgovore..."
+  },
+  "conversationsRename": {
+    "message": "Preimenuj"
+  },
+  "conversationsRestore": {
+    "message": "Vrati"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopiraj"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Izbriši"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Izbriši odabrano"
+  },
+  "conversationsEmpty": {
+    "message": "Još nema razgovora"
+  },
+  "conversationsOpenBadge": {
+    "message": "Otvoreno"
+  },
+  "conversationsClosedBadge": {
+    "message": "Zatvoreno"
+  },
+  "builtInActionsLabel": {
+    "message": "Ugrađene brze radnje"
+  },
+  "actionTranslate": {
+    "message": "Prevedi"
+  },
+  "actionConvertChinese": {
+    "message": "Pretvori kinesku varijantu"
+  },
+  "actionExplain": {
+    "message": "Objasni"
+  },
+  "actionSummarize": {
+    "message": "Sažmi"
+  },
+  "actionPolish": {
+    "message": "Poboljšaj tekst"
+  },
+  "actionTutorial": {
+    "message": "Vodič"
+  },
+  "commandOpenPopup": {
+    "message": "Otvori AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Otvori ladicu razgovora"
+  },
+  "shortcutsHint": {
+    "message": "Savjet: prilagodite prečace na chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Sažmi starije poruke"
+  },
+  "summarizingStatus": {
+    "message": "Sažimanje starijih poruka…"
+  },
+  "settingsExportBtn": {
+    "message": "Izvezi postavke"
+  },
+  "settingsImportBtn": {
+    "message": "Uvezi"
+  },
+  "settingsImported": {
+    "message": "Postavke su uvezene (API ključevi se nikada ne izvoze)"
+  },
+  "settingsImportFailed": {
+    "message": "Uvoz postavki nije uspio: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Odgovor možda nije potpun (prijenos je prerano završio). Za ponovni pokušaj upotrijebite Ponovno generiraj."
   }
 }

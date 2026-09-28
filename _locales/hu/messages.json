@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Visszaállítva az előző munkamenetből"
   },
-  "recentClosedBtn": {
-    "message": "Nemrég bezárt"
-  },
-  "recentClosedEmpty": {
-    "message": "Nincs bezárt beszélgetés"
-  },
-  "recentClosedTitle": {
-    "message": "Nemrég bezárt beszélgetések"
-  },
-  "recentClosedRestore": {
-    "message": "Visszaállítás"
-  },
-  "recentClosedAllClear": {
-    "message": "Összes törlése"
-  },
   "codeCopyBtn": {
     "message": "Másolás"
   },
@@ -252,79 +237,154 @@
     "message": "Párbeszédablak megnyitása",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "További javaslatok...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Panel megnyitása"
+  },
+  "openDrawerFailed": {
+    "message": "Nem sikerült megnyitni a panelt: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Áthelyezés a panelre"
+  },
+  "profilesLabel": {
+    "message": "Szolgáltatói profilok"
+  },
+  "profileSaveBtn": {
+    "message": "Jelenlegi mentése"
+  },
+  "profileDeleteBtn": {
+    "message": "Törlés"
+  },
+  "profilesHint": {
+    "message": "Mentse a jelenlegi kulcsot, URL-t és modellt egy profilként; a kulcsok ezen az eszközön maradnak"
+  },
+  "messageEdit": {
+    "message": "Szerkesztés"
+  },
+  "messageRegenerate": {
+    "message": "Újragenerálás"
+  },
+  "messageCopy": {
+    "message": "Másolás"
+  },
+  "messageSave": {
+    "message": "Mentés"
+  },
+  "messageCancel": {
+    "message": "Mégse"
+  },
+  "conversationsBtn": {
+    "message": "Beszélgetések"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Beszélgetések keresése..."
+  },
+  "conversationsRename": {
+    "message": "Átnevezés"
+  },
+  "conversationsRestore": {
+    "message": "Visszaállítás"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Másolás"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Törlés"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Kijelöltek törlése"
+  },
+  "conversationsEmpty": {
+    "message": "Még nincs beszélgetés"
+  },
+  "conversationsOpenBadge": {
+    "message": "Nyitott"
+  },
+  "conversationsClosedBadge": {
+    "message": "Lezárva"
+  },
+  "builtInActionsLabel": {
+    "message": "Beépített gyorsműveletek"
+  },
+  "actionTranslate": {
+    "message": "Fordítás"
+  },
+  "actionConvertChinese": {
+    "message": "Kínai írásváltozat átalakítása"
+  },
+  "actionExplain": {
+    "message": "Magyarázat"
+  },
+  "actionSummarize": {
+    "message": "Összefoglalás"
+  },
+  "actionPolish": {
+    "message": "Szöveg csiszolása"
+  },
+  "actionTutorial": {
+    "message": "Útmutató"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant megnyitása"
+  },
+  "commandOpenDrawer": {
+    "message": "Csevegőpanel megnyitása"
+  },
+  "shortcutsHint": {
+    "message": "Tipp: testreszabhatja a gyorsbillentyűket a chrome://extensions/shortcuts oldalon"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Régebbi üzenetek összefoglalása"
+  },
+  "summarizingStatus": {
+    "message": "Régebbi üzenetek összefoglalása…"
+  },
+  "settingsExportBtn": {
+    "message": "Beállítások exportálása"
+  },
+  "settingsImportBtn": {
+    "message": "Importálás"
+  },
+  "settingsImported": {
+    "message": "A beállítások importálva (az API-kulcsokat soha nem exportáljuk)"
+  },
+  "settingsImportFailed": {
+    "message": "A beállítások importálása sikertelen: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "A válasz hiányos lehet (a streamelés idő előtt véget ért). Próbálja újra az Újragenerálás gombbal."
   }
 }

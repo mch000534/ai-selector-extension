@@ -227,104 +227,164 @@
   "dialogRestoredHint": {
     "message": "Restored from previous session"
   },
-  "recentClosedBtn": {
-    "message": "Recently closed"
-  },
-  "recentClosedEmpty": {
-    "message": "No closed conversations"
-  },
-  "recentClosedTitle": {
-    "message": "Recently closed conversations"
-  },
-  "recentClosedRestore": {
-    "message": "Restore"
-  },
-  "recentClosedAllClear": {
-    "message": "Clear all"
-  },
   "codeCopyBtn": {
     "message": "Copy"
   },
   "codeCopied": {
     "message": "Copied"
   },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
   "contextMenuOpenDialog": {
     "message": "Open dialog",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "More prompts...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Open drawer"
+  },
+  "openDrawerFailed": {
+    "message": "Could not open drawer: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Move to drawer"
+  },
+  "profilesLabel": {
+    "message": "Provider profiles"
+  },
+  "profileSaveBtn": {
+    "message": "Save current"
+  },
+  "profileDeleteBtn": {
+    "message": "Delete"
+  },
+  "profilesHint": {
+    "message": "Save the current key, URL and model as one profile; keys stay on this device"
+  },
+  "messageEdit": {
+    "message": "Edit"
+  },
+  "messageRegenerate": {
+    "message": "Regenerate"
+  },
+  "messageCopy": {
+    "message": "Copy"
+  },
+  "messageSave": {
+    "message": "Save"
+  },
+  "messageCancel": {
+    "message": "Cancel"
+  },
+  "conversationsBtn": {
+    "message": "Conversations"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Search conversations..."
+  },
+  "conversationsRename": {
+    "message": "Rename"
+  },
+  "conversationsRestore": {
+    "message": "Restore"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copy"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Delete"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Delete selected"
+  },
+  "conversationsEmpty": {
+    "message": "No conversations yet"
+  },
+  "conversationsOpenBadge": {
+    "message": "Open"
+  },
+  "conversationsClosedBadge": {
+    "message": "Closed"
+  },
+  "builtInActionsLabel": {
+    "message": "Built-in quick actions"
+  },
+  "actionTranslate": {
+    "message": "Translate"
+  },
+  "actionConvertChinese": {
+    "message": "Convert Chinese variant"
+  },
+  "actionExplain": {
+    "message": "Explain"
+  },
+  "actionSummarize": {
+    "message": "Summarize"
+  },
+  "actionPolish": {
+    "message": "Polish"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Open AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Open chat drawer"
+  },
+  "shortcutsHint": {
+    "message": "Tip: customize shortcuts at chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Summarize older messages"
+  },
+  "summarizingStatus": {
+    "message": "Summarizing older messages…"
+  },
+  "settingsExportBtn": {
+    "message": "Export settings"
+  },
+  "settingsImportBtn": {
+    "message": "Import"
+  },
+  "settingsImported": {
+    "message": "Settings imported (API keys are never exported)"
+  },
+  "settingsImportFailed": {
+    "message": "Settings import failed: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Response may be incomplete (stream ended early). Use Regenerate to retry."
   }
 }

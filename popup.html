@@ -10,7 +10,7 @@
   <div class="container">
     <h1 data-i18n="popupHeading">AI Selection Assistant</h1>
 
-    <button id="openSidePanelBtn" class="btn-sidepanel" type="button" data-i18n="sidePanelOpenBtn">Open side panel</button>
+    <button id="openDrawerBtn" class="btn-drawer" type="button" data-i18n="openDrawer">Open drawer</button>
 
     <div class="form-group">
       <label for="provider" data-i18n="providersLabel">Preset providers</label>
@@ -18,6 +18,16 @@
         <option value="custom" data-i18n="providersCustom">Custom...</option>
       </select>
       <small data-i18n="providersHint">Pick a provider to auto-fill Base URL and model</small>
+    </div>
+
+    <div class="form-group">
+      <label for="profile" data-i18n="profilesLabel">Provider profiles</label>
+      <div class="profile-row">
+        <select id="profile"></select>
+        <button id="saveProfileBtn" class="btn-fetch btn-auto" type="button" data-i18n="profileSaveBtn">Save current</button>
+        <button id="deleteProfileBtn" class="btn-fetch btn-auto" type="button" data-i18n="profileDeleteBtn">Delete</button>
+      </div>
+      <small data-i18n="profilesHint">Save the current key, URL and model as one profile; keys stay on this device</small>
     </div>
 
     <div class="form-group">
@@ -57,6 +67,11 @@
       <small data-i18n="quickPromptsHint">Click a quick prompt in the dialog to fill it in</small>
     </div>
 
+    <div class="form-group">
+      <label data-i18n="builtInActionsLabel">Built-in quick actions</label>
+      <div id="builtInList" class="builtin-list"></div>
+    </div>
+
     <div class="form-group toggle-group">
       <label class="toggle-label">
         <input type="checkbox" id="defaultPin" checked>
@@ -75,25 +90,36 @@
 
     <div id="status" class="status"></div>
 
-    <div class="recent-closed">
-      <button id="recentClosedBtn" class="recent-closed-btn" type="button" data-i18n="recentClosedBtn">Recently closed</button>
-      <div id="recentClosedSection" class="recent-closed-section" hidden>
-        <div class="recent-closed-header">
-          <span class="recent-closed-title" data-i18n="recentClosedTitle">Recently closed conversations</span>
-          <button id="recentClosedClearAll" class="recent-closed-clear-all" type="button" data-i18n="recentClosedAllClear">Clear all</button>
+    <div class="conv">
+      <button id="convBtn" class="conv-btn" type="button" data-i18n="conversationsBtn">Conversations</button>
+      <div id="convSection" class="conv-section" hidden>
+        <div class="conv-toolbar">
+          <input id="convSearch" class="conv-search" type="text" data-i18n-placeholder="conversationsSearchPlaceholder" placeholder="Search conversations...">
+          <button id="convDeleteSelected" class="conv-delete-selected" type="button" data-i18n="conversationsDeleteSelected">Delete selected</button>
         </div>
-        <div id="recentClosedList" class="recent-closed-list"></div>
+        <div id="convList" class="conv-list"></div>
       </div>
     </div>
 
     <div class="footer">
       <p data-i18n="footerHint">Select text on any page to use</p>
+      <p data-i18n="shortcutsHint">Tip: customize shortcuts at chrome://extensions/shortcuts</p>
+      <p class="settings-io">
+        <button id="exportSettingsBtn" class="conv-action" type="button" data-i18n="settingsExportBtn">Export settings</button>
+        <button id="importSettingsBtn" class="conv-action" type="button" data-i18n="settingsImportBtn">Import</button>
+        <input id="importSettingsFile" type="file" accept="application/json,.json" hidden>
+      </p>
       <p class="version"></p>
       <p class="github-link"><a href="https://github.com/mch000534/ai-selector-extension" target="_blank" rel="noopener" data-i18n="githubLink">GitHub</a></p>
     </div>
   </div>
   <script src="lib/utils.js"></script>
   <script src="lib/chat.js"></script>
+  <script src="lib/api.js"></script>
+  <script src="lib/storage.js"></script>
+  <script src="lib/profiles.js"></script>
+  <script src="lib/actions.js"></script>
+  <script src="lib/theme.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

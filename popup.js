@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
+  const { normalizeBaseUrl } = window.__aiext.utils;
   const chat = window.__aiext.chat;
   const apiKeyInput = document.getElementById('apiKey');
   const modelInput = document.getElementById('model');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modelHint = document.getElementById('modelHint');
   const fetchModelsBtn = document.getElementById('fetchModelsBtn');
   const statusEl = document.getElementById('status');
-  const openSidePanelBtn = document.getElementById('openSidePanelBtn');
+  const openDrawerBtn = document.getElementById('openDrawerBtn');
   const promptsList = document.getElementById('promptsList');
   const newPromptInput = document.getElementById('newPrompt');
   const addPromptBtn = document.getElementById('addPromptBtn');
@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const baseUrlHint = document.getElementById('baseUrlHint');
   const toggleApiKeyBtn = document.getElementById('toggleApiKey');
   const providerSelect = document.getElementById('provider');
+  const profileSelect = document.getElementById('profile');
+  const saveProfileBtn = document.getElementById('saveProfileBtn');
+  const deleteProfileBtn = document.getElementById('deleteProfileBtn');
 
   let PROVIDERS = {};
   let PROVIDER_ORDER = [];
@@ -52,10 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let quickPrompts = [];
 
+  // Baseline of connection-critical settings. Dialog history is only cleared
+  // when apiKey or baseUrl actually changes — not on every save() (e.g.
+  // typing the API key fires debouncedSave every 500ms, editing quick
+  // prompts also calls save()). Null until initial load completes.
+  let baselineApiKey = null;
+  let baselineBaseUrl = null;
+
   function applyI18n() {
     const lang = chrome.i18n.getUILanguage();
-    const rtlLangs = ['ar', 'iw', 'fa', 'ur'];
-    const isRtl = rtlLangs.some(l => lang.startsWith(l));
+    // Single RTL source (lib/theme.js); inline list is only a fallback.
+    const isRtl = window.__aiext.isRtlLang
+      ? window.__aiext.isRtlLang(lang)
+      : ['ar', 'iw', 'fa', 'ur'].some(l => lang.startsWith(l));
     document.documentElement.lang = lang;
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
 
@@ -117,19 +129,34 @@ document.addEventListener('DOMContentLoaded', () => {
   (async () => {
     await loadProviders();
     renderProviderOptions();
-    applyI18n();
+  applyI18n();
 
-    chrome.storage.sync.get(['apiKey', 'model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], (result) => {
+  try {
+    if (window.__aiext.theme && window.__aiext.theme.applyDocumentVars) {
+      window.__aiext.theme.applyDocumentVars(document);
+    }
+  } catch (e) { /* popup keeps CSS fallbacks */ }
+
+    // API keys live in storage.local (this device); the rest stays in sync.
+    await window.__aiext.storage.ensureLocalApiKey();
+    const [syncResult, localResult] = await Promise.all([
+      window.__aiext.storage.getSync(['model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating'], {}),
+      window.__aiext.storage.getLocal(['apiKey'], {}),
+    ]);
+    const result = { ...syncResult, apiKey: (localResult && localResult.apiKey) || syncResult.apiKey || '' };
     if (result.apiKey) apiKeyInput.value = result.apiKey;
     if (result.baseUrl) baseUrlInput.value = result.baseUrl;
     if (result.model) modelInput.value = result.model;
+    baselineApiKey = (result.apiKey || '').trim();
+    baselineBaseUrl = (result.baseUrl || '').trim();
     defaultPinCheckbox.checked = result.defaultPin !== false;
     showFloatingCheckbox.checked = result.showFloating !== false;
     providerSelect.value = detectProvider(result.baseUrl);
     quickPrompts = result.quickPrompts || [];
     renderPrompts();
     updateBaseUrlHint();
-  });
+    await loadProfiles();
+    await loadBuiltInActions();
   })();
 
   providerSelect.addEventListener('change', () => {
@@ -141,6 +168,125 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBaseUrlHint();
     save();
   });
+
+  // ─── Provider profiles (per-endpoint keys in storage.local) ───
+  let profiles = [];
+
+  // ─── Built-in quick actions (independent of the prompt quota) ───
+  const builtInList = document.getElementById('builtInList');
+
+  async function loadBuiltInActions() {
+    if (!builtInList || !window.__aiext.actions) return;
+    const data = await window.__aiext.storage.getSync(['builtInActions'], {});
+    const enabled = new Set(window.__aiext.actions.normalizeEnabledIds(data.builtInActions));
+    builtInList.textContent = '';
+    window.__aiext.actions.DEFINITIONS.forEach(def => {
+      const label = document.createElement('label');
+      label.className = 'toggle-label';
+      const box = document.createElement('input');
+      box.type = 'checkbox';
+      box.checked = enabled.has(def.id);
+      box.dataset.action = def.id;
+      box.addEventListener('change', async () => {
+        const ids = Array.from(builtInList.querySelectorAll('input[data-action]:checked'))
+          .map(el => el.dataset.action);
+        // normalizeEnabledIds falls back to all when empty; an explicit
+        // empty selection is preserved so users can disable the whole group.
+        await window.__aiext.storage.setSync({ builtInActions: ids });
+      });
+      const text = document.createElement('span');
+      text.textContent = chrome.i18n.getMessage(def.labelKey) || def.id;
+      label.appendChild(box);
+      label.appendChild(text);
+      builtInList.appendChild(label);
+    });
+  }
+
+  async function persistProfiles() {
+    await window.__aiext.storage.setLocal({ [window.__aiext.profiles.STORAGE_KEY]: profiles });
+  }
+
+  function renderProfileOptions(selectedId) {
+    if (!profileSelect) return;
+    profileSelect.textContent = '';
+    profiles.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.model ? `${p.name} · ${p.model}` : p.name;
+      profileSelect.appendChild(opt);
+    });
+    if (selectedId && profiles.some(p => p.id === selectedId)) {
+      profileSelect.value = selectedId;
+    } else {
+      const match = profiles.find(p => p.baseUrl === baseUrlInput.value.trim());
+      profileSelect.value = match ? match.id : '';
+    }
+  }
+
+  function applyProfile(id) {
+    const p = window.__aiext.profiles.findProfile(profiles, id);
+    if (!p) return;
+    apiKeyInput.value = p.apiKey || '';
+    baseUrlInput.value = p.baseUrl || '';
+    modelInput.value = p.model || '';
+    providerSelect.value = detectProvider(p.baseUrl);
+    updateBaseUrlHint();
+    save();
+  }
+
+  async function loadProfiles() {
+    const data = await window.__aiext.storage.getLocal([window.__aiext.profiles.STORAGE_KEY], {});
+    profiles = window.__aiext.profiles.normalizeProfiles(data && data[window.__aiext.profiles.STORAGE_KEY]);
+    if (profiles.length === 0) {
+      // Seed one profile from the current connection so existing users keep
+      // one-click switching without re-entering credentials.
+      const baseUrl = baseUrlInput.value.trim();
+      if (baseUrl) {
+        const seeded = window.__aiext.profiles.upsertProfile([], {
+          baseUrl,
+          apiKey: apiKeyInput.value.trim(),
+          model: modelInput.value.trim(),
+        });
+        profiles = seeded.profiles;
+        await persistProfiles();
+      }
+    }
+    renderProfileOptions();
+  }
+
+  if (profileSelect) {
+    profileSelect.addEventListener('change', () => {
+      if (profileSelect.value) applyProfile(profileSelect.value);
+    });
+  }
+  if (saveProfileBtn) {
+    saveProfileBtn.addEventListener('click', async () => {
+      const baseUrl = baseUrlInput.value.trim();
+      if (!baseUrl) {
+        showStatus(chrome.i18n.getMessage('statusNeedUrlAndKey'), 'error');
+        return;
+      }
+      const { profiles: next, id } = window.__aiext.profiles.upsertProfile(profiles, {
+        baseUrl,
+        apiKey: apiKeyInput.value.trim(),
+        model: modelInput.value.trim(),
+      });
+      profiles = next;
+      await persistProfiles();
+      renderProfileOptions(id);
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
+    });
+  }
+  if (deleteProfileBtn) {
+    deleteProfileBtn.addEventListener('click', async () => {
+      const id = profileSelect && profileSelect.value;
+      if (!id) return;
+      profiles = window.__aiext.profiles.deleteProfile(profiles, id);
+      await persistProfiles();
+      renderProfileOptions();
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
+    });
+  }
 
   baseUrlInput.addEventListener('input', () => {
     const detected = detectProvider(baseUrlInput.value);
@@ -155,13 +301,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderPrompts() {
     const editTooltip = chrome.i18n.getMessage('quickPromptsEditTooltip');
-    promptsList.innerHTML = quickPrompts.map((p, i) => `
-      <div class="prompt-item" data-index="${i}">
-        <span class="prompt-drag" draggable="true">⠿</span>
-        <span class="prompt-text" title="${escapeHtml(editTooltip)}">${escapeHtml(p)}</span>
-        <button class="prompt-remove" data-index="${i}">&times;</button>
-      </div>
-    `).join('');
+    // Built with DOM APIs (not innerHTML) so prompt text can never break out
+    // into markup: textContent assigns, never parses.
+    promptsList.textContent = '';
+    quickPrompts.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'prompt-item';
+      item.dataset.index = String(i);
+
+      const drag = document.createElement('span');
+      drag.className = 'prompt-drag';
+      drag.draggable = true;
+      drag.textContent = '⠿';
+      item.appendChild(drag);
+
+      const label = document.createElement('span');
+      label.className = 'prompt-text';
+      label.title = editTooltip;
+      label.textContent = p;
+      item.appendChild(label);
+
+      const remove = document.createElement('button');
+      remove.className = 'prompt-remove';
+      remove.dataset.index = String(i);
+      remove.textContent = '×';
+      item.appendChild(remove);
+
+      promptsList.appendChild(item);
+    });
 
     promptsList.querySelectorAll('.prompt-remove').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -280,30 +447,26 @@ document.addEventListener('DOMContentLoaded', () => {
     modelHint.textContent = chrome.i18n.getMessage('modelFetchingHint');
 
     try {
-      const url = normalizeBaseUrl(baseUrl) + '/models';
-      const res = await fetch(url, {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
+      const r = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
 
-      if (models.length === 0) {
+      if (!r.ok) {
+        showStatus(chrome.i18n.getMessage('modelFetchFailed', [r.detail || `HTTP ${r.status}`]), 'error');
+        modelHint.textContent = chrome.i18n.getMessage('modelFetchFailedHint');
+        return;
+      }
+      if (r.models.length === 0) {
         showStatus(chrome.i18n.getMessage('modelNoModels'), 'error');
         return;
       }
 
       modelList.innerHTML = '';
-      models.forEach(id => {
+      r.models.forEach(id => {
         const opt = document.createElement('option');
         opt.value = id;
         modelList.appendChild(opt);
       });
-      modelHint.textContent = chrome.i18n.getMessage('modelFound', [String(models.length)]);
+      modelHint.textContent = chrome.i18n.getMessage('modelFound', [String(r.models.length)]);
       showStatus(chrome.i18n.getMessage('modelUpdated'), 'success');
-    } catch (err) {
-      showStatus(chrome.i18n.getMessage('modelFetchFailed', [err.message]), 'error');
-      modelHint.textContent = chrome.i18n.getMessage('modelFetchFailedHint');
     } finally {
       fetchModelsBtn.disabled = false;
       fetchModelsBtn.textContent = chrome.i18n.getMessage('modelFetchBtn');
@@ -316,13 +479,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = baseUrlInput.value.trim();
     const defaultPin = defaultPinCheckbox.checked;
     const showFloating = showFloatingCheckbox.checked;
-    chrome.storage.sync.set({ apiKey, model, baseUrl, quickPrompts, defaultPin, showFloating }, () => {
+    // Keys stay on this device (local); the rest roams via sync.
+    Promise.all([
+      window.__aiext.storage.setLocal({ apiKey }),
+      window.__aiext.storage.setSync({ model, baseUrl, quickPrompts, defaultPin, showFloating }),
+    ]).then(() => {
       showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
-    // Clear persisted conversations — they belong to the previous config.
-    try {
-      chrome.storage.local.remove('aiext_dialogs_v1');
-    } catch (e) { /* ignore */ }
+    // Only clear persisted conversations when the connection config actually
+    // changed — they belong to the previous endpoint/credential.
+    if (baselineApiKey !== null && baselineBaseUrl !== null &&
+        (apiKey !== baselineApiKey || baseUrl !== baselineBaseUrl)) {
+      baselineApiKey = apiKey;
+      baselineBaseUrl = baseUrl;
+      try {
+        chrome.storage.local.remove(['aiext_dialogs_v1']);
+      } catch (e) { /* ignore */ }
+    }
   }
 
   let saveTimer = null;
@@ -351,8 +524,8 @@ document.addEventListener('DOMContentLoaded', () => {
   defaultPinCheckbox.addEventListener('change', save);
   showFloatingCheckbox.addEventListener('change', save);
 
-  if (openSidePanelBtn) {
-    openSidePanelBtn.addEventListener('click', async () => {
+  if (openDrawerBtn) {
+    openDrawerBtn.addEventListener('click', async () => {
       try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (!tab || typeof tab.id !== 'number') throw new Error('no_active_tab');
@@ -360,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response && response.error) throw new Error(response.error);
         window.close();
       } catch (err) {
-        showStatus(chrome.i18n.getMessage('sidePanelOpenFailed', [err.message]), 'error');
+        showStatus(chrome.i18n.getMessage('openDrawerFailed', [err.message]), 'error');
       }
     });
   }
@@ -383,12 +556,87 @@ document.addEventListener('DOMContentLoaded', () => {
     versionEl.textContent = `v${manifest.version}`;
   }
 
-  // ─── Recently closed ───
-  const recentClosedBtn = document.getElementById('recentClosedBtn');
-  const recentClosedSection = document.getElementById('recentClosedSection');
-  const recentClosedList = document.getElementById('recentClosedList');
-  const recentClosedClearAll = document.getElementById('recentClosedClearAll');
+  // ─── Settings export / import (API keys are never exported) ───
+  const exportSettingsBtn = document.getElementById('exportSettingsBtn');
+  const importSettingsBtn = document.getElementById('importSettingsBtn');
+  const importSettingsFile = document.getElementById('importSettingsFile');
+
+  if (exportSettingsBtn) {
+    exportSettingsBtn.addEventListener('click', async () => {
+      try {
+        const store = window.__aiext.storage;
+        const [sync, local] = await Promise.all([
+          store.getSync(['model', 'baseUrl', 'quickPrompts', 'defaultPin', 'showFloating', 'builtInActions'], {}),
+          store.getLocal([window.__aiext.profiles.STORAGE_KEY], {}),
+        ]);
+        const profiles = window.__aiext.profiles
+          .normalizeProfiles(local && local[window.__aiext.profiles.STORAGE_KEY])
+          .map(p => ({ ...p, apiKey: '' }));
+        const payload = {
+          app: 'ai-selector-extension',
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          sync: {
+            model: sync.model || '',
+            baseUrl: sync.baseUrl || '',
+            quickPrompts: chat.normalizeQuickPrompts(sync.quickPrompts),
+            defaultPin: sync.defaultPin !== false,
+            showFloating: sync.showFloating !== false,
+            builtInActions: window.__aiext.actions.normalizeEnabledIds(sync.builtInActions),
+          },
+          profiles,
+        };
+        downloadFile('ai-selector-settings.json', JSON.stringify(payload, null, 2), 'application/json');
+      } catch (e) {
+        showStatus(chrome.i18n.getMessage('settingsImportFailed', [e.message]), 'error');
+      }
+    });
+  }
+
+  if (importSettingsBtn && importSettingsFile) {
+    importSettingsBtn.addEventListener('click', () => importSettingsFile.click());
+    importSettingsFile.addEventListener('change', async () => {
+      const file = importSettingsFile.files && importSettingsFile.files[0];
+      importSettingsFile.value = '';
+      if (!file) return;
+      try {
+        const payload = JSON.parse(await file.text());
+        if (!payload || typeof payload !== 'object' || payload.app !== 'ai-selector-extension') {
+          throw new Error('unrecognized file');
+        }
+        const store = window.__aiext.storage;
+        const s = (payload.sync && typeof payload.sync === 'object') ? payload.sync : {};
+        await store.setSync({
+          model: typeof s.model === 'string' ? s.model.slice(0, 200) : '',
+          baseUrl: typeof s.baseUrl === 'string' ? s.baseUrl.slice(0, 500) : '',
+          quickPrompts: chat.normalizeQuickPrompts(s.quickPrompts).slice(0, 10),
+          defaultPin: s.defaultPin !== false,
+          showFloating: s.showFloating !== false,
+          builtInActions: window.__aiext.actions.normalizeEnabledIds(s.builtInActions),
+        });
+        const profiles = window.__aiext.profiles
+          .normalizeProfiles(payload.profiles)
+          .map(p => ({ ...p, apiKey: '' }));
+        await store.setLocal({ [window.__aiext.profiles.STORAGE_KEY]: profiles });
+        showStatus(chrome.i18n.getMessage('settingsImported'), 'success');
+        setTimeout(() => window.location.reload(), 800);
+      } catch (e) {
+        showStatus(chrome.i18n.getMessage('settingsImportFailed', [(e && e.message) || 'error']), 'error');
+      }
+    });
+  }
+
+  // ─── Conversation manager ───
+  // Lists every stored record (open + closed, all hosts) with search,
+  // rename, export and batch delete. Reads storage directly; only Restore
+  // needs the live tab's content script.
+  const convBtn = document.getElementById('convBtn');
+  const convSection = document.getElementById('convSection');
+  const convSearch = document.getElementById('convSearch');
+  const convList = document.getElementById('convList');
+  const convDeleteSelected = document.getElementById('convDeleteSelected');
   const STORAGE_KEY = 'aiext_dialogs_v1';
+  const CONV_LIST_CAP = 50;
 
   function formatRelativeTime(ts) {
     if (!ts) return '';
@@ -422,129 +670,250 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  async function fetchClosedList() {
-    recentClosedList.innerHTML = '';
-    const res = await sendToActiveTab({ action: 'listClosedDialogs' });
-    if (!res || !res.ok) {
-      // Fallback: read storage directly (won't be hostname-scoped)
-      try {
-        const data = await chrome.storage.local.get([STORAGE_KEY]);
-        const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
-        const now = Date.now();
-        const TTL_MS = 7 * 24 * 3600 * 1000;
-        const closed = records
-          .filter(r => r && r.closedAt && (now - r.closedAt) < TTL_MS)
-          .sort((a, b) => b.closedAt - a.closedAt)
-          .slice(0, 10)
-          .map(r => {
-            const last = Array.isArray(r.conversationHistory) && r.conversationHistory.length > 0
-              ? r.conversationHistory[r.conversationHistory.length - 1]
-              : null;
-            let preview = '';
-            if (last && last.content) {
-              if (typeof last.content === 'string') preview = last.content;
-              else if (Array.isArray(last.content)) {
-                preview = last.content.filter(p => p && p.type === 'text').map(p => p.text).join(' ');
-              }
-            }
-            return {
-              id: r.id,
-              hostname: r.hostname || '',
-              closedAt: r.closedAt,
-              messageCount: Array.isArray(r.conversationHistory) ? r.conversationHistory.length : 0,
-              preview: preview.slice(0, 120),
-              model: r.model || ''
-            };
-          });
-        renderClosedList(closed);
-      } catch (e) {
-        renderEmpty();
-      }
-      return;
+  let convRecords = [];
+
+  async function loadConvRecords() {
+    try {
+      const data = await window.__aiext.storage.getLocal([STORAGE_KEY], {});
+      const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
+      convRecords = records.filter(r => r && r.id);
+    } catch (e) {
+      convRecords = [];
     }
-    renderClosedList(res.items || []);
   }
 
-  function renderEmpty() {
-    recentClosedList.innerHTML = `<div class="recent-closed-empty">${escapeHtml(chrome.i18n.getMessage('recentClosedEmpty'))}</div>`;
+  async function writeConvRecords() {
+    await window.__aiext.storage.setLocal({ [STORAGE_KEY]: { dialogs: convRecords } });
   }
 
-  function renderClosedList(items) {
-    if (!Array.isArray(items) || items.length === 0) {
-      renderEmpty();
-      return;
+  function convMatches(rec, q) {
+    if (!q) return true;
+    const item = chat.buildClosedListItem(rec);
+    const hay = `${chat.deriveTitle(rec)} ${item ? item.preview : ''} ${rec.hostname || ''} ${rec.model || ''}`.toLowerCase();
+    return hay.includes(q);
+  }
+
+  function updateDeleteSelected() {
+    if (!convDeleteSelected) return;
+    const n = convList.querySelectorAll('.conv-select:checked').length;
+    convDeleteSelected.disabled = n === 0;
+  }
+
+  function renderConvList() {
+    const q = ((convSearch && convSearch.value) || '').trim().toLowerCase();
+    convList.textContent = '';
+    const shown = convRecords
+      .slice()
+      .sort((a, b) => (b.lastActive || 0) - (a.lastActive || 0))
+      .slice(0, CONV_LIST_CAP)
+      .filter(r => convMatches(r, q));
+    if (shown.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'conv-empty';
+      empty.textContent = chrome.i18n.getMessage('conversationsEmpty');
+      convList.appendChild(empty);
     }
-    const html = items.map(item => {
-      const preview = item.preview || '';
-      const host = item.hostname || '';
-      const dateStr = formatRelativeTime(item.closedAt);
-      const meta = [
-        item.messageCount ? `${item.messageCount} msg` : '',
-        item.model || ''
-      ].filter(Boolean).join(' · ');
-      return `
-        <div class="recent-closed-item" data-persist-id="${escapeHtml(item.id)}">
-          <div class="recent-closed-item-body">
-            <div class="recent-closed-item-top">
-              <span class="recent-closed-item-host">${escapeHtml(host)}</span>
-              <span class="recent-closed-item-date">${escapeHtml(dateStr)}</span>
-            </div>
-            ${preview ? `<div class="recent-closed-item-preview">${escapeHtml(preview)}</div>` : ''}
-            ${meta ? `<div class="recent-closed-item-meta">${escapeHtml(meta)}</div>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-    recentClosedList.innerHTML = html;
-    recentClosedList.querySelectorAll('.recent-closed-item').forEach(el => {
-      el.addEventListener('click', async () => {
-        const id = el.dataset.persistId;
-        if (!id) return;
-        el.style.opacity = '0.5';
-        el.style.pointerEvents = 'none';
-        const res = await sendToActiveTab({ action: 'restoreClosedDialog', persistId: id });
+    shown.forEach(rec => renderConvItem(rec));
+    updateDeleteSelected();
+  }
+
+  function sanitizeFilename(s) {
+    const clean = String(s || 'conversation').replace(/[^\w\-]+/g, '_').slice(0, 40);
+    return clean || 'conversation';
+  }
+
+  function downloadFile(filename, text, mime) {
+    const blob = new Blob([text], { type: mime });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+
+  function copyText(text) {
+    const done = ok => showStatus(
+      ok ? chrome.i18n.getMessage('statusAutoSaved') : 'copy failed',
+      ok ? 'success' : 'error'
+    );
+    window.__aiext.utils.copyTextToClipboard(text, {
+      onSuccess: () => done(true),
+      onFail: () => done(false),
+    });
+  }
+
+  function renderConvItem(rec) {
+    const item = chat.buildClosedListItem(rec) || {
+      id: rec.id, hostname: rec.hostname || '', preview: '',
+      messageCount: 0, model: rec.model || '', closedAt: 0, lastActive: 0, url: ''
+    };
+    const isOpen = !rec.closedAt;
+    const title = chat.deriveTitle(rec) || item.preview.slice(0, 40) || rec.hostname || '';
+    const dateTs = rec.closedAt || rec.lastActive || rec.createdAt || 0;
+
+    const el = document.createElement('div');
+    el.className = 'conv-item';
+    el.dataset.persistId = rec.id || '';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'conv-select';
+    checkbox.setAttribute('aria-label', 'select');
+    checkbox.addEventListener('change', updateDeleteSelected);
+    el.appendChild(checkbox);
+
+    const body = document.createElement('div');
+    body.className = 'conv-item-body';
+    el.appendChild(body);
+
+    const top = document.createElement('div');
+    top.className = 'conv-item-top';
+    body.appendChild(top);
+
+    const titleEl = document.createElement('span');
+    titleEl.className = 'conv-item-title';
+    titleEl.textContent = title;
+    titleEl.title = chrome.i18n.getMessage('conversationsRename');
+    titleEl.addEventListener('click', () => startConvRename(rec.id, titleEl));
+    top.appendChild(titleEl);
+
+    const badge = document.createElement('span');
+    badge.className = 'conv-badge ' + (isOpen ? 'conv-badge-open' : 'conv-badge-closed');
+    badge.textContent = chrome.i18n.getMessage(isOpen ? 'conversationsOpenBadge' : 'conversationsClosedBadge');
+    top.appendChild(badge);
+
+    const dateEl = document.createElement('span');
+    dateEl.className = 'conv-item-date';
+    dateEl.textContent = formatRelativeTime(dateTs);
+    top.appendChild(dateEl);
+
+    const hostLine = [rec.hostname || '', item.messageCount ? `${item.messageCount} msg` : '', rec.model || '']
+      .filter(Boolean).join(' · ');
+    if (hostLine) {
+      const hostEl = document.createElement('div');
+      hostEl.className = 'conv-item-host';
+      hostEl.textContent = hostLine;
+      body.appendChild(hostEl);
+    }
+    if (item.preview) {
+      const previewEl = document.createElement('div');
+      previewEl.className = 'conv-item-preview';
+      previewEl.textContent = item.preview;
+      body.appendChild(previewEl);
+    }
+
+    const actions = document.createElement('div');
+    actions.className = 'conv-item-actions';
+    body.appendChild(actions);
+
+    function mkAction(label, fn, danger) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'conv-action' + (danger ? ' conv-action-danger' : '');
+      b.textContent = label;
+      b.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await fn();
+      });
+      actions.appendChild(b);
+    }
+
+    if (!isOpen) {
+      mkAction(chrome.i18n.getMessage('conversationsRestore'), async () => {
+        const res = await sendToActiveTab({ action: 'restoreClosedDialog', persistId: rec.id });
         if (res && res.ok) {
-          el.remove();
-          if (!recentClosedList.querySelector('.recent-closed-item')) renderEmpty();
+          await loadConvRecords();
+          renderConvList();
           showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
         } else {
-          el.style.opacity = '';
-          el.style.pointerEvents = '';
-          const errMsg = document.createElement('div');
-          errMsg.className = 'recent-closed-error';
-          errMsg.textContent = (res && res.error) || 'restore failed';
-          recentClosedList.prepend(errMsg);
-          setTimeout(() => errMsg.remove(), 3000);
+          showStatus((res && res.error) || 'restore failed', 'error');
         }
       });
+    }
+    mkAction(chrome.i18n.getMessage('conversationsExportMd'), async () => {
+      downloadFile(`${sanitizeFilename(title)}.md`, chat.buildConversationMarkdown(rec), 'text/markdown');
     });
+    mkAction(chrome.i18n.getMessage('conversationsCopyMd'), async () => {
+      copyText(chat.buildConversationMarkdown(rec));
+    });
+    mkAction(chrome.i18n.getMessage('conversationsExportJson'), async () => {
+      downloadFile(`${sanitizeFilename(title)}.json`, JSON.stringify(rec, null, 2), 'application/json');
+    });
+    mkAction(chrome.i18n.getMessage('conversationsDelete'), async () => {
+      convRecords = convRecords.filter(r => r.id !== rec.id);
+      await writeConvRecords();
+      renderConvList();
+    }, true);
+
+    convList.appendChild(el);
   }
 
-  if (recentClosedBtn && recentClosedSection) {
-    recentClosedBtn.addEventListener('click', () => {
-      const opening = recentClosedSection.hasAttribute('hidden');
-      if (opening) {
-        recentClosedSection.removeAttribute('hidden');
-        recentClosedBtn.classList.add('open');
-        fetchClosedList();
+  function startConvRename(id, titleEl) {
+    const rec = convRecords.find(r => r.id === id);
+    if (!rec) return;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'conv-rename-input';
+    input.value = chat.deriveTitle(rec);
+    titleEl.replaceWith(input);
+    input.focus();
+    input.select();
+
+    let done = false;
+    function commit() {
+      if (done) return;
+      done = true;
+      const val = input.value.trim();
+      if (val) {
+        rec.title = val.slice(0, 80);
+        rec.titleExplicit = true;
+        writeConvRecords().then(() => renderConvList());
       } else {
-        recentClosedSection.setAttribute('hidden', '');
-        recentClosedBtn.classList.remove('open');
+        renderConvList();
+      }
+    }
+    function cancel() {
+      if (done) return;
+      done = true;
+      renderConvList();
+    }
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+    input.addEventListener('blur', commit);
+  }
+
+  if (convBtn && convSection) {
+    convBtn.addEventListener('click', async () => {
+      const opening = convSection.hasAttribute('hidden');
+      if (opening) {
+        convSection.removeAttribute('hidden');
+        convBtn.classList.add('open');
+        await loadConvRecords();
+        renderConvList();
+      } else {
+        convSection.setAttribute('hidden', '');
+        convBtn.classList.remove('open');
       }
     });
   }
 
-  if (recentClosedClearAll) {
-    recentClosedClearAll.addEventListener('click', async () => {
-      try {
-        const data = await chrome.storage.local.get([STORAGE_KEY]);
-        const records = (data && data[STORAGE_KEY] && data[STORAGE_KEY].dialogs) || [];
-        const kept = records.filter(r => !r.closedAt);
-        await chrome.storage.local.set({ [STORAGE_KEY]: { dialogs: kept } });
-        renderEmpty();
-      } catch (e) {
-        // ignore
-      }
+  if (convSearch) {
+    convSearch.addEventListener('input', renderConvList);
+  }
+
+  if (convDeleteSelected) {
+    convDeleteSelected.addEventListener('click', async () => {
+      const checked = convList.querySelectorAll('.conv-select:checked');
+      if (checked.length === 0) return;
+      const ids = new Set(Array.from(checked).map(box => box.closest('.conv-item').dataset.persistId));
+      convRecords = convRecords.filter(r => !ids.has(r.id));
+      await writeConvRecords();
+      renderConvList();
+      showStatus(chrome.i18n.getMessage('statusAutoSaved'), 'success');
     });
   }
 });

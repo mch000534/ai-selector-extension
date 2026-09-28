@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Đã khôi phục từ phiên trước"
   },
-  "recentClosedBtn": {
-    "message": "Đã đóng gần đây"
-  },
-  "recentClosedEmpty": {
-    "message": "Không có cuộc trò chuyện đã đóng"
-  },
-  "recentClosedTitle": {
-    "message": "Các cuộc trò chuyện đã đóng gần đây"
-  },
-  "recentClosedRestore": {
-    "message": "Khôi phục"
-  },
-  "recentClosedAllClear": {
-    "message": "Xóa tất cả"
-  },
   "codeCopyBtn": {
     "message": "Sao chép"
   },
@@ -252,79 +237,154 @@
     "message": "Mở hộp thoại",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Thêm gợi ý...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Mở ngăn"
+  },
+  "openDrawerFailed": {
+    "message": "Không thể mở ngăn: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Chuyển vào ngăn"
+  },
+  "profilesLabel": {
+    "message": "Hồ sơ nhà cung cấp"
+  },
+  "profileSaveBtn": {
+    "message": "Lưu cấu hình hiện tại"
+  },
+  "profileDeleteBtn": {
+    "message": "Xóa"
+  },
+  "profilesHint": {
+    "message": "Lưu khóa, URL và mô hình hiện tại thành một hồ sơ; khóa chỉ lưu trên thiết bị này"
+  },
+  "messageEdit": {
+    "message": "Chỉnh sửa"
+  },
+  "messageRegenerate": {
+    "message": "Tạo lại"
+  },
+  "messageCopy": {
+    "message": "Sao chép"
+  },
+  "messageSave": {
+    "message": "Lưu"
+  },
+  "messageCancel": {
+    "message": "Hủy"
+  },
+  "conversationsBtn": {
+    "message": "Cuộc trò chuyện"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Tìm kiếm cuộc trò chuyện..."
+  },
+  "conversationsRename": {
+    "message": "Đổi tên"
+  },
+  "conversationsRestore": {
+    "message": "Khôi phục"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Sao chép"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Xóa"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Xóa mục đã chọn"
+  },
+  "conversationsEmpty": {
+    "message": "Chưa có cuộc trò chuyện nào"
+  },
+  "conversationsOpenBadge": {
+    "message": "Đang mở"
+  },
+  "conversationsClosedBadge": {
+    "message": "Đã đóng"
+  },
+  "builtInActionsLabel": {
+    "message": "Thao tác nhanh tích hợp sẵn"
+  },
+  "actionTranslate": {
+    "message": "Dịch"
+  },
+  "actionConvertChinese": {
+    "message": "Chuyển đổi biến thể tiếng Trung"
+  },
+  "actionExplain": {
+    "message": "Giải thích"
+  },
+  "actionSummarize": {
+    "message": "Tóm tắt"
+  },
+  "actionPolish": {
+    "message": "Trau chuốt văn bản"
+  },
+  "actionTutorial": {
+    "message": "Hướng dẫn"
+  },
+  "commandOpenPopup": {
+    "message": "Mở AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Mở ngăn trò chuyện"
+  },
+  "shortcutsHint": {
+    "message": "Mẹo: tùy chỉnh phím tắt tại chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Tóm tắt các tin nhắn cũ"
+  },
+  "summarizingStatus": {
+    "message": "Đang tóm tắt các tin nhắn cũ…"
+  },
+  "settingsExportBtn": {
+    "message": "Xuất cài đặt"
+  },
+  "settingsImportBtn": {
+    "message": "Nhập"
+  },
+  "settingsImported": {
+    "message": "Đã nhập cài đặt (khóa API không bao giờ được xuất ra)"
+  },
+  "settingsImportFailed": {
+    "message": "Nhập cài đặt không thành công: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Câu trả lời có thể chưa đầy đủ (luồng dữ liệu kết thúc sớm). Hãy dùng Tạo lại để thử lại."
   }
 }

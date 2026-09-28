@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "از نشست قبلی بازیابی شد"
   },
-  "recentClosedBtn": {
-    "message": "اخیراً بسته‌شده"
-  },
-  "recentClosedEmpty": {
-    "message": "گفتگوی بسته‌شده‌ای نیست"
-  },
-  "recentClosedTitle": {
-    "message": "گفتگوهای اخیراً بسته‌شده"
-  },
-  "recentClosedRestore": {
-    "message": "بازیابی"
-  },
-  "recentClosedAllClear": {
-    "message": "پاک کردن همه"
-  },
   "codeCopyBtn": {
     "message": "کپی"
   },
@@ -252,79 +237,154 @@
     "message": "باز کردن کادر گفتگو",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "درخواست‌های بیشتر...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "باز کردن کشو"
+  },
+  "openDrawerFailed": {
+    "message": "باز کردن کشو ممکن نشد: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "انتقال به کشو"
+  },
+  "profilesLabel": {
+    "message": "نمایه‌های ارائه‌دهنده"
+  },
+  "profileSaveBtn": {
+    "message": "ذخیره وضعیت فعلی"
+  },
+  "profileDeleteBtn": {
+    "message": "حذف"
+  },
+  "profilesHint": {
+    "message": "کلید، URL و مدل فعلی را به‌عنوان یک نمایه ذخیره کنید؛ کلیدها روی همین دستگاه باقی می‌مانند"
+  },
+  "messageEdit": {
+    "message": "ویرایش"
+  },
+  "messageRegenerate": {
+    "message": "تولید دوباره"
+  },
+  "messageCopy": {
+    "message": "کپی"
+  },
+  "messageSave": {
+    "message": "ذخیره"
+  },
+  "messageCancel": {
+    "message": "لغو"
+  },
+  "conversationsBtn": {
+    "message": "گفتگوها"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "جستجوی گفتگوها..."
+  },
+  "conversationsRename": {
+    "message": "تغییر نام"
+  },
+  "conversationsRestore": {
+    "message": "بازیابی"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "کپی"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "حذف"
+  },
+  "conversationsDeleteSelected": {
+    "message": "حذف موارد انتخاب‌شده"
+  },
+  "conversationsEmpty": {
+    "message": "هنوز گفتگویی وجود ندارد"
+  },
+  "conversationsOpenBadge": {
+    "message": "باز"
+  },
+  "conversationsClosedBadge": {
+    "message": "بسته‌شده"
+  },
+  "builtInActionsLabel": {
+    "message": "اقدامات سریع داخلی"
+  },
+  "actionTranslate": {
+    "message": "ترجمه"
+  },
+  "actionConvertChinese": {
+    "message": "تبدیل گونه چینی"
+  },
+  "actionExplain": {
+    "message": "توضیح"
+  },
+  "actionSummarize": {
+    "message": "خلاصه‌سازی"
+  },
+  "actionPolish": {
+    "message": "ویرایش متن"
+  },
+  "actionTutorial": {
+    "message": "آموزش"
+  },
+  "commandOpenPopup": {
+    "message": "باز کردن AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "باز کردن کشوی گفتگو"
+  },
+  "shortcutsHint": {
+    "message": "نکته: میان‌برها را در chrome://extensions/shortcuts سفارشی کنید"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "خلاصه‌سازی پیام‌های قدیمی‌تر"
+  },
+  "summarizingStatus": {
+    "message": "در حال خلاصه‌سازی پیام‌های قدیمی‌تر…"
+  },
+  "settingsExportBtn": {
+    "message": "خروجی گرفتن از تنظیمات"
+  },
+  "settingsImportBtn": {
+    "message": "وارد کردن"
+  },
+  "settingsImported": {
+    "message": "تنظیمات وارد شد (کلیدهای API هرگز خروجی گرفته نمی‌شوند)"
+  },
+  "settingsImportFailed": {
+    "message": "وارد کردن تنظیمات ناموفق بود: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "ممکن است پاسخ ناقص باشد (پخش زودتر از موعد پایان یافت). برای تلاش دوباره از «تولید دوباره» استفاده کنید."
   }
 }

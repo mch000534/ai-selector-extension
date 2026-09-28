@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "تمت الاستعادة من الجلسة السابقة"
   },
-  "recentClosedBtn": {
-    "message": "المغلقة حديثًا"
-  },
-  "recentClosedEmpty": {
-    "message": "لا توجد محادثات مغلقة"
-  },
-  "recentClosedTitle": {
-    "message": "المحادثات المغلقة حديثًا"
-  },
-  "recentClosedRestore": {
-    "message": "استعادة"
-  },
-  "recentClosedAllClear": {
-    "message": "مسح الكل"
-  },
   "codeCopyBtn": {
     "message": "نسخ"
   },
@@ -252,79 +237,154 @@
     "message": "فتح مربع الحوار",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "المزيد من المطالبات...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "فتح اللوحة"
+  },
+  "openDrawerFailed": {
+    "message": "تعذر فتح اللوحة: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "نقل إلى اللوحة"
+  },
+  "profilesLabel": {
+    "message": "ملفات تعريف المزوّد"
+  },
+  "profileSaveBtn": {
+    "message": "حفظ الحالي"
+  },
+  "profileDeleteBtn": {
+    "message": "حذف"
+  },
+  "profilesHint": {
+    "message": "احفظ المفتاح وعنوان URL والنموذج الحاليين كملف تعريف واحد؛ تبقى المفاتيح على هذا الجهاز"
+  },
+  "messageEdit": {
+    "message": "تعديل"
+  },
+  "messageRegenerate": {
+    "message": "إعادة الإنشاء"
+  },
+  "messageCopy": {
+    "message": "نسخ"
+  },
+  "messageSave": {
+    "message": "حفظ"
+  },
+  "messageCancel": {
+    "message": "إلغاء"
+  },
+  "conversationsBtn": {
+    "message": "المحادثات"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "بحث في المحادثات..."
+  },
+  "conversationsRename": {
+    "message": "إعادة تسمية"
+  },
+  "conversationsRestore": {
+    "message": "استعادة"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "نسخ"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "حذف"
+  },
+  "conversationsDeleteSelected": {
+    "message": "حذف المحدد"
+  },
+  "conversationsEmpty": {
+    "message": "لا توجد محادثات بعد"
+  },
+  "conversationsOpenBadge": {
+    "message": "مفتوحة"
+  },
+  "conversationsClosedBadge": {
+    "message": "مغلقة"
+  },
+  "builtInActionsLabel": {
+    "message": "الإجراءات السريعة المدمجة"
+  },
+  "actionTranslate": {
+    "message": "ترجمة"
+  },
+  "actionConvertChinese": {
+    "message": "تحويل نوع الصينية"
+  },
+  "actionExplain": {
+    "message": "شرح"
+  },
+  "actionSummarize": {
+    "message": "تلخيص"
+  },
+  "actionPolish": {
+    "message": "تحسين الصياغة"
+  },
+  "actionTutorial": {
+    "message": "دليل تعليمي"
+  },
+  "commandOpenPopup": {
+    "message": "فتح AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "فتح لوحة المحادثة"
+  },
+  "shortcutsHint": {
+    "message": "نصيحة: خصّص الاختصارات على chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "تلخيص الرسائل الأقدم"
+  },
+  "summarizingStatus": {
+    "message": "جارٍ تلخيص الرسائل الأقدم…"
+  },
+  "settingsExportBtn": {
+    "message": "تصدير الإعدادات"
+  },
+  "settingsImportBtn": {
+    "message": "استيراد"
+  },
+  "settingsImported": {
+    "message": "تم استيراد الإعدادات (لا يتم تصدير مفاتيح API أبدًا)"
+  },
+  "settingsImportFailed": {
+    "message": "فشل استيراد الإعدادات: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "قد يكون الرد غير مكتمل (انتهى البث مبكرًا). استخدم إعادة الإنشاء للمحاولة مرة أخرى."
   }
 }

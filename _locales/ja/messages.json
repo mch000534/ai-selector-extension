@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "前回のセッションから復元しました"
   },
-  "recentClosedBtn": {
-    "message": "最近閉じた"
-  },
-  "recentClosedEmpty": {
-    "message": "閉じた会話はありません"
-  },
-  "recentClosedTitle": {
-    "message": "最近閉じた会話"
-  },
-  "recentClosedRestore": {
-    "message": "復元"
-  },
-  "recentClosedAllClear": {
-    "message": "すべてクリア"
-  },
   "codeCopyBtn": {
     "message": "コピー"
   },
@@ -252,79 +237,154 @@
     "message": "ダイアログを開く",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "その他のプロンプト...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "ドロワーを開く"
+  },
+  "openDrawerFailed": {
+    "message": "ドロワーを開けませんでした: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ドロワーに移動"
+  },
+  "profilesLabel": {
+    "message": "プロバイダープロファイル"
+  },
+  "profileSaveBtn": {
+    "message": "現在の設定を保存"
+  },
+  "profileDeleteBtn": {
+    "message": "削除"
+  },
+  "profilesHint": {
+    "message": "現在のキー、URL、モデルを1つのプロファイルとして保存します。キーはこの端末にのみ保存されます"
+  },
+  "messageEdit": {
+    "message": "編集"
+  },
+  "messageRegenerate": {
+    "message": "再生成"
+  },
+  "messageCopy": {
+    "message": "コピー"
+  },
+  "messageSave": {
+    "message": "保存"
+  },
+  "messageCancel": {
+    "message": "キャンセル"
+  },
+  "conversationsBtn": {
+    "message": "会話"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "会話を検索..."
+  },
+  "conversationsRename": {
+    "message": "名前を変更"
+  },
+  "conversationsRestore": {
+    "message": "復元"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "コピー"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "削除"
+  },
+  "conversationsDeleteSelected": {
+    "message": "選択項目を削除"
+  },
+  "conversationsEmpty": {
+    "message": "まだ会話がありません"
+  },
+  "conversationsOpenBadge": {
+    "message": "進行中"
+  },
+  "conversationsClosedBadge": {
+    "message": "終了済み"
+  },
+  "builtInActionsLabel": {
+    "message": "組み込みのクイックアクション"
+  },
+  "actionTranslate": {
+    "message": "翻訳する"
+  },
+  "actionConvertChinese": {
+    "message": "中国語の字体を変換"
+  },
+  "actionExplain": {
+    "message": "説明する"
+  },
+  "actionSummarize": {
+    "message": "要約する"
+  },
+  "actionPolish": {
+    "message": "文章を推敲する"
+  },
+  "actionTutorial": {
+    "message": "チュートリアル"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant を開く"
+  },
+  "commandOpenDrawer": {
+    "message": "チャットドロワーを開く"
+  },
+  "shortcutsHint": {
+    "message": "ヒント: chrome://extensions/shortcuts でショートカットをカスタマイズできます"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "古いメッセージを要約する"
+  },
+  "summarizingStatus": {
+    "message": "古いメッセージを要約しています…"
+  },
+  "settingsExportBtn": {
+    "message": "設定をエクスポート"
+  },
+  "settingsImportBtn": {
+    "message": "インポート"
+  },
+  "settingsImported": {
+    "message": "設定をインポートしました（APIキーはエクスポートされません）"
+  },
+  "settingsImportFailed": {
+    "message": "設定のインポートに失敗しました: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "応答が不完全な可能性があります（ストリームが早期に終了しました）。再生成をお試しください。"
   }
 }

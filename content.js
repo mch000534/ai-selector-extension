@@ -24,6 +24,8 @@
   let drawerDialogId = null;
   let dialogIdCounter = 0;
   const Z_BASE = 2147483400;
+  const Z_MAX = 2147483647;
+  const Z_ICON = Z_BASE - 1;
   let topZ = Z_BASE;
   let _activeDragState = null;
   let _activeDrawerResizeState = null;
@@ -32,28 +34,31 @@
   let _bodyShiftSide = null;
   let _bodyShiftStyleEl = null;
 
-  const { escapeHtml, normalizeBaseUrl } = window.__aiext.utils;
+  const { escapeHtml } = window.__aiext.utils;
   const chat = window.__aiext.chat;
 
   function t(key, ...args) {
     if (!contextValid() || !chrome.i18n || !chrome.i18n.getMessage) return key;
     try { return chrome.i18n.getMessage(key, args) || key; }
-    catch (e) { _contextInvalid = true; return key; }
+    catch (e) { return key; }
   }
 
   const _isRtl = window.__aiext.isRtl;
   const _shadow = () => window.__aiext.shadow.root;
   const _shadowAppend = (el) => window.__aiext.shadow.append(el);
-  const _shadowQuery = (sel) => window.__aiext.shadow.query(sel);
-  const _shadowQueryAll = (sel) => window.__aiext.shadow.queryAll(sel);
   const isOurElement = (el) => window.__aiext.shadow.isOurElement(el);
-  const getThemeColors = () => window.__aiext.theme.getThemeColors();
   const applyThemeVars = () => window.__aiext.theme.applyThemeVars();
 
   let _hoveredImage = null;
   let _iconHoverTimer = null;
 
   function injectStyles() {
+    // Shadow isolation needs a body to host. If the script ever runs
+    // pre-body, wait instead of leaking the stylesheet into document.head.
+    if (!document.body) {
+      document.addEventListener('DOMContentLoaded', injectStyles, { once: true });
+      return;
+    }
     const root = _shadow();
     const old = root ? root.querySelector('style[data-aiext-styles]') : document.querySelector('style[data-aiext-styles]');
     if (old) old.remove();
@@ -63,8 +68,8 @@
       .${PREFIX}icon {
         all: initial;
         position: fixed !important;
-        width: 32px !important;
-        height: 32px !important;
+        width: 19px !important;
+        height: 19px !important;
         background: transparent !important;
         border-radius: 50% !important;
         cursor: pointer !important;
@@ -72,14 +77,14 @@
         align-items: center !important;
         justify-content: center !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-        z-index: 2147483647 !important;
+        z-index: ${Z_ICON} !important;
         transition: transform 0.15s !important;
         user-select: none !important;
         pointer-events: auto !important;
         overflow: hidden !important;
       }
       .${PREFIX}icon:hover { transform: scale(1.1) !important; }
-      .${PREFIX}icon img { width: 32px; height: 32px; border-radius: 50%; pointer-events: none; display: block; overflow: clip !important; }
+      .${PREFIX}icon img { width: 19px; height: 19px; border-radius: 50%; pointer-events: none; display: block; overflow: clip !important; }
       .${PREFIX}icon img,
       .${PREFIX}dialog img,
       .${PREFIX}dialog video,
@@ -436,6 +441,103 @@
         font-style: italic !important;
         padding: 4px 8px !important;
       }
+      .${PREFIX}msg-actions {
+        all: unset;
+        display: none !important;
+        gap: 4px !important;
+        margin-top: 4px !important;
+        font-size: 12px !important;
+      }
+      .${PREFIX}msg:hover .${PREFIX}msg-actions {
+        display: flex !important;
+      }
+      .${PREFIX}msg-action {
+        all: unset;
+        cursor: pointer !important;
+        color: var(--aiext-textSecondary) !important;
+        font-size: 12px !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+      }
+      .${PREFIX}msg-action:hover {
+        background: var(--aiext-bgHover) !important;
+        color: var(--aiext-text) !important;
+      }
+      .${PREFIX}msg-editor {
+        all: unset;
+        display: block !important;
+        margin-top: 4px !important;
+      }
+      .${PREFIX}msg-edit-input {
+        all: unset;
+        display: block !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        min-height: 60px !important;
+        padding: 8px !important;
+        border: 1px solid var(--aiext-border) !important;
+        border-radius: 8px !important;
+        background: var(--aiext-bgInput) !important;
+        color: var(--aiext-text) !important;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+      }
+      .${PREFIX}msg-edit-row {
+        all: unset;
+        display: flex !important;
+        gap: 6px !important;
+        margin-top: 4px !important;
+      }
+      .${PREFIX}msg-edit-save, .${PREFIX}msg-edit-cancel {
+        all: unset;
+        cursor: pointer !important;
+        font-size: 12px !important;
+        padding: 4px 10px !important;
+        border-radius: 6px !important;
+        background: var(--aiext-chipBg) !important;
+        color: var(--aiext-chipText) !important;
+      }
+      .${PREFIX}msg-edit-save:hover, .${PREFIX}msg-edit-cancel:hover {
+        background: var(--aiext-chipHoverBg) !important;
+      }
+      .${PREFIX}msg-thumbs {
+        all: unset;
+        display: flex !important;
+        gap: 4px !important;
+        margin-top: 4px !important;
+        justify-content: flex-end !important;
+      }
+      .${PREFIX}msg-thumb {
+        width: 48px !important;
+        height: 48px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        cursor: zoom-in !important;
+      }
+      .${PREFIX}token-line {
+        all: unset;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 2px 16px !important;
+        font-size: 11px !important;
+        color: var(--aiext-textMuted) !important;
+      }
+      .${PREFIX}token-warn {
+        color: var(--aiext-errorText) !important;
+      }
+      .${PREFIX}token-summarize {
+        all: unset;
+        cursor: pointer !important;
+        font-size: 11px !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        background: var(--aiext-chipBg) !important;
+        color: var(--aiext-chipText) !important;
+      }
+      .${PREFIX}token-summarize:hover {
+        background: var(--aiext-chipHoverBg) !important;
+      }
       .${PREFIX}msg-assistant .${PREFIX}bubble pre {
         position: relative !important;
         background: var(--aiext-codeBg) !important;
@@ -637,6 +739,30 @@
         z-index: 2147483647 !important;
         pointer-events: none !important;
       }
+      .${PREFIX}lightbox {
+        all: initial;
+        position: fixed !important;
+        top: 0 !important; left: 0 !important;
+        width: 100vw !important; height: 100vh !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: zoom-out !important;
+        z-index: 2147483647 !important;
+      }
+      .${PREFIX}lightbox-img {
+        max-width: 92vw !important;
+        max-height: 92vh !important;
+        border-radius: 8px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .${PREFIX}icon, .${PREFIX}dialog, .${PREFIX}bubble, .${PREFIX}drawer {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
       .${PREFIX}prompts {
         all: unset;
         display: flex !important;
@@ -782,6 +908,21 @@
     applyThemeVars();
   }
 
+  // ─── Image lightbox ───
+  function showImageLightbox(src) {
+    if (!src) return;
+    const overlay = document.createElement('div');
+    overlay.className = `${PREFIX}lightbox`;
+    overlay.setAttribute('data-aiext', '1');
+    const img = document.createElement('img');
+    img.className = `${PREFIX}lightbox-img`;
+    img.setAttribute('data-aiext', '1');
+    img.src = src;
+    overlay.appendChild(img);
+    overlay.addEventListener('click', () => overlay.remove());
+    _shadowAppend(overlay);
+  }
+
   function showCropOverlay(dataUrl) {
     return new Promise((resolve) => {
       const overlay = document.createElement('div');
@@ -808,6 +949,8 @@
       function cleanup() {
         overlay.remove();
         document.removeEventListener('keydown', onKeyDown);
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('mouseup', onDragEnd);
       }
 
       function onKeyDown(e) {
@@ -831,7 +974,10 @@
         e.preventDefault();
       });
 
-      overlay.addEventListener('mousemove', (e) => {
+      // Tracked on document (not the overlay) so releasing the mouse outside
+      // the overlay still ends the drag and resolves the promise. Otherwise
+      // the awaiting caller hangs forever with its dialog hidden.
+      function onDragMove(e) {
         if (!isDragging) return;
         const currentX = e.clientX;
         const currentY = e.clientY;
@@ -844,9 +990,10 @@
         selection.style.width = width + 'px';
         selection.style.height = height + 'px';
         e.preventDefault();
-      });
+      }
+      document.addEventListener('mousemove', onDragMove);
 
-      overlay.addEventListener('mouseup', async (e) => {
+      async function onDragEnd(e) {
         if (!isDragging) return;
         isDragging = false;
 
@@ -888,7 +1035,8 @@
         };
         img.src = dataUrl;
         e.preventDefault();
-      });
+      }
+      document.addEventListener('mouseup', onDragEnd);
     });
   }
 
@@ -936,15 +1084,20 @@
     if (sel.rangeCount > 0) {
       const range = sel.getRangeAt(0);
       const fragment = range.cloneContents();
-      const imgEls = fragment.querySelectorAll('img');
-      for (const img of imgEls) {
-        if (images.length >= 4) break;
-        const dataURL = await imageToDataURL(img);
+      const imgEls = Array.from(fragment.querySelectorAll('img')).slice(0, MAX_PENDING_IMAGES);
+      const results = await Promise.all(imgEls.map((img) => imageToDataURL(img)));
+      for (const dataURL of results) {
         if (dataURL) images.push(dataURL);
       }
     }
 
     return { text, images };
+  }
+
+  // Image sources the extension accepts from messages (see
+  // utils.isTrustedImageSrc): data: images or http(s) URLs.
+  function isTrustedImageSrc(src) {
+    return window.__aiext.utils.isTrustedImageSrc(src, document.baseURI);
   }
 
   function selectionHasContext(sel) {
@@ -958,7 +1111,7 @@
   }
 
   async function setContextFromSelectionOrSource(srcUrl) {
-    if (srcUrl) {
+    if (srcUrl && isTrustedImageSrc(srcUrl)) {
       currentContext = { text: '', images: [srcUrl] };
       return currentContext;
     }
@@ -1010,56 +1163,44 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(onSuccess).catch(onFail);
         } else {
-          try {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            ta.remove();
-            onSuccess();
-          } catch (err) { onFail(); }
+          copyTextToClipboard(text, onSuccess, onFail);
         }
       });
       pre.appendChild(btn);
     });
   }
 
-  function getConfig() {
-    return new Promise((resolve) => {
-      try {
-        if (!chrome.storage || !chrome.storage.sync) return resolve({});
-        chrome.storage.sync.get(['apiKey', 'model', 'baseUrl'], resolve);
-      } catch (e) {
-        resolve({});
-      }
-    });
+  // API keys live in storage.local (this device); the rest roams via sync.
+  // The sync fallback covers installs that have not opened the popup since
+  // the migration (popup migrates on open via ensureLocalApiKey).
+  async function getConfig() {
+    const store = window.__aiext.storage;
+    const [sync, local] = await Promise.all([
+      store.getSync(['model', 'baseUrl'], {}),
+      store.getLocal(['apiKey'], {}),
+    ]);
+    let apiKey = (local && local.apiKey) || '';
+    if (!apiKey) {
+      const legacy = await store.getSync(['apiKey'], {});
+      apiKey = (legacy && legacy.apiKey) || '';
+    }
+    return {
+      apiKey,
+      model: (sync && sync.model) || '',
+      baseUrl: (sync && sync.baseUrl) || '',
+    };
   }
 
   function getQuickPrompts() {
-    return new Promise((resolve) => {
-      try {
-        if (!chrome.storage || !chrome.storage.sync) return resolve([]);
-        chrome.storage.sync.get(['quickPrompts'], (result) => {
-          resolve(result.quickPrompts || []);
-        });
-      } catch (e) {
-        resolve([]);
-      }
+    return window.__aiext.storage.getSync(['quickPrompts'], {}).then((result) => {
+      return chat.normalizeQuickPrompts(result && result.quickPrompts);
     });
   }
 
   function getShowFloating() {
-    return new Promise((resolve) => {
-      try {
-        if (!contextValid() || !chrome.storage || !chrome.storage.sync) return resolve(true);
-        chrome.storage.sync.get(['showFloating'], (result) => {
-          resolve(result.showFloating !== false);
-        });
-      } catch (e) {
-        resolve(true);
-      }
+    if (!contextValid()) return Promise.resolve(true);
+    return window.__aiext.storage.getSync(['showFloating'], {}).then((result) => {
+      return !result || result.showFloating !== false;
     });
   }
 
@@ -1068,6 +1209,13 @@
   const TTL_MS = 7 * 24 * 3600 * 1000;
   const MAX_PER_HOST = 10;
   const MAX_TOTAL = 50;
+  // Auto-restore is capped well below MAX_PER_HOST: silently reopening a
+  // wall of dialogs (e.g. same host, different SPA routes) is surprising;
+  // the rest stay restorable from the conversation manager.
+  const MAX_AUTO_RESTORE = 3;
+  // Two-tier image budget: the in-memory pending buffer holds up to 4 (paste,
+  // screenshot, selection), while only 2 survive persistence (storage quota).
+  const MAX_PENDING_IMAGES = 4;
   const MAX_IMAGES_PER_DIALOG = 2;
   const MAX_IMAGE_BYTES = 300 * 1024;
   const _persistedIds = new Set();
@@ -1078,21 +1226,18 @@
 
   async function loadDialogRecords() {
     if (!_storageAvailable()) return [];
-    return new Promise((resolve) => {
-      try {
-        chrome.storage.local.get([STORAGE_KEY], (r) => {
-          const data = r && r[STORAGE_KEY];
-          resolve(Array.isArray(data && data.dialogs) ? data.dialogs : []);
-        });
-      } catch (e) { resolve([]); }
-    });
+    const r = await window.__aiext.storage.getLocal([STORAGE_KEY], {});
+    const data = r && r[STORAGE_KEY];
+    return Array.isArray(data && data.dialogs) ? data.dialogs : [];
   }
 
   async function saveDialogRecords(dialogs) {
-    if (!_storageAvailable()) return;
-    try {
-      await chrome.storage.local.set({ [STORAGE_KEY]: { dialogs } });
-    } catch (e) { /* quota exceeded etc. */ }
+    if (!_storageAvailable()) return false;
+    const ok = await window.__aiext.storage.setLocal({ [STORAGE_KEY]: { dialogs } });
+    if (!ok) {
+      try { console.warn('[aiext] dialog records not persisted (storage unavailable or quota exceeded)'); } catch (e) {}
+    }
+    return ok;
   }
 
   function pruneExpired(dialogs) {
@@ -1123,6 +1268,7 @@
       id: state.persistId || (state.persistId = (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random())),
       url: location.href,
       hostname: location.hostname,
+      title: chat.deriveTitle({ conversationHistory: state.conversationHistory }, 60),
       createdAt: state.persistedAt || (state.persistedAt = Date.now()),
       lastActive: Date.now(),
       conversationHistory: (state.conversationHistory || [])
@@ -1134,89 +1280,176 @@
         text: (state.context && state.context.text) ? String(state.context.text).slice(0, 2000) : '',
         images: _trimImageList(state.context && state.context.images)
       },
+      // Unsent screenshots survive reload (same quota rules as context images).
+      pendingScreenshots: _trimImageList(state.pendingScreenshots),
       model: (state.config && state.config.model) || '',
       position: pos,
       size: size
     };
   }
 
+  // ─── Serialized persistence ───
+  // Every storage read-modify-write cycle runs through this queue so
+  // concurrent persistState / closeDialog / restore calls cannot interleave
+  // and lose updates. Queued functions must be pure storage ops and must
+  // never re-enqueue (no deadlock possible by construction).
+  let _persistQueue = Promise.resolve();
+  function _enqueuePersist(fn) {
+    const run = _persistQueue.then(fn, fn);
+    _persistQueue = run.catch(() => {});
+    return run;
+  }
+
+  // Merge a fresh record into a record list. A stored closedAt is never
+  // dropped by an older snapshot: if closeDialog marked a record closed
+  // while a persistState was already queued, the closed state still wins.
+  function _upsertRecord(records, rec) {
+    const idx = records.findIndex(r => r && r.id === rec.id);
+    if (idx >= 0) {
+      const existing = records[idx];
+      if (existing && existing.closedAt && (!rec.closedAt || existing.closedAt > rec.closedAt)) {
+        rec.closedAt = existing.closedAt;
+      }
+      // Preserve an explicit rename across persists; freshly derived titles
+      // refresh otherwise.
+      if (existing && existing.titleExplicit && existing.title) {
+        rec.title = existing.title;
+        rec.titleExplicit = true;
+      }
+      records[idx] = rec;
+    } else {
+      records.push(rec);
+    }
+    return records;
+  }
+
+  function _applyCaps(records, hostname) {
+    const perHost = records.filter(r => r && r.hostname === hostname);
+    let out = records;
+    if (perHost.length > MAX_PER_HOST) {
+      perHost.sort((a, b) => a.lastActive - b.lastActive);
+      const dropIds = new Set(perHost.slice(0, perHost.length - MAX_PER_HOST).map(d => d.id));
+      out = out.filter(r => !dropIds.has(r.id));
+    }
+    if (out.length > MAX_TOTAL) {
+      out.sort((a, b) => a.lastActive - b.lastActive);
+      out = out.slice(out.length - MAX_TOTAL);
+    }
+    return out;
+  }
+
   async function persistState(id) {
     const state = dialogs.get(id);
     if (!state) return;
-    let records = pruneExpired(await loadDialogRecords());
-    const rec = toRecord(state);
-    if (!rec) return;
-    const idx = records.findIndex(r => r && r.id === rec.id);
-    if (idx >= 0) records[idx] = rec;
-    else records.push(rec);
-    // per-host cap
-    const perHost = records.filter(r => r.hostname === rec.hostname);
-    if (perHost.length > MAX_PER_HOST) {
-      perHost.sort((a, b) => a.lastActive - b.lastActive);
-      const toDrop = perHost.slice(0, perHost.length - MAX_PER_HOST);
-      const dropIds = new Set(toDrop.map(d => d.id));
-      records = records.filter(r => !dropIds.has(r.id));
-    }
-    // total cap
-    if (records.length > MAX_TOTAL) {
-      records.sort((a, b) => a.lastActive - b.lastActive);
-      records = records.slice(records.length - MAX_TOTAL);
-    }
-    _persistedIds.add(rec.id);
-    await saveDialogRecords(records);
+    return _enqueuePersist(async () => {
+      const records = pruneExpired(await loadDialogRecords());
+      const rec = toRecord(state);
+      if (!rec) return;
+      _persistedIds.add(rec.id);
+      await saveDialogRecords(_applyCaps(_upsertRecord(records, rec), rec.hostname));
+    });
   }
 
   async function deleteRecord(id) {
     const state = dialogs.get(id);
     const persistId = state && state.persistId;
     if (!persistId) return;
-    let records = await loadDialogRecords();
-    records = records.filter(r => r && r.id !== persistId);
-    _persistedIds.delete(persistId);
-    await saveDialogRecords(records);
+    return _enqueuePersist(async () => {
+      const records = (await loadDialogRecords()).filter(r => r && r.id !== persistId);
+      _persistedIds.delete(persistId);
+      await saveDialogRecords(records);
+    });
+  }
+
+  // Rebuilds a dialog from a persisted record. Shared by startup restore
+  // and popup-triggered restore of a closed dialog. Returns the dialog id,
+  // or null when the dialog state went missing.
+  function applyRecordToDialog(r, config, quickPrompts) {
+    const ctx = { text: (r.context && r.context.text) || '', images: (r.context && r.context.images) || [] };
+    const id = createDialog(
+      { ...config, model: r.model || config.model },
+      null,
+      quickPrompts,
+      ctx,
+      { startPinned: true }
+    );
+    const st = dialogs.get(id);
+    if (!st) return null;
+    const pinBtn = st.dialog.querySelector(`.${PREFIX}pin`);
+    if (pinBtn) pinBtn.classList.add(`${PREFIX}pin-active`);
+    st.persistId = r.id;
+    st.persistedAt = r.createdAt;
+    _persistedIds.add(r.id);
+    if (r.position) {
+      st.dialog.style.left = r.position.x + 'px';
+      st.dialog.style.top = r.position.y + 'px';
+      st.dialog.style.right = 'auto';
+    }
+    if (r.size && r.size.width) {
+      st.dialog.style.width = r.size.width + 'px';
+      if (r.size.height) st.dialog.style.height = r.size.height + 'px';
+    }
+    st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
+    st.conversationHistory.forEach((m, hIdx) => appendHistoryMessage(id, m, hIdx));
+    if (Array.isArray(r.pendingScreenshots) && r.pendingScreenshots.length > 0) {
+      st.pendingScreenshots = _trimImageList(r.pendingScreenshots);
+      if (typeof st.renderScreenshotPreview === 'function') st.renderScreenshotPreview();
+    }
+    addMessage(id, 'system', t('dialogRestoredHint'));
+    updateTokenLine(id);
+    return id;
+  }
+
+  // Renders one history entry (shared by restore and post-summarize re-render).
+  function appendHistoryMessage(id, m, hIdx) {
+    if (!m || (m.role !== 'user' && m.role !== 'assistant')) return;
+    let images = null;
+    let content;
+    if (typeof m.content === 'string') {
+      content = m.content;
+    } else if (Array.isArray(m.content)) {
+      content = m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n');
+      images = m.content
+        .filter(p => p && p.type === 'image_url' && p.image_url && typeof p.image_url.url === 'string')
+        .map(p => p.image_url.url);
+    } else {
+      content = '';
+    }
+    const hasDataImages = Array.isArray(images) &&
+      images.some(src => typeof src === 'string' && src.startsWith('data:'));
+    if (!content && !(m.role === 'user' && hasDataImages)) return;
+    const bubble = addMessage(id, m.role, content || t('screenshotLabel'), hIdx, images);
+    if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, m.role, hIdx);
   }
 
   async function restoreDialogsOnLoad() {
     if (!_storageAvailable()) return;
     let records = pruneExpired(await loadDialogRecords());
     const hostname = location.hostname;
-    const matches = records.filter(r => r.hostname === hostname && !r.closedAt);
+    const matches = records
+      .filter(r => r.hostname === hostname && !r.closedAt)
+      .sort((a, b) => (b.lastActive || 0) - (a.lastActive || 0))
+      .slice(0, MAX_AUTO_RESTORE);
     if (matches.length === 0) return;
     const config = await getConfig();
     if (!config || !config.apiKey) return;
     const quickPrompts = await getQuickPrompts();
     for (const r of matches) {
-      const ctx = { text: (r.context && r.context.text) || '', images: (r.context && r.context.images) || [] };
-      const id = createDialog(
-        { ...config, model: r.model || config.model },
-        null,
-        quickPrompts,
-        ctx
-      );
-      const st = dialogs.get(id);
-      if (!st) continue;
-      st.persistId = r.id;
-      st.persistedAt = r.createdAt;
-      _persistedIds.add(r.id);
-      if (r.position) {
-        st.dialog.style.left = r.position.x + 'px';
-        st.dialog.style.top = r.position.y + 'px';
-        st.dialog.style.right = 'auto';
-      }
-      if (r.size && r.size.width) {
-        st.dialog.style.width = r.size.width + 'px';
-        if (r.size.height) st.dialog.style.height = r.size.height + 'px';
-      }
-      st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
-      st.conversationHistory.forEach(m => {
-        if (m.role === 'user' || m.role === 'assistant') {
-          const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
-          if (content) addMessage(id, m.role, content);
-        }
-      });
-      addMessage(id, 'system', t('dialogRestoredHint'));
+      applyRecordToDialog(r, config, quickPrompts);
     }
-    await saveDialogRecords(records);
+    // Merge instead of blind overwrite: dialogs created after this snapshot
+    // was taken must survive. Newer lastActive wins per record id.
+    const snapshot = records;
+    await _enqueuePersist(async () => {
+      const fresh = pruneExpired(await loadDialogRecords());
+      const byId = new Map(fresh.map(r => [r.id, r]));
+      for (const r of snapshot) {
+        if (!r || !r.id) continue;
+        const cur = byId.get(r.id);
+        if (!cur || (r.lastActive || 0) > (cur.lastActive || 0)) byId.set(r.id, r);
+      }
+      await saveDialogRecords(_applyCaps([...byId.values()], location.hostname));
+    });
   }
 
   // ─── Floating Icon ───
@@ -1231,7 +1464,7 @@
       if (contextValid() && chrome.runtime && chrome.runtime.getURL) {
         _iconUrl = chrome.runtime.getURL('icons/icon48.png');
       }
-    } catch (e) { _contextInvalid = true; }
+    } catch (e) { /* transient getURL failure: keep context flag untouched */ }
     floatingIcon.innerHTML = _iconUrl ? `<img src="${_iconUrl}" alt="">` : '';
 
     if (imgEl) {
@@ -1265,7 +1498,7 @@
           const src = imgEl.src || imgEl.getAttribute('src');
           const imageUrl = dataUrl || (src && !src.startsWith('blob:') ? src : null);
           currentContext = { text: '', images: imageUrl ? [imageUrl] : [] };
-          openDialog();
+          openDialog({ skipSelectionRefresh: true });
         })();
       } else {
         openDialog();
@@ -1276,6 +1509,7 @@
   }
 
   function hideFloatingIcon() {
+    if (_iconHoverTimer) { clearTimeout(_iconHoverTimer); _iconHoverTimer = null; }
     if (floatingIcon) {
       floatingIcon.remove();
       floatingIcon = null;
@@ -1322,7 +1556,7 @@
       <div class="${PREFIX}drawer-resize" data-aiext="1"></div>
       <div class="${PREFIX}header" data-aiext="1">
         <span class="${PREFIX}title">${t('dialogTitle')}</span>
-        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${config.model || ''}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
+        <input class="${PREFIX}model-input" data-aiext="1" type="text" list="${PREFIX}model-list-${id}" value="${escapeHtml(config.model || '')}" placeholder="${t('dialogModelPlaceholder')}" title="${t('dialogModelTooltip')}" autocomplete="off">
         <datalist id="${PREFIX}model-list-${id}"></datalist>
         <span class="${PREFIX}pin" data-aiext="1" title="${t('dialogPinTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>
@@ -1330,7 +1564,7 @@
         <span class="${PREFIX}minimize" data-aiext="1" title="${t('dialogMinimizeTooltip')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
         </span>
-        <span class="${PREFIX}todrawer" data-aiext="1" title="${t('dialogMoveToDrawerTooltip')}">
+        <span class="${PREFIX}todrawer" data-aiext="1" title="${t('moveToDrawer')}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
         </span>
         <span class="${PREFIX}tofloat" data-aiext="1" title="${t('dialogMoveToFloatTooltip')}">
@@ -1341,13 +1575,14 @@
       ${hasContent ? `
       <div class="${PREFIX}selected">
         ${ctx.text ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedText')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="text" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-text">${escapeHtml(ctx.text.length > 200 ? ctx.text.slice(0, 200) + '...' : ctx.text)}</div>` : ''}
-        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${src}" data-aiext="1"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
+        ${ctx.images && ctx.images.length > 0 ? `<div class="${PREFIX}selected-label"><span data-aiext="1">${t('dialogSelectedImages')}</span><button class="${PREFIX}selected-clear" data-aiext="1" data-clear-type="images" type="button" title="${t('dialogClearTooltip')}">&times;</button></div><div class="${PREFIX}selected-images">${ctx.images.map((src, i) => `<span class="${PREFIX}selected-img-wrap" data-aiext="1" data-image-index="${i}"><img class="${PREFIX}selected-img" src="${escapeHtml(src)}" data-aiext="1"><button class="${PREFIX}selected-img-remove" data-aiext="1" data-image-index="${i}" type="button" title="${t('dialogClearTooltip')}">&times;</button></span>`).join('')}</div>` : ''}
       </div>` : ''}
       <div class="${PREFIX}messages"></div>
       ${quickPrompts && quickPrompts.length > 0 ? `
       <div class="${PREFIX}prompts">
         ${quickPrompts.map((p, i) => `<span class="${PREFIX}prompt-chip" data-aiext="1" data-prompt-index="${i}">${escapeHtml(p)}</span>`).join('')}
       </div>` : ''}
+      <div class="${PREFIX}token-line" data-aiext="1"></div>
       <div class="${PREFIX}input-row">
         <textarea class="${PREFIX}input" rows="1" placeholder="${t('dialogInputPlaceholder')}" data-aiext="1"></textarea>
         <button class="${PREFIX}camera" data-aiext="1" title="${t('dialogCameraTooltip')}">
@@ -1357,12 +1592,16 @@
       </div>
     `;
 
-    // Position
+    // Position (clamped into the viewport; RTL cascades from the selection end)
+    const MIN_W = 280, MIN_H = 250;
     if (rect) {
       let left = rect.left + dialogs.size * 30;
       let top = rect.bottom + 8 + dialogs.size * 30;
+      if (_isRtl) left = rect.right - 420 - dialogs.size * 30;
       if (left + 420 > window.innerWidth) left = Math.max(10, window.innerWidth - 440);
       if (top + 400 > window.innerHeight) top = Math.max(10, rect.top - 420);
+      left = Math.max(10, Math.min(left, Math.max(10, window.innerWidth - MIN_W - 10)));
+      top = Math.max(10, Math.min(top, Math.max(10, window.innerHeight - MIN_H - 10)));
       state.dialog.style.left = left + 'px';
       state.dialog.style.top = top + 'px';
     } else {
@@ -1373,6 +1612,15 @@
     if (state.overlay) _shadowAppend(state.overlay);
     _shadowAppend(state.dialog);
     dialogs.set(id, state);
+
+    // Enlarge selected-context images on click.
+    state.dialog.addEventListener('click', (e) => {
+      const target = e.target;
+      const img = target && typeof target.closest === 'function'
+        ? target.closest(`.${PREFIX}selected-img`)
+        : null;
+      if (img && img.src) showImageLightbox(img.src);
+    });
 
     // Events
     state.dialog.querySelector(`.${PREFIX}close`).addEventListener('click', () => closeDialog(id));
@@ -1440,6 +1688,18 @@
     setupDrawerResize(id);
     bringToFront(id);
 
+    // Manual resizes (CSS resize:both writes inline size; drawer drags write
+    // it too) persist debounced, so adjusted sizes survive reload.
+    if (typeof ResizeObserver !== 'undefined') {
+      let resizeTimer = null;
+      const ro = new ResizeObserver(() => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => persistState(id), 600);
+      });
+      ro.observe(state.dialog);
+      state._resizeObserver = ro;
+    }
+
     state.dialog.addEventListener('mousedown', () => {
       if (!state.isDragging && state.zIndex !== topZ) bringToFront(id);
     });
@@ -1450,12 +1710,32 @@
       state.config.model = modelInput.value.trim();
       clearTimeout(_persistModelTimer);
       _persistModelTimer = setTimeout(() => persistState(id), 600);
+      updateTokenLine(id);
     });
     modelInput.addEventListener('mousedown', (e) => e.stopPropagation());
     fetchModelsForDialog(id);
 
     const input = state.dialog.querySelector(`.${PREFIX}input`);
     const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
+
+    // Stages an image file (paste or drop) into pending screenshots.
+    function addPendingImageFile(dialogId, file) {
+      if (!file) return;
+      if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
+        addMessage(dialogId, 'system', t('pasteTooManyImages'));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
+          addMessage(dialogId, 'system', t('pasteTooManyImages'));
+          return;
+        }
+        state.pendingScreenshots.push(reader.result);
+        renderScreenshotPreview();
+      };
+      reader.readAsDataURL(file);
+    }
 
     function autoGrowInput() {
       if (!input) return;
@@ -1481,21 +1761,23 @@
           e.preventDefault();
           const file = item.getAsFile();
           if (!file) continue;
-          if (state.pendingScreenshots.length >= 4) {
-            addMessage(id, 'system', t('pasteTooManyImages'));
-            return;
-          }
-          const reader = new FileReader();
-          reader.onload = () => {
-            if (state.pendingScreenshots.length >= 4) {
-              addMessage(id, 'system', t('pasteTooManyImages'));
-              return;
-            }
-            state.pendingScreenshots.push(reader.result);
-            renderScreenshotPreview();
-          };
-          reader.readAsDataURL(file);
+          addPendingImageFile(id, file);
         }
+      }
+    });
+
+    // Dropping image files onto the dialog stages them like pasting does.
+    state.dialog.addEventListener('dragover', (e) => {
+      const types = (e.dataTransfer && e.dataTransfer.types) || [];
+      if (Array.from(types).includes('Files')) e.preventDefault();
+    });
+    state.dialog.addEventListener('drop', (e) => {
+      const files = (e.dataTransfer && e.dataTransfer.files) || [];
+      if (!files.length) return;
+      e.preventDefault();
+      e.stopPropagation();
+      for (const file of files) {
+        if (file.type && file.type.startsWith('image/')) addPendingImageFile(id, file);
       }
     });
 
@@ -1516,7 +1798,7 @@
 
     const cameraBtn = state.dialog.querySelector(`.${PREFIX}camera`);
     cameraBtn.addEventListener('click', async () => {
-      if (state.pendingScreenshots.length >= 4) {
+      if (state.pendingScreenshots.length >= MAX_PENDING_IMAGES) {
         addMessage(id, 'system', t('pasteTooManyImages'));
         return;
       }
@@ -1560,44 +1842,76 @@
       state.pendingScreenshots.forEach((src, i) => {
         const thumb = document.createElement('div');
         thumb.className = `${PREFIX}screenshot-thumb`;
-        thumb.innerHTML = `<img src="${src}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        thumb.innerHTML = `<img src="${escapeHtml(src)}" data-aiext="1"><span class="${PREFIX}screenshot-remove" data-index="${i}">&times;</span>`;
+        const img = thumb.querySelector('img');
+        if (img) img.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showImageLightbox(src);
+        });
         thumb.querySelector(`.${PREFIX}screenshot-remove`).addEventListener('click', () => {
           state.pendingScreenshots.splice(i, 1);
           renderScreenshotPreview();
         });
         screenshotPreview.appendChild(thumb);
       });
+      persistState(id);
     }
+    state.renderScreenshotPreview = renderScreenshotPreview;
 
     setTimeout(() => input.focus(), 50);
+    updateTokenLine(id);
     return id;
   }
 
   function closeDialog(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (state.summarizeController) {
+      try { state.summarizeController.abort(); } catch (e) {}
+    }
     if (drawerDialogId === id) {
       drawerDialogId = null;
       clearBodyShift();
     }
     if (state.persistId) {
-      (async () => {
-        let records = await loadDialogRecords();
-        const idx = records.findIndex(r => r && r.id === state.persistId);
+      const pid = state.persistId;
+      _enqueuePersist(async () => {
+        const records = await loadDialogRecords();
+        const idx = records.findIndex(r => r && r.id === pid);
         if (idx >= 0) {
           records[idx].closedAt = Date.now();
           await saveDialogRecords(records);
         }
-      })();
+      });
     }
     if (state.overlay) state.overlay.remove();
     if (state.dialog) state.dialog.remove();
+    if (state._resizeObserver) {
+      try { state._resizeObserver.disconnect(); } catch (e) {}
+      state._resizeObserver = null;
+    }
     dialogs.delete(id);
+  }
+
+  // Renormalizes stacking order when topZ approaches the CSS limit, so
+  // z-index never overflows into invalid values no matter how often
+  // dialogs are focused.
+  function normalizeZOrder() {
+    const ordered = [...dialogs.values()].sort((a, b) => (a.zIndex || 0) - (b.zIndex || 0));
+    topZ = Z_BASE;
+    for (const st of ordered) {
+      topZ++;
+      st.zIndex = topZ;
+      if (st.dialog) st.dialog.style.zIndex = topZ;
+      if (st.overlay) st.overlay.style.zIndex = topZ - 1;
+    }
   }
 
   function bringToFront(id) {
     const state = dialogs.get(id);
     if (!state) return;
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
     topZ++;
     state.zIndex = topZ;
     state.dialog.style.zIndex = topZ;
@@ -1773,16 +2087,10 @@
     }
 
     const fetchPromise = (async () => {
-      try {
-        const url = normalizeBaseUrl(baseUrl) + '/models';
-        const res = await fetch(url, { headers: { 'Authorization': `Bearer ${apiKey}` } });
-        if (!res.ok) return null;
-        const data = await res.json();
-        const models = (data.data || data.models || []).map(m => m.id || m.name).filter(Boolean).sort();
-        if (models.length === 0) return null;
-        _modelCache.set(cacheKey, { models, ts: Date.now() });
-        return models;
-      } catch (e) { return null; }
+      const r = await window.__aiext.api.fetchModels({ baseUrl, apiKey });
+      if (!r.ok || !r.models || r.models.length === 0) return null;
+      _modelCache.set(cacheKey, { models: r.models, ts: Date.now() });
+      return r.models;
     })();
 
     _modelFetchInFlight.set(cacheKey, fetchPromise);
@@ -1795,14 +2103,17 @@
   }
 
   // Global drag handler
-  document.addEventListener('mousemove', (e) => {
+  // Coalesced via rAF: mousemove fires far more often than frames, and every
+  // handler run below forces layout through style writes.
+  let _dragRaf = null;
+  let _dragEvent = null;
+  function _applyDrag(e) {
     if (_activeDrawerResizeState) {
       const { state, startX, startWidth } = _activeDrawerResizeState;
       const delta = _isRtl ? (e.clientX - startX) : (startX - e.clientX);
       const newWidth = startWidth + delta;
       applyDrawerWidth(state.dialog, newWidth);
       applyBodyShift(newWidth, _isRtl ? 'left' : 'right');
-      e.preventDefault();
       return;
     }
 
@@ -1815,9 +2126,25 @@
     state.dialog.style.left = newLeft + 'px';
     state.dialog.style.top = newTop + 'px';
     state.dialog.style.right = 'auto';
+  }
+  document.addEventListener('mousemove', (e) => {
+    if (!_activeDrawerResizeState && !_activeDragState) return;
+    e.preventDefault();
+    _dragEvent = e;
+    if (_dragRaf === null) {
+      _dragRaf = requestAnimationFrame(() => {
+        _dragRaf = null;
+        const ev = _dragEvent;
+        _dragEvent = null;
+        if (ev) _applyDrag(ev);
+      });
+    }
   });
 
-  document.addEventListener('mouseup', () => {
+  // Ends drag/resize gestures and restores page cursor/selection. Bound to
+  // mouseup and window blur (a mouseup lost outside the window must not
+  // leave the page stuck in ew-resize with selection disabled).
+  function endActiveGestures() {
     if (_activeDrawerResizeState) {
       const state = _activeDrawerResizeState.state;
       _activeDrawerResizeState = null;
@@ -1826,11 +2153,18 @@
       if (state && state.id) persistState(state.id);
     }
     if (_activeDragState) { _activeDragState.isDragging = false; _activeDragState = null; }
-  });
+  }
+  document.addEventListener('mouseup', endActiveGestures);
+  window.addEventListener('blur', endActiveGestures);
 
   // ─── ESC handler ───
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      try {
+        const root = _shadow();
+        const lb = root ? root.querySelector(`.${PREFIX}lightbox`) : null;
+        if (lb) { lb.remove(); return; }
+      } catch (err) {}
       for (const state of dialogs.values()) {
         if (!state.isPinned) { closeDialog(state.id); break; }
       }
@@ -1842,23 +2176,17 @@
     return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
   }
 
-  function autoScroll(id) {
-    const state = dialogs.get(id);
-    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
-    if (m && isNearBottom(m)) m.scrollTop = m.scrollHeight;
-  }
-
-  // During streaming we cache the "user is at bottom" decision once per frame
-  // so scrollHeight/scrollTop reads don't force a layout flush on every delta.
-  let _scrollAtBottom = true;
+  // During streaming each dialog caches its own "user is at bottom" decision
+  // once per frame, so scrollHeight/scrollTop reads don't force a layout
+  // flush on every delta (and concurrent streams can't pollute each other).
   function autoScrollStreaming(id) {
-    if (!_scrollAtBottom) return;
     const state = dialogs.get(id);
-    const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!state || state.scrollAtBottom === false) return;
+    const m = state.dialog.querySelector(`.${PREFIX}messages`);
     if (m) m.scrollTop = m.scrollHeight;
   }
 
-  function addMessage(id, role, content) {
+  function addMessage(id, role, content, historyIndex, images) {
     const state = dialogs.get(id);
     if (!state) return null;
     const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
@@ -1866,6 +2194,7 @@
     const msg = document.createElement('div');
     msg.className = `${PREFIX}msg ${PREFIX}msg-${role}`;
     msg.setAttribute('data-aiext', '1');
+    if (typeof historyIndex === 'number') msg.dataset.historyIndex = String(historyIndex);
     const bubble = document.createElement('div');
     bubble.className = `${PREFIX}bubble`;
     if (role === 'assistant') {
@@ -1875,6 +2204,27 @@
       bubble.textContent = content;
     }
     msg.appendChild(bubble);
+    // Sent-image thumbnail strip (data: URLs only — remote URLs are never
+    // fetched just for display). Click enlarges via the shared lightbox.
+    if (role === 'user' && Array.isArray(images) && images.length > 0) {
+      const strip = document.createElement('div');
+      strip.className = `${PREFIX}msg-thumbs`;
+      strip.setAttribute('data-aiext', '1');
+      images.slice(0, MAX_PENDING_IMAGES).forEach(src => {
+        if (typeof src !== 'string' || !src.startsWith('data:')) return;
+        const thumb = document.createElement('img');
+        thumb.className = `${PREFIX}msg-thumb`;
+        thumb.setAttribute('data-aiext', '1');
+        thumb.src = src;
+        thumb.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showImageLightbox(src);
+        });
+        strip.appendChild(thumb);
+      });
+      if (strip.children.length > 0) msg.appendChild(strip);
+    }
     messagesEl.appendChild(msg);
     if (role === 'user' || isNearBottom(messagesEl)) messagesEl.scrollTop = messagesEl.scrollHeight;
     return bubble;
@@ -1894,23 +2244,57 @@
   }
 
   // ─── Send Message ───
+  function clearPendingScreenshots(state) {
+    if (state) state.pendingScreenshots.length = 0;
+    const previewEl = state && state.dialog.querySelector(`.${PREFIX}screenshot-preview`);
+    if (previewEl) previewEl.innerHTML = '';
+  }
+
+  // Copies text with a textarea fallback for non-secure contexts. Shared by
+  // code-block copy buttons and message-level copy.
+  function copyTextToClipboard(text, onSuccess, onFail) {
+    window.__aiext.utils.copyTextToClipboard(text, { onSuccess, onFail, markExtensionElement: true });
+  }
+
   async function sendMessage(id) {
     const state = dialogs.get(id);
     if (!state || state.isStreaming) return;
 
     const input = state.dialog.querySelector(`.${PREFIX}input`);
-    const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
     const text = input.value.trim();
     const hasScreenshots = state.pendingScreenshots && state.pendingScreenshots.length > 0;
     if (!text && !hasScreenshots) return;
 
     input.value = '';
     input.dispatchEvent(new Event('input'));
-    addMessage(id, 'user', text || t('screenshotLabel'));
-    state.conversationHistory.push({ role: 'user', content: text || t('screenshotLabel') });
+    appendUserMessage(id, text || t('screenshotLabel'),
+      (state.pendingScreenshots || []).slice());
+    await runCompletion(id);
+  }
+
+  // Appends a user message to history + DOM. Returns the history index.
+  function appendUserMessage(id, text, images) {
+    const state = dialogs.get(id);
+    if (!state) return -1;
+    const idx = state.conversationHistory.length;
+    state.conversationHistory.push({ role: 'user', content: text });
+    const bubble = addMessage(id, 'user', text, idx, images);
+    if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, 'user', idx);
+    return idx;
+  }
+
+  // Runs the AI round-trip for the current history (used by fresh sends,
+  // edits and regenerates alike).
+  async function runCompletion(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+
+    const input = state.dialog.querySelector(`.${PREFIX}input`);
+    const sendBtn = state.dialog.querySelector(`.${PREFIX}send`);
 
     state.isStreaming = true;
     sendBtn.disabled = true;
+    updateTokenLine(id);
 
     const typing = addTypingIndicator(id);
 
@@ -1920,7 +2304,7 @@
         if (contextValid() && chrome.i18n && chrome.i18n.getUILanguage) {
           uiLang = chrome.i18n.getUILanguage() || 'en';
         }
-      } catch (e) { _contextInvalid = true; }
+      } catch (e) { /* transient getUILanguage failure: keep default 'en' */ }
       const messages = chat.buildChatMessages({
         context: state.context,
         pendingImages: state.pendingScreenshots,
@@ -1939,18 +2323,34 @@
         errDiv.textContent = response.error;
         messagesEl.appendChild(errDiv);
       } else if (response.bubble) {
-        response.bubble.innerHTML = renderMarkdown(response.content);
-        attachCodeCopyButtons(response.bubble);
-        state.conversationHistory.push({ role: 'assistant', content: response.content });
+        if (!response.content) {
+          // Empty reply: drop the blank bubble instead of writing an empty
+          // turn into history (which would be sent back to the API).
+          if (response.bubble.parentElement) response.bubble.parentElement.remove();
+        } else {
+          response.bubble.innerHTML = renderMarkdown(response.content);
+          attachCodeCopyButtons(response.bubble);
+          const aIdx = state.conversationHistory.length;
+          state.conversationHistory.push({ role: 'assistant', content: response.content });
+          const msgEl = response.bubble.parentElement;
+          if (msgEl) {
+            msgEl.dataset.historyIndex = String(aIdx);
+            attachMessageActions(msgEl, id, 'assistant', aIdx);
+          }
+          if (response.truncated) {
+            // The stream ended without a terminator; the content may be cut
+            // off. The message toolbar already offers Regenerate to retry.
+            addMessage(id, 'system', t('streamTruncated'));
+          }
+        }
       } else {
-        addMessage(id, 'assistant', response.content);
+        const aIdx = state.conversationHistory.length;
         state.conversationHistory.push({ role: 'assistant', content: response.content });
+        const bubble = addMessage(id, 'assistant', response.content, aIdx);
+        if (bubble && bubble.parentElement) attachMessageActions(bubble.parentElement, id, 'assistant', aIdx);
       }
 
-      // Clear pending screenshots
-      state.pendingScreenshots.length = 0;
-      const previewEl = state.dialog.querySelector(`.${PREFIX}screenshot-preview`);
-      if (previewEl) previewEl.innerHTML = '';
+      clearPendingScreenshots(state);
     } catch (err) {
       if (typing) typing.remove();
       const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
@@ -1966,30 +2366,288 @@
 
     state.isStreaming = false;
     sendBtn.disabled = false;
+    updateTokenLine(id);
     input.focus();
   }
 
+  // ─── Message actions (edit / regenerate / copy) ───
+  // History indices are append-only + tail-truncated, so a dataset index
+  // stamped at creation stays valid for the node's lifetime.
+  function attachMessageActions(msgEl, id, role, idx) {
+    if (!msgEl || msgEl.querySelector(`.${PREFIX}msg-actions`)) return;
+    const state = dialogs.get(id);
+    if (!state) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry) return;
+    const bar = document.createElement('div');
+    bar.className = `${PREFIX}msg-actions`;
+    bar.setAttribute('data-aiext', '1');
+    function mkBtn(label, fn) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `${PREFIX}msg-action`;
+      b.setAttribute('data-aiext', '1');
+      b.textContent = label;
+      b.title = label;
+      b.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fn(b);
+      });
+      bar.appendChild(b);
+      return b;
+    }
+    if (role === 'user') {
+      if (typeof entry.content === 'string') {
+        mkBtn(t('messageEdit'), () => startEditMessage(id, msgEl, idx));
+      }
+      mkBtn(t('messageRegenerate'), () => regenerateFromUser(id, msgEl, idx));
+    } else if (role === 'assistant') {
+      mkBtn(t('messageRegenerate'), () => regenerateAssistant(id, msgEl, idx));
+      mkBtn(t('messageCopy'), (btn) => copyMessageText(id, idx, btn));
+    }
+    msgEl.appendChild(bar);
+  }
+
+  function copyMessageText(id, idx, btn) {
+    const state = dialogs.get(id);
+    const entry = state && state.conversationHistory[idx];
+    const text = entry && typeof entry.content === 'string' ? entry.content : '';
+    if (!text) return;
+    const done = () => {
+      if (!btn) return;
+      const orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    };
+    copyTextToClipboard(text, done, done);
+  }
+
+  function removeMessageNodesFrom(messagesEl, fromNode, inclusive) {
+    let n = inclusive ? fromNode : fromNode.nextSibling;
+    while (n) {
+      const nx = n.nextSibling;
+      n.remove();
+      n = nx;
+    }
+  }
+
+  function startEditMessage(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    if (msgEl.querySelector(`.${PREFIX}msg-editor`)) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry || entry.role !== 'user' || typeof entry.content !== 'string') return;
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!messagesEl) return;
+    const bubble = msgEl.querySelector(`.${PREFIX}bubble`);
+    const bar = msgEl.querySelector(`.${PREFIX}msg-actions`);
+    if (bubble) bubble.style.display = 'none';
+    if (bar) bar.style.display = 'none';
+
+    const editor = document.createElement('div');
+    editor.className = `${PREFIX}msg-editor`;
+    editor.setAttribute('data-aiext', '1');
+    const ta = document.createElement('textarea');
+    ta.className = `${PREFIX}msg-edit-input`;
+    ta.setAttribute('data-aiext', '1');
+    ta.value = entry.content;
+    const row = document.createElement('div');
+    row.className = `${PREFIX}msg-edit-row`;
+    row.setAttribute('data-aiext', '1');
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.className = `${PREFIX}msg-edit-save`;
+    saveBtn.setAttribute('data-aiext', '1');
+    saveBtn.textContent = t('messageSave');
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.className = `${PREFIX}msg-edit-cancel`;
+    cancelBtn.setAttribute('data-aiext', '1');
+    cancelBtn.textContent = t('messageCancel');
+    row.appendChild(saveBtn);
+    row.appendChild(cancelBtn);
+    editor.appendChild(ta);
+    editor.appendChild(row);
+    msgEl.appendChild(editor);
+    ta.focus();
+    ta.addEventListener('keydown', (ev) => {
+      // Cancel editing without letting Escape reach the global handler
+      // (which would close the whole dialog when unpinned).
+      if (ev.key === 'Escape') {
+        ev.preventDefault();
+        ev.stopPropagation();
+        closeEditor();
+        const input = state.dialog.querySelector(`.${PREFIX}input`);
+        if (input) input.focus();
+      }
+    });
+
+    function closeEditor() {
+      editor.remove();
+      if (bubble) bubble.style.display = '';
+      if (bar) bar.style.display = '';
+    }
+    cancelBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeEditor();
+      const input = state.dialog.querySelector(`.${PREFIX}input`);
+      if (input) input.focus();
+    });
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const newText = ta.value.trim();
+      if (!newText || newText === entry.content) {
+        closeEditor();
+        return;
+      }
+      // Truncate (never branch): drop this message and everything after it,
+      // then resend the edited text as a fresh turn.
+      state.conversationHistory = state.conversationHistory.slice(0, idx);
+      clearPendingScreenshots(state);
+      removeMessageNodesFrom(messagesEl, msgEl, true);
+      appendUserMessage(id, newText);
+      runCompletion(id);
+    });
+  }
+
+  function regenerateFromUser(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const entry = state.conversationHistory[idx];
+    if (!entry || entry.role !== 'user') return;
+    state.conversationHistory = state.conversationHistory.slice(0, idx + 1);
+    clearPendingScreenshots(state);
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (messagesEl) removeMessageNodesFrom(messagesEl, msgEl, false);
+    runCompletion(id);
+  }
+
+  function regenerateAssistant(id, msgEl, idx) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const k = chat.lastUserIndexBefore(state.conversationHistory, idx);
+    if (k < 0) return;
+    state.conversationHistory = state.conversationHistory.slice(0, k + 1);
+    clearPendingScreenshots(state);
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (messagesEl) {
+      const userNode = messagesEl.querySelector(`[data-history-index="${k}"]`);
+      if (userNode) removeMessageNodesFrom(messagesEl, userNode, false);
+      else removeMessageNodesFrom(messagesEl, msgEl, false);
+    }
+    runCompletion(id);
+  }
+
+  // ─── Token awareness (4.8) ───
+  function estimateDialogTokens(state) {
+    const ctx = state.context || { text: '', images: [] };
+    let total = chat.estimateTextTokens(ctx.text || '');
+    total += (Array.isArray(ctx.images) ? ctx.images.length : 0) * chat.TOKENS_PER_IMAGE;
+    total += (Array.isArray(state.pendingScreenshots) ? state.pendingScreenshots.length : 0) * chat.TOKENS_PER_IMAGE;
+    total += chat.estimateMessagesTokens(state.conversationHistory);
+    return total;
+  }
+
+  function updateTokenLine(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    const line = state.dialog.querySelector(`.${PREFIX}token-line`);
+    if (!line) return;
+    const model = (state.config && state.config.model) || '';
+    const budget = chat.contextWindowForModel(model);
+    const used = estimateDialogTokens(state);
+    const frac = budget > 0 ? used / budget : 0;
+    line.textContent = '';
+    const label = document.createElement('span');
+    label.setAttribute('data-aiext', '1');
+    label.textContent = t('tokenUsage',
+      chat.formatTokenCount(used),
+      chat.formatTokenCount(budget),
+      `${Math.round(frac * 100)}%`);
+    line.appendChild(label);
+    line.classList.toggle(`${PREFIX}token-warn`, frac >= chat.WARN_TOKEN_FRACTION);
+    if (frac >= chat.SUMMARIZE_TOKEN_FRACTION && (state.conversationHistory || []).length > 8 && !state.isStreaming) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `${PREFIX}token-summarize`;
+      btn.setAttribute('data-aiext', '1');
+      btn.textContent = t('summarizeOld');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        summarizeOldestTurns(id);
+      });
+      line.appendChild(btn);
+    }
+  }
+
+  function rerenderHistory(id) {
+    const state = dialogs.get(id);
+    if (!state) return;
+    const messagesEl = state.dialog.querySelector(`.${PREFIX}messages`);
+    if (!messagesEl) return;
+    messagesEl.textContent = '';
+    (state.conversationHistory || []).forEach((m, hIdx) => appendHistoryMessage(id, m, hIdx));
+  }
+
+  // Compresses all but the last 6 turns into one summary message so long
+  // conversations fit the context window. Text-only by construction.
+  async function summarizeOldestTurns(id) {
+    const state = dialogs.get(id);
+    if (!state || state.isStreaming) return;
+    const history = state.conversationHistory || [];
+    if (history.length <= 8) return;
+    const keepFrom = history.length - 6;
+    const old = chat.stripImagesFromMessages(history.slice(0, keepFrom));
+    const recent = history.slice(keepFrom);
+    state.isStreaming = true;
+    updateTokenLine(id);
+    const controller = new AbortController();
+    state.summarizeController = controller;
+    try {
+      const statusEl = addMessage(id, 'system', t('summarizingStatus'));
+      const r = await window.__aiext.api.chatCompletion({
+        baseUrl: (state.config && state.config.baseUrl) || 'https://api.openai.com/v1',
+        apiKey: state.config && state.config.apiKey,
+        model: state.config && state.config.model,
+        messages: [
+          { role: 'system', content: 'Summarize the following conversation briefly in the same language, preserving key facts, decisions and open questions.' },
+          ...old,
+        ],
+        signal: controller.signal,
+        hasImages: (m) => chat.messagesHaveImages(m),
+        stripImages: (m) => chat.stripImagesFromMessages(m),
+      });
+      if (statusEl && statusEl.parentElement) statusEl.parentElement.remove();
+      if (!r.ok || !r.content || !r.content.trim()) {
+        if (r.code !== 'cancelled') addMessage(id, 'system', t('errorRequestFailed', 'summarize'));
+        return;
+      }
+      state.conversationHistory = [
+        { role: 'assistant', content: `Summary of earlier conversation:\n${r.content.trim()}` },
+        ...recent,
+      ];
+      rerenderHistory(id);
+      persistState(id);
+    } finally {
+      state.isStreaming = false;
+      state.summarizeController = null;
+      updateTokenLine(id);
+    }
+  }
+
   // ─── AI Calls ───
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  function messagesHaveImages(messages) {
-    return chat.messagesHaveImages(messages);
-  }
-
-  function stripImagesFromMessages(messages) {
-    return chat.stripImagesFromMessages(messages);
-  }
-
   async function callAI(id, config, messages) {
     const { apiKey, model, baseUrl } = config;
-    const url = normalizeBaseUrl(baseUrl || 'https://api.openai.com/v1') + '/chat/completions';
 
     const state = dialogs.get(id);
     const messagesEl = state && state.dialog ? state.dialog.querySelector(`.${PREFIX}messages`) : null;
     const retryBubble = messagesEl ? addMessage(id, 'system', '') : null;
     if (retryBubble && retryBubble.parentElement) retryBubble.parentElement.style.display = 'none';
 
-    let aborted = false;
     let currentController = null;
     let cancelEl = null;
 
@@ -2000,100 +2658,86 @@
       cancelBtn.textContent = '✕';
       cancelBtn.style.cssText = 'margin-left:8px;cursor:pointer;opacity:0.7;';
       cancelBtn.addEventListener('click', () => {
-        aborted = true;
         if (currentController) try { currentController.abort(); } catch (e) {}
       });
       retryBubble.appendChild(cancelBtn);
       cancelEl = cancelBtn;
     }
 
-    let attempt = 0;
-    const MAX_ATTEMPTS = 3;
-    let fallbackTriggered = false;
-    let result = { error: t('errorRequestFailed', 'unknown'), status: 0, code: 'unknown' };
+    // Assistant bubble + rAF-throttled flush, previously inside readStream.
+    let bubble = null;
+    let rafId = null;
+    let fullContent = '';
+    const flush = () => {
+      rafId = null;
+      if (bubble) bubble.textContent = fullContent;
+      autoScrollStreaming(id);
+    };
 
-    try {
-      while (attempt < MAX_ATTEMPTS) {
-        if (aborted) {
-          result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
-          break;
+    function showRetryNotice(text) {
+      if (retryBubble && retryBubble.parentElement) {
+        retryBubble.parentElement.style.display = '';
+        const node = document.createTextNode(text);
+        retryBubble.insertBefore(node, cancelEl);
+        const prev = cancelEl.previousSibling;
+        if (prev && prev.previousSibling && prev.previousSibling.nodeType === 3 && prev.previousSibling !== node) {
+          retryBubble.removeChild(prev.previousSibling);
         }
-
-        const controller = new AbortController();
-        currentController = controller;
-        let res;
-        try {
-          res = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({ model: model || 'gpt-4o', messages, stream: true }),
-            signal: controller.signal
-          });
-        } catch (fetchErr) {
-          if (aborted) {
-            result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
-            break;
-          }
-          attempt++;
-          if (attempt >= MAX_ATTEMPTS) {
-            result = { error: t('errorRequestFailed', fetchErr.message || 'network'), status: 0, code: 'network' };
-            break;
-          }
-          if (retryBubble && retryBubble.parentElement) {
-            retryBubble.parentElement.style.display = '';
-            if (cancelEl) retryBubble.insertBefore(document.createTextNode(t('retrying', String(attempt))), cancelEl);
-            const prev = cancelEl.previousSibling;
-            if (prev && prev.previousSibling && prev.previousSibling.nodeType === 3) {
-              retryBubble.removeChild(prev.previousSibling);
-            }
-          }
-          await sleep(Math.min(1000 * Math.pow(2, attempt - 1), 8000));
-          continue;
-        }
-
-        if (res.status === 400 && messagesHaveImages(messages) && !fallbackTriggered) {
-          fallbackTriggered = true;
-          if (retryBubble && retryBubble.parentElement) {
-            retryBubble.parentElement.style.display = '';
-            const notice = document.createTextNode(t('fallbackTextOnly') + ' ');
-            retryBubble.insertBefore(notice, cancelEl);
-          }
-          messages = stripImagesFromMessages(messages);
-          continue;
-        }
-
-        if (res.status === 429 || (res.status >= 500 && res.status <= 504)) {
-          attempt++;
-          if (attempt >= MAX_ATTEMPTS) {
-            const errText = await res.text().catch(() => '');
-            result = { error: t('errorApiError', String(res.status), errText.slice(0, 200)), status: res.status, code: res.status === 429 ? 'rate_limited' : 'server' };
-            break;
-          }
-          if (retryBubble && retryBubble.parentElement) {
-            retryBubble.parentElement.style.display = '';
-            const node = document.createTextNode(t('retrying', String(attempt)) + ' ');
-            retryBubble.insertBefore(node, cancelEl);
-            const prev = cancelEl.previousSibling;
-            if (prev && prev.previousSibling && prev.previousSibling.nodeType === 3 && prev.previousSibling !== node) {
-              retryBubble.removeChild(prev.previousSibling);
-            }
-          }
-          await sleep(Math.min(1000 * Math.pow(2, attempt - 1), 8000));
-          continue;
-        }
-
-        if (!res.ok) {
-          const errText = await res.text().catch(() => '');
-          result = { error: t('errorApiError', String(res.status), errText.slice(0, 200)), status: res.status, code: 'api_error' };
-          break;
-        }
-
-        result = await readStream(id, res);
-        break;
       }
+    }
+
+    const controller = new AbortController();
+    currentController = controller;
+
+    let result;
+    try {
+      const r = await window.__aiext.api.chatCompletion({
+        baseUrl: baseUrl || 'https://api.openai.com/v1',
+        apiKey,
+        model,
+        messages,
+        signal: controller.signal,
+        hasImages: (m) => chat.messagesHaveImages(m),
+        stripImages: (m) => chat.stripImagesFromMessages(m),
+        onEvent: (ev) => {
+          if (ev.type === 'start') {
+            bubble = addMessage(id, 'assistant', '');
+            const st = dialogs.get(id);
+            const m = st && st.dialog.querySelector(`.${PREFIX}messages`);
+            if (st) st.scrollAtBottom = m ? isNearBottom(m) : true;
+          } else if (ev.type === 'delta') {
+            fullContent = ev.fullContent;
+            if (rafId === null) rafId = requestAnimationFrame(flush);
+          } else if (ev.type === 'retry') {
+            showRetryNotice(t('retrying', String(ev.attempt)) + ' ');
+          } else if (ev.type === 'fallback') {
+            if (retryBubble && retryBubble.parentElement) {
+              retryBubble.parentElement.style.display = '';
+              const notice = document.createTextNode(t('fallbackTextOnly') + ' ');
+              retryBubble.insertBefore(notice, cancelEl);
+            }
+          } else if (ev.type === 'end') {
+            fullContent = ev.fullContent;
+            if (rafId !== null) cancelAnimationFrame(rafId);
+            if (bubble) {
+              bubble.innerHTML = renderMarkdown(fullContent);
+              attachCodeCopyButtons(bubble);
+              autoScrollStreaming(id);
+            }
+          }
+        }
+      });
+      if (r.ok) {
+        result = { content: r.content, bubble, truncated: r.truncated };
+      } else if (r.code === 'cancelled') {
+        result = { error: t('retryCancelled'), status: 0, code: 'cancelled' };
+      } else if (r.code === 'network') {
+        result = { error: t('errorRequestFailed', r.detail || 'network'), status: 0, code: 'network' };
+      } else {
+        result = { error: t('errorApiError', String(r.status), r.detail || ''), status: r.status, code: r.code };
+      }
+    } catch (e) {
+      result = { error: t('errorRequestFailed', (e && e.message) || 'unknown'), status: 0, code: 'unknown' };
     } finally {
       if (retryBubble && retryBubble.parentElement) {
         retryBubble.parentElement.remove();
@@ -2104,75 +2748,8 @@
     return result;
   }
 
-  async function readStream(id, res) {
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let fullContent = '';
-    let lineBuffer = '';
-    const bubble = addMessage(id, 'assistant', '');
-    let rafId = null;
-
-    {
-      const state = dialogs.get(id);
-      const m = state && state.dialog.querySelector(`.${PREFIX}messages`);
-      _scrollAtBottom = m ? isNearBottom(m) : true;
-    }
-
-    const flush = () => {
-      rafId = null;
-      if (bubble) bubble.textContent = fullContent;
-      autoScrollStreaming(id);
-    };
-
-    let doneReceived = false;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      lineBuffer += decoder.decode(value, { stream: true });
-
-      // Only consume complete lines; an SSE event may be split across chunks,
-      // so the trailing partial line must stay buffered until its '\n' arrives.
-      let nlIdx;
-      while ((nlIdx = lineBuffer.indexOf('\n')) !== -1) {
-        const line = lineBuffer.slice(0, nlIdx);
-        lineBuffer = lineBuffer.slice(nlIdx + 1);
-        const trimmed = line.trim();
-        if (!trimmed.startsWith('data: ')) continue;
-        const data = trimmed.slice(6);
-        if (data === '[DONE]') { doneReceived = true; break; }
-        try {
-          const delta = JSON.parse(data).choices?.[0]?.delta?.content;
-          if (delta) {
-            fullContent += delta;
-            if (rafId === null) rafId = requestAnimationFrame(flush);
-          }
-        } catch (e) {}
-      }
-      if (doneReceived) break;
-    }
-
-    // Process any final complete-ish line left in the buffer
-    if (!doneReceived && lineBuffer.trim()) {
-      const trimmed = lineBuffer.trim();
-      if (trimmed.startsWith('data: ') && trimmed.slice(6) !== '[DONE]') {
-        try {
-          const delta = JSON.parse(trimmed.slice(6)).choices?.[0]?.delta?.content;
-          if (delta) fullContent += delta;
-        } catch (e) {}
-      }
-    }
-
-    if (rafId !== null) cancelAnimationFrame(rafId);
-    if (bubble) {
-      bubble.innerHTML = renderMarkdown(fullContent);
-      attachCodeCopyButtons(bubble);
-      autoScrollStreaming(id);
-    }
-    return { content: fullContent, bubble };
-  }
-
   // ─── Open Dialog ───
-  async function openDialog() {
+  async function openDialog(options = {}) {
     hideFloatingIcon();
 
     const config = await getConfig();
@@ -2181,6 +2758,10 @@
       return;
     }
 
+    // Re-read the live selection like openDrawer does, instead of reusing a
+    // possibly stale currentContext. Callers that already set the context
+    // (e.g. the openDialog message handler) opt out to avoid double fetch.
+    if (!options.skipSelectionRefresh) await setContextFromSelectionOrSource('');
     const sel = window.getSelection();
     const range = sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
     const rect = range ? range.getBoundingClientRect() : null;
@@ -2188,14 +2769,7 @@
 
     const id = createDialog(config, rect, quickPrompts, currentContext);
 
-    const settings = await new Promise(r => {
-      try {
-        if (!chrome.storage || !chrome.storage.sync) return r({});
-        chrome.storage.sync.get(['defaultPin'], r);
-      } catch (e) {
-        r({});
-      }
-    });
+    const settings = await window.__aiext.storage.getSync(['defaultPin'], {});
     if (settings.defaultPin !== false) togglePin(id);
     persistState(id);
   }
@@ -2238,6 +2812,7 @@
     applyDrawerWidth(state.dialog, 410);
     applyBodyShift(410, _isRtl ? 'left' : 'right');
     state.dialog.style.height = '100vh';
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
     state.dialog.style.zIndex = ++topZ;
     if (state.overlay) {
       state.overlay.remove();
@@ -2395,8 +2970,9 @@
 
     _shadowAppend(overlay);
     _shadowAppend(dlg);
-    overlay.style.zIndex = 2147483640;
-    dlg.style.zIndex = 2147483641;
+    if (topZ >= Z_MAX - 8) normalizeZOrder();
+    overlay.style.zIndex = ++topZ;
+    dlg.style.zIndex = ++topZ;
     dlg.querySelector(`.${PREFIX}close`).addEventListener('click', () => { overlay.remove(); dlg.remove(); });
 
     dlg.querySelectorAll(`.${PREFIX}warning-free-btn`).forEach(btn => {
@@ -2420,6 +2996,9 @@
   }
 
   // ─── Text Selection ───
+  // Note: this also refreshes currentContext for the context-menu entry, so
+  // it must run even when the floating icon is disabled. Frequency is one
+  // scan per click-release (not per mousemove), so no throttle needed.
   document.addEventListener('mouseup', (e) => {
     if (isOurElement(e.target)) return;
 
@@ -2457,7 +3036,10 @@
   });
 
   // ─── Image Hover ───
+  // mouseover/mouseout are the highest-frequency listeners here; bail out
+  // before any DOM traversal when the floating icon is disabled.
   document.addEventListener('mouseover', (e) => {
+    if (!_showFloating || !contextValid()) return;
     const img = e.target.closest('img');
     if (!img || isOurElement(img)) return;
     if (img.naturalWidth < 20 || img.naturalHeight < 20) return;
@@ -2469,6 +3051,7 @@
   });
 
   document.addEventListener('mouseout', (e) => {
+    if (!_hoveredImage) return;
     const img = e.target.closest('img');
     if (!img || img !== _hoveredImage) return;
     if (_iconHoverTimer) clearTimeout(_iconHoverTimer);
@@ -2516,7 +3099,7 @@
       (async () => {
         try {
           await setContextFromSelectionOrSource(msg.srcUrl || '');
-          await openDialog();
+          await openDialog({ skipSelectionRefresh: true });
           if (typeof msg.initialText === 'string' && msg.initialText) {
             await new Promise(r => setTimeout(r, 0));
             const entries = Array.from(dialogs.values()).reverse();
@@ -2539,7 +3122,9 @@
     } else if (msg.action === 'fillInput' && typeof msg.text === 'string') {
       (async () => {
         try {
-          if (msg.srcUrl) {
+          // Only accept same-shape image sources the extension itself could
+          // have produced (data: images or http(s) URLs).
+          if (msg.srcUrl && isTrustedImageSrc(msg.srcUrl)) {
             currentContext = { text: '', images: [msg.srcUrl] };
             for (const state of dialogs.values()) {
               if (!state.dialog || !state.context) continue;
@@ -2578,30 +3163,8 @@
             .filter(r => r.hostname === hostname && r.closedAt)
             .sort((a, b) => b.closedAt - a.closedAt)
             .slice(0, 10)
-            .map(r => {
-              const last = Array.isArray(r.conversationHistory) && r.conversationHistory.length > 0
-                ? r.conversationHistory[r.conversationHistory.length - 1]
-                : null;
-              let preview = '';
-              if (last && last.content) {
-                if (typeof last.content === 'string') preview = last.content;
-                else if (Array.isArray(last.content)) {
-                  preview = last.content
-                    .filter(p => p && p.type === 'text')
-                    .map(p => p.text)
-                    .join(' ');
-                }
-              }
-              return {
-                id: r.id,
-                hostname: r.hostname,
-                url: r.url || '',
-                closedAt: r.closedAt,
-                messageCount: Array.isArray(r.conversationHistory) ? r.conversationHistory.length : 0,
-                preview: preview.slice(0, 120),
-                model: r.model || ''
-              };
-            });
+            .map(r => chat.buildClosedListItem(r))
+            .filter(Boolean);
           sendResponse({ ok: true, items: closed });
         } catch (e) {
           sendResponse({ ok: false, error: e.message });
@@ -2611,45 +3174,22 @@
     } else if (msg.action === 'restoreClosedDialog' && msg.persistId) {
       (async () => {
         try {
-          let records = pruneExpired(await loadDialogRecords());
-          const idx = records.findIndex(r => r && r.id === msg.persistId);
-          if (idx < 0) return sendResponse({ ok: false, error: 'not_found' });
-          const r = records[idx];
-          delete r.closedAt;
-          records[idx] = r;
-          await saveDialogRecords(records);
+          const r = await _enqueuePersist(async () => {
+            const records = pruneExpired(await loadDialogRecords());
+            const idx = records.findIndex(x => x && x.id === msg.persistId);
+            if (idx < 0) return null;
+            const rec = records[idx];
+            delete rec.closedAt;
+            records[idx] = rec;
+            await saveDialogRecords(records);
+            return rec;
+          });
+          if (!r) return sendResponse({ ok: false, error: 'not_found' });
           const config = await getConfig();
           if (!config || !config.apiKey) return sendResponse({ ok: false, error: 'no_api_key' });
           const quickPrompts = await getQuickPrompts();
-          const ctx = { text: (r.context && r.context.text) || '', images: (r.context && r.context.images) || [] };
-          const id = createDialog(
-            { ...config, model: r.model || config.model },
-            null,
-            quickPrompts,
-            ctx
-          );
-          const st = dialogs.get(id);
-          if (!st) return sendResponse({ ok: false, error: 'state_missing' });
-          st.persistId = r.id;
-          st.persistedAt = r.createdAt;
-          _persistedIds.add(r.id);
-          if (r.position) {
-            st.dialog.style.left = r.position.x + 'px';
-            st.dialog.style.top = r.position.y + 'px';
-            st.dialog.style.right = 'auto';
-          }
-          if (r.size && r.size.width) {
-            st.dialog.style.width = r.size.width + 'px';
-            if (r.size.height) st.dialog.style.height = r.size.height + 'px';
-          }
-          st.conversationHistory = (r.conversationHistory || []).map(m => ({ role: m.role, content: m.content }));
-          st.conversationHistory.forEach(m => {
-            if (m.role === 'user' || m.role === 'assistant') {
-              const content = typeof m.content === 'string' ? m.content : (Array.isArray(m.content) ? m.content.filter(p => p && p.type === 'text').map(p => p.text).join('\n') : '');
-              if (content) addMessage(id, m.role, content);
-            }
-          });
-          addMessage(id, 'system', t('dialogRestoredHint'));
+          const id = applyRecordToDialog(r, config, quickPrompts);
+          if (!id) return sendResponse({ ok: false, error: 'state_missing' });
           sendResponse({ ok: true });
         } catch (e) {
           sendResponse({ ok: false, error: e.message });
@@ -2672,39 +3212,68 @@
           _showFloating = changes.showFloating.newValue !== false;
           if (!_showFloating) hideFloatingIcon();
         }
+        // Propagate connection settings to live dialogs so the next turn
+        // uses them (in-flight requests already captured their config).
+        // The visible model inputs keep their text to avoid clobbering edits.
+        if (area === 'sync' && (changes.model || changes.baseUrl)) {
+          for (const st of dialogs.values()) {
+            if (!st.config) continue;
+            if (changes.model) st.config.model = changes.model.newValue || '';
+            if (changes.baseUrl) st.config.baseUrl = changes.baseUrl.newValue || '';
+          }
+        }
+        if (area === 'local' && changes.apiKey) {
+          for (const st of dialogs.values()) {
+            if (st.config) st.config.apiKey = changes.apiKey.newValue || '';
+          }
+        }
       });
     }
-  } catch (e) { _contextInvalid = true; }
+  } catch (e) { /* storage listener unavailable: floating toggle just won't live-update */ }
 
   injectStyles();
 
-  window.addEventListener('beforeunload', () => {
-    if (!_storageAvailable()) return;
+  // Best-effort flush of live dialogs. Queued so it merges with — rather
+  // than clobbers — records written concurrently. pagehide additionally
+  // covers bfcache navigations where beforeunload never fires.
+  function flushAllDialogs() {
+    if (!_storageAvailable()) return Promise.resolve();
     const snapshots = [];
-    for (const [id, st] of dialogs) {
+    for (const [, st] of dialogs) {
       const rec = toRecord(st);
-      if (rec) snapshots.push({ id, rec });
+      if (rec) snapshots.push(rec);
     }
-    if (snapshots.length === 0) return;
-    // Best-effort synchronous-ish flush via the promise we started — chrome.storage.local.set is async,
-    // so we kick it off; browsers typically let storage calls complete during beforeunload.
-    (async () => {
-      let records = pruneExpired(await loadDialogRecords());
+    if (snapshots.length === 0) return Promise.resolve();
+    return _enqueuePersist(async () => {
+      const records = pruneExpired(await loadDialogRecords());
       const byId = new Map(records.map(r => [r.id, r]));
-      for (const { rec } of snapshots) byId.set(rec.id, rec);
-      records = [...byId.values()];
-      if (records.length > MAX_TOTAL) {
-        records.sort((a, b) => a.lastActive - b.lastActive);
-        records = records.slice(records.length - MAX_TOTAL);
-      }
-      await saveDialogRecords(records);
-    })();
-  });
+      for (const rec of snapshots) byId.set(rec.id, rec);
+      await saveDialogRecords(_applyCaps([...byId.values()], location.hostname));
+    });
+  }
+
+  window.addEventListener('beforeunload', () => { flushAllDialogs(); });
+  window.addEventListener('pagehide', () => { flushAllDialogs(); });
+
+  // SPA navigations keep the content script alive with a stale selection
+  // context. Drop it on route changes (pushState-based routers don't fire
+  // these; that residual case is a known limitation).
+  function clearStaleContext() {
+    currentContext = { text: '', images: [] };
+    hideFloatingIcon();
+  }
+  window.addEventListener('popstate', clearStaleContext);
+  window.addEventListener('hashchange', clearStaleContext);
 
   restoreDialogsOnLoad();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (!contextValid()) return;
     try { applyThemeVars(); } catch (e) { /* context invalidated */ }
+  });
+
+  window.addEventListener('resize', () => {
+    if (!contextValid()) return;
+    try { refreshBodyShiftForDrawer(); } catch (e) { /* context invalidated */ }
   });
 })();

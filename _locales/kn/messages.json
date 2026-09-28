@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "ಹಿಂದಿನ ಸೆಶನ್‌ನಿಂದ ಪುನಃಸ್ಥಾಪಿಸಲಾಗಿದೆ"
   },
-  "recentClosedBtn": {
-    "message": "ಇತ್ತೀಚೆಗೆ ಮುಚ್ಚಿದವು"
-  },
-  "recentClosedEmpty": {
-    "message": "ಮುಚ್ಚಿದ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ"
-  },
-  "recentClosedTitle": {
-    "message": "ಇತ್ತೀಚೆಗೆ ಮುಚ್ಚಿದ ಸಂಭಾಷಣೆಗಳು"
-  },
-  "recentClosedRestore": {
-    "message": "ಪುನಃಸ್ಥಾಪಿಸಿ"
-  },
-  "recentClosedAllClear": {
-    "message": "ಎಲ್ಲವನ್ನೂ ತೆರವುಗೊಳಿಸಿ"
-  },
   "codeCopyBtn": {
     "message": "ನಕಲಿಸಿ"
   },
@@ -252,79 +237,154 @@
     "message": "ಸಂವಾದ ತೆರೆಯಿರಿ",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "ಹೆಚ್ಚಿನ ಪ್ರಾಂಪ್ಟ್‌ಗಳು...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ"
+  },
+  "openDrawerFailed": {
+    "message": "ಡ್ರಾಯರ್ ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ಡ್ರಾಯರ್‌ಗೆ ಸರಿಸಿ"
+  },
+  "profilesLabel": {
+    "message": "ಪೂರೈಕೆದಾರ ಪ್ರೊಫೈಲ್‌ಗಳು"
+  },
+  "profileSaveBtn": {
+    "message": "ಪ್ರಸ್ತುತವನ್ನು ಉಳಿಸಿ"
+  },
+  "profileDeleteBtn": {
+    "message": "ಅಳಿಸಿ"
+  },
+  "profilesHint": {
+    "message": "ಪ್ರಸ್ತುತ ಕೀ, URL ಮತ್ತು ಮಾದರಿಯನ್ನು ಒಂದು ಪ್ರೊಫೈಲ್ ಆಗಿ ಉಳಿಸಿ; ಕೀಗಳು ಈ ಸಾಧನದಲ್ಲಿಯೇ ಉಳಿಯುತ್ತವೆ"
+  },
+  "messageEdit": {
+    "message": "ಸಂಪಾದಿಸಿ"
+  },
+  "messageRegenerate": {
+    "message": "ಮತ್ತೆ ರಚಿಸಿ"
+  },
+  "messageCopy": {
+    "message": "ನಕಲಿಸಿ"
+  },
+  "messageSave": {
+    "message": "ಉಳಿಸಿ"
+  },
+  "messageCancel": {
+    "message": "ರದ್ದುಮಾಡಿ"
+  },
+  "conversationsBtn": {
+    "message": "ಸಂಭಾಷಣೆಗಳು"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "ಸಂಭಾಷಣೆಗಳನ್ನು ಹುಡುಕಿ..."
+  },
+  "conversationsRename": {
+    "message": "ಮರುಹೆಸರಿಸಿ"
+  },
+  "conversationsRestore": {
+    "message": "ಮರುಸ್ಥಾಪಿಸಿ"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "ನಕಲಿಸಿ"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "ಅಳಿಸಿ"
+  },
+  "conversationsDeleteSelected": {
+    "message": "ಆಯ್ಕೆಮಾಡಿದವುಗಳನ್ನು ಅಳಿಸಿ"
+  },
+  "conversationsEmpty": {
+    "message": "ಇನ್ನೂ ಯಾವುದೇ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ"
+  },
+  "conversationsOpenBadge": {
+    "message": "ತೆರೆದಿದೆ"
+  },
+  "conversationsClosedBadge": {
+    "message": "ಮುಚ್ಚಲಾಗಿದೆ"
+  },
+  "builtInActionsLabel": {
+    "message": "ಅಂತರ್ನಿರ್ಮಿತ ತ್ವರಿತ ಕ್ರಿಯೆಗಳು"
+  },
+  "actionTranslate": {
+    "message": "ಅನುವಾದಿಸಿ"
+  },
+  "actionConvertChinese": {
+    "message": "ಚೀನೀ ಭಿನ್ನರೂಪವನ್ನು ಪರಿವರ್ತಿಸಿ"
+  },
+  "actionExplain": {
+    "message": "ವಿವರಿಸಿ"
+  },
+  "actionSummarize": {
+    "message": "ಸಾರಾಂಶ ಮಾಡಿ"
+  },
+  "actionPolish": {
+    "message": "ಬರವಣಿಗೆ ಸುಧಾರಿಸಿ"
+  },
+  "actionTutorial": {
+    "message": "ಟ್ಯುಟೋರಿಯಲ್"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant ತೆರೆಯಿರಿ"
+  },
+  "commandOpenDrawer": {
+    "message": "ಚಾಟ್ ಡ್ರಾಯರ್ ತೆರೆಯಿರಿ"
+  },
+  "shortcutsHint": {
+    "message": "ಸಲಹೆ: chrome://extensions/shortcuts ನಲ್ಲಿ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "ಹಳೆಯ ಸಂದೇಶಗಳನ್ನು ಸಾರಾಂಶ ಮಾಡಿ"
+  },
+  "summarizingStatus": {
+    "message": "ಹಳೆಯ ಸಂದೇಶಗಳನ್ನು ಸಾರಾಂಶ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "settingsExportBtn": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಿ"
+  },
+  "settingsImportBtn": {
+    "message": "ಆಮದು ಮಾಡಿ"
+  },
+  "settingsImported": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗಿದೆ (API ಕೀಗಳನ್ನು ಎಂದಿಗೂ ರಫ್ತು ಮಾಡುವುದಿಲ್ಲ)"
+  },
+  "settingsImportFailed": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಆಮದು ವಿಫಲವಾಗಿದೆ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "ಪ್ರತಿಕ್ರಿಯೆ ಅಪೂರ್ಣವಾಗಿರಬಹುದು (ಸ್ಟ್ರೀಮ್ ಮೊದಲೇ ಕೊನೆಗೊಂಡಿದೆ). ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಲು ಮತ್ತೆ ರಚಿಸಿ ಬಳಸಿ."
   }
 }

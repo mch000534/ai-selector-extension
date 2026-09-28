@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Atjaunots no iepriekšējās sesijas"
   },
-  "recentClosedBtn": {
-    "message": "Nesen aizvērtie"
-  },
-  "recentClosedEmpty": {
-    "message": "Nav aizvērtu sarunu"
-  },
-  "recentClosedTitle": {
-    "message": "Nesen aizvērtās sarunas"
-  },
-  "recentClosedRestore": {
-    "message": "Atjaunot"
-  },
-  "recentClosedAllClear": {
-    "message": "Notīrīt visu"
-  },
   "codeCopyBtn": {
     "message": "Kopēt"
   },
@@ -252,79 +237,154 @@
     "message": "Atvērt dialoglodziņu",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Vairāk ieteikumu...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Atvērt paneli"
+  },
+  "openDrawerFailed": {
+    "message": "Neizdevās atvērt paneli: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Pārvietot uz paneli"
+  },
+  "profilesLabel": {
+    "message": "Pakalpojumu sniedzēju profili"
+  },
+  "profileSaveBtn": {
+    "message": "Saglabāt pašreizējo"
+  },
+  "profileDeleteBtn": {
+    "message": "Dzēst"
+  },
+  "profilesHint": {
+    "message": "Saglabājiet pašreizējo atslēgu, URL un modeli kā vienu profilu; atslēgas paliek šajā ierīcē"
+  },
+  "messageEdit": {
+    "message": "Rediģēt"
+  },
+  "messageRegenerate": {
+    "message": "Ģenerēt no jauna"
+  },
+  "messageCopy": {
+    "message": "Kopēt"
+  },
+  "messageSave": {
+    "message": "Saglabāt"
+  },
+  "messageCancel": {
+    "message": "Atcelt"
+  },
+  "conversationsBtn": {
+    "message": "Sarunas"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Meklēt sarunas..."
+  },
+  "conversationsRename": {
+    "message": "Pārdēvēt"
+  },
+  "conversationsRestore": {
+    "message": "Atjaunot"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopēt"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Dzēst"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Dzēst atlasītās"
+  },
+  "conversationsEmpty": {
+    "message": "Pagaidām nav sarunu"
+  },
+  "conversationsOpenBadge": {
+    "message": "Atvērta"
+  },
+  "conversationsClosedBadge": {
+    "message": "Slēgta"
+  },
+  "builtInActionsLabel": {
+    "message": "Iebūvētās ātrās darbības"
+  },
+  "actionTranslate": {
+    "message": "Tulkot"
+  },
+  "actionConvertChinese": {
+    "message": "Konvertēt ķīniešu rakstības variantu"
+  },
+  "actionExplain": {
+    "message": "Paskaidrot"
+  },
+  "actionSummarize": {
+    "message": "Apkopot"
+  },
+  "actionPolish": {
+    "message": "Uzlabot tekstu"
+  },
+  "actionTutorial": {
+    "message": "Pamācība"
+  },
+  "commandOpenPopup": {
+    "message": "Atvērt AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Atvērt tērzēšanas paneli"
+  },
+  "shortcutsHint": {
+    "message": "Padoms: pielāgojiet saīsnes vietnē chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Apkopot vecākas ziņas"
+  },
+  "summarizingStatus": {
+    "message": "Notiek vecāku ziņu apkopošana…"
+  },
+  "settingsExportBtn": {
+    "message": "Eksportēt iestatījumus"
+  },
+  "settingsImportBtn": {
+    "message": "Importēt"
+  },
+  "settingsImported": {
+    "message": "Iestatījumi importēti (API atslēgas nekad netiek eksportētas)"
+  },
+  "settingsImportFailed": {
+    "message": "Neizdevās importēt iestatījumus: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Atbilde var būt nepilnīga (straumēšana beidzās priekšlaicīgi). Izmantojiet Ģenerēt no jauna, lai mēģinātu vēlreiz."
   }
 }

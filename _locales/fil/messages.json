@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Ibinalik mula sa nakaraang session"
   },
-  "recentClosedBtn": {
-    "message": "Kamakailang isinara"
-  },
-  "recentClosedEmpty": {
-    "message": "Walang saradong usapan"
-  },
-  "recentClosedTitle": {
-    "message": "Mga kamakailang isinara na usapan"
-  },
-  "recentClosedRestore": {
-    "message": "Ibalik"
-  },
-  "recentClosedAllClear": {
-    "message": "Burahin lahat"
-  },
   "codeCopyBtn": {
     "message": "Kopyahin"
   },
@@ -252,79 +237,154 @@
     "message": "Buksan ang dialog",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Higit pang mga prompt...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Buksan ang drawer"
+  },
+  "openDrawerFailed": {
+    "message": "Hindi mabuksan ang drawer: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Ilipat sa drawer"
+  },
+  "profilesLabel": {
+    "message": "Mga profile ng provider"
+  },
+  "profileSaveBtn": {
+    "message": "I-save ang kasalukuyan"
+  },
+  "profileDeleteBtn": {
+    "message": "Tanggalin"
+  },
+  "profilesHint": {
+    "message": "I-save ang kasalukuyang key, URL, at modelo bilang isang profile; nananatili ang mga key sa device na ito"
+  },
+  "messageEdit": {
+    "message": "I-edit"
+  },
+  "messageRegenerate": {
+    "message": "Buuin muli"
+  },
+  "messageCopy": {
+    "message": "Kopyahin"
+  },
+  "messageSave": {
+    "message": "I-save"
+  },
+  "messageCancel": {
+    "message": "Kanselahin"
+  },
+  "conversationsBtn": {
+    "message": "Mga Usapan"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Maghanap ng mga usapan..."
+  },
+  "conversationsRename": {
+    "message": "Palitan ang pangalan"
+  },
+  "conversationsRestore": {
+    "message": "Ibalik"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopyahin"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Tanggalin"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Tanggalin ang napili"
+  },
+  "conversationsEmpty": {
+    "message": "Wala pang usapan"
+  },
+  "conversationsOpenBadge": {
+    "message": "Bukas"
+  },
+  "conversationsClosedBadge": {
+    "message": "Sarado"
+  },
+  "builtInActionsLabel": {
+    "message": "Mga built-in na mabilisang aksyon"
+  },
+  "actionTranslate": {
+    "message": "Isalin"
+  },
+  "actionConvertChinese": {
+    "message": "I-convert ang variant ng Chinese"
+  },
+  "actionExplain": {
+    "message": "Ipaliwanag"
+  },
+  "actionSummarize": {
+    "message": "Ibuod"
+  },
+  "actionPolish": {
+    "message": "Pinuhin ang pagsulat"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Buksan ang AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Buksan ang chat drawer"
+  },
+  "shortcutsHint": {
+    "message": "Tip: i-customize ang mga shortcut sa chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Ibuod ang mas lumang mga mensahe"
+  },
+  "summarizingStatus": {
+    "message": "Binubuod ang mas lumang mga mensahe…"
+  },
+  "settingsExportBtn": {
+    "message": "I-export ang mga setting"
+  },
+  "settingsImportBtn": {
+    "message": "I-import"
+  },
+  "settingsImported": {
+    "message": "Na-import ang mga setting (hindi kailanman ine-export ang mga API key)"
+  },
+  "settingsImportFailed": {
+    "message": "Nabigo ang pag-import ng mga setting: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Maaaring hindi kumpleto ang sagot (naputol nang maaga ang stream). Gamitin ang Buuin Muli para subukan ulit."
   }
 }

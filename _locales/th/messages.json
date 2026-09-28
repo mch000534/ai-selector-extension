@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "กู้คืนจากเซสชันก่อนหน้า"
   },
-  "recentClosedBtn": {
-    "message": "ปิดเมื่อเร็ว ๆ นี้"
-  },
-  "recentClosedEmpty": {
-    "message": "ไม่มีการสนทนาที่ปิด"
-  },
-  "recentClosedTitle": {
-    "message": "การสนทนาที่ปิดเมื่อเร็ว ๆ นี้"
-  },
-  "recentClosedRestore": {
-    "message": "กู้คืน"
-  },
-  "recentClosedAllClear": {
-    "message": "ล้างทั้งหมด"
-  },
   "codeCopyBtn": {
     "message": "คัดลอก"
   },
@@ -252,79 +237,154 @@
     "message": "เปิดกล่องโต้ตอบ",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "พรอมต์เพิ่มเติม...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "เปิดแผง"
+  },
+  "openDrawerFailed": {
+    "message": "ไม่สามารถเปิดแผงได้: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ย้ายไปที่แผง"
+  },
+  "profilesLabel": {
+    "message": "โปรไฟล์ผู้ให้บริการ"
+  },
+  "profileSaveBtn": {
+    "message": "บันทึกค่าปัจจุบัน"
+  },
+  "profileDeleteBtn": {
+    "message": "ลบ"
+  },
+  "profilesHint": {
+    "message": "บันทึกคีย์ URL และโมเดลปัจจุบันเป็นโปรไฟล์เดียว คีย์จะเก็บไว้ในอุปกรณ์นี้เท่านั้น"
+  },
+  "messageEdit": {
+    "message": "แก้ไข"
+  },
+  "messageRegenerate": {
+    "message": "สร้างใหม่"
+  },
+  "messageCopy": {
+    "message": "คัดลอก"
+  },
+  "messageSave": {
+    "message": "บันทึก"
+  },
+  "messageCancel": {
+    "message": "ยกเลิก"
+  },
+  "conversationsBtn": {
+    "message": "บทสนทนา"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "ค้นหาบทสนทนา..."
+  },
+  "conversationsRename": {
+    "message": "เปลี่ยนชื่อ"
+  },
+  "conversationsRestore": {
+    "message": "กู้คืน"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "คัดลอก"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "ลบ"
+  },
+  "conversationsDeleteSelected": {
+    "message": "ลบรายการที่เลือก"
+  },
+  "conversationsEmpty": {
+    "message": "ยังไม่มีบทสนทนา"
+  },
+  "conversationsOpenBadge": {
+    "message": "เปิดอยู่"
+  },
+  "conversationsClosedBadge": {
+    "message": "ปิดแล้ว"
+  },
+  "builtInActionsLabel": {
+    "message": "การดำเนินการด่วนในตัว"
+  },
+  "actionTranslate": {
+    "message": "แปล"
+  },
+  "actionConvertChinese": {
+    "message": "แปลงรูปแบบภาษาจีน"
+  },
+  "actionExplain": {
+    "message": "อธิบาย"
+  },
+  "actionSummarize": {
+    "message": "สรุป"
+  },
+  "actionPolish": {
+    "message": "ขัดเกลาข้อความ"
+  },
+  "actionTutorial": {
+    "message": "บทแนะนำ"
+  },
+  "commandOpenPopup": {
+    "message": "เปิด AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "เปิดแผงแชท"
+  },
+  "shortcutsHint": {
+    "message": "เคล็ดลับ: ปรับแต่งทางลัดได้ที่ chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "สรุปข้อความเก่า"
+  },
+  "summarizingStatus": {
+    "message": "กำลังสรุปข้อความเก่า…"
+  },
+  "settingsExportBtn": {
+    "message": "ส่งออกการตั้งค่า"
+  },
+  "settingsImportBtn": {
+    "message": "นำเข้า"
+  },
+  "settingsImported": {
+    "message": "นำเข้าการตั้งค่าแล้ว (จะไม่มีการส่งออกคีย์ API เด็ดขาด)"
+  },
+  "settingsImportFailed": {
+    "message": "นำเข้าการตั้งค่าไม่สำเร็จ: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "คำตอบอาจไม่สมบูรณ์ (สตรีมสิ้นสุดก่อนกำหนด) ใช้ปุ่มสร้างใหม่เพื่อลองอีกครั้ง"
   }
 }

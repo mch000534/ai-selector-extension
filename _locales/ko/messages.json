@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "이전 세션에서 복원됨"
   },
-  "recentClosedBtn": {
-    "message": "최근 닫은 항목"
-  },
-  "recentClosedEmpty": {
-    "message": "닫힌 대화 없음"
-  },
-  "recentClosedTitle": {
-    "message": "최근 닫은 대화"
-  },
-  "recentClosedRestore": {
-    "message": "복원"
-  },
-  "recentClosedAllClear": {
-    "message": "모두 지우기"
-  },
   "codeCopyBtn": {
     "message": "복사"
   },
@@ -252,79 +237,154 @@
     "message": "대화 상자 열기",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "추가 프롬프트...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "서랍 열기"
+  },
+  "openDrawerFailed": {
+    "message": "서랍을 열 수 없습니다: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "서랍으로 이동"
+  },
+  "profilesLabel": {
+    "message": "공급자 프로필"
+  },
+  "profileSaveBtn": {
+    "message": "현재 설정 저장"
+  },
+  "profileDeleteBtn": {
+    "message": "삭제"
+  },
+  "profilesHint": {
+    "message": "현재 키, URL, 모델을 하나의 프로필로 저장합니다. 키는 이 기기에만 보관됩니다"
+  },
+  "messageEdit": {
+    "message": "수정"
+  },
+  "messageRegenerate": {
+    "message": "다시 생성"
+  },
+  "messageCopy": {
+    "message": "복사"
+  },
+  "messageSave": {
+    "message": "저장"
+  },
+  "messageCancel": {
+    "message": "취소"
+  },
+  "conversationsBtn": {
+    "message": "대화"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "대화 검색..."
+  },
+  "conversationsRename": {
+    "message": "이름 바꾸기"
+  },
+  "conversationsRestore": {
+    "message": "복원"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "복사"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "삭제"
+  },
+  "conversationsDeleteSelected": {
+    "message": "선택 항목 삭제"
+  },
+  "conversationsEmpty": {
+    "message": "아직 대화가 없습니다"
+  },
+  "conversationsOpenBadge": {
+    "message": "진행 중"
+  },
+  "conversationsClosedBadge": {
+    "message": "종료됨"
+  },
+  "builtInActionsLabel": {
+    "message": "내장 빠른 작업"
+  },
+  "actionTranslate": {
+    "message": "번역하기"
+  },
+  "actionConvertChinese": {
+    "message": "중국어 표기 변환"
+  },
+  "actionExplain": {
+    "message": "설명하기"
+  },
+  "actionSummarize": {
+    "message": "요약하기"
+  },
+  "actionPolish": {
+    "message": "문장 다듬기"
+  },
+  "actionTutorial": {
+    "message": "튜토리얼"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant 열기"
+  },
+  "commandOpenDrawer": {
+    "message": "채팅 서랍 열기"
+  },
+  "shortcutsHint": {
+    "message": "팁: chrome://extensions/shortcuts 에서 단축키를 사용자 지정하세요"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "이전 메시지 요약하기"
+  },
+  "summarizingStatus": {
+    "message": "이전 메시지를 요약하는 중…"
+  },
+  "settingsExportBtn": {
+    "message": "설정 내보내기"
+  },
+  "settingsImportBtn": {
+    "message": "가져오기"
+  },
+  "settingsImported": {
+    "message": "설정을 가져왔습니다(API 키는 절대 내보내지 않습니다)"
+  },
+  "settingsImportFailed": {
+    "message": "설정 가져오기 실패: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "응답이 불완전할 수 있습니다(스트림이 조기에 종료됨). 다시 생성을 사용해 재시도하세요."
   }
 }

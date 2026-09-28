@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Restaurat din sesiunea anterioară"
   },
-  "recentClosedBtn": {
-    "message": "Închise recent"
-  },
-  "recentClosedEmpty": {
-    "message": "Nicio conversație închisă"
-  },
-  "recentClosedTitle": {
-    "message": "Conversații închise recent"
-  },
-  "recentClosedRestore": {
-    "message": "Restaurează"
-  },
-  "recentClosedAllClear": {
-    "message": "Șterge tot"
-  },
   "codeCopyBtn": {
     "message": "Copiază"
   },
@@ -252,79 +237,154 @@
     "message": "Deschide caseta de dialog",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Mai multe sugestii...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Deschide panoul"
+  },
+  "openDrawerFailed": {
+    "message": "Panoul nu a putut fi deschis: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Mută în panou"
+  },
+  "profilesLabel": {
+    "message": "Profiluri de furnizor"
+  },
+  "profileSaveBtn": {
+    "message": "Salvează curentul"
+  },
+  "profileDeleteBtn": {
+    "message": "Șterge"
+  },
+  "profilesHint": {
+    "message": "Salvează cheia, URL-ul și modelul curente ca un profil; cheile rămân pe acest dispozitiv"
+  },
+  "messageEdit": {
+    "message": "Editează"
+  },
+  "messageRegenerate": {
+    "message": "Regenerează"
+  },
+  "messageCopy": {
+    "message": "Copiază"
+  },
+  "messageSave": {
+    "message": "Salvează"
+  },
+  "messageCancel": {
+    "message": "Anulează"
+  },
+  "conversationsBtn": {
+    "message": "Conversații"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Caută conversații..."
+  },
+  "conversationsRename": {
+    "message": "Redenumește"
+  },
+  "conversationsRestore": {
+    "message": "Restaurează"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Copiază"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Șterge"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Șterge selecția"
+  },
+  "conversationsEmpty": {
+    "message": "Încă nu există conversații"
+  },
+  "conversationsOpenBadge": {
+    "message": "Deschisă"
+  },
+  "conversationsClosedBadge": {
+    "message": "Închisă"
+  },
+  "builtInActionsLabel": {
+    "message": "Acțiuni rapide integrate"
+  },
+  "actionTranslate": {
+    "message": "Traduce"
+  },
+  "actionConvertChinese": {
+    "message": "Convertește varianta de chineză"
+  },
+  "actionExplain": {
+    "message": "Explică"
+  },
+  "actionSummarize": {
+    "message": "Rezumă"
+  },
+  "actionPolish": {
+    "message": "Îmbunătățește textul"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Deschide AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Deschide panoul de chat"
+  },
+  "shortcutsHint": {
+    "message": "Sfat: personalizează comenzile rapide la chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Rezumă mesajele mai vechi"
+  },
+  "summarizingStatus": {
+    "message": "Se rezumă mesajele mai vechi…"
+  },
+  "settingsExportBtn": {
+    "message": "Exportă setările"
+  },
+  "settingsImportBtn": {
+    "message": "Importă"
+  },
+  "settingsImported": {
+    "message": "Setările au fost importate (cheile API nu sunt niciodată exportate)"
+  },
+  "settingsImportFailed": {
+    "message": "Importul setărilor a eșuat: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Răspunsul poate fi incomplet (transmisia s-a încheiat prematur). Folosește Regenerează pentru a încerca din nou."
   }
 }

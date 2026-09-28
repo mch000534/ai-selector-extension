@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "मागील सत्रातून पुनर्संचयित केले"
   },
-  "recentClosedBtn": {
-    "message": "अलीकडे बंद केलेले"
-  },
-  "recentClosedEmpty": {
-    "message": "बंद केलेले संवाद नाहीत"
-  },
-  "recentClosedTitle": {
-    "message": "अलीकडे बंद केलेले संवाद"
-  },
-  "recentClosedRestore": {
-    "message": "पुनर्संचयित करा"
-  },
-  "recentClosedAllClear": {
-    "message": "सर्व साफ करा"
-  },
   "codeCopyBtn": {
     "message": "कॉपी करा"
   },
@@ -252,79 +237,154 @@
     "message": "संवाद उघडा",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "अधिक सूचना...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "ड्रॉवर उघडा"
+  },
+  "openDrawerFailed": {
+    "message": "ड्रॉवर उघडता आले नाही: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ड्रॉवरमध्ये हलवा"
+  },
+  "profilesLabel": {
+    "message": "प्रदाता प्रोफाइल"
+  },
+  "profileSaveBtn": {
+    "message": "सध्याचे जतन करा"
+  },
+  "profileDeleteBtn": {
+    "message": "हटवा"
+  },
+  "profilesHint": {
+    "message": "सध्याची की, URL आणि मॉडेल एक प्रोफाइल म्हणून जतन करा; की या डिव्हाइसवरच राहतात"
+  },
+  "messageEdit": {
+    "message": "संपादित करा"
+  },
+  "messageRegenerate": {
+    "message": "पुन्हा तयार करा"
+  },
+  "messageCopy": {
+    "message": "कॉपी करा"
+  },
+  "messageSave": {
+    "message": "जतन करा"
+  },
+  "messageCancel": {
+    "message": "रद्द करा"
+  },
+  "conversationsBtn": {
+    "message": "संभाषणे"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "संभाषणे शोधा..."
+  },
+  "conversationsRename": {
+    "message": "नाव बदला"
+  },
+  "conversationsRestore": {
+    "message": "पुनर्संचयित करा"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "कॉपी करा"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "हटवा"
+  },
+  "conversationsDeleteSelected": {
+    "message": "निवडलेले हटवा"
+  },
+  "conversationsEmpty": {
+    "message": "अद्याप कोणतीही संभाषणे नाहीत"
+  },
+  "conversationsOpenBadge": {
+    "message": "उघडे"
+  },
+  "conversationsClosedBadge": {
+    "message": "बंद"
+  },
+  "builtInActionsLabel": {
+    "message": "अंगभूत क्विक अ‍ॅक्शन्स"
+  },
+  "actionTranslate": {
+    "message": "भाषांतर करा"
+  },
+  "actionConvertChinese": {
+    "message": "चिनी वेरिएंट रूपांतरित करा"
+  },
+  "actionExplain": {
+    "message": "स्पष्ट करा"
+  },
+  "actionSummarize": {
+    "message": "सारांश तयार करा"
+  },
+  "actionPolish": {
+    "message": "लेखन सुधारा"
+  },
+  "actionTutorial": {
+    "message": "ट्यूटोरियल"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant उघडा"
+  },
+  "commandOpenDrawer": {
+    "message": "चॅट ड्रॉवर उघडा"
+  },
+  "shortcutsHint": {
+    "message": "टीप: chrome://extensions/shortcuts येथे शॉर्टकट सानुकूल करा"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "जुने संदेश सारांशित करा"
+  },
+  "summarizingStatus": {
+    "message": "जुने संदेश सारांशित करत आहे…"
+  },
+  "settingsExportBtn": {
+    "message": "सेटिंग्ज निर्यात करा"
+  },
+  "settingsImportBtn": {
+    "message": "आयात करा"
+  },
+  "settingsImported": {
+    "message": "सेटिंग्ज आयात केल्या (API की कधीही निर्यात केल्या जात नाहीत)"
+  },
+  "settingsImportFailed": {
+    "message": "सेटिंग्ज आयात करणे अयशस्वी: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "उत्तर अपूर्ण असू शकते (स्ट्रीम लवकर संपली). पुन्हा प्रयत्न करण्यासाठी पुन्हा तयार करा वापरा."
   }
 }

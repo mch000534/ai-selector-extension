@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "שוחזר מההפעלה הקודמת"
   },
-  "recentClosedBtn": {
-    "message": "נסגרו לאחרונה"
-  },
-  "recentClosedEmpty": {
-    "message": "אין שיחות סגורות"
-  },
-  "recentClosedTitle": {
-    "message": "שיחות שנסגרו לאחרונה"
-  },
-  "recentClosedRestore": {
-    "message": "שחזר"
-  },
-  "recentClosedAllClear": {
-    "message": "נקה הכל"
-  },
   "codeCopyBtn": {
     "message": "העתק"
   },
@@ -252,79 +237,154 @@
     "message": "פתח תיבת דו-שיח",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "בקשות נוספות...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "פתיחת המגירה"
+  },
+  "openDrawerFailed": {
+    "message": "לא ניתן היה לפתוח את המגירה: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "העברה למגירה"
+  },
+  "profilesLabel": {
+    "message": "פרופילי ספקים"
+  },
+  "profileSaveBtn": {
+    "message": "שמירת הנוכחי"
+  },
+  "profileDeleteBtn": {
+    "message": "מחיקה"
+  },
+  "profilesHint": {
+    "message": "שמירת המפתח, כתובת ה-URL והמודל הנוכחיים כפרופיל אחד; המפתחות נשארים במכשיר הזה"
+  },
+  "messageEdit": {
+    "message": "עריכה"
+  },
+  "messageRegenerate": {
+    "message": "יצירה מחדש"
+  },
+  "messageCopy": {
+    "message": "העתקה"
+  },
+  "messageSave": {
+    "message": "שמירה"
+  },
+  "messageCancel": {
+    "message": "ביטול"
+  },
+  "conversationsBtn": {
+    "message": "שיחות"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "חיפוש שיחות..."
+  },
+  "conversationsRename": {
+    "message": "שינוי שם"
+  },
+  "conversationsRestore": {
+    "message": "שחזור"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "העתקה"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "מחיקה"
+  },
+  "conversationsDeleteSelected": {
+    "message": "מחיקת הנבחרים"
+  },
+  "conversationsEmpty": {
+    "message": "אין עדיין שיחות"
+  },
+  "conversationsOpenBadge": {
+    "message": "פתוחה"
+  },
+  "conversationsClosedBadge": {
+    "message": "סגורה"
+  },
+  "builtInActionsLabel": {
+    "message": "פעולות מהירות מובנות"
+  },
+  "actionTranslate": {
+    "message": "תרגום"
+  },
+  "actionConvertChinese": {
+    "message": "המרת גרסת סינית"
+  },
+  "actionExplain": {
+    "message": "הסבר"
+  },
+  "actionSummarize": {
+    "message": "סיכום"
+  },
+  "actionPolish": {
+    "message": "שיפור הניסוח"
+  },
+  "actionTutorial": {
+    "message": "מדריך"
+  },
+  "commandOpenPopup": {
+    "message": "פתיחת AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "פתיחת מגירת הצ׳אט"
+  },
+  "shortcutsHint": {
+    "message": "טיפ: התאימו אישית את קיצורי הדרך בכתובת chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "סיכום הודעות ישנות יותר"
+  },
+  "summarizingStatus": {
+    "message": "מתבצע סיכום של הודעות ישנות יותר…"
+  },
+  "settingsExportBtn": {
+    "message": "ייצוא הגדרות"
+  },
+  "settingsImportBtn": {
+    "message": "ייבוא"
+  },
+  "settingsImported": {
+    "message": "ההגדרות יובאו (מפתחות API לעולם אינם מיוצאים)"
+  },
+  "settingsImportFailed": {
+    "message": "ייבוא ההגדרות נכשל: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "ייתכן שהתשובה אינה שלמה (ההזרמה הסתיימה מוקדם מדי). השתמשו ב״יצירה מחדש״ כדי לנסות שוב."
   }
 }

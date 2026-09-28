@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Atkurta iš ankstesnės sesijos"
   },
-  "recentClosedBtn": {
-    "message": "Neseniai uždaryti"
-  },
-  "recentClosedEmpty": {
-    "message": "Nėra uždarytų pokalbių"
-  },
-  "recentClosedTitle": {
-    "message": "Neseniai uždaryti pokalbiai"
-  },
-  "recentClosedRestore": {
-    "message": "Atkurti"
-  },
-  "recentClosedAllClear": {
-    "message": "Išvalyti viską"
-  },
   "codeCopyBtn": {
     "message": "Kopijuoti"
   },
@@ -252,79 +237,154 @@
     "message": "Atidaryti dialogo langą",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Daugiau raginimų...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Atverti skydelį"
+  },
+  "openDrawerFailed": {
+    "message": "Nepavyko atverti skydelio: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Perkelti į skydelį"
+  },
+  "profilesLabel": {
+    "message": "Teikėjų profiliai"
+  },
+  "profileSaveBtn": {
+    "message": "Išsaugoti dabartinį"
+  },
+  "profileDeleteBtn": {
+    "message": "Ištrinti"
+  },
+  "profilesHint": {
+    "message": "Išsaugokite dabartinį raktą, URL ir modelį kaip vieną profilį; raktai lieka šiame įrenginyje"
+  },
+  "messageEdit": {
+    "message": "Redaguoti"
+  },
+  "messageRegenerate": {
+    "message": "Generuoti iš naujo"
+  },
+  "messageCopy": {
+    "message": "Kopijuoti"
+  },
+  "messageSave": {
+    "message": "Išsaugoti"
+  },
+  "messageCancel": {
+    "message": "Atšaukti"
+  },
+  "conversationsBtn": {
+    "message": "Pokalbiai"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Ieškoti pokalbių..."
+  },
+  "conversationsRename": {
+    "message": "Pervadinti"
+  },
+  "conversationsRestore": {
+    "message": "Atkurti"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopijuoti"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Ištrinti"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Ištrinti pažymėtus"
+  },
+  "conversationsEmpty": {
+    "message": "Kol kas pokalbių nėra"
+  },
+  "conversationsOpenBadge": {
+    "message": "Atviras"
+  },
+  "conversationsClosedBadge": {
+    "message": "Uždarytas"
+  },
+  "builtInActionsLabel": {
+    "message": "Integruoti spartieji veiksmai"
+  },
+  "actionTranslate": {
+    "message": "Versti"
+  },
+  "actionConvertChinese": {
+    "message": "Konvertuoti kinų rašto variantą"
+  },
+  "actionExplain": {
+    "message": "Paaiškinti"
+  },
+  "actionSummarize": {
+    "message": "Apibendrinti"
+  },
+  "actionPolish": {
+    "message": "Patobulinti tekstą"
+  },
+  "actionTutorial": {
+    "message": "Vadovas"
+  },
+  "commandOpenPopup": {
+    "message": "Atverti AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Atverti pokalbio skydelį"
+  },
+  "shortcutsHint": {
+    "message": "Patarimas: pritaikykite sparčiuosius klavišus adresu chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Apibendrinti senesnes žinutes"
+  },
+  "summarizingStatus": {
+    "message": "Apibendrinamos senesnės žinutės…"
+  },
+  "settingsExportBtn": {
+    "message": "Eksportuoti nustatymus"
+  },
+  "settingsImportBtn": {
+    "message": "Importuoti"
+  },
+  "settingsImported": {
+    "message": "Nustatymai importuoti (API raktai niekada neeksportuojami)"
+  },
+  "settingsImportFailed": {
+    "message": "Nepavyko importuoti nustatymų: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Atsakymas gali būti nepilnas (srautas baigėsi anksčiau laiko). Bandykite dar kartą naudodami „Generuoti iš naujo“."
   }
 }

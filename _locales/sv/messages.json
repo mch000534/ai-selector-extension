@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Återställd från föregående session"
   },
-  "recentClosedBtn": {
-    "message": "Nyligen stängda"
-  },
-  "recentClosedEmpty": {
-    "message": "Inga stängda konversationer"
-  },
-  "recentClosedTitle": {
-    "message": "Nyligen stängda konversationer"
-  },
-  "recentClosedRestore": {
-    "message": "Återställ"
-  },
-  "recentClosedAllClear": {
-    "message": "Rensa allt"
-  },
   "codeCopyBtn": {
     "message": "Kopiera"
   },
@@ -252,79 +237,154 @@
     "message": "Öppna dialogruta",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Fler förslag...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Öppna panelen"
+  },
+  "openDrawerFailed": {
+    "message": "Det gick inte att öppna panelen: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Flytta till panelen"
+  },
+  "profilesLabel": {
+    "message": "Leverantörsprofiler"
+  },
+  "profileSaveBtn": {
+    "message": "Spara aktuell"
+  },
+  "profileDeleteBtn": {
+    "message": "Ta bort"
+  },
+  "profilesHint": {
+    "message": "Spara aktuell nyckel, URL och modell som en profil; nycklar stannar på den här enheten"
+  },
+  "messageEdit": {
+    "message": "Redigera"
+  },
+  "messageRegenerate": {
+    "message": "Generera på nytt"
+  },
+  "messageCopy": {
+    "message": "Kopiera"
+  },
+  "messageSave": {
+    "message": "Spara"
+  },
+  "messageCancel": {
+    "message": "Avbryt"
+  },
+  "conversationsBtn": {
+    "message": "Konversationer"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Sök konversationer..."
+  },
+  "conversationsRename": {
+    "message": "Byt namn"
+  },
+  "conversationsRestore": {
+    "message": "Återställ"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopiera"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Ta bort"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Ta bort markerade"
+  },
+  "conversationsEmpty": {
+    "message": "Inga konversationer än"
+  },
+  "conversationsOpenBadge": {
+    "message": "Öppen"
+  },
+  "conversationsClosedBadge": {
+    "message": "Stängd"
+  },
+  "builtInActionsLabel": {
+    "message": "Inbyggda snabbåtgärder"
+  },
+  "actionTranslate": {
+    "message": "Översätt"
+  },
+  "actionConvertChinese": {
+    "message": "Konvertera kinesisk variant"
+  },
+  "actionExplain": {
+    "message": "Förklara"
+  },
+  "actionSummarize": {
+    "message": "Sammanfatta"
+  },
+  "actionPolish": {
+    "message": "Förbättra texten"
+  },
+  "actionTutorial": {
+    "message": "Handledning"
+  },
+  "commandOpenPopup": {
+    "message": "Öppna AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Öppna chattpanelen"
+  },
+  "shortcutsHint": {
+    "message": "Tips: anpassa kortkommandon på chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Sammanfatta äldre meddelanden"
+  },
+  "summarizingStatus": {
+    "message": "Sammanfattar äldre meddelanden…"
+  },
+  "settingsExportBtn": {
+    "message": "Exportera inställningar"
+  },
+  "settingsImportBtn": {
+    "message": "Importera"
+  },
+  "settingsImported": {
+    "message": "Inställningar importerade (API-nycklar exporteras aldrig)"
+  },
+  "settingsImportFailed": {
+    "message": "Det gick inte att importera inställningarna: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Svaret kan vara ofullständigt (strömmen avslutades i förtid). Använd Generera på nytt för att försöka igen."
   }
 }

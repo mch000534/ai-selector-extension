@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Önceki oturumdan geri yüklendi"
   },
-  "recentClosedBtn": {
-    "message": "Son kapatılanlar"
-  },
-  "recentClosedEmpty": {
-    "message": "Kapatılmış konuşma yok"
-  },
-  "recentClosedTitle": {
-    "message": "Son kapatılan konuşmalar"
-  },
-  "recentClosedRestore": {
-    "message": "Geri yükle"
-  },
-  "recentClosedAllClear": {
-    "message": "Tümünü temizle"
-  },
   "codeCopyBtn": {
     "message": "Kopyala"
   },
@@ -252,79 +237,154 @@
     "message": "İletişim kutusunu aç",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Daha fazla istem...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Paneli aç"
+  },
+  "openDrawerFailed": {
+    "message": "Panel açılamadı: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Panele taşı"
+  },
+  "profilesLabel": {
+    "message": "Sağlayıcı profilleri"
+  },
+  "profileSaveBtn": {
+    "message": "Geçerli olanı kaydet"
+  },
+  "profileDeleteBtn": {
+    "message": "Sil"
+  },
+  "profilesHint": {
+    "message": "Geçerli anahtarı, URL ve modeli tek bir profil olarak kaydedin; anahtarlar bu cihazda kalır"
+  },
+  "messageEdit": {
+    "message": "Düzenle"
+  },
+  "messageRegenerate": {
+    "message": "Yeniden oluştur"
+  },
+  "messageCopy": {
+    "message": "Kopyala"
+  },
+  "messageSave": {
+    "message": "Kaydet"
+  },
+  "messageCancel": {
+    "message": "İptal"
+  },
+  "conversationsBtn": {
+    "message": "Konuşmalar"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Konuşmalarda ara..."
+  },
+  "conversationsRename": {
+    "message": "Yeniden adlandır"
+  },
+  "conversationsRestore": {
+    "message": "Geri yükle"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopyala"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Sil"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Seçilenleri sil"
+  },
+  "conversationsEmpty": {
+    "message": "Henüz konuşma yok"
+  },
+  "conversationsOpenBadge": {
+    "message": "Açık"
+  },
+  "conversationsClosedBadge": {
+    "message": "Kapalı"
+  },
+  "builtInActionsLabel": {
+    "message": "Yerleşik hızlı eylemler"
+  },
+  "actionTranslate": {
+    "message": "Çevir"
+  },
+  "actionConvertChinese": {
+    "message": "Çince yazım biçimini dönüştür"
+  },
+  "actionExplain": {
+    "message": "Açıkla"
+  },
+  "actionSummarize": {
+    "message": "Özetle"
+  },
+  "actionPolish": {
+    "message": "Metni iyileştir"
+  },
+  "actionTutorial": {
+    "message": "Eğitim"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant'ı aç"
+  },
+  "commandOpenDrawer": {
+    "message": "Sohbet panelini aç"
+  },
+  "shortcutsHint": {
+    "message": "İpucu: kısayolları chrome://extensions/shortcuts adresinden özelleştirin"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Eski mesajları özetle"
+  },
+  "summarizingStatus": {
+    "message": "Eski mesajlar özetleniyor…"
+  },
+  "settingsExportBtn": {
+    "message": "Ayarları dışa aktar"
+  },
+  "settingsImportBtn": {
+    "message": "İçe aktar"
+  },
+  "settingsImported": {
+    "message": "Ayarlar içe aktarıldı (API anahtarları asla dışa aktarılmaz)"
+  },
+  "settingsImportFailed": {
+    "message": "Ayarlar içe aktarılamadı: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Yanıt eksik olabilir (akış erken sona erdi). Tekrar denemek için Yeniden Oluştur'u kullanın."
   }
 }

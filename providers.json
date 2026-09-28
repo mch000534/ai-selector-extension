@@ -31,7 +31,23 @@
       "model": "openai/gpt-4o-mini",
       "signup": "https://openrouter.ai/keys",
       "free": true
+    },
+    "anthropic": {
+      "name": "Anthropic",
+      "host": "api.anthropic.com",
+      "baseUrl": "https://api.anthropic.com",
+      "model": "claude-sonnet-4-20250514",
+      "signup": "https://console.anthropic.com/settings/keys",
+      "free": false
+    },
+    "gemini": {
+      "name": "Google Gemini",
+      "host": "generativelanguage.googleapis.com",
+      "baseUrl": "https://generativelanguage.googleapis.com",
+      "model": "gemini-2.0-flash",
+      "signup": "https://aistudio.google.com/apikey",
+      "free": true
     }
   },
-  "displayOrder": ["mistral", "openai", "groq", "openrouter"]
+  "displayOrder": ["mistral", "openai", "groq", "openrouter", "anthropic", "gemini"]
 }

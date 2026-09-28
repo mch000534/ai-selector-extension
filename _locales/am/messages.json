@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "ከቀድሞ ክፍለ-ጊዜ ተመልሷል"
   },
-  "recentClosedBtn": {
-    "message": "በቅርብ ጊዜ የተዘጉ"
-  },
-  "recentClosedEmpty": {
-    "message": "የተዘጉ ውይይቶች የሉም"
-  },
-  "recentClosedTitle": {
-    "message": "በቅርብ ጊዜ የተዘጉ ውይይቶች"
-  },
-  "recentClosedRestore": {
-    "message": "ይመልሱ"
-  },
-  "recentClosedAllClear": {
-    "message": "ሁሉንም ያጽዱ"
-  },
   "codeCopyBtn": {
     "message": "ቅዳ"
   },
@@ -252,79 +237,154 @@
     "message": "ውይይት ክፈት",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "ተጨማሪ ጥያቄዎች...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "መሳቢያ ክፈት"
+  },
+  "openDrawerFailed": {
+    "message": "መሳቢያውን መክፈት አልተቻለም፦ $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ወደ መሳቢያ ውሰድ"
+  },
+  "profilesLabel": {
+    "message": "የአቅራቢ መገለጫዎች"
+  },
+  "profileSaveBtn": {
+    "message": "የአሁኑን አስቀምጥ"
+  },
+  "profileDeleteBtn": {
+    "message": "ሰርዝ"
+  },
+  "profilesHint": {
+    "message": "የአሁኑን ቁልፍ፣ URL እና ሞዴል እንደ አንድ መገለጫ አስቀምጥ፤ ቁልፎች በዚህ መሣሪያ ብቻ ይቆያሉ"
+  },
+  "messageEdit": {
+    "message": "አርትዕ"
+  },
+  "messageRegenerate": {
+    "message": "እንደገና ፍጠር"
+  },
+  "messageCopy": {
+    "message": "ቅዳ"
+  },
+  "messageSave": {
+    "message": "አስቀምጥ"
+  },
+  "messageCancel": {
+    "message": "ሰርዝ"
+  },
+  "conversationsBtn": {
+    "message": "ውይይቶች"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "ውይይቶችን ፈልግ..."
+  },
+  "conversationsRename": {
+    "message": "ስም ቀይር"
+  },
+  "conversationsRestore": {
+    "message": "መልስ"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "ቅዳ"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "ሰርዝ"
+  },
+  "conversationsDeleteSelected": {
+    "message": "የተመረጡትን ሰርዝ"
+  },
+  "conversationsEmpty": {
+    "message": "እስካሁን ምንም ውይይት የለም"
+  },
+  "conversationsOpenBadge": {
+    "message": "ክፍት"
+  },
+  "conversationsClosedBadge": {
+    "message": "ተዘግቷል"
+  },
+  "builtInActionsLabel": {
+    "message": "አብሮ የተሰሩ ፈጣን እርምጃዎች"
+  },
+  "actionTranslate": {
+    "message": "ተርጉም"
+  },
+  "actionConvertChinese": {
+    "message": "የቻይንኛ ዝርያ ለውጥ"
+  },
+  "actionExplain": {
+    "message": "ማብራሪያ"
+  },
+  "actionSummarize": {
+    "message": "አጠቃልል"
+  },
+  "actionPolish": {
+    "message": "ጽሑፍ አሻሽል"
+  },
+  "actionTutorial": {
+    "message": "አጋዥ ስልጠና"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant ክፈት"
+  },
+  "commandOpenDrawer": {
+    "message": "የውይይት መሳቢያ ክፈት"
+  },
+  "shortcutsHint": {
+    "message": "ጠቃሚ ምክር፦ አቋራጮችን በ chrome://extensions/shortcuts ላይ አብጅ"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "የቆዩ መልዕክቶችን አጠቃልል"
+  },
+  "summarizingStatus": {
+    "message": "የቆዩ መልዕክቶችን በማጠቃለል ላይ…"
+  },
+  "settingsExportBtn": {
+    "message": "ቅንብሮችን ላክ"
+  },
+  "settingsImportBtn": {
+    "message": "አስመጣ"
+  },
+  "settingsImported": {
+    "message": "ቅንብሮች ገብተዋል (የAPI ቁልፎች በጭራሽ አይላኩም)"
+  },
+  "settingsImportFailed": {
+    "message": "ቅንብሮችን ማስመጣት አልተሳካም፦ $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "ምላሹ ያልተሟላ ሊሆን ይችላል (ዥረቱ ቀደም ብሎ አብቅቷል)። እንደገና ለመሞከር እንደገና ፍጠር ተጠቀም።"
   }
 }

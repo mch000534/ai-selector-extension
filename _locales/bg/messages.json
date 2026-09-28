@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Възстановено от предишната сесия"
   },
-  "recentClosedBtn": {
-    "message": "Наскоро затворени"
-  },
-  "recentClosedEmpty": {
-    "message": "Няма затворени разговори"
-  },
-  "recentClosedTitle": {
-    "message": "Наскоро затворени разговори"
-  },
-  "recentClosedRestore": {
-    "message": "Възстанови"
-  },
-  "recentClosedAllClear": {
-    "message": "Изчисти всичко"
-  },
   "codeCopyBtn": {
     "message": "Копиране"
   },
@@ -252,79 +237,154 @@
     "message": "Отваряне на диалога",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Още подсказки...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Отваряне на чекмеджето"
+  },
+  "openDrawerFailed": {
+    "message": "Неуспешно отваряне на чекмеджето: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Преместване в чекмеджето"
+  },
+  "profilesLabel": {
+    "message": "Профили на доставчици"
+  },
+  "profileSaveBtn": {
+    "message": "Запазване на текущия"
+  },
+  "profileDeleteBtn": {
+    "message": "Изтриване"
+  },
+  "profilesHint": {
+    "message": "Запазете текущия ключ, URL адрес и модел като един профил; ключовете остават на това устройство"
+  },
+  "messageEdit": {
+    "message": "Редактиране"
+  },
+  "messageRegenerate": {
+    "message": "Генериране отново"
+  },
+  "messageCopy": {
+    "message": "Копиране"
+  },
+  "messageSave": {
+    "message": "Запазване"
+  },
+  "messageCancel": {
+    "message": "Отказ"
+  },
+  "conversationsBtn": {
+    "message": "Разговори"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Търсене на разговори..."
+  },
+  "conversationsRename": {
+    "message": "Преименуване"
+  },
+  "conversationsRestore": {
+    "message": "Възстановяване"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Копиране"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Изтриване"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Изтриване на избраните"
+  },
+  "conversationsEmpty": {
+    "message": "Все още няма разговори"
+  },
+  "conversationsOpenBadge": {
+    "message": "Отворен"
+  },
+  "conversationsClosedBadge": {
+    "message": "Затворен"
+  },
+  "builtInActionsLabel": {
+    "message": "Вградени бързи действия"
+  },
+  "actionTranslate": {
+    "message": "Превод"
+  },
+  "actionConvertChinese": {
+    "message": "Преобразуване на китайски вариант"
+  },
+  "actionExplain": {
+    "message": "Обяснение"
+  },
+  "actionSummarize": {
+    "message": "Обобщение"
+  },
+  "actionPolish": {
+    "message": "Подобряване"
+  },
+  "actionTutorial": {
+    "message": "Урок"
+  },
+  "commandOpenPopup": {
+    "message": "Отваряне на AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Отваряне на чекмеджето за чат"
+  },
+  "shortcutsHint": {
+    "message": "Съвет: персонализирайте преките пътища на chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Обобщаване на по-стари съобщения"
+  },
+  "summarizingStatus": {
+    "message": "Обобщаване на по-стари съобщения…"
+  },
+  "settingsExportBtn": {
+    "message": "Експортиране на настройки"
+  },
+  "settingsImportBtn": {
+    "message": "Импортиране"
+  },
+  "settingsImported": {
+    "message": "Настройките са импортирани (API ключовете никога не се експортират)"
+  },
+  "settingsImportFailed": {
+    "message": "Неуспешен импорт на настройки: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Отговорът може да е непълен (потокът приключи преждевременно). Използвайте „Генериране отново“, за да опитате пак."
   }
 }

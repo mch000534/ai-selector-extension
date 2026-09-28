@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Taastatud eelmisest seansist"
   },
-  "recentClosedBtn": {
-    "message": "Hiljuti suletud"
-  },
-  "recentClosedEmpty": {
-    "message": "Suletud vestlusi pole"
-  },
-  "recentClosedTitle": {
-    "message": "Hiljuti suletud vestlused"
-  },
-  "recentClosedRestore": {
-    "message": "Taasta"
-  },
-  "recentClosedAllClear": {
-    "message": "Tühjenda kõik"
-  },
   "codeCopyBtn": {
     "message": "Kopeeri"
   },
@@ -252,79 +237,154 @@
     "message": "Ava dialoog",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Rohkem vihjeid...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Ava riiul"
+  },
+  "openDrawerFailed": {
+    "message": "Riiuli avamine ebaõnnestus: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Teisalda riiulile"
+  },
+  "profilesLabel": {
+    "message": "Teenusepakkuja profiilid"
+  },
+  "profileSaveBtn": {
+    "message": "Salvesta praegune"
+  },
+  "profileDeleteBtn": {
+    "message": "Kustuta"
+  },
+  "profilesHint": {
+    "message": "Salvesta praegune võti, URL ja mudel ühe profiilina; võtmed jäävad sellesse seadmesse"
+  },
+  "messageEdit": {
+    "message": "Muuda"
+  },
+  "messageRegenerate": {
+    "message": "Genereeri uuesti"
+  },
+  "messageCopy": {
+    "message": "Kopeeri"
+  },
+  "messageSave": {
+    "message": "Salvesta"
+  },
+  "messageCancel": {
+    "message": "Tühista"
+  },
+  "conversationsBtn": {
+    "message": "Vestlused"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Otsi vestlusi..."
+  },
+  "conversationsRename": {
+    "message": "Nimeta ümber"
+  },
+  "conversationsRestore": {
+    "message": "Taasta"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopeeri"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Kustuta"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Kustuta valitud"
+  },
+  "conversationsEmpty": {
+    "message": "Vestlusi pole veel"
+  },
+  "conversationsOpenBadge": {
+    "message": "Avatud"
+  },
+  "conversationsClosedBadge": {
+    "message": "Suletud"
+  },
+  "builtInActionsLabel": {
+    "message": "Sisseehitatud kiirtoimingud"
+  },
+  "actionTranslate": {
+    "message": "Tõlgi"
+  },
+  "actionConvertChinese": {
+    "message": "Teisenda hiina keele variant"
+  },
+  "actionExplain": {
+    "message": "Selgita"
+  },
+  "actionSummarize": {
+    "message": "Tee kokkuvõte"
+  },
+  "actionPolish": {
+    "message": "Lihvi teksti"
+  },
+  "actionTutorial": {
+    "message": "Juhend"
+  },
+  "commandOpenPopup": {
+    "message": "Ava AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Ava vestlusriiul"
+  },
+  "shortcutsHint": {
+    "message": "Vihje: kohanda otseteid aadressil chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Tee vanematest sõnumitest kokkuvõte"
+  },
+  "summarizingStatus": {
+    "message": "Vanemate sõnumite kokkuvõtte tegemine…"
+  },
+  "settingsExportBtn": {
+    "message": "Ekspordi seaded"
+  },
+  "settingsImportBtn": {
+    "message": "Impordi"
+  },
+  "settingsImported": {
+    "message": "Seaded imporditud (API-võtmeid ei ekspordita kunagi)"
+  },
+  "settingsImportFailed": {
+    "message": "Seadete importimine ebaõnnestus: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Vastus võib olla poolik (voog lõppes enneaegselt). Proovi uuesti nupuga „Genereeri uuesti“."
   }
 }

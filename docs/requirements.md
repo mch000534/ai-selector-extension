@@ -112,24 +112,26 @@
 - 安裝時建立右鍵選單項目「AI 劃詞助手」，`contexts: ['all']`
 - 點擊後透過 `chrome.tabs.sendMessage` 發送 `{ action: 'openDialog' }` 給 content script
 - content script 接收後若有選取內容則提取上下文，否則以空上下文開啟對話框
-- 右鍵選單提供「Open side panel」入口，可開啟網頁內右側抽屜聊天
+- 右鍵選單提供「Open drawer」入口，可開啟網頁內右側抽屜聊天
+- 選取文字時右鍵選單直接列出前 5 個 quickPrompts（無子選單層級）與內建快捷動作（翻譯、繁簡轉換、解釋、摘要、潤稿、產生教學），內建動作走獨立 `builtInActions` 設定、不佔用 10 個額度；點擊後以選取文字組裝 prompt 開啟對話框
 
 #### FR-009：設定頁面
 - **API Base URL**：文字輸入框，placeholder 為 `https://api.example.com/v1`
-- **API Key**：密碼輸入框
+- **API Key**：密碼輸入框，僅存於 `chrome.storage.local`（本機，不隨帳號漫遊）
+- **Provider profiles**：同一組 key/URL/model 存為具名設定檔（`aiext_profiles_v1`，local），下拉切換即套用；同 endpoint 重複儲存會更新而非新增；首次開啟自動以目前連線建立一個
 - **模型名稱**：文字輸入框附 datalist，點擊「獲取」按鈕從 `{baseUrl}/models` 取得列表
 - **快速預設問題**：可新增（Enter 或按鈕）、刪除（× 按鈕），上限 10 個
 - **預設釘住**：勾選框，開啟後新對話框自動釘選
-- **儲存**：驗證必填欄位（API Key、Base URL、模型）後存入 `chrome.storage.sync`
-- 所有設定以 `chrome.storage.sync` 同步，鍵值：`apiKey`、`model`、`baseUrl`、`quickPrompts`、`defaultPin`
+- **儲存**：API Key 寫入 `chrome.storage.local`，其餘（`model`、`baseUrl`、`quickPrompts`、`defaultPin`、`showFloating`、`builtInActions`）寫入 `chrome.storage.sync`；僅當 key 或 URL 變動時清除已存對話
 
 #### FR-010：鍵盤快捷鍵
 - `Enter`：發送訊息
 - `Shift + Enter`：輸入換行
 - `ESC`：關閉最上層未釘選的對話框
+- 全域快捷鍵（`manifest.commands`）：`Alt+Shift+A` 開啟 popup，`Alt+Shift+D` 在目前分頁開啟右側抽屜；使用者可在 `chrome://extensions/shortcuts` 自訂按鍵
 
 #### FR-010a：網頁內右側抽屜聊天
-- popup 設定頁提供開啟 side panel 的按鈕，透過 content script 在目前頁面內開啟右側抽屜
+- popup 設定頁提供開啟抽屜的按鈕，透過 content script 在目前頁面內開啟右側抽屜
 - 右側抽屜沿用 `apiKey`、`baseUrl`、`model`、`quickPrompts` 設定
 - 右側抽屜提供模型輸入框與 datalist，並沿用對話框既有模型清單載入行為
 - 右側抽屜的快速預設問題以晶片形式呈現，點擊後填入輸入框
@@ -137,6 +139,24 @@
 - 開啟右側抽屜時會讀取目前頁面選取文字或圖片作為上下文
 - 右側抽屜以 content script DOM 注入實作，不申請 Chrome 原生 `sidePanel` 權限
 - 現有 content script 注入式浮動對話框功能需完整保留
+
+#### FR-010b：對話管理
+- popup 設定頁提供「Conversations」管理器，列出全部儲存紀錄（開啟中 + 已關閉，跨 host，取最新 50 筆）
+- 關鍵字搜尋比對標題、預覽、host 與模型
+- 重新命名：record 加 `title`/`titleExplicit` 欄位，預設取首則使用者訊息；改名後 persist 不覆寫
+- 匯出：單筆下載 Markdown / JSON，Markdown 可複製（供貼至 NotebookLM）
+- 刪除：單筆刪除與勾選批次刪除（直接寫 storage；開啟中對話下次 persist 會重建）
+
+#### FR-010c：上下文感知
+- 對話框顯示粗略 token 估算（`ceil(chars/4)`，圖片每張 1000）與模型 window 佔比；超過 80% 警示
+- 超過 90% 且歷史超過 8 則時提供「Summarize older messages」：保留最後 6 則，其餘壓縮為一則摘要後重繪
+
+#### FR-010d：圖片與小改善
+- 未送出的截圖/貼上/拖放圖片隨對話紀錄持久化，還原時一併恢復預覽
+- 縮圖點擊放大燈箱（ESC 或點擊關閉）；圖片可拖放進對話框（與貼上同額度）
+- 串流未收到終止標記時顯示可能截斷提示（附帶的 Regenerate 可重試）
+- 設定頁支援設定匯出/匯入（JSON；API 金鑰一律不匯出）
+- 尊重 `prefers-reduced-motion`（content 與 popup 動畫全關）
 
 #### FR-011：錯誤處理
 - 未設定 API Key 時顯示引導提示
@@ -151,13 +171,11 @@
 - `popup.html` 透過 `data-i18n*` 屬性標記可翻譯元素，`popup.js` 的 `applyI18n()` 套用翻譯
 - `content.js` 透過 `t()` 輔助函式取得翻譯字串
 - 系統提示詞為英文，但根據使用者 UI 語言指示 AI 以該語言回應
-- RTL 語言（ar、iw、fa）自動設定 `dir="rtl"`，訊息氣泡對齊方向翻轉
+- RTL 語言（ar、iw、fa、ur）自動設定 `dir="rtl"`，訊息氣泡對齊方向翻轉
 
 #### FR-013：暗色/亮色模式
 - 依系統 `prefers-color-scheme` 自動切換，無需手動設定
-- `popup.css` 使用 CSS 自訂屬性 + `@media (prefers-color-scheme: dark)` 覆寫
-- `content.js` 的 `getThemeColors()` 根據 `matchMedia` 回傳對應色彩組
-- 系統切換主題時自動重新注入 content script 樣式
+- 色票單一來源為 `lib/theme.js`：content 經 shadow `:host` 變數、popup 經 `applyDocumentVars` 寫入 `documentElement`；系統切換時監聽 `matchMedia` 即時更新
 - 滾動條顏色跟隨主題切換
 
 #### FR-014：Base URL 自動正規化
@@ -205,7 +223,7 @@
 
 - **語言/框架**：純 Vanilla JS（ES2020+），不使用任何前端框架或打包工具
 - **平台**：Chrome Extension（Manifest V3）
-- **第三方服務**：OpenAI 相容 API（`/v1/chat/completions` + SSE streaming、`/models`）
+- **第三方服務**：OpenAI 相容 API（`/v1/chat/completions` + SSE streaming、`/models`）；`api.anthropic.com` 與 `generativelanguage.googleapis.com` 自動切換專用 adapter（URL、auth header、body、SSE 事件格式）
 - **限制與相容性**：
   - Manifest V3 service worker 限制（`background.js` 無 DOM 存取）
   - `chrome.storage.sync` 每項最大 8KB，總計 100KB

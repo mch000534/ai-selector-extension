@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Obnovené z predchádzajúcej relácie"
   },
-  "recentClosedBtn": {
-    "message": "Nedávno zatvorené"
-  },
-  "recentClosedEmpty": {
-    "message": "Žiadne zatvorené konverzácie"
-  },
-  "recentClosedTitle": {
-    "message": "Nedávno zatvorené konverzácie"
-  },
-  "recentClosedRestore": {
-    "message": "Obnoviť"
-  },
-  "recentClosedAllClear": {
-    "message": "Vymazať všetko"
-  },
   "codeCopyBtn": {
     "message": "Kopírovať"
   },
@@ -252,79 +237,154 @@
     "message": "Otvoriť dialógové okno",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Ďalšie návrhy...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Otvoriť panel"
+  },
+  "openDrawerFailed": {
+    "message": "Panel sa nepodarilo otvoriť: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Presunúť do panela"
+  },
+  "profilesLabel": {
+    "message": "Profily poskytovateľov"
+  },
+  "profileSaveBtn": {
+    "message": "Uložiť aktuálne"
+  },
+  "profileDeleteBtn": {
+    "message": "Odstrániť"
+  },
+  "profilesHint": {
+    "message": "Uložte aktuálny kľúč, URL a model ako jeden profil; kľúče zostávajú v tomto zariadení"
+  },
+  "messageEdit": {
+    "message": "Upraviť"
+  },
+  "messageRegenerate": {
+    "message": "Znova vygenerovať"
+  },
+  "messageCopy": {
+    "message": "Kopírovať"
+  },
+  "messageSave": {
+    "message": "Uložiť"
+  },
+  "messageCancel": {
+    "message": "Zrušiť"
+  },
+  "conversationsBtn": {
+    "message": "Konverzácie"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Hľadať konverzácie..."
+  },
+  "conversationsRename": {
+    "message": "Premenovať"
+  },
+  "conversationsRestore": {
+    "message": "Obnoviť"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Kopírovať"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Odstrániť"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Odstrániť vybrané"
+  },
+  "conversationsEmpty": {
+    "message": "Zatiaľ žiadne konverzácie"
+  },
+  "conversationsOpenBadge": {
+    "message": "Otvorená"
+  },
+  "conversationsClosedBadge": {
+    "message": "Uzavretá"
+  },
+  "builtInActionsLabel": {
+    "message": "Vstavané rýchle akcie"
+  },
+  "actionTranslate": {
+    "message": "Preložiť"
+  },
+  "actionConvertChinese": {
+    "message": "Konvertovať variant čínštiny"
+  },
+  "actionExplain": {
+    "message": "Vysvetliť"
+  },
+  "actionSummarize": {
+    "message": "Zhrnúť"
+  },
+  "actionPolish": {
+    "message": "Vylepšiť text"
+  },
+  "actionTutorial": {
+    "message": "Návod"
+  },
+  "commandOpenPopup": {
+    "message": "Otvoriť AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Otvoriť panel chatu"
+  },
+  "shortcutsHint": {
+    "message": "Tip: prispôsobte si klávesové skratky na chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Zhrnúť staršie správy"
+  },
+  "summarizingStatus": {
+    "message": "Zhŕňanie starších správ…"
+  },
+  "settingsExportBtn": {
+    "message": "Exportovať nastavenia"
+  },
+  "settingsImportBtn": {
+    "message": "Importovať"
+  },
+  "settingsImported": {
+    "message": "Nastavenia boli importované (API kľúče sa nikdy needportujú)"
+  },
+  "settingsImportFailed": {
+    "message": "Import nastavení zlyhal: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Odpoveď môže byť neúplná (prenos predčasne skončil). Skúste to znova pomocou Znova vygenerovať."
   }
 }

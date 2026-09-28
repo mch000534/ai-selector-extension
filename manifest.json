@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "permissions": [
@@ -23,6 +23,20 @@
       "128": "icons/icon128.png"
     }
   },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "__MSG_commandOpenPopup__"
+    },
+    "open-drawer": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "__MSG_commandOpenDrawer__"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
@@ -33,6 +47,9 @@
         "lib/shadow.js",
         "lib/markdown.js",
         "lib/chat.js",
+        "lib/net.js",
+        "lib/api.js",
+        "lib/storage.js",
         "lib/theme.js",
         "content.js"
       ],

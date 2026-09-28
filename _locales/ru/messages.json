@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Восстановлено из предыдущего сеанса"
   },
-  "recentClosedBtn": {
-    "message": "Недавно закрытые"
-  },
-  "recentClosedEmpty": {
-    "message": "Нет закрытых диалогов"
-  },
-  "recentClosedTitle": {
-    "message": "Недавно закрытые диалоги"
-  },
-  "recentClosedRestore": {
-    "message": "Восстановить"
-  },
-  "recentClosedAllClear": {
-    "message": "Очистить всё"
-  },
   "codeCopyBtn": {
     "message": "Копировать"
   },
@@ -252,79 +237,154 @@
     "message": "Открыть диалог",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Другие подсказки...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Открыть панель"
+  },
+  "openDrawerFailed": {
+    "message": "Не удалось открыть панель: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Переместить на панель"
+  },
+  "profilesLabel": {
+    "message": "Профили провайдеров"
+  },
+  "profileSaveBtn": {
+    "message": "Сохранить текущий"
+  },
+  "profileDeleteBtn": {
+    "message": "Удалить"
+  },
+  "profilesHint": {
+    "message": "Сохраните текущий ключ, URL и модель как один профиль; ключи остаются на этом устройстве"
+  },
+  "messageEdit": {
+    "message": "Изменить"
+  },
+  "messageRegenerate": {
+    "message": "Сгенерировать заново"
+  },
+  "messageCopy": {
+    "message": "Копировать"
+  },
+  "messageSave": {
+    "message": "Сохранить"
+  },
+  "messageCancel": {
+    "message": "Отмена"
+  },
+  "conversationsBtn": {
+    "message": "Беседы"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Поиск бесед..."
+  },
+  "conversationsRename": {
+    "message": "Переименовать"
+  },
+  "conversationsRestore": {
+    "message": "Восстановить"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Копировать"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Удалить"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Удалить выбранные"
+  },
+  "conversationsEmpty": {
+    "message": "Бесед пока нет"
+  },
+  "conversationsOpenBadge": {
+    "message": "Открыта"
+  },
+  "conversationsClosedBadge": {
+    "message": "Закрыта"
+  },
+  "builtInActionsLabel": {
+    "message": "Встроенные быстрые действия"
+  },
+  "actionTranslate": {
+    "message": "Перевести"
+  },
+  "actionConvertChinese": {
+    "message": "Преобразовать вариант китайского письма"
+  },
+  "actionExplain": {
+    "message": "Объяснить"
+  },
+  "actionSummarize": {
+    "message": "Сделать краткое изложение"
+  },
+  "actionPolish": {
+    "message": "Улучшить текст"
+  },
+  "actionTutorial": {
+    "message": "Инструкция"
+  },
+  "commandOpenPopup": {
+    "message": "Открыть AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Открыть панель чата"
+  },
+  "shortcutsHint": {
+    "message": "Совет: настройте сочетания клавиш на странице chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Кратко изложить более старые сообщения"
+  },
+  "summarizingStatus": {
+    "message": "Составление краткого изложения старых сообщений…"
+  },
+  "settingsExportBtn": {
+    "message": "Экспортировать настройки"
+  },
+  "settingsImportBtn": {
+    "message": "Импортировать"
+  },
+  "settingsImported": {
+    "message": "Настройки импортированы (ключи API никогда не экспортируются)"
+  },
+  "settingsImportFailed": {
+    "message": "Не удалось импортировать настройки: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Ответ может быть неполным (передача завершилась преждевременно). Нажмите «Сгенерировать заново», чтобы повторить попытку."
   }
 }

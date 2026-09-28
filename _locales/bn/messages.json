@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "আগের সেশন থেকে পুনরুদ্ধার করা হয়েছে"
   },
-  "recentClosedBtn": {
-    "message": "সম্প্রতি বন্ধ করা"
-  },
-  "recentClosedEmpty": {
-    "message": "কোনো বন্ধ কথোপকথন নেই"
-  },
-  "recentClosedTitle": {
-    "message": "সম্প্রতি বন্ধ করা কথোপকথন"
-  },
-  "recentClosedRestore": {
-    "message": "পুনরুদ্ধার করুন"
-  },
-  "recentClosedAllClear": {
-    "message": "সব মুছুন"
-  },
   "codeCopyBtn": {
     "message": "কপি করুন"
   },
@@ -252,79 +237,154 @@
     "message": "ডায়ালগ খুলুন",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "আরও প্রম্পট...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "ড্রয়ার খুলুন"
+  },
+  "openDrawerFailed": {
+    "message": "ড্রয়ার খোলা যায়নি: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "ড্রয়ারে সরান"
+  },
+  "profilesLabel": {
+    "message": "প্রদানকারী প্রোফাইল"
+  },
+  "profileSaveBtn": {
+    "message": "বর্তমানটি সংরক্ষণ করুন"
+  },
+  "profileDeleteBtn": {
+    "message": "মুছুন"
+  },
+  "profilesHint": {
+    "message": "বর্তমান কী, URL এবং মডেলকে একটি প্রোফাইল হিসেবে সংরক্ষণ করুন; কী এই ডিভাইসেই থেকে যায়"
+  },
+  "messageEdit": {
+    "message": "সম্পাদনা করুন"
+  },
+  "messageRegenerate": {
+    "message": "পুনরায় তৈরি করুন"
+  },
+  "messageCopy": {
+    "message": "কপি করুন"
+  },
+  "messageSave": {
+    "message": "সংরক্ষণ করুন"
+  },
+  "messageCancel": {
+    "message": "বাতিল করুন"
+  },
+  "conversationsBtn": {
+    "message": "কথোপকথন"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "কথোপকথন খুঁজুন..."
+  },
+  "conversationsRename": {
+    "message": "নাম পরিবর্তন করুন"
+  },
+  "conversationsRestore": {
+    "message": "পুনরুদ্ধার করুন"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "কপি করুন"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "মুছুন"
+  },
+  "conversationsDeleteSelected": {
+    "message": "নির্বাচিতগুলি মুছুন"
+  },
+  "conversationsEmpty": {
+    "message": "এখনো কোনো কথোপকথন নেই"
+  },
+  "conversationsOpenBadge": {
+    "message": "চলমান"
+  },
+  "conversationsClosedBadge": {
+    "message": "বন্ধ"
+  },
+  "builtInActionsLabel": {
+    "message": "অন্তর্নির্মিত দ্রুত কার্যক্রম"
+  },
+  "actionTranslate": {
+    "message": "অনুবাদ করুন"
+  },
+  "actionConvertChinese": {
+    "message": "চীনা ভ্যারিয়েন্ট রূপান্তর করুন"
+  },
+  "actionExplain": {
+    "message": "ব্যাখ্যা করুন"
+  },
+  "actionSummarize": {
+    "message": "সংক্ষিপ্তসার করুন"
+  },
+  "actionPolish": {
+    "message": "লেখা উন্নত করুন"
+  },
+  "actionTutorial": {
+    "message": "টিউটোরিয়াল"
+  },
+  "commandOpenPopup": {
+    "message": "AI Selection Assistant খুলুন"
+  },
+  "commandOpenDrawer": {
+    "message": "চ্যাট ড্রয়ার খুলুন"
+  },
+  "shortcutsHint": {
+    "message": "টিপ: chrome://extensions/shortcuts এ শর্টকাট কাস্টমাইজ করুন"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "পুরনো বার্তাগুলোর সংক্ষিপ্তসার করুন"
+  },
+  "summarizingStatus": {
+    "message": "পুরনো বার্তাগুলোর সংক্ষিপ্তসার করা হচ্ছে…"
+  },
+  "settingsExportBtn": {
+    "message": "সেটিংস রপ্তানি করুন"
+  },
+  "settingsImportBtn": {
+    "message": "আমদানি করুন"
+  },
+  "settingsImported": {
+    "message": "সেটিংস আমদানি করা হয়েছে (API কী কখনো রপ্তানি করা হয় না)"
+  },
+  "settingsImportFailed": {
+    "message": "সেটিংস আমদানি ব্যর্থ হয়েছে: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "উত্তরটি অসম্পূর্ণ হতে পারে (স্ট্রিম আগেভাগে শেষ হয়েছে)। আবার চেষ্টা করতে পুনরায় তৈরি করুন ব্যবহার করুন।"
   }
 }

@@ -1,15 +1,18 @@
 const MENU_PARENT_ID = 'ai-selector-parent';
 const MENU_OPEN_ID = 'ai-selector-open';
-const MENU_OPEN_SIDE_PANEL_ID = 'ai-selector-open-side-panel';
+const MENU_OPEN_DRAWER_ID = 'ai-selector-open-drawer';
 const MENU_PROMPT_PREFIX = 'ai-selector-prompt-';
-const MENU_PROMPT_MORE = 'ai-selector-prompt-more';
-const MENU_SEPARATOR_ID = 'ai-selector-separator';
-const MAX_PROMPTS_IN_MENU = 20;
+const MENU_ACTION_PREFIX = 'ai-selector-action-';
+const MENU_SEPARATOR_PROMPTS = 'ai-selector-separator-prompts';
+const MENU_SEPARATOR_ACTIONS = 'ai-selector-separator-actions';
+// Must match the max quick prompts a user can save (popup.js), or prompts
+// beyond this count become permanently unreachable from the context menu.
+const QUICK_PROMPTS_IN_MENU = 10;
 
 let _buildMenuPromise = null;
 
 try {
-  importScripts('lib/chat.js');
+  importScripts('lib/chat.js', 'lib/net.js', 'lib/storage.js', 'lib/actions.js');
 } catch {}
 
 const createOpenDrawerMessage = (options) => {
@@ -21,32 +24,47 @@ const createOpenDrawerMessage = (options) => {
   return msg;
 };
 
-// Reject localhost, private, and link-local hosts to prevent SSRF via
-// attacker-controlled <img src> routed through fetchImageAsDataUrl.
+// Fail-closed aliases for lib/net.js (shared with tests via vm loading).
+const _net = (globalThis.__aiext && globalThis.__aiext.net) || null;
 function isSafeFetchUrl(urlStr) {
-  let u;
-  try { u = new URL(urlStr); } catch (e) { return false; }
-  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
-  const host = u.hostname.toLowerCase().replace(/^\[|\]$/g, '');
-  if (host === 'localhost' || host.endsWith('.localhost') || host === '::1') return false;
-  const v4 = host.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
-  if (v4) {
-    const a = Number(v4[1]), b = Number(v4[2]);
-    if (a === 0 || a === 127) return false;
-    if (a === 10) return false;
-    if (a === 172 && b >= 16 && b <= 31) return false;
-    if (a === 192 && b === 168) return false;
-    if (a === 169 && b === 254) return false; // link-local incl. cloud metadata
-  }
-  if (host.startsWith('fe80:') || host.startsWith('fc') || host.startsWith('fd')) return false;
-  return true;
+  if (!_net) return false;
+  return _net.isSafeFetchUrl(urlStr);
 }
+
+// Upper bound for a single fetched image (memory DoS guard).
+const MAX_FETCH_IMAGE_BYTES = (_net && _net.MAX_FETCH_IMAGE_BYTES) || 5 * 1024 * 1024;
+const MAX_FETCH_REDIRECTS = (_net && _net.MAX_FETCH_REDIRECTS) || 3;
 
 function getMessage(key) {
   try {
     return chrome.i18n.getMessage(key) || key;
   } catch {
     return key;
+  }
+}
+
+function getUILanguage() {
+  try {
+    if (chrome.i18n && chrome.i18n.getUILanguage) return chrome.i18n.getUILanguage() || 'en';
+  } catch {}
+  return 'en';
+}
+
+function getActionDefs() {
+  const lib = globalThis.__aiext && globalThis.__aiext.actions;
+  if (lib && Array.isArray(lib.DEFINITIONS)) return lib.DEFINITIONS;
+  return [];
+}
+
+// Storage access with lib/storage.js when loaded, raw chrome API otherwise.
+async function syncGet(keys) {
+  try {
+    if (globalThis.__aiext && globalThis.__aiext.storage) {
+      return await globalThis.__aiext.storage.getSync(keys, {});
+    }
+    return await chrome.storage.sync.get(keys);
+  } catch {
+    return {};
   }
 }
 
@@ -71,45 +89,64 @@ async function buildMenu() {
     });
 
     chrome.contextMenus.create({
-      id: MENU_OPEN_SIDE_PANEL_ID,
+      id: MENU_OPEN_DRAWER_ID,
       parentId: MENU_PARENT_ID,
-      title: getMessage('contextMenuOpenSidePanel'),
+      title: getMessage('openDrawer'),
       contexts: ['all'],
     });
 
     let quickPrompts = [];
     try {
-      const result = await chrome.storage.sync.get(['quickPrompts']);
-      quickPrompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
+      const result = await syncGet(['quickPrompts']);
+      const normalize = globalThis.__aiext && globalThis.__aiext.chat && globalThis.__aiext.chat.normalizeQuickPrompts;
+      quickPrompts = normalize ? normalize(result.quickPrompts) : [];
     } catch {}
 
+    // User quick prompts: listed directly (no submenu level) for selections.
     if (quickPrompts.length > 0) {
       chrome.contextMenus.create({
-        id: MENU_SEPARATOR_ID,
+        id: MENU_SEPARATOR_PROMPTS,
         type: 'separator',
         parentId: MENU_PARENT_ID,
-        contexts: ['all'],
+        contexts: ['selection'],
       });
 
-      const visible = quickPrompts.slice(0, MAX_PROMPTS_IN_MENU);
-      visible.forEach((prompt, i) => {
+      quickPrompts.slice(0, QUICK_PROMPTS_IN_MENU).forEach((prompt, i) => {
         const title = (typeof prompt === 'string' && prompt.length > 80) ? prompt.slice(0, 77) + '...' : String(prompt || '');
         chrome.contextMenus.create({
           id: `${MENU_PROMPT_PREFIX}${i}`,
           parentId: MENU_PARENT_ID,
           title: title || '·',
-          contexts: ['all'],
+          contexts: ['selection'],
         });
       });
+    }
 
-      if (quickPrompts.length > MAX_PROMPTS_IN_MENU) {
+    // Built-in quick actions: independent of the user's prompt quota.
+    let enabledActions = [];
+    try {
+      const lib = globalThis.__aiext && globalThis.__aiext.actions;
+      const result = await syncGet(['builtInActions']);
+      enabledActions = lib
+        ? lib.normalizeEnabledIds(result.builtInActions)
+        : (Array.isArray(result.builtInActions) ? result.builtInActions : []);
+    } catch {}
+    const defs = getActionDefs().filter(d => enabledActions.includes(d.id));
+    if (defs.length > 0) {
+      chrome.contextMenus.create({
+        id: MENU_SEPARATOR_ACTIONS,
+        type: 'separator',
+        parentId: MENU_PARENT_ID,
+        contexts: ['selection'],
+      });
+      defs.forEach(d => {
         chrome.contextMenus.create({
-          id: MENU_PROMPT_MORE,
+          id: `${MENU_ACTION_PREFIX}${d.id}`,
           parentId: MENU_PARENT_ID,
-          title: getMessage('contextMenuMorePrompts'),
-          contexts: ['all'],
+          title: getMessage(d.labelKey),
+          contexts: ['selection'],
         });
-      }
+      });
     }
   })();
   try { return await _buildMenuPromise; }
@@ -118,6 +155,11 @@ async function buildMenu() {
 
 chrome.runtime.onInstalled.addListener(() => {
   buildMenu();
+  try {
+    if (globalThis.__aiext && globalThis.__aiext.storage) {
+      globalThis.__aiext.storage.ensureSchema();
+    }
+  } catch {}
 });
 
 chrome.runtime.onStartup.addListener(() => {
@@ -129,10 +171,10 @@ buildMenu();
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab || typeof tab.id !== 'number') return;
   try {
-    if (info.menuItemId === MENU_OPEN_SIDE_PANEL_ID) {
+    if (info.menuItemId === MENU_OPEN_DRAWER_ID) {
       const payload = createOpenDrawerMessage({ srcUrl: info.srcUrl || '' });
       await chrome.tabs.sendMessage(tab.id, payload);
-    } else if (info.menuItemId === MENU_OPEN_ID || info.menuItemId === MENU_PROMPT_MORE) {
+    } else if (info.menuItemId === MENU_OPEN_ID) {
       const payload = { action: 'openDialog' };
       if (info.srcUrl) payload.srcUrl = info.srcUrl;
       await chrome.tabs.sendMessage(tab.id, payload);
@@ -141,8 +183,9 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       let prompt = '';
       if (!isNaN(index)) {
         try {
-          const result = await chrome.storage.sync.get(['quickPrompts']);
-          const prompts = Array.isArray(result.quickPrompts) ? result.quickPrompts : [];
+          const result = await syncGet(['quickPrompts']);
+          const normalize = globalThis.__aiext && globalThis.__aiext.chat && globalThis.__aiext.chat.normalizeQuickPrompts;
+          const prompts = normalize ? normalize(result.quickPrompts) : [];
           prompt = prompts[index] || '';
         } catch {}
       }
@@ -157,6 +200,18 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           await chrome.tabs.sendMessage(tab.id, fallback);
         }
       }
+    } else if (typeof info.menuItemId === 'string' && info.menuItemId.startsWith(MENU_ACTION_PREFIX)) {
+      const actionId = info.menuItemId.slice(MENU_ACTION_PREFIX.length);
+      const lib = globalThis.__aiext && globalThis.__aiext.actions;
+      const selection = (info.selectionText || '').trim();
+      if (!lib || !selection) return;
+      const initialText = lib.buildActionPrompt(actionId, { selection, uiLang: getUILanguage() });
+      if (!initialText) return;
+      try {
+        await chrome.tabs.sendMessage(tab.id, { action: 'openDialog', initialText });
+      } catch {
+        await chrome.tabs.sendMessage(tab.id, { action: 'fillInput', text: initialText });
+      }
     }
   } catch {
     // content script not loaded on this page (e.g. chrome:// URLs)
@@ -164,8 +219,19 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes.quickPrompts) {
+  if (changes.quickPrompts || changes.builtInActions) {
     buildMenu();
+  }
+});
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== 'open-drawer') return;
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || typeof tab.id !== 'number') return;
+    await chrome.tabs.sendMessage(tab.id, createOpenDrawerMessage({}));
+  } catch {
+    // content script not loaded on this page (e.g. chrome:// URLs)
   }
 });
 
@@ -175,7 +241,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'captureScreenshot') {
     (async () => {
       try {
-        const dataUrl = await chrome.tabs.captureVisibleTab(null, { format: 'png' });
+        // Bind the capture to the sender's window: a background tab must not
+        // be able to screenshot whatever the user is currently viewing.
+        const winId = sender && sender.tab && sender.tab.windowId;
+        if (typeof winId !== 'number') return sendResponse({ error: 'no_sender_tab' });
+        const dataUrl = await chrome.tabs.captureVisibleTab(winId, { format: 'png' });
         sendResponse({ dataUrl });
       } catch (e) {
         sendResponse({ error: e.message });
@@ -190,9 +260,43 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         if (!isSafeFetchUrl(msg.url)) {
           return sendResponse({ error: 'URL not allowed' });
         }
-        const res = await fetch(msg.url);
+        // Manual redirect handling: each hop is re-validated so a 302 to
+        // 169.254.169.254 (or any other blocked host) cannot bypass the check.
+        let currentUrl = msg.url;
+        let res = null;
+        for (let hop = 0; hop <= MAX_FETCH_REDIRECTS; hop++) {
+          res = await fetch(currentUrl, { redirect: 'manual' });
+          if (res.status >= 300 && res.status < 400) {
+            const loc = res.headers.get('location');
+            if (!loc) return sendResponse({ error: `HTTP ${res.status}` });
+            let next;
+            try { next = new URL(loc, currentUrl).toString(); }
+            catch (e) { return sendResponse({ error: 'Bad redirect URL' }); }
+            if (!isSafeFetchUrl(next)) {
+              return sendResponse({ error: 'URL not allowed' });
+            }
+            currentUrl = next;
+            continue;
+          }
+          break;
+        }
+        if (!res) return sendResponse({ error: 'Fetch failed' });
+        if (res.status >= 300 && res.status < 400) {
+          return sendResponse({ error: 'Too many redirects' });
+        }
         if (!res.ok) return sendResponse({ error: `HTTP ${res.status}` });
+        const lenHeader = res.headers.get('content-length');
+        if (lenHeader !== null && Number(lenHeader) > MAX_FETCH_IMAGE_BYTES) {
+          return sendResponse({ error: 'Image too large' });
+        }
+        const contentType = res.headers.get('content-type');
+        if (contentType && !contentType.toLowerCase().startsWith('image/')) {
+          return sendResponse({ error: 'Not an image' });
+        }
         const blob = await res.blob();
+        if (blob.size > MAX_FETCH_IMAGE_BYTES) {
+          return sendResponse({ error: 'Image too large' });
+        }
         const reader = new FileReader();
         reader.onload = () => sendResponse({ dataUrl: reader.result });
         reader.onerror = () => sendResponse({ error: 'FileReader failed' });
@@ -207,7 +311,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'saveProviderPreset' && msg.baseUrl && msg.model) {
     (async () => {
       try {
-        await chrome.storage.sync.set({ baseUrl: msg.baseUrl, model: msg.model });
+        const rawUrl = String(msg.baseUrl || '').trim();
+        const rawModel = String(msg.model || '').trim();
+        let httpUrl = false;
+        try {
+          const u = new URL(rawUrl);
+          httpUrl = u.protocol === 'http:' || u.protocol === 'https:';
+        } catch (e) { httpUrl = false; }
+        if (!httpUrl || !rawModel || rawModel.length > 200) {
+          return sendResponse({ error: 'invalid preset' });
+        }
+        if (globalThis.__aiext && globalThis.__aiext.storage) {
+          await globalThis.__aiext.storage.setSync({ baseUrl: rawUrl, model: rawModel });
+        } else {
+          await chrome.storage.sync.set({ baseUrl: rawUrl, model: rawModel });
+        }
         sendResponse({ ok: true });
       } catch (e) {
         sendResponse({ error: e.message });

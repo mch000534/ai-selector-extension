@@ -227,21 +227,6 @@
   "dialogRestoredHint": {
     "message": "Dipulihkan dari sesi sebelumnya"
   },
-  "recentClosedBtn": {
-    "message": "Baru saja ditutup"
-  },
-  "recentClosedEmpty": {
-    "message": "Tidak ada percakapan yang ditutup"
-  },
-  "recentClosedTitle": {
-    "message": "Percakapan yang baru saja ditutup"
-  },
-  "recentClosedRestore": {
-    "message": "Pulihkan"
-  },
-  "recentClosedAllClear": {
-    "message": "Hapus semua"
-  },
   "codeCopyBtn": {
     "message": "Salin"
   },
@@ -252,79 +237,154 @@
     "message": "Buka dialog",
     "description": "Context menu: open the dialog"
   },
-  "contextMenuMorePrompts": {
-    "message": "Prompt lainnya...",
-    "description": "Context menu: show more quick prompts in the dialog"
-  },
-  "sidePanelTitle": {
-    "message": "AI Chat"
-  },
-  "sidePanelOpenBtn": {
-    "message": "Open side panel"
-  },
-  "sidePanelOpenFailed": {
-    "message": "Could not open side panel: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelSettingsBtn": {
-    "message": "Settings"
-  },
-  "sidePanelContextTitle": {
-    "message": "Page context"
-  },
-  "sidePanelClearContext": {
-    "message": "Clear"
-  },
-  "sidePanelUseSelection": {
-    "message": "Use selection"
-  },
-  "sidePanelClearChat": {
-    "message": "Clear chat"
-  },
-  "sidePanelEmptyState": {
-    "message": "Ask anything, or use the current page selection as context."
-  },
-  "sidePanelMissingConfig": {
-    "message": "Set API Key and Base URL in settings first"
-  },
-  "sidePanelStreaming": {
-    "message": "Thinking..."
-  },
-  "sidePanelNoActiveTab": {
-    "message": "No active tab"
-  },
-  "sidePanelSelectionFailed": {
-    "message": "Could not read selection"
-  },
-  "sidePanelSelectionLoaded": {
-    "message": "Selection loaded"
-  },
-  "sidePanelNoSelection": {
-    "message": "No selected text or images found"
-  },
-  "sidePanelSelectionError": {
-    "message": "Selection unavailable: $1",
-    "placeholders": {
-      "error": {
-        "content": "$1"
-      }
-    }
-  },
-  "sidePanelChatCleared": {
-    "message": "Chat cleared"
-  },
-  "contextMenuOpenSidePanel": {
-    "message": "Open side panel",
-    "description": "Context menu: open the side panel"
-  },
-  "dialogMoveToDrawerTooltip": {
-    "message": "Move to side panel"
-  },
   "dialogMoveToFloatTooltip": {
     "message": "Move to floating window"
+  },
+  "openDrawer": {
+    "message": "Buka panel"
+  },
+  "openDrawerFailed": {
+    "message": "Panel tidak dapat dibuka: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "moveToDrawer": {
+    "message": "Pindahkan ke panel"
+  },
+  "profilesLabel": {
+    "message": "Profil penyedia"
+  },
+  "profileSaveBtn": {
+    "message": "Simpan saat ini"
+  },
+  "profileDeleteBtn": {
+    "message": "Hapus"
+  },
+  "profilesHint": {
+    "message": "Simpan kunci, URL, dan model saat ini sebagai satu profil; kunci tetap berada di perangkat ini"
+  },
+  "messageEdit": {
+    "message": "Edit"
+  },
+  "messageRegenerate": {
+    "message": "Buat ulang"
+  },
+  "messageCopy": {
+    "message": "Salin"
+  },
+  "messageSave": {
+    "message": "Simpan"
+  },
+  "messageCancel": {
+    "message": "Batal"
+  },
+  "conversationsBtn": {
+    "message": "Percakapan"
+  },
+  "conversationsSearchPlaceholder": {
+    "message": "Cari percakapan..."
+  },
+  "conversationsRename": {
+    "message": "Ganti nama"
+  },
+  "conversationsRestore": {
+    "message": "Pulihkan"
+  },
+  "conversationsExportMd": {
+    "message": "Markdown"
+  },
+  "conversationsCopyMd": {
+    "message": "Salin"
+  },
+  "conversationsExportJson": {
+    "message": "JSON"
+  },
+  "conversationsDelete": {
+    "message": "Hapus"
+  },
+  "conversationsDeleteSelected": {
+    "message": "Hapus yang dipilih"
+  },
+  "conversationsEmpty": {
+    "message": "Belum ada percakapan"
+  },
+  "conversationsOpenBadge": {
+    "message": "Terbuka"
+  },
+  "conversationsClosedBadge": {
+    "message": "Ditutup"
+  },
+  "builtInActionsLabel": {
+    "message": "Tindakan cepat bawaan"
+  },
+  "actionTranslate": {
+    "message": "Terjemahkan"
+  },
+  "actionConvertChinese": {
+    "message": "Konversi varian bahasa Tionghoa"
+  },
+  "actionExplain": {
+    "message": "Jelaskan"
+  },
+  "actionSummarize": {
+    "message": "Ringkas"
+  },
+  "actionPolish": {
+    "message": "Sempurnakan tulisan"
+  },
+  "actionTutorial": {
+    "message": "Tutorial"
+  },
+  "commandOpenPopup": {
+    "message": "Buka AI Selection Assistant"
+  },
+  "commandOpenDrawer": {
+    "message": "Buka panel obrolan"
+  },
+  "shortcutsHint": {
+    "message": "Tips: sesuaikan pintasan di chrome://extensions/shortcuts"
+  },
+  "tokenUsage": {
+    "message": "≈$1 / $2 tokens ($3)",
+    "placeholders": {
+      "used": {
+        "content": "$1"
+      },
+      "total": {
+        "content": "$2"
+      },
+      "pct": {
+        "content": "$3"
+      }
+    }
+  },
+  "summarizeOld": {
+    "message": "Ringkas pesan lama"
+  },
+  "summarizingStatus": {
+    "message": "Meringkas pesan lama…"
+  },
+  "settingsExportBtn": {
+    "message": "Ekspor pengaturan"
+  },
+  "settingsImportBtn": {
+    "message": "Impor"
+  },
+  "settingsImported": {
+    "message": "Pengaturan diimpor (kunci API tidak pernah diekspor)"
+  },
+  "settingsImportFailed": {
+    "message": "Impor pengaturan gagal: $1",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "streamTruncated": {
+    "message": "Jawaban mungkin belum lengkap (streaming berakhir lebih awal). Gunakan Buat Ulang untuk mencoba lagi."
   }
 }
